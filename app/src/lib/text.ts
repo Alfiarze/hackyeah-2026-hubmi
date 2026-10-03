@@ -104,7 +104,7 @@ export function snippet(text: string, max = 180): string {
 }
 
 /**
- * Polska odmiana rzeczownika przez liczebnik: 1 / 2–4 / 5+.
+ * Polska odmiana rzeczownika przez liczebnik: 1 / 2-4 / 5+.
  *
  * Nie jest to kosmetyka - „6 rozwiązania” w podsumowaniu wyników czyta się
  * jak maszynowe tłumaczenie i podważa zaufanie do reszty tekstu.
@@ -113,7 +113,7 @@ export function plural(n: number, one: string, few: string, many: string): strin
   const abs = Math.abs(n) % 100;
   if (abs === 1) return one;
   const last = abs % 10;
-  // 12–14 idą do formy „wielu” mimo końcówki 2–4
+  // 12-14 idą do formy „wielu” mimo końcówki 2-4
   if (last >= 2 && last <= 4 && (abs < 12 || abs > 14)) return few;
   return many;
 }

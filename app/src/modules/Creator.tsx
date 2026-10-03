@@ -169,8 +169,9 @@ export function Creator() {
             zobaczysz kropkę „nowa odpowiedź", kiedy przyjdzie.
           </p>
           <p className="hint">
-            Chcesz zobaczyć drugą stronę tej pętli? Przełącz rolę na „pracownik ROPS"
-            w pasku na górze i wejdź do modułu VI.
+            Odpowiedź możesz zobaczyć z drugiej strony: w module Komunikacja
+            przełącz się przy odpowiedzi na rolę „ROPS” albo zajrzyj do panelu
+            koordynatora w module VI.
           </p>
           <div className="row">
             <button

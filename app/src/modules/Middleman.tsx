@@ -226,7 +226,7 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
                 <div className={`mi__num${out.affordable ? "" : " mi__num--warn"}`}>
                   <span className="eyebrow">Koszt wdrożenia</span>
                   <strong>
-                    {out.costLow.toLocaleString("pl-PL")}–
+                    {out.costLow.toLocaleString("pl-PL")}-
                     {out.costHigh.toLocaleString("pl-PL")} zł
                   </strong>
                   <span className="hint">

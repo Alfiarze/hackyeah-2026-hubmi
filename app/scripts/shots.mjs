@@ -52,10 +52,10 @@ for (const s of SHOTS) {
   const ctx = await b.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 2 });
   const p = await ctx.newPage();
   await p.goto(`${BASE}/#${s.r}`, { waitUntil: "networkidle" });
-  // 900 ms: karty wjeżdżają przez 600 ms — bez tego zrzuty wychodzą wyblakłe.
+  // 900 ms: karty wjeżdżają przez 600 ms - bez tego zrzuty wychodzą wyblakłe.
   await p.waitForTimeout(900);
   if (s.setup) { try { await s.setup(p); } catch (e) { console.warn(`  ${s.n}: ${e.message.split("\n")[0]}`); } }
-  // Biblioteka to ~30 000 px pionu przy deviceScaleFactor 2 — render z tego
+  // Biblioteka to ~30 000 px pionu przy deviceScaleFactor 2 - render z tego
   // bywa dłuższy niż domyślnych 30 s.
   await p.screenshot({ path: join(OUT, `${s.n}.png`), fullPage: true, timeout: 90000 });
   console.log(`✓ ${s.n}`);

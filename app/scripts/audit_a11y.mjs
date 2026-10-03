@@ -7,7 +7,7 @@
  * Wynik ląduje w src/data/audit.json i jest wyświetlany na stronie
  * „Dostępność", żeby liczby w interfejsie nie rozjechały się z rzeczywistością.
  *
- * Zestaw reguł: wcag2a + wcag2aa + wcag21a + wcag21aa — czyli dokładnie to,
+ * Zestaw reguł: wcag2a + wcag2aa + wcag21a + wcag21aa - czyli dokładnie to,
  * czego wymaga zadanie, bez reguł „best-practice", które nie są częścią normy.
  */
 import { chromium } from "@playwright/test";
@@ -24,13 +24,13 @@ const BASE = process.env.AUDIT_URL ?? "http://localhost:4173";
 const TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"];
 
 const VIEWS = [
-  { route: "matchmaking", label: "I — Matchmaking" },
-  { route: "biblioteka", label: "II — Zasobnik wiedzy" },
-  { route: "kreator", label: "III — Kreator pomysłów" },
-  { route: "tester", label: "IV — Tester innowacji" },
-  { route: "komunikacja", label: "V — Komunikacja" },
-  { route: "admin", label: "VI — Panel administratora" },
-  { route: "middleman", label: "VII — Middleman" },
+  { route: "matchmaking", label: "I - Matchmaking" },
+  { route: "biblioteka", label: "II - Zasobnik wiedzy" },
+  { route: "kreator", label: "III - Kreator pomysłów" },
+  { route: "tester", label: "IV - Tester innowacji" },
+  { route: "komunikacja", label: "V - Komunikacja" },
+  { route: "admin", label: "VI - Panel administratora" },
+  { route: "middleman", label: "VII - Middleman" },
   { route: "dostepnosc", label: "Dostępność" },
 ];
 
@@ -38,7 +38,7 @@ const VIEWS = [
 const SETUP = {
   matchmaking: async (page) => {
     // Rozmowa musi dobiec do końca, inaczej audyt nie zobaczy ani wyników,
-    // ani mapy, ani fiszek — czyli najważniejszej części tego widoku.
+    // ani mapy, ani fiszek - czyli najważniejszej części tego widoku.
     // Kamyk na tacy emocji wpisuje gotowy opis problemu do pigułki…
     await page.getByRole("button", { name: "Osoby starsze" }).click();
     // …a „Szukaj" wysyła pierwszą wypowiedź (asystent doprecyzowuje chipsami).
@@ -50,12 +50,12 @@ const SETUP = {
       await page.waitForTimeout(250);
     }
     // Podsumowanie (role=status) renderuje się i po sukcesie, i po błędzie
-    // backendu — czekamy na nie, a nie na wyniki, żeby audyt działał też
+    // backendu - czekamy na nie, a nie na wyniki, żeby audyt działał też
     // bez podniesionego API.
     await page.locator(".mm__summary").first().waitFor({ timeout: 8000 });
   },
   admin: async (page) => {
-    // druga zakładka to wykresy — audytujemy je razem ze skrzynką
+    // druga zakładka to wykresy - audytujemy je razem ze skrzynką
     await page.getByRole("tab", { name: /potrzeby i trendy/ }).click();
     await page.waitForTimeout(400);
   },
@@ -68,7 +68,7 @@ const SETUP = {
 const run = async (page, route) => {
   await page.goto(`${BASE}/#${route}`, { waitUntil: "networkidle" });
   // 900 ms, nie 250: elementy [data-reveal] wjeżdżają przez 600 ms
-  // (transition opacity), a axe mierzy kontrast z uwzględnieniem opacity —
+  // (transition opacity), a axe mierzy kontrast z uwzględnieniem opacity -
   // audyt w połowie przejścia widziałby rozjaśnione kolory i fałszywie
   // płakał na pary, które po dojechaniu spełniają AA z zapasem.
   await page.waitForTimeout(900);
@@ -82,7 +82,7 @@ const run = async (page, route) => {
   await page.evaluate(AXE);
   return page.evaluate(
     async (tags) =>
-      // bez resultTypes — potrzebujemy też liczby reguł zaliczonych,
+      // bez resultTypes - potrzebujemy też liczby reguł zaliczonych,
       // inaczej strona „Dostępność" pokazywałaby 0 passes
       await window.axe.run(document, {
         runOnly: { type: "tag", values: tags },
@@ -95,7 +95,7 @@ const main = async () => {
   const browser = await chromium.launch();
   // reducedMotion: audytujemy stan docelowy. Karty wjeżdżają przez 600 ms
   // ( Biblioteka: 115 fiszek z kaskadą opóźnień do 1,2 s), a axe liczy
-  // kontrast z opacity — pomiar w locie dawał fałszywe naruszenia.
+  // kontrast z opacity - pomiar w locie dawał fałszywe naruszenia.
   // Stan „bez ruchu" jest częścią gwarancji WCAG 2.3.3, więc to, co
   // audytujemy, nie jest wygodnym uproszczeniem, tylko jednym z dwóch
   // równoważnych stanów interfejsu.

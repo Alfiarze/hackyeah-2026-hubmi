@@ -58,7 +58,7 @@ const nid = () => `t${++seq}`;
 
 export const OPENING =
   "Opisz problem lub wyzwanie w swojej okolicy. " +
-  "Wystarczą 1–2 zdania zwykłym, codziennym językiem.";
+  "Wystarczą 1-2 zdania zwykłym, codziennym językiem.";
 
 export function initConversation(): ConvState {
   return {

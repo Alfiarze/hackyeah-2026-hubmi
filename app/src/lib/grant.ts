@@ -46,7 +46,7 @@ export interface GrantDraft {
 
 export const MAX_GRANT = 120_000;
 
-const MONTHS = ["1–2", "3–4", "5–7", "8–9", "10–12"];
+const MONTHS = ["1-2", "3-4", "5-7", "8-9", "10-12"];
 
 function budgetFor(amount: number): { item: string; amount: number }[] {
   // Proporcje zbliżone do typowego budżetu testu innowacji społecznej:
@@ -145,7 +145,7 @@ export function generateGrant(input: GrantInput): GrantDraft {
       criterion: "Ocena merytoryczna: realność planu testowania",
       body:
         `Grupa testowa: [UZUPEŁNIJ liczbę i sposób rekrutacji uczestników].\n` +
-        `Czas testu: ${MONTHS.length > 0 ? "9–12 miesięcy" : ""}.\n` +
+        `Czas testu: ${MONTHS.length > 0 ? "9-12 miesięcy" : ""}.\n` +
         `Miejsce: ${place}.\n` +
         `Partnerzy lokalni: [UZUPEŁNIJ - CUS/OPS, szkoła, biblioteka, NGO. ` +
         `Potwierdzony partner realnie podnosi ocenę wykonalności.]\n\n` +

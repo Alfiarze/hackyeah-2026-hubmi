@@ -23,7 +23,7 @@ export type OrgType =
   | "NGO / fundacja"
   | "DPS / placówka";
 
-export type SizeBand = "do 5 tys." | "5–20 tys." | "20–100 tys." | "powyżej 100 tys.";
+export type SizeBand = "do 5 tys." | "5-20 tys." | "20-100 tys." | "powyżej 100 tys.";
 
 export interface OrgProfile {
   type: OrgType;
@@ -36,7 +36,7 @@ export interface OrgProfile {
 
 export interface AdaptedService {
   title: string;
-  /** 1–2 zdania: czym to jest jako usługa w tej instytucji */
+  /** 1-2 zdania: czym to jest jako usługa w tej instytucji */
   summary: string;
   scale: string;
   /** kto to prowadzi */
@@ -69,15 +69,15 @@ function unitCost(inn: Innovation): { low: number; high: number; kind: string } 
 
 const SIZE_MULT: Record<SizeBand, number> = {
   "do 5 tys.": 1,
-  "5–20 tys.": 1.8,
-  "20–100 tys.": 3.2,
+  "5-20 tys.": 1.8,
+  "20-100 tys.": 3.2,
   "powyżej 100 tys.": 6,
 };
 
 const SIZE_REACH: Record<SizeBand, string> = {
-  "do 5 tys.": "1 punkt, 10–20 odbiorców miesięcznie",
-  "5–20 tys.": "1–2 punkty, 25–50 odbiorców miesięcznie",
-  "20–100 tys.": "3–4 punkty, 80–150 odbiorców miesięcznie",
+  "do 5 tys.": "1 punkt, 10-20 odbiorców miesięcznie",
+  "5-20 tys.": "1-2 punkty, 25-50 odbiorców miesięcznie",
+  "20-100 tys.": "3-4 punkty, 80-150 odbiorców miesięcznie",
   "powyżej 100 tys.": "sieć 5+ punktów, 200+ odbiorców miesięcznie",
 };
 
@@ -133,7 +133,7 @@ function adaptationsFor(inn: Innovation, p: OrgProfile): string[] {
         "zatrzyma się na pierwszym zwolnieniu.",
     );
   }
-  if (p.size === "powyżej 100 tys." || p.size === "20–100 tys.") {
+  if (p.size === "powyżej 100 tys." || p.size === "20-100 tys.") {
     out.push("Przy tej skali od razu zaplanuj listę zapisów i kryteria kwalifikacji odbiorców.");
   }
   return out;
@@ -237,5 +237,5 @@ export const ORG_TYPES: OrgType[] = [
 ];
 
 export const SIZE_BANDS: SizeBand[] = [
-  "do 5 tys.", "5–20 tys.", "20–100 tys.", "powyżej 100 tys.",
+  "do 5 tys.", "5-20 tys.", "20-100 tys.", "powyżej 100 tys.",
 ];

@@ -445,7 +445,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
           {phase === "ready" && gap && (
             <section className="mm__gap card" data-reveal>
               <p className="page__mod">Luka w ofercie Hubu</p>
-              <h3>Twoje zgłoszenie jest tu wartościowe właśnie dlatego, że nic nie pasuje</h3>
+              <h3>Na ten problem nie ma jeszcze rozwiązania w bazie</h3>
               <p>
                 Problem, na który nikt jeszcze nie odpowiedział, jest dla ROPS
                 informacją o tym, czego w regionie brakuje. Po zgłoszeniu trafi do

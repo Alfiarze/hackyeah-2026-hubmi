@@ -76,7 +76,7 @@ interface DocIndex {
 }
 
 /**
- * Siła obecności wątku w karcie, 0–1. Wzmianka rzucona raz w jednym słabym
+ * Siła obecności wątku w karcie, 0-1. Wzmianka rzucona raz w jednym słabym
  * polu daje ~0.1; wątek, na który karta wprost odpowiada - blisko 1.
  */
 function conceptStrength(hit: ConceptHit): number {
@@ -92,7 +92,7 @@ export interface MatchedConcept {
   fields: string[];
   /** słowa z karty, które go uruchomiły */
   terms: string[];
-  /** jak mocno ten wątek jest obecny w karcie, 0–1 */
+  /** jak mocno ten wątek jest obecny w karcie, 0-1 */
   strength: number;
 }
 
@@ -103,12 +103,12 @@ export interface Highlight {
 
 export interface MatchResult {
   innovation: Innovation;
-  /** 0–100; 65% pokrycie wątków + 35% siła leksykalna */
+  /** 0-100; 65% pokrycie wątków + 35% siła leksykalna */
   score: number;
   tier: "wysokie" | "średnie" | "niskie";
   matched: MatchedConcept[];
   missed: { id: string; label: string }[];
-  /** ważone pokrycie wątków zapytania, 0–1 */
+  /** ważone pokrycie wątków zapytania, 0-1 */
   coverage: number;
   /** gotowe zdania uzasadnienia */
   reasons: string[];

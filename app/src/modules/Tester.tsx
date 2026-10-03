@@ -5,7 +5,7 @@
  * które ktoś już u siebie uruchomił. Oba kończą się wątkiem w tej samej
  * skrzynce Hubu, więc koordynator ROPS ma jedno miejsce do obsługi.
  *
- * Ocena jest 1–5 z wymaganym komentarzem: sama gwiazdka nic nie mówi
+ * Ocena jest 1-5 z wymaganym komentarzem: sama gwiazdka nic nie mówi
  * autorowi innowacji o tym, co poprawić.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -128,7 +128,7 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
         <p className="page__mod">Moduł IV · Tester innowacji</p>
         <h1>Przetestuj albo oceń</h1>
         <p>
-          Innowacja bez testu to pomysł. Zgłoś się do testów albo powiedz, jak
+          Zgłoś gotowość do przetestowania innowacji albo opisz, jak
           sprawdziło się rozwiązanie, które już u siebie uruchomiliście.
         </p>
       </div>

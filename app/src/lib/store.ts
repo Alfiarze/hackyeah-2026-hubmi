@@ -39,13 +39,13 @@ export interface Thread {
   /** przy luce: wątki rozpoznane i nierozpoznane w zapytaniu */
   concepts?: string[];
   unknownTerms?: string[];
-  /** przy luce: najlepszy wynik dopasowania, 0–100 */
+  /** przy luce: najlepszy wynik dopasowania, 0-100 */
   topScore?: number;
   /** przy pomyśle: dane fiszki */
   fiszka?: Fiszka;
   /** przy zgłoszeniu na testera: id innowacji */
   innovationId?: string;
-  /** ocena innowacji 1–5 (moduł IV) */
+  /** ocena innowacji 1-5 (moduł IV) */
   rating?: number;
   /** czy admin oznaczył jako przeczytane */
   read?: boolean;

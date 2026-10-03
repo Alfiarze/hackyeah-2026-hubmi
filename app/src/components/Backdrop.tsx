@@ -1,7 +1,7 @@
 /**
  * Tło strony - jasny papier z patternem marki.
  *
- * System wizualny HubMI v1: patterny tła są „ledwo widoczne" (krycie 6–14%)
+ * System wizualny HubMI v1: patterny tła są „ledwo widoczne" (krycie 6-14%)
  * i pojawiają się tylko pod nagłówkami, w hero i stopce - nigdy pod długim
  * tekstem. Ten komponent kładzie kafel „Sieć węzłów" (A) jako pas u góry
  * strony, wygaszany gradientem do czystej bieli: nagłówek i hero dostają

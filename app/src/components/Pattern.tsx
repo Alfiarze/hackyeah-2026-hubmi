@@ -3,7 +3,7 @@
  * znaków co ikony (koło, miękki kwadrat, łuk, węzeł).
  *
  * Reguły (strona 03 systemu wizualnego):
- *  - krycie 6–14%, jedna linia 1,5 px w turkusie;
+ *  - krycie 6-14%, jedna linia 1,5 px w turkusie;
  *  - tylko pod nagłówkami, w hero i stopce - nigdy pod długim tekstem;
  *  - jeden pattern na ekran;
  *  - tekst na patternie ≥ 4,5:1 względem najciemniejszego miejsca tła

@@ -1,6 +1,6 @@
 /* Tło strony: pas patternu u góry, wygaszany do czystej bieli.
    Kafle SVG z systemu wizualnego (strona 03), krycie przez opacity
-   na warstwie - wartości systemowe: 10–14%. */
+   na warstwie - wartości systemowe: 10-14%. */
 
 .backdrop {
   position: fixed;
