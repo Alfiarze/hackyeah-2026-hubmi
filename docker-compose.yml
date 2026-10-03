@@ -51,14 +51,5 @@ services:
       db:
         condition: service_healthy
 
-  landing:
-    build:
-      context: ./landing
-    container_name: hubmi-landing
-    restart: unless-stopped
-    depends_on:
-      db:
-        condition: service_healthy
-
 volumes:
   db_data:
