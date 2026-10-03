@@ -9,9 +9,12 @@
 }
 
 .ts__form {
-  background: var(--surface);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-5);
 }
 .ts__form > * + * { margin-top: var(--sp-4); }
@@ -25,8 +28,12 @@
   gap: var(--sp-4);
   padding: var(--sp-4);
   background: var(--accent-wash);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
   border-left: 3px solid var(--accent);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--glass-highlight);
 }
 .ts__picked h3 { font-size: var(--fs-lg); margin-top: var(--sp-1); }
 
@@ -48,8 +55,16 @@
 }
 .ts__option > span:first-child { font-weight: 600; }
 
-/* --- ocena --- */
-.ts__rating { border: 0; background: var(--surface-2); border-radius: var(--radius); padding: var(--sp-4); }
+/* --- ocena: Apple grouped cell style --- */
+.ts__rating {
+  border: var(--glass-border-subtle);
+  background: var(--surface-glass-thin);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius);
+  padding: var(--sp-4);
+  box-shadow: var(--glass-highlight);
+}
 .ts__rating legend {
   font-size: var(--fs-sm);
   font-weight: 600;
@@ -64,12 +79,15 @@
   justify-content: center;
   min-width: 44px;
   min-height: 44px;
-  border: 1px solid var(--line-ui);
+  border: var(--glass-border);
   border-radius: var(--radius-sm);
-  background: var(--surface);
+  background: var(--surface-glass);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   font-size: var(--fs-base);
   font-weight: 600;
   cursor: pointer;
+  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 /* Radio jest ukryte wizualnie, ale nadal fokusowalne — stan czyta czytnik. */
 .ts__star input {
@@ -85,6 +103,7 @@
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-ink);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 45%, transparent);
 }
 .ts__star:has(input:focus-visible) {
   outline: 2px solid var(--focus-ring);
@@ -92,9 +111,12 @@
 }
 
 .ts__side {
-  background: var(--surface);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-5);
 }
 

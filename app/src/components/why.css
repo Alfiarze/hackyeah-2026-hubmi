@@ -43,21 +43,25 @@
   .why__term-row { grid-template-columns: 1fr; gap: var(--sp-1); }
 }
 
-/* --- wskaźnik wyniku: liczba, nie tarcza --- */
+/* --- wskaźnik wyniku: Apple iOS Frosted Capsule ze szkłem i rozmyciem --- */
 .dial {
   display: flex;
   align-items: baseline;
   gap: 2px;
   flex: none;
-  padding: var(--sp-1) var(--sp-3);
-  border-radius: var(--radius-sm);
-  background: var(--surface-2);
+  padding: 4px var(--sp-3);
+  border-radius: var(--radius-pill);
+  background: var(--surface-glass-thin);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: var(--glass-border-subtle);
+  box-shadow: var(--glass-highlight);
   line-height: 1.1;
 }
 .dial__num {
   font-variant-numeric: tabular-nums;
   font-size: var(--fs-xl);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.03em;
 }
 .dial__den { font-size: var(--fs-xs); color: var(--ink-3); }
@@ -65,13 +69,24 @@
    (WCAG 1.4.1). */
 .dial__tier {
   font-size: var(--fs-xs);
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin-left: var(--sp-2);
   align-self: center;
 }
-.dial--wysokie { background: var(--ok-wash); }
+.dial--wysokie {
+  background: var(--ok-wash);
+  border-color: color-mix(in srgb, var(--ok) 35%, transparent);
+}
 .dial--wysokie .dial__num, .dial--wysokie .dial__tier { color: var(--ok); }
-.dial--srednie { background: var(--accent-wash); }
+.dial--srednie {
+  background: var(--accent-wash);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
 .dial--srednie .dial__num, .dial--srednie .dial__tier { color: var(--accent); }
+.dial--niskie {
+  background: var(--surface-glass-thin);
+  border-color: var(--glass-border-subtle);
+}
 .dial--niskie .dial__num { color: var(--ink-2); }
 .dial--niskie .dial__tier { color: var(--ink-3); }

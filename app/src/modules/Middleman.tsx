@@ -56,12 +56,11 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
   return (
     <div className="page wrap">
       <div className="page__head" data-reveal>
-        <p className="page__mod">Moduł VII · Middleman Innowacji</p>
-        <h1>Co ta innowacja znaczy u mnie</h1>
+        <p className="page__mod">Moduł VII · Adaptacja innowacji (Middleman)</p>
+        <h1>Plan wdrożenia i kalkulator skali</h1>
         <p>
-          Wybierz rozwiązanie i opisz swoją instytucję. Dostaniesz wersję
-          dopasowaną do Twojej skali: koszt, obsada, kroki wdrożenia, ryzyka
-          i wymogi formalne.
+          Wybierz rozwiązanie i określ profil swojej jednostki. Wyliczymy realne
+          widełki kosztów, zapotrzebowanie kadrowe, harmonogram wdrożenia oraz wymogi formalne.
         </p>
       </div>
 
@@ -182,9 +181,9 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
             <div className="mi__placeholder">
               <h3>Wybierz innowację z listy obok</h3>
               <p>
-                Pokażemy tę samą innowację opisaną jako usługa Twojej instytucji —
-                z kosztem przy Twojej skali, obsadą, kolejnością kroków i listą
-                rzeczy, które trzeba zmienić.
+                Pokażemy tę samą innowację rozpisaną jako usługę Twojej jednostki —
+                z kalkulacją kosztów przy Twojej skali, harmonogramem wdrożenia
+                i wytycznymi adaptacyjnymi.
               </p>
             </div>
           ) : (

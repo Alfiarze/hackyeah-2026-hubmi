@@ -9,9 +9,12 @@
 }
 
 .mi__form {
-  background: var(--surface);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-5);
   position: sticky;
   top: 7rem;
@@ -22,10 +25,13 @@
 
 .mi__profile {
   margin-top: var(--sp-5);
-  border: 0;
-  background: var(--surface-2);
-  border-radius: var(--radius);
+  border: var(--glass-border-subtle);
+  background: var(--surface-glass-thin);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-sm);
   padding: var(--sp-4);
+  box-shadow: var(--glass-highlight);
 }
 .mi__profile legend {
   font-family: var(--font);
@@ -34,9 +40,12 @@
 }
 
 .mi__out {
-  background: var(--surface);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-5);
 }
 .mi__out h2 { font-size: var(--fs-2xl); margin-bottom: var(--sp-4); }
@@ -48,16 +57,24 @@
   grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
   margin-bottom: var(--sp-5);
 }
+/* Apple Health / Fitness metric card style */
 .mi__num {
   display: grid;
   gap: var(--sp-1);
   padding: var(--sp-4);
-  background: var(--surface-2);
+  background: var(--surface-glass-thin);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: var(--glass-border-subtle);
   border-radius: var(--radius-sm);
+  box-shadow: var(--glass-highlight);
 }
 .mi__num strong { font-size: var(--fs-lg); line-height: 1.25; }
 /* Przekroczony budżet: belka + podpis słowny, nie samo tło. */
-.mi__num--warn { background: var(--warn-wash); }
+.mi__num--warn {
+  background: var(--warn-wash);
+  border-color: color-mix(in srgb, var(--warn) 40%, transparent);
+}
 .mi__num--warn strong { color: var(--warn); }
 
 .mi__block { margin-top: var(--sp-6); }

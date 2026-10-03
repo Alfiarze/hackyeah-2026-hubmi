@@ -1,8 +1,11 @@
 .chart {
   margin: 0;
-  background: var(--surface);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur-heavy)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-heavy)) saturate(var(--glass-saturate));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-6);
 }
 .chart figcaption { margin-bottom: var(--sp-4); }
@@ -65,15 +68,18 @@
 .chart__tip {
   margin: var(--sp-3) 0 0;
   padding: var(--sp-2) var(--sp-3);
-  background: var(--surface-2);
+  background: var(--surface-glass-thin);
+  border: var(--glass-border-subtle);
   border-radius: var(--radius-sm);
   font-size: var(--fs-sm);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .chart__table { margin-top: var(--sp-4); font-size: var(--fs-sm); }
 .chart--empty { color: var(--ink-3); }
 
-/* --- kafle wskaźników --- */
+/* --- kafle wskaźników: Apple Health style frosted cards --- */
 .tiles {
   display: grid;
   gap: var(--sp-4);
@@ -84,9 +90,20 @@
   display: grid;
   gap: var(--sp-1);
   padding: var(--sp-5);
-  background: var(--surface);
+  background: var(--surface-glass);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--glass-shadow-sm), var(--glass-highlight);
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+.tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--glass-border-bright);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
 }
 .tile__v {
   font-variant-numeric: tabular-nums;

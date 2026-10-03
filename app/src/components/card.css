@@ -1,4 +1,4 @@
-/* Fiszka innowacji. Powierzchnia i cień zamiast obramowania. */
+/* Fiszka innowacji: Apple iOS Frosted Widget z głębokim rozmyciem */
 
 .fiszka {
   /* Celowo BEZ content-visibility: auto.
@@ -7,17 +7,27 @@
      i na wydruku, a wyszukiwanie w stronie potrafi ich nie znaleźć.
      Przy 115 kartach zysk nie równoważy tych strat; gdyby lista urosła
      do tysięcy pozycji, właściwą odpowiedzią jest wirtualizacja, nie to. */
-  background: var(--surface);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-6);
   display: flex;
   flex-direction: column;
   gap: var(--sp-5);
   container-type: inline-size;
-  /* Element grida ma domyślnie min-width:auto, więc jedno długie nieprzełamywalne
-     słowo w opisie innowacji rozpycha kolumnę i całą stronę (WCAG 1.4.10). */
   min-width: 0;
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 260ms ease;
+}
+.fiszka:hover {
+  border-color: var(--glass-border-bright);
+  box-shadow: var(--glass-shadow-lg), var(--glass-highlight);
+  transform: translateY(-2px);
 }
 
 .fiszka__head {
@@ -30,10 +40,17 @@
 .fiszka__id h3 { margin-top: var(--sp-1); text-wrap: pretty; }
 
 .fiszka__badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 3px var(--sp-3);
+  background: var(--surface-glass-thin);
+  border: var(--glass-border-subtle);
+  border-radius: var(--radius-pill);
   font-size: var(--fs-xs);
   color: var(--ink-3);
   margin: 0;
   max-width: none;
+  box-shadow: var(--glass-highlight);
 }
 
 .fiszka__fields {

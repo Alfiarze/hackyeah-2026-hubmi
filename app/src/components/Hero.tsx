@@ -12,7 +12,6 @@
  * `--bg`, a przyciemnienie kadrów jest policzone w tokens.css (`--scrim`).
  */
 import { type ReactNode } from "react";
-import { EmojiPile } from "./EmojiPile";
 import "./hero.css";
 
 interface Props {
@@ -27,10 +26,6 @@ export function Hero({ receded, children }: Props) {
       <div className="hero__glow" aria-hidden="true" />
 
       <div className="hero__content wrap">{children}</div>
-
-      {/* Sterta emotek na dole — źródło, z którego pod polem wyszukiwania
-          wjeżdżają dobrane przez analizę. Czysto dekoracyjna. */}
-      <EmojiPile />
     </section>
   );
 }

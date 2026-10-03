@@ -7,9 +7,7 @@
   position: relative;
   isolation: isolate;
   text-align: center;
-  padding-block: var(--sp-9) var(--sp-7);
-  /* Dół z zapasem na stertę emotek, żeby nie leżała na podpowiedziach. */
-  padding-bottom: calc(var(--sp-7) + 5.5rem);
+  padding-block: var(--sp-8) var(--sp-6);
   overflow: hidden;
   transition: padding 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -17,8 +15,7 @@
 /* Sygnatura: po wejściu wyników hero kurczy się i oddaje pierwszeństwo
    narzędziu. Jedyny zaaranżowany moment w aplikacji. */
 .hero--receded {
-  padding-block: var(--sp-6) var(--sp-5);
-  padding-bottom: calc(var(--sp-5) + 5.5rem);
+  padding-block: var(--sp-5) var(--sp-4);
 }
 
 /* Poświata za nagłówkiem. Czysto dekoracyjna, pod tekstem, bardzo szeroka —
@@ -64,67 +61,35 @@
 
 .hero__content { position: relative; }
 
-/* --- sterta emotek na dole hero --- */
-/* Źródło, z którego pod pigułką wjeżdżają dobrane emotki. Czysto
-   dekoracyjna (aria-hidden), więc jedyna jej rola jest wizualna: ma być
-   cicho i lekko „żyć", nie konkurować z nagłówkiem. */
-.hero__pile {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-end;
-  gap: clamp(0.5rem, 1.6vw, 1.25rem);
-  padding: 0 var(--sp-5) var(--sp-3);
-  /* Gaśnie ku dołowi i ku górze — emotki wyglądają, jakby leżały na dnie
-     ekranu, a nie jak kolejny rzędzik elementów. */
-  -webkit-mask-image: linear-gradient(to top, #000 40%, transparent);
-  mask-image: linear-gradient(to top, #000 40%, transparent);
-  pointer-events: none;
-  user-select: none;
-}
-.hero__pile-emoji {
-  display: inline-block;
-  line-height: 1;
-  opacity: 0.4;
-  /* Wolne, subtelne kołysanie — jedna wspólna animacja, opóźnienie z inline,
-     więc fala idzie przez stertę. Przy reduced-motion globalnie wyłączona. */
-  animation: pile-bob 5.5s ease-in-out infinite alternate;
-}
-@keyframes pile-bob {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-7px); }
-}
-/* Wysoki kontrast: dekoracja znika, zostaje płaskie tło. */
-:root[data-contrast="high"] .hero__pile { display: none; }
 
-/* --- pigułka nad nagłówkiem --- */
+
+/* --- pigułka nad nagłówkiem: Apple iOS Frosted Capsule --- */
 .hero__eyebrow {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
   margin: 0 auto var(--sp-5);
   padding: var(--sp-1) var(--sp-4);
-  border: 1px solid var(--line-ui);
-  border-radius: 100px;
-  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: var(--glass-border-subtle);
+  border-radius: var(--radius-pill);
+  background: var(--surface-glass-thin);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: var(--glass-highlight);
   font-size: var(--fs-xs);
   font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--ink-2);
   max-width: none;
 }
 
-/* --- nagłówek: to on robi całą robotę --- */
+/* --- nagłówek: Apple large title typography --- */
 .hero h1 {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 7.5vw, 5.5rem);
   font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 0.95;
+  letter-spacing: -0.04em;
+  line-height: 0.96;
   text-transform: uppercase;
   text-wrap: balance;
   max-width: 18ch;
@@ -166,7 +131,7 @@
 }
 .hero--receded .hero__lede { display: none; }
 
-/* --- przycisk pauzy, gdy materiał jednak gra (WCAG 2.2.2) --- */
+/* --- przycisk pauzy, gdy materiał jednak gra (WCAG 2.2.2): Apple Frosted Glass --- */
 .hero__pause {
   position: absolute;
   right: var(--sp-5);
@@ -177,18 +142,28 @@
   gap: var(--sp-2);
   min-height: 44px;
   padding: var(--sp-2) var(--sp-4);
-  border: 1px solid var(--line-ui);
-  border-radius: 100px;
-  background: color-mix(in srgb, var(--bg) 70%, transparent);
-  backdrop-filter: blur(8px);
+  border: var(--glass-border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-glass-btn);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: var(--glass-highlight);
   color: var(--ink);
   font-family: var(--font);
   font-size: var(--fs-xs);
   font-weight: 500;
   cursor: pointer;
   touch-action: manipulation;
+  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.hero__pause:hover { background: var(--surface); border-color: var(--ink-3); }
+.hero__pause:hover {
+  background: var(--surface-glass-thick);
+  border-color: var(--glass-border-bright);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+}
+.hero__pause:active {
+  transform: scale(0.97);
+}
 
 @media (max-width: 40rem) {
   .hero { padding-block: var(--sp-7) var(--sp-6); }

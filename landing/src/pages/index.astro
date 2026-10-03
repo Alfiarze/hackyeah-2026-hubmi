@@ -13,6 +13,8 @@ const description =
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" />
   </head>
   <body>
     <a class="skip-link" href="#main">Przejdź do treści głównej</a>
@@ -37,15 +39,14 @@ const description =
       <section class="hero" aria-labelledby="hero-title">
         <div class="container">
           <p class="eyebrow">HackYeah 2026 · Zadanie partnerskie · Województwo Małopolskie + ROPS Kraków</p>
-          <h1 id="hero-title">Cyfrowe serce Małopolskiego Hubu&nbsp;Innowacji Społecznych</h1>
+          <h1 id="hero-title">Baza i wdrożenia innowacji społecznych w&nbsp;Małopolsce</h1>
           <p class="lead">
-            Platforma, która łączy mieszkańców, NGO, samorządy i ekspertów:
-            od zgłoszenia problemu, przez dopasowanie sprawdzonego rozwiązania,
-            po wdrożenie w społeczności lokalnej.
+            Wyszukaj sprawdzone rozwiązanie problemu w Twojej miejscowości,
+            skonsultuj je z autorami i przenieś do swojej gminy lub organizacji.
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="#moduly">Poznaj moduły</a>
-            <a class="btn btn-secondary" href="#kontakt">Zgłoś problem</a>
+            <a class="btn btn-primary" href="#moduly">Przeglądaj moduły</a>
+            <a class="btn btn-secondary" href="#kontakt">Zgłoś problem w gminie</a>
           </div>
         </div>
       </section>
@@ -53,39 +54,39 @@ const description =
       <section id="moduly" aria-labelledby="moduly-title">
         <div class="container">
           <h2 id="moduly-title">Moduły platformy</h2>
-          <p class="section-lead">Siedem modułów — jedno miejsce wymiany wiedzy i współpracy międzysektorowej.</p>
+          <p class="section-lead">Siedem powiązanych narzędzi — od zgłoszenia potrzeby po wdrożenie rozwiązania.</p>
           <ul class="card-grid">
             <li class="card card-featured">
               <h3><span class="card-icon" aria-hidden="true">⭐</span> Matchmaking społeczny</h3>
               <p>
-                Opisz problem — inteligentny mechanizm znajdzie podobne przypadki
-                i zaproponuje sprawdzone innowacje społeczne z bazy ROPS.
+                Wpisz problem zwykłym językiem. System dopasuje rozwiązania przetestowane w regionie
+                i poda bezpośredni kontakt do realizatorów.
               </p>
               <p class="card-tag">Moduł obowiązkowy</p>
             </li>
             <li class="card">
               <h3><span class="card-icon" aria-hidden="true">📚</span> Zasobnik wiedzy</h3>
-              <p>Mapa Wyzwań Społecznych, Biblioteka Innowacji, raporty — zawsze aktualne i dostępne.</p>
+              <p>115 opisów przetestowanych innowacji, narzędziowniki, szablony i podręczniki dobrych praktyk z Małopolski.</p>
             </li>
             <li class="card">
               <h3><span class="card-icon" aria-hidden="true">💡</span> Kreator pomysłów</h3>
-              <p>Fiszki pomysłów, generator wniosków grantowych, Canwy Innowacji i asystent AI kreatora.</p>
+              <p>4-polowa fiszka pomysłu, automatyczne sprawdzenie czy ktoś w regionie już tego nie zrobił i szkic wniosku grantowego.</p>
             </li>
             <li class="card">
               <h3><span class="card-icon" aria-hidden="true">🧪</span> Tester innowacji</h3>
-              <p>Zgłoś się do testów, oceń rozwiązania, przekaż feedback twórcom.</p>
+              <p>Zgłoszenia samorządów i NGO do udziału w testach oraz merytoryczne recenzje wdrożonych projektów.</p>
             </li>
             <li class="card">
               <h3><span class="card-icon" aria-hidden="true">💬</span> Aktywna komunikacja</h3>
-              <p>Bezpośredni dialog z ROPS, wsparcie mentorów, budowanie partnerstw.</p>
+              <p>Otwarte wątki spraw, bezpośrednie konsultacje z ekspertami ROPS Kraków i śledzenie statusu zgłoszeń.</p>
             </li>
             <li class="card">
               <h3><span class="card-icon" aria-hidden="true">🛠️</span> Panel administratora</h3>
-              <p>Szybka aktualizacja wiedzy, weryfikacja zgłoszeń, monitoring potrzeb i trendów.</p>
+              <p>Skrzynka spraw mieszkańców, rejestr niezaspokojonych potrzeb i analiza luk według małopolskich powiatów.</p>
             </li>
             <li class="card">
               <h3><span class="card-icon" aria-hidden="true">🤝</span> Middleman Innowacji</h3>
-              <p>Asystent AI dopasuje innowację do potrzeb Twojej instytucji — od pomysłu do usługi.</p>
+              <p>Kalkulator wdrożenia: szacunek budżetu, wymagana obsada, harmonogram etapów i wymogi formalne dla Twojej jednostki.</p>
             </li>
           </ul>
         </div>
@@ -93,23 +94,23 @@ const description =
 
       <section id="dla-kogo" aria-labelledby="dla-kogo-title">
         <div class="container">
-          <h2 id="dla-kogo-title">Dla kogo?</h2>
+          <h2 id="dla-kogo-title">Dla kogo powstał HubMI?</h2>
           <div class="audience-grid">
             <div class="audience">
               <h3>Mieszkańcy i NGO</h3>
-              <p>Zgłaszajcie problemy i pomysły — prosto, bez biurokracji, w kilku krokach.</p>
+              <p>Zgłaszajcie lokalne trudności i pomysły na innowacje — w 4 konkretnych polach, bez urzędowego żargonu.</p>
             </div>
             <div class="audience">
-              <h3>JST (samorządy)</h3>
-              <p>Szukajcie sprawdzonych rozwiązań i wdrażajcie je lokalnie z gotowym wsparciem.</p>
+              <h3>Samorządy (JST)</h3>
+              <p>Wybierajcie gotowe rozwiązania, sprawdzajcie szacunkowy koszt i kontaktujcie się z gminami, które już je uruchomiły.</p>
             </div>
             <div class="audience">
               <h3>Pracownicy ROPS</h3>
-              <p>Zarządzajcie wiedzą, monitorujcie zgłoszenia i rozmawiajcie z regionem.</p>
+              <p>Koordynujcie wsparcie, odpowiadajcie mieszkańcom i analizujcie, w jakich powiatach brakuje sprawdzonych ofert.</p>
             </div>
             <div class="audience">
               <h3>Eksperci branżowi</h3>
-              <p>Doradzajcie innowatorom, oceniajcie pomysły, dzielcie się doświadczeniem.</p>
+              <p>Oceniajcie innowacje, weryfikujcie metodykę testów i dzielcie się praktycznymi wskazówkami wdrożeniowymi.</p>
             </div>
           </div>
         </div>
@@ -152,11 +153,14 @@ const description =
 
       body {
         margin: 0;
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", system-ui, sans-serif;
         color: var(--c-ink);
         background: var(--c-bg);
         line-height: 1.6;
         font-size: 1.05rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
 
       .container { max-width: 68rem; margin-inline: auto; padding-inline: 1.25rem; }
@@ -174,11 +178,14 @@ const description =
       .skip-link:focus { left: 0; }
 
       .site-header {
-        border-bottom: 1px solid var(--c-border);
-        background: var(--c-bg);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(28px) saturate(190%);
+        -webkit-backdrop-filter: blur(28px) saturate(190%);
         position: sticky;
         top: 0;
-        z-index: 5;
+        z-index: 20;
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
       }
       .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.85rem; }
       .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.25rem; color: var(--c-ink); text-decoration: none; }
@@ -199,8 +206,14 @@ const description =
 
       .hero { background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg)); padding-block: 4.5rem 3.5rem; }
       .eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; font-weight: 600; color: var(--c-primary-dark); margin: 0 0 1rem; }
-      h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); line-height: 1.15; margin: 0 0 1rem; max-width: 46ch; }
-      .lead { font-size: 1.2rem; color: var(--c-muted); max-width: 52ch; margin: 0 0 2rem; }
+      h1 {
+        font-size: clamp(1.9rem, 4.5vw, 3rem);
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        margin: 0 0 1rem;
+        max-width: 46ch;
+      }
+      .lead { font-size: 1.2rem; color: var(--c-muted); max-width: 52ch; margin: 0 0 2rem; letter-spacing: -0.01em; }
       .cta-row { display: flex; flex-wrap: wrap; gap: 0.9rem; }
 
       .btn {
@@ -210,15 +223,20 @@ const description =
         font-weight: 600;
         text-decoration: none;
         font-size: 1.05rem;
+        letter-spacing: -0.01em;
+        transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease, box-shadow 160ms ease;
       }
-      .btn-primary { background: var(--c-primary); color: #fff; }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn-primary { background: var(--c-primary); color: #fff; box-shadow: 0 4px 14px -2px rgba(29, 78, 216, 0.4); }
       .btn-primary:hover, .btn-primary:focus-visible { background: var(--c-primary-dark); }
       .btn-secondary { color: var(--c-primary-dark); border: 2px solid var(--c-primary); }
       .btn-secondary:hover, .btn-secondary:focus-visible { background: #e8eefc; }
 
       section { padding-block: 3.5rem; }
       #dla-kogo { background: var(--c-bg-alt); }
-      h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 0 0 0.75rem; }
+      h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -0.02em; margin: 0 0 0.75rem; }
       .section-lead { color: var(--c-muted); font-size: 1.12rem; max-width: 60ch; margin: 0 0 2rem; }
 
       .card-grid {
@@ -230,12 +248,20 @@ const description =
         margin: 0;
       }
       .card {
-        background: var(--c-bg);
-        border: 1px solid var(--c-border);
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(0, 0, 0, 0.08);
         border-radius: var(--radius);
         padding: 1.4rem 1.5rem;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+        transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease;
       }
-      .card h3 { margin: 0 0 0.6rem; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem; }
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+      }
+      .card h3 { margin: 0 0 0.6rem; font-size: 1.15rem; letter-spacing: -0.015em; display: flex; align-items: center; gap: 0.5rem; }
       .card p { margin: 0; color: var(--c-muted); }
       .card-featured { border-color: var(--c-primary); border-width: 2px; background: #f6f9ff; }
       .card-tag {

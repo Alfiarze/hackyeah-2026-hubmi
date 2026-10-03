@@ -23,11 +23,12 @@
  *  - etykieta pola jest `sr-only`, przyciski mają nazwy dostępne,
  *    a minimalny cel to 44×44 px (WCAG 2.5.5).
  */
-import { useMemo, type FormEvent, type ReactNode } from "react";
-import { pickEmojis } from "../lib/emojis";
+import { useLayoutEffect, useMemo, useRef, type FormEvent, type ReactNode } from "react";
+import { pickEmojis, type PickedEmoji } from "../lib/emojis";
 
 interface Props {
   value: string;
+  picks?: PickedEmoji[];
   /** tekst dopowiadany przez dyktowanie — pokazany obok wpisanego */
   interim?: string;
   onChange: (v: string) => void;
@@ -45,6 +46,7 @@ interface Props {
 
 export function SearchPill({
   value,
+  picks: picksProp,
   interim,
   onChange,
   onSubmit,
@@ -56,9 +58,10 @@ export function SearchPill({
   actions,
   status,
 }: Props) {
-  // Analiza przy każdym znaku: to tylko tokenizacja i mapowanie rdzeni,
-  // więc nie potrzeba debouncera.
-  const picks = useMemo(() => pickEmojis(value), [value]);
+  // Jeśli rodzic przekazał picks (np. Matchmaking współdzielący stan z dolną stertą),
+  // używamy ich bezpośrednio. W przeciwnym razie wyliczamy lokalnie.
+  const computedPicks = useMemo(() => pickEmojis(value), [value]);
+  const activePicks = picksProp ?? computedPicks;
 
   return (
     <form className="mm__search" onSubmit={(e) => onSubmit(e)}>
@@ -87,21 +90,89 @@ export function SearchPill({
         {actions}
       </div>
 
-      {/* Pod pigułką, jak w referencji: krótka nadlinia i emotki wjeżdżające
-          z dołu. Pusty box ma zarezerwowaną wysokość, żeby pole i
-          podpowiedzi nie skakały przy każdym naciśnięciu klawisza. */}
-      <div className="mm__picks" aria-hidden="true">
-        {picks.map((p, i) => (
-          <span key={p.id} className="mm__pick" style={{ animationDelay: `${i * 70}ms` }}>
-            {p.emoji}
+      {/* Pod pigułką: emotki przylatujące z dołu po rozpoznaniu przez Jev AI */}
+      {activePicks.length > 0 && (
+        <div className="mm__picks mm__picks--active" aria-live="polite">
+          <span className="mm__ai-tag">
+            <span className="mm__ai-icon" aria-hidden="true">✦</span>
+            <span>Jev AI:</span>
           </span>
-        ))}
-      </div>
+          <div className="mm__picks-list">
+            {activePicks.map((p, i) => (
+              <FlyingPick key={p.emoji} pick={p} index={i} />
+            ))}
+          </div>
+        </div>
+      )}
 
       <p id={hintId} className="hint mm__hint">
         {hint}
       </p>
       {status}
     </form>
+  );
+}
+
+/**
+ * Pojedyncza emotka pod inputem, która fizycznie startuje z punktu (X, Y)
+ * krążka w dolnej stercie i przelatuje po łuku w swoje docelowe miejsce.
+ */
+function FlyingPick({ pick, index }: { pick: PickedEmoji; index: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // Szukamy odpowiadającego krążka leżącego w stercie na dole
+    const pebble = document.querySelector(`[data-pebble="${pick.emoji}"]`) as HTMLElement | null;
+    if (!pebble) return;
+
+    const elRect = el.getBoundingClientRect();
+    const pebbleRect = pebble.getBoundingClientRect();
+
+    // Różnica współrzędnych: od krążka na dole do tego slotu pod inputem
+    const deltaX = pebbleRect.left + pebbleRect.width / 2 - (elRect.left + elRect.width / 2);
+    const deltaY = pebbleRect.top + pebbleRect.height / 2 - (elRect.top + elRect.height / 2);
+
+    // Animujemy DOKŁADNIE z fizycznej pozycji krążka na dole aż pod input
+    if (Math.abs(deltaY) > 8 && typeof el.animate === "function") {
+      el.animate(
+        [
+          {
+            transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(0.9) rotate(-10deg)`,
+            opacity: 0.92,
+          },
+          {
+            transform: `translate3d(${deltaX * 0.25}px, ${deltaY * 0.2 - 14}px, 0) scale(1.16) rotate(0deg)`,
+            opacity: 1,
+            offset: 0.65,
+          },
+          {
+            transform: "translate3d(0, 0, 0) scale(1) rotate(0deg)",
+            opacity: 1,
+            offset: 1,
+          },
+        ],
+        {
+          duration: 500,
+          delay: Math.min(160, index * 40),
+          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+          fill: "both",
+        }
+      );
+    }
+  }, [pick.emoji, index]);
+
+  return (
+    <span
+      ref={ref}
+      className="mm__pick"
+      title={pick.label}
+      aria-label={pick.label}
+      data-pick-emoji={pick.emoji}
+    >
+      <span className="mm__pick-emoji" aria-hidden="true">{pick.emoji}</span>
+    </span>
   );
 }

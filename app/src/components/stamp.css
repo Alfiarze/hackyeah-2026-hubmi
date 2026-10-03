@@ -9,7 +9,11 @@
   padding: var(--sp-3) var(--sp-4);
   margin: 0;
   background: var(--ok-wash);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--ok) 30%, transparent);
   border-radius: var(--radius-sm);
+  box-shadow: var(--glass-highlight);
   max-width: none;
 }
 
@@ -39,7 +43,8 @@
 
 /* Brak dowodu to osobny, jeszcze cichszy stan. Nie alarm — po prostu brak. */
 .stamp--none {
-  background: var(--surface-2);
+  background: var(--surface-glass-thin);
+  border-color: var(--glass-border-subtle);
 }
 .stamp--none .stamp__label { color: var(--ink-3); }
 .stamp--none .stamp__label::before { content: "—"; }

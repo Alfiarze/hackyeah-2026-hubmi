@@ -17,6 +17,7 @@ import {
   type Turn,
 } from "../lib/conversation";
 import { buildIndex, search, gapReason, GAP_REASON_TEXT, type MatchResult } from "../lib/match";
+import { LOOSE_EMOJIS, pickEmojis } from "../lib/emojis";
 import { INNOVATIONS, type Innovation } from "../lib/data";
 import { addThread } from "../lib/store";
 import { useSpeech } from "../lib/useSpeech";
@@ -29,14 +30,6 @@ import { SearchPill } from "../components/SearchPill";
 import "./matchmaking.css";
 
 buildIndex(INNOVATIONS);
-
-const EXAMPLES = [
-  "Mama mieszka sama na wsi i nie ma z kim pogadać",
-  "Babcia zapomina, gubi się w domu",
-  "Jestem na wózku i nie wejdę do urzędu, wszędzie schody",
-  "Syn ma autyzm i boi się wychodzić z domu",
-  "Głucha pacjentka nie dogada się w przychodni",
-];
 
 interface Props {
   onAdapt: (inn: Innovation) => void;
@@ -51,6 +44,9 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
   const [gapSent, setGapSent] = useState(false);
   const [gapOpen, setGapOpen] = useState(false);
   const liveRef = useRef<HTMLDivElement>(null);
+
+  const picks = useMemo(() => pickEmojis(draft), [draft]);
+  const pickedEmojiSet = useMemo(() => new Set(picks.map((p) => p.emoji)), [picks]);
 
   const speech = useSpeech((text) => {
     // dyktowanie od razu wysyła wypowiedź — senior nie musi szukać przycisku
@@ -132,12 +128,12 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
           </span>
         </h1>
         <p className="hero__lede">
-          Nie musisz znać nazw ani kategorii. Powiedz to tak, jak sąsiadowi —
-          resztę dopytamy.
+          Opisz sytuację zwykłym językiem lub podyktuj głosem.
+          Wskażemy przetestowane rozwiązania z Małopolski i bezpośredni kontakt do realizatorów.
         </p>
 
       {/* --- rozmowa --- */}
-      <section className="mm__conv" aria-label="Rozmowa z asystentem">
+      <section className="mm__conv" aria-label="Wyszukiwanie rozwiązań">
         <ol className="mm__turns">
           {conv.turns.map((turn) => (
             <li
@@ -145,7 +141,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
               className={`mm__turn mm__turn--${turn.role === "user" ? "user" : "bot"}`}
             >
               <span className="mm__who">
-                {turn.role === "user" ? "Ty" : "Asystent HubMI"}
+                {turn.role === "user" ? "Ty" : "HubMI"}
               </span>
               <p>{turn.text}</p>
             </li>
@@ -165,6 +161,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
         {!conv.done && (
           <SearchPill
             value={draft}
+            picks={picks}
             interim={speech.interim}
             onChange={setDraft}
             onSubmit={send}
@@ -172,7 +169,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
             label={conv.turns.length <= 1 ? "Opisz problem" : "Twoja odpowiedź"}
             placeholder={
               conv.turns.length <= 1
-                ? EXAMPLES[0]
+                ? "Opisz sytuację, np. brak windy, samotny senior, dojazd do lekarza…"
                 : "Dopisz, co jeszcze warto wiedzieć"
             }
             hintId="mm-hint"
@@ -223,19 +220,37 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
         )}
 
         {conv.turns.length <= 1 && (
-          <div className="mm__examples" data-reveal>
-            <p className="eyebrow">Albo zacznij od przykładu</p>
-            <div className="row">
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex}
-                  type="button"
-                  className="btn btn--ghost mm__example"
-                  onClick={() => setConv((c) => advance(c, ex))}
-                >
-                  „{ex}”
-                </button>
-              ))}
+          <div className="mm__gravity-section" data-reveal>
+            <div className="mm__gravity-floor">
+              <div
+                className="mm__gravity-pit"
+                role="group"
+                aria-label="Wyzwania społeczne Małopolski — kliknij, by wpisać do wyszukiwarki"
+              >
+                {LOOSE_EMOJIS.map((item) => {
+                  const isLifted = pickedEmojiSet.has(item.emoji);
+                  return (
+                    <button
+                      key={`${item.conceptId}-${item.emoji}`}
+                      type="button"
+                      data-pebble={item.emoji}
+                      className={`mm__gravity-pebble ${isLifted ? "mm__gravity-pebble--lifted" : ""}`}
+                      style={{
+                        "--tilt": `${item.tilt}deg`,
+                        "--jitter-y": `${item.jitterY}px`,
+                        "--scale": `${item.scale}`,
+                      } as React.CSSProperties}
+                      onClick={() => setDraft(item.sampleQuery)}
+                      disabled={isLifted}
+                      aria-hidden={isLifted ? "true" : undefined}
+                      title={`${item.label} — kliknij, by wpisać: „${item.sampleQuery}”`}
+                      aria-label={item.label}
+                    >
+                      <span className="mm__gravity-emoji" aria-hidden="true">{item.emoji}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}

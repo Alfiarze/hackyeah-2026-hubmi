@@ -131,8 +131,8 @@ export function Creator() {
         <p className="page__mod">Moduł III · Kreator pomysłów</p>
         <h1>Masz pomysł? Zacznij od fiszki</h1>
         <p>
-          Cztery pola. Bez wniosku, bez załączników. Jeśli pomysł okaże się dobry,
-          wygenerujemy z tego szkic wniosku grantowego.
+          Cztery konkretne pola. Sprawdzimy nowość w bazie ROPS i wygenerujemy
+          roboczy szkic wniosku o grant do 120 000 zł.
         </p>
       </div>
 
@@ -268,20 +268,20 @@ export function Creator() {
         </form>
 
         {/* --- asystent kreatora --- */}
-        <aside className="cr__assist" data-reveal="right" aria-label="Asystent kreatora innowacji">
-          <p className="page__mod">Asystent kreatora</p>
+        <aside className="cr__assist" data-reveal="right" aria-label="Weryfikacja nowości pomysłu">
+          <p className="page__mod">Weryfikator nowości</p>
 
           {!probe ? (
             <p className="muted">
-              Opisz pomysł w polach obok. Sprawdzę, czy ktoś w Małopolsce już tego
-              nie zrobił — i powiem, co z tego wynika dla Twojego wniosku.
+              Wpisz opis pomysłu. Baza automatycznie zweryfikuje, czy analogiczne
+              rozwiązanie było już testowane w Małopolsce i przygotuje argumentację do wniosku.
             </p>
           ) : probe.results.length === 0 ? (
             <div className="cr__verdict cr__verdict--new">
-              <h3>Nie znalazłem nic podobnego</h3>
+              <h3>Brak analogicznych innowacji w bazie</h3>
               <p>
-                Wśród 115 przetestowanych innowacji nie ma odpowiednika. To mocny
-                argument o nowości rozwiązania — powołaj go wprost w sekcji 5 wniosku.
+                Wśród 115 przetestowanych innowacji ROPS nie ma odpowiednika. To kluczowy
+                argument potwierdzający nowość rozwiązania — powołaj go w sekcji 5 wniosku.
               </p>
             </div>
           ) : (
@@ -293,16 +293,15 @@ export function Creator() {
               >
                 <h3>
                   {probe.results[0].score >= 70
-                    ? "Uwaga: to może być już zrobione"
-                    : "Są rozwiązania z pogranicza"}
+                    ? "Zidentyfikowano podobne rozwiązania w regionie"
+                    : "Powiązane innowacje w bazie ROPS"}
                 </h3>
                 <p>
                   {probe.results[0].score >= 70
-                    ? "ROPS ocenia nowość w skali Polski. Przy tak wysokim dopasowaniu " +
-                      "wniosek musi jasno pokazać różnicę — albo rozważ zgłoszenie się " +
-                      "jako tester istniejącej innowacji."
-                    : "Nie są tym samym, ale komisja o nie zapyta. Warto wiedzieć, " +
-                      "czym się od nich różnisz."}
+                    ? "Kryterium naboru wymaga wykazania unikalności. Przy wysokim podobieństwie " +
+                      "wskaż precyzyjnie różnice metodyczne lub rozważ adaptację gotowego modelu."
+                    : "Rozwiązania o zbliżonej tematyce. Eksperci oceniający wniosek zwrócą " +
+                      "na nie uwagę — warto wskazać różnice i unikalną wartość Twojego pomysłu."}
                 </p>
               </div>
 

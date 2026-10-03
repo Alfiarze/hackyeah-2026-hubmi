@@ -57,8 +57,8 @@ let seq = 0;
 const nid = () => `t${++seq}`;
 
 export const OPENING =
-  "Opisz swoimi słowami, co się dzieje. Nie musi być po urzędowemu — " +
-  "wystarczy tak, jak powiedziałbyś sąsiadowi.";
+  "Opisz problem lub wyzwanie w swojej okolicy. " +
+  "Wystarczą 1–2 zdania zwykłym, codziennym językiem.";
 
 export function initConversation(): ConvState {
   return {
@@ -103,7 +103,7 @@ function ask(slot: Slot): Turn {
     return {
       role: "assistant",
       id: nid(),
-      text: "Kogo ten problem dotyczy przede wszystkim?",
+      text: "Kogo ten problem dotyczy w pierwszej kolejności?",
       chips: WHO_CHIPS,
     };
   }
@@ -111,10 +111,10 @@ function ask(slot: Slot): Turn {
     role: "assistant",
     id: nid(),
     text:
-      "W jakiej gminie lub powiecie? Dzięki temu pokażę, gdzie podobny " +
-      "problem już rozwiązano i z kim można się skontaktować.",
+      "W jakiej gminie lub powiecie występuje ten problem? " +
+      "Pozwoli to sprawdzić lokalne wdrożenia i kontakt do realizatorów.",
     chips: [
-      { label: "Nie chcę podawać", value: "" },
+      { label: "Pomiń lokalizację", value: "" },
       ...POWIATY.slice(0, 6).map((p) => ({ label: p, value: p })),
     ],
   };
@@ -142,7 +142,7 @@ export function advance(st: ConvState, input: string): ConvState {
     turns.push({
       role: "assistant",
       id: nid(),
-      text: "Napisz jeszcze jedno zdanie o samym problemie — co konkretnie nie działa?",
+      text: "Dopisz jeszcze jedno zdanie: co konkretnie stanowi barierę lub problem?",
     });
     return next;
   }
@@ -158,10 +158,10 @@ export function advance(st: ConvState, input: string): ConvState {
     role: "assistant",
     id: nid(),
     text: a.concepts.length
-      ? `Rozumiem. Rozpoznałem wątki: ${a.concepts
+      ? `Rozpoznane obszary: ${a.concepts
           .map((c) => c.label)
-          .join(", ")}. Szukam rozwiązań, które już zostały przetestowane.`
-      : "Sprawdzam Bibliotekę pod kątem tego opisu.",
+          .join(", ")}. Porównuję zgłoszenie z bazą przetestowanych innowacji.`
+      : "Przeszukuję bazę innowacji pod kątem tego opisu.",
   });
   return { ...next, done: true };
 }

@@ -10,8 +10,11 @@
 .map__shell {
   position: relative;
   border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--shadow);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-4);
 }
 
@@ -62,11 +65,14 @@
   align-items: center;
   gap: var(--sp-1);
   margin: 0;
-  padding: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
   list-style: none;
-  background: var(--surface);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-sm);
+  background: var(--surface-glass-thick);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: var(--glass-border-subtle);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   font-size: var(--fs-xs);
   color: var(--ink-3);
 }

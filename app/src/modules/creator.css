@@ -9,9 +9,12 @@
 }
 
 .cr__form {
-  background: var(--surface);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-5);
 }
 
@@ -30,15 +33,19 @@
   padding: var(--sp-4);
   border-left: 3px solid var(--warn);
   background: var(--warn-wash);
+  border-radius: var(--radius-sm);
   font-size: var(--fs-sm);
 }
 .cr__errors ul { margin: var(--sp-2) 0 0; padding-left: var(--sp-5); }
 
-/* --- asystent --- */
+/* --- asystent: Apple frosted glass panel --- */
 .cr__assist {
-  background: var(--surface);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-5);
   position: sticky;
   top: 7rem;
@@ -49,15 +56,33 @@
 
 .cr__verdict {
   padding: var(--sp-4);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   margin-bottom: var(--sp-4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--glass-highlight);
 }
 .cr__verdict h3 { font-size: var(--fs-lg); margin-bottom: var(--sp-2); }
 .cr__verdict p { font-size: var(--fs-sm); margin: 0; }
 /* Każdy werdykt ma własny nagłówek słowny — kolor tylko go wzmacnia. */
-.cr__verdict--new { background: var(--ok-wash); border-left: 3px solid var(--ok); }
-.cr__verdict--near { background: var(--accent-wash); border-left: 3px solid var(--accent); }
-.cr__verdict--dup { background: var(--warn-wash); border-left: 3px solid var(--warn); }
+.cr__verdict--new {
+  background: var(--ok-wash);
+  border-left: 3px solid var(--ok);
+  border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
+  border-left-width: 3px;
+}
+.cr__verdict--near {
+  background: var(--accent-wash);
+  border-left: 3px solid var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-left-width: 3px;
+}
+.cr__verdict--dup {
+  background: var(--warn-wash);
+  border-left: 3px solid var(--warn);
+  border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+  border-left-width: 3px;
+}
 
 .cr__near { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); }
 .cr__near > li { border-top: 1px solid var(--line); padding-top: var(--sp-3); }

@@ -12,6 +12,7 @@
 }
 
 /* --- lista wątków --- */
+/* --- lista wątków: styl Apple Messages --- */
 .cm__list ul { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: var(--sp-2); }
 
 .cm__item {
@@ -19,20 +20,29 @@
   gap: var(--sp-1);
   width: 100%;
   text-align: left;
-  padding: var(--sp-3);
-  min-height: 44px;
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  padding: var(--sp-3) var(--sp-4);
+  min-height: 48px;
+  background: var(--surface-glass-thin);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: var(--glass-border-subtle);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--glass-highlight);
   cursor: pointer;
   font-family: inherit;
   color: var(--ink);
+  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.cm__item:hover { background: var(--surface-2); }
-/* Wybrany wątek: obrys + lewa belka, nie tylko inne tło. */
+.cm__item:hover {
+  background: var(--surface-glass-btn);
+  border-color: var(--glass-border-bright);
+  transform: translateY(-1px);
+}
+/* Wybrany wątek: Apple active bubble */
 .cm__item--sel {
   background: var(--accent-wash);
-  box-shadow: inset 3px 0 0 var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: inset 3px 0 0 var(--accent), var(--glass-highlight);
 }
 
 .cm__item-top { display: flex; align-items: center; gap: var(--sp-2); }
@@ -48,11 +58,14 @@
   box-shadow: 0 0 0 3px var(--warn-wash);
 }
 
-/* --- wątek --- */
+/* --- wątek: Apple frosted glass panel --- */
 .cm__thread {
-  background: var(--surface);
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-5);
 }
 .cm__thread-head { margin-bottom: var(--sp-5); }
@@ -60,9 +73,13 @@
 
 .cm__fiszka {
   padding: var(--sp-4);
-  background: var(--bg);
-  border-radius: var(--radius);
+  background: var(--surface-glass-thin);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: var(--glass-border-subtle);
+  border-radius: var(--radius-sm);
   margin-bottom: var(--sp-5);
+  box-shadow: var(--glass-highlight);
 }
 @media (min-width: 44rem) {
   .cm__fiszka { grid-template-columns: 1fr 1fr; }
@@ -77,8 +94,22 @@
 }
 .cm__msg p { margin: 0; font-size: var(--fs-sm); line-height: 1.6; white-space: pre-wrap; }
 /* Autor wypowiedzi jest zawsze podpisany — strona rozmowy nie zależy od koloru. */
-.cm__msg--author { background: var(--bg); border-left: 3px solid var(--line-ui); }
-.cm__msg--staff { background: var(--accent-wash); border-left: 3px solid var(--accent); }
+.cm__msg--author {
+  background: var(--surface-glass-thin);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: var(--glass-border-subtle);
+  border-left: 3px solid var(--ink-3);
+  box-shadow: var(--glass-highlight);
+}
+.cm__msg--staff {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface-glass-thin));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-left: 3px solid var(--accent);
+  box-shadow: var(--glass-highlight);
+}
 .cm__from {
   font-family: var(--font);
   font-size: var(--fs-xs);

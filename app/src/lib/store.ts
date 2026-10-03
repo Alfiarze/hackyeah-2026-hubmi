@@ -1,15 +1,16 @@
 /**
- * Stan aplikacji — mock backendu.
+ * Stan aplikacji — hybrydowy store (lokalny stan z automatyczną synchronizacją z API).
  *
- * Wszystko leży w localStorage, więc zamknięta pętla (mieszkanka zgłasza →
- * admin widzi powiadomienie → odpowiada → autorka widzi odpowiedź) działa
- * na żywo w demo, bez serwera. Przy wdrożeniu `save()` i `load()` podmienia
- * się na wywołania API; reszta aplikacji nie wie o różnicy.
- *
- * Jeden model `Thread` obsługuje wszystkie kanały zgłoszeń: pomysł (moduł III),
- * lukę z matchmakingu (I → VI), pytanie do ROPS (V) i zgłoszenie na testera (IV).
- * Dzięki temu panel administratora ma jedną skrzynkę, a nie cztery.
+ * Zasada działania:
+ *  1. Zawsze startuje natychmiast z danych lokalnych (localStorage / seed) — zero opóźnień
+ *     przy pierwszym renderze, 100% odporność na brak sieci (offline-first).
+ *  2. W tle weryfikuje łączność z backendem Django (`/api/health/`).
+ *  3. Gdy backend jest dostępny, automatycznie dociąga wątki z serwera (`/api/threads/`)
+ *     i asynchronicznie przesyła nowe zgłoszenia, odpowiedzi i statusy.
+ *  4. Gdy backend jest wyłączony, aplikacja działa bez żadnych błędów w trybie demo.
  */
+
+import { api, BackendThread } from "./api";
 
 export type ThreadKind = "pomysł" | "luka" | "pytanie" | "test";
 export type ThreadStatus = "nowe" | "w trakcie" | "odpowiedziane" | "zamknięte";
@@ -62,12 +63,55 @@ export interface AppState {
   /** kto jest „zalogowany" — przełącznik roli na potrzeby demo */
   role: Role;
   seenByAuthor: string[];
+  backendConnected: boolean;
 }
 
 const KEY = "hubmi.state.v1";
 
 function uid(): string {
   return Math.random().toString(36).slice(2, 10);
+}
+
+/** Konwersja wątku z modelu Django REST Framework do formatu aplikacji frontendu. */
+function backendToFrontend(b: BackendThread): Thread {
+  const parseTime = (iso?: string) => {
+    if (!iso) return Date.now();
+    const t = Date.parse(iso);
+    return isNaN(t) ? Date.now() : t;
+  };
+
+  return {
+    id: String(b.id),
+    kind: (b.kind as ThreadKind) || "pomysł",
+    title: b.title || "Bez tytułu",
+    author: b.author_name || "Mieszkaniec (demo)",
+    authorRole: (b.author_role as Role) || "mieszkaniec",
+    powiat: b.powiat || undefined,
+    body: b.body || "",
+    status: (b.status as ThreadStatus) || "nowe",
+    createdAt: parseTime(b.created_at),
+    messages: (b.messages || []).map((m) => ({
+      id: String(m.id || uid()),
+      from: (m.role as Role) || "mieszkaniec",
+      author: m.author_name || "Uczestnik",
+      text: m.text || "",
+      at: parseTime(m.created_at),
+    })),
+    concepts: b.concepts || [],
+    unknownTerms: b.unknown_terms || [],
+    topScore: typeof b.top_score === "number" ? b.top_score : undefined,
+    fiszka: b.fiszka
+      ? {
+          istota: b.fiszka.istota || "",
+          adresat: b.fiszka.adresat || "",
+          etap: b.fiszka.etap || "pomysł",
+          obszar: b.fiszka.obszar || "",
+        }
+      : undefined,
+    innovationId: b.innovation ? String(b.innovation) : undefined,
+    rating: typeof b.rating === "number" ? b.rating : undefined,
+    read: Boolean(b.read),
+  };
 }
 
 /** Dane startowe, żeby panel admina i mapa nie były puste przy pierwszym wejściu. */
@@ -168,15 +212,23 @@ function seed(): Thread[] {
 
 function load(): AppState {
   if (typeof localStorage === "undefined") {
-    return { threads: seed(), role: "mieszkaniec", seenByAuthor: [] };
+    return { threads: seed(), role: "mieszkaniec", seenByAuthor: [], backendConnected: false };
   }
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return JSON.parse(raw) as AppState;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return {
+        threads: parsed.threads || seed(),
+        role: parsed.role || "mieszkaniec",
+        seenByAuthor: parsed.seenByAuthor || [],
+        backendConnected: false,
+      };
+    }
   } catch {
     // uszkodzony wpis — startujemy od danych demo
   }
-  return { threads: seed(), role: "mieszkaniec", seenByAuthor: [] };
+  return { threads: seed(), role: "mieszkaniec", seenByAuthor: [], backendConnected: false };
 }
 
 let state: AppState = load();
@@ -201,6 +253,10 @@ export function getState(): AppState {
   return state;
 }
 
+export function isBackendConnected(): boolean {
+  return state.backendConnected;
+}
+
 export function setRole(role: Role) {
   commit({ ...state, role });
 }
@@ -219,10 +275,11 @@ export interface NewThread {
   rating?: number;
 }
 
-/** Tworzy zgłoszenie i od razu zapala powiadomienie w panelu administratora. */
+/** Tworzy zgłoszenie natychmiast w UI, a przy dostępnym backendzie wysyła do Django. */
 export function addThread(t: NewThread): Thread {
+  const localId = uid();
   const thread: Thread = {
-    id: uid(),
+    id: localId,
     status: "nowe",
     createdAt: Date.now(),
     messages: [],
@@ -231,12 +288,51 @@ export function addThread(t: NewThread): Thread {
     read: false,
     ...t,
   };
+
   commit({ ...state, threads: [thread, ...state.threads] });
+
+  // Asynchroniczna synchronizacja z backendem
+  (async () => {
+    try {
+      const res = await api.threads.create({
+        kind: t.kind,
+        title: t.title,
+        body: t.body,
+        author_name: thread.author,
+        powiat: t.powiat,
+        innovation_id: t.innovationId,
+        rating: t.rating,
+        concepts: t.concepts,
+        unknown_terms: t.unknownTerms,
+        top_score: t.topScore,
+        fiszka: t.fiszka,
+      });
+
+      if (res.ok && res.data?.id) {
+        const backendId = String(res.data.id);
+        // Podmień ID lokalne na oficjalne UUID z backendu
+        const updated = state.threads.map((th) => (th.id === localId ? { ...th, id: backendId } : th));
+        commit({ ...state, threads: updated, backendConnected: true });
+      }
+    } catch {
+      // Offline fallback: stan lokalny już jest zaktualizowany
+    }
+  })();
+
   return thread;
 }
 
 /** Odpowiedź ROPS lub eksperta — domyka pętlę komunikacji. */
 export function reply(threadId: string, text: string, from: Role = "ROPS", author?: string) {
+  const authorName = author || (from === "ROPS" ? "Koordynator ROPS (demo)" : "Ekspert (demo)");
+  const newMsg: Message = {
+    id: uid(),
+    from,
+    author: authorName,
+    text,
+    at: Date.now(),
+  };
+
   const threads = state.threads.map((th) =>
     th.id !== threadId
       ? th
@@ -244,20 +340,24 @@ export function reply(threadId: string, text: string, from: Role = "ROPS", autho
           ...th,
           status: "odpowiedziane" as ThreadStatus,
           read: true,
-          messages: [
-            ...th.messages,
-            {
-              id: uid(),
-              from,
-              author: author || (from === "ROPS" ? "Koordynator ROPS (demo)" : "Ekspert (demo)"),
-              text,
-              at: Date.now(),
-            },
-          ],
+          messages: [...th.messages, newMsg],
         },
   );
-  // odpowiedź jest nowa dla autora, więc znika z listy „już widziane"
-  commit({ ...state, threads, seenByAuthor: state.seenByAuthor.filter((id) => id !== threadId) });
+
+  commit({
+    ...state,
+    threads,
+    seenByAuthor: state.seenByAuthor.filter((id) => id !== threadId),
+  });
+
+  // Asynchroniczna wysyłka do API
+  (async () => {
+    try {
+      await api.threads.addMessage(threadId, text, authorName, from);
+    } catch {
+      // cichy fallback w demo
+    }
+  })();
 }
 
 export function setStatus(threadId: string, status: ThreadStatus) {
@@ -267,6 +367,14 @@ export function setStatus(threadId: string, status: ThreadStatus) {
       th.id === threadId ? { ...th, status, read: true } : th,
     ),
   });
+
+  (async () => {
+    try {
+      await api.threads.moderate(threadId, { status, read: true });
+    } catch {
+      // offline
+    }
+  })();
 }
 
 export function markRead(threadId: string) {
@@ -274,6 +382,14 @@ export function markRead(threadId: string) {
     ...state,
     threads: state.threads.map((th) => (th.id === threadId ? { ...th, read: true } : th)),
   });
+
+  (async () => {
+    try {
+      await api.threads.moderate(threadId, { read: true });
+    } catch {
+      // offline
+    }
+  })();
 }
 
 /** Autor przeczytał odpowiedź — kropka „nowa odpowiedź" gaśnie. */
@@ -283,7 +399,7 @@ export function markSeenByAuthor(threadId: string) {
 }
 
 export function resetDemo() {
-  commit({ threads: seed(), role: "mieszkaniec", seenByAuthor: [] });
+  commit({ threads: seed(), role: "mieszkaniec", seenByAuthor: [], backendConnected: state.backendConnected });
 }
 
 /** Zgłoszenia nieprzeczytane przez administratora. */
@@ -296,4 +412,49 @@ export function unseenRepliesForAuthor(s: AppState = state): Thread[] {
   return s.threads.filter(
     (t) => t.messages.length > 0 && !s.seenByAuthor.includes(t.id),
   );
+}
+
+/**
+ * Automatyczna synchronizacja z backendem:
+ * Pobiera wątki z Django i łączy z lokalną bazą danych.
+ */
+export async function syncWithBackend(): Promise<void> {
+  try {
+    const health = await api.checkHealth();
+    if (!health) {
+      if (state.backendConnected) {
+        commit({ ...state, backendConnected: false });
+      }
+      return;
+    }
+
+    const res = await api.threads.list();
+    if (res.ok && Array.isArray(res.data) && res.data.length > 0) {
+      const serverThreads = res.data.map(backendToFrontend);
+      const serverIds = new Set(serverThreads.map((t) => t.id));
+
+      // Zachowaj wątki lokalne (np. seed), których serwer jeszcze nie ma
+      const localOnly = state.threads.filter((t) => !serverIds.has(t.id));
+      const merged = [...serverThreads, ...localOnly];
+
+      commit({
+        ...state,
+        threads: merged,
+        backendConnected: true,
+      });
+    } else {
+      commit({ ...state, backendConnected: true });
+    }
+  } catch {
+    if (state.backendConnected) {
+      commit({ ...state, backendConnected: false });
+    }
+  }
+}
+
+// Inicjalizacja synchronizacji w tle po załadowaniu aplikacji
+if (typeof window !== "undefined") {
+  setTimeout(() => {
+    syncWithBackend();
+  }, 300);
 }
