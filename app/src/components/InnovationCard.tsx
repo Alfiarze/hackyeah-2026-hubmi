@@ -87,7 +87,7 @@ export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest 
       {aiVerdict && (
         <div className="fiszka__ai-verdict">
           <span className="eyebrow">
-            {aiVerdict.source === "jev" ? "Weryfikacja Jev Decisions" : "Diagnoza powiązania"}
+            {aiVerdict.source === "jev" ? "Weryfikacja AI" : "Diagnoza powiązania"}
             {typeof aiVerdict.confidence === "number" && ` · pewność ${aiVerdict.confidence}%`}
           </span>
           <p>{aiVerdict.reason || (aiVerdict.related ? "Potwierdzono silne powiązanie merytoryczne z opisanym problemem." : "Rozwiązanie kontekstowo zbliżone.")}</p>

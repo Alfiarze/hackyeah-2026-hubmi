@@ -184,34 +184,6 @@
   border-radius: var(--radius-pill);
 }
 
-.mm__ai-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--accent-deep);
-  background: var(--mist);
-  border: 1px solid color-mix(in srgb, var(--accent-deep) 35%, transparent);
-  border-radius: var(--radius-pill);
-  animation: pick-rise 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.mm__ai-icon {
-  font-size: 0.85rem;
-  color: var(--accent-deep);
-  display: inline-block;
-  animation: ai-pulse 2.2s ease-in-out infinite;
-}
-
-@keyframes ai-pulse {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
 .mm__picks-list {
   display: inline-flex;
   align-items: center;
@@ -251,11 +223,6 @@
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-}
-
-@keyframes pick-rise {
-  from { opacity: 0; transform: translateY(24px) scale(0.65); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .mm__hint { text-align: center; }
@@ -386,13 +353,6 @@
 @media (prefers-reduced-motion: reduce) {
   .mm__pick,
   .mm__gravity-pebble,
-  .mm__ai-icon,
-  .mm__ai-tag {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-  }
-
   .mm__gravity-pebble--lifted {
     display: none !important;
   }

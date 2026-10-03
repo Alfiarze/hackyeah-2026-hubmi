@@ -1,72 +1,31 @@
 /**
- * Dobór emotek do zapytania — „AI" decyduje, które pasują.
+ * Sterta emotek wyzwań społecznych Małopolski + typy doboru.
  *
- * To nie jest ozdoba i nie jest losowanie: emotki wybiera ten sam silnik,
- * który dopasowuje innowacje (`analyzeQuery` z lib/match.ts). Zapytanie jest
- * rozbijane na rdzenie, rdzenie trafiają do znanych wątków (lib/concepts.ts),
- * a każdy wątek ma przypisaną paczkę emotek. Dzięki temu „Mama mieszka sama
- * na wsi" dostaje 👵🌾🫂, a „nie wejdę do urzędu, wszędzie schody" — ♿🏛️🛗.
+ * **Doboru NIE liczy ten plik.** O tym, które emotki pasują do opisu problemu,
+ * decyduje wyłącznie Jev przez `POST /api/match/emojis/` (zob.
+ * `lib/useEmojiPicks.ts`). Tutaj zostaje tylko sterta — zbiór, z którego Jev
+ * wybiera — bo emotka widoczna pod polem musi fizycznie istnieć na dole
+ * ekranu i odlecieć z tej samej sterty.
  *
- * Dlaczego bez API: cała aplikacja działa offline (zob. komentarz w match.ts),
- * a demo na hackathonie nie może zależeć od wifi na sali. Decyzja jest
- * w pełni explainable — dla każdego wyboru widać, który wątek go spowodował,
- * więc da się pokazać jury, „skąd" wzięła się dana emotka.
+ * Dlaczego bez lokalnych reguł: dobór po rozpoznanych wątkach trafiał średnio
+ * („wszędzie schody" dostawało emotki od pierwszego pasującego wątku, nie od
+ * najtrafniejszego). Jev ocenia każdą emotkę osobno w jednej przepustce i
+ * zwraca pewność, więc kolejność jest wynikiem oceny, a nie kolejności w
+ * tablicy.
  *
- * Kolejność emotek w paczce ma znaczenie: pierwsza jest nośnikiem wątku
- * (najbardziej rozpoznawalna), kolejne go dopowiadają.
+ * Kolejność emotek w stercie nie wpływa już na wybór — ma znaczenie wyłącznie
+ * dla układu wizualnego.
  */
-import { analyzeQuery } from "./match";
-
-/** koncept (wątek z lib/concepts.ts) → emotki, którymi go pokazujemy */
-const CONCEPT_EMOJI: Record<string, string[]> = {
-  samotnosc: ["🫂", "💬", "📞"],
-  senior: ["👵", "👴", "🧓"],
-  wies: ["🌾", "🏡", "🚏"],
-  demencja: ["💊", "🧠", "🧭"],
-  psyche: ["🧠", "🌿", "🧘"],
-  ruch: ["🦽", "🛗", "🚶"],
-  bariery: ["♿", "🛗", "🏛️"],
-  wzrok: ["🦯", "👁️", "🔊"],
-  sluch: ["🧏", "👂", "💬"],
-  intelekt: ["🧩", "🎨", "📖"],
-  autyzm: ["🧩", "🧸", "🎧"],
-  dzieci: ["🧒", "🎒", "🏫"],
-  rodzina: ["👨‍👩‍👧", "🏠", "💛"],
-  opieka: ["💛", "🩺", "🤲"],
-  bezdomnosc: ["🏠", "🛏️", "🆘"],
-  cudzoziemcy: ["🌍", "🗣️", "🤝"],
-  praca: ["💼", "🛠️", "🤝"],
-  cyfrowe: ["💻", "📱", "📶"],
-  zdrowie: ["🩺", "🏥", "💊"],
-  transport: ["🚌", "🚏", "🗺️"],
-  aktywnosc: ["🎨", "🎭", "⚽"],
-  instytucje: ["🏛️", "🤝", "📋"],
-};
-
-/**
- * Emotki dla zapytania, którego nie rozpoznaliśmy jako żadnego znanego wątku.
- * Nie zostawiamy pola pustego — użytkownik ma wtedy sygnał, że tekst dotarł
- * i jest przetwarzany, a nie że wpisanie nic nie dało.
- */
-const FALLBACK = ["🔎", "💭", "✨"];
-
-/**
- * Cała pula — do „sterty" emotek na dole hero (dekoracja, `aria-hidden`).
- * Sterta jest źródłem, z którego widoczny dobór „wylatuje" w górę pod pole
- * wyszukiwania, więc musi zawierać dokładnie te same emotki, co wybór.
- */
-export const ALL_EMOJI: string[] = [
-  ...new Set([...Object.values(CONCEPT_EMOJI).flat(), ...FALLBACK]),
-];
-
 /** Ile emotek maksymalnie pokazujemy — więcej przestaje być czytelne. */
-const MAX = 6;
+export const EMOJI_LIMIT = 6;
 
 export interface PickedEmoji {
   id: string;
   emoji: string;
   conceptId?: string;
   label?: string;
+  /** pewność Jev 0..1 — `undefined`, gdy wybór pochodzi z zachowanego stanu */
+  confidence?: number;
 }
 
 export interface LooseEmoji {
@@ -124,85 +83,21 @@ export const LOOSE_EMOJIS: LooseEmoji[] = [
 ];
 
 /**
- * Rozpoznane wątki → pasujące emotki (zawsze wybierane z dolnej sterty LOOSE_EMOJIS).
- *
- * Emotki nigdy nie biorą się „znikąd" — każda emotka widoczna pod polem
- * jest fizycznie reprezentowana w stercie na dole ekranu i odlatuje z niej
- * do pigułki wyszukiwania. Nawet przy braku podpiętego backendu lub
- * nietypowych frazach testowych, wybierane są elementy z tej samej sterty.
+ * Cała pula — do „sterty" emotek na dole hero (dekoracja, `aria-hidden`).
+ * Sterta jest źródłem, z którego widoczny dobór „wylatuje" w górę pod pole
+ * wyszukiwania, więc musi zawierać dokładnie te same emotki, co wybór Jev.
  */
-export function pickEmojis(text: string): PickedEmoji[] {
-  const q = text.trim();
-  if (q.length < 2) return [];
+export const ALL_EMOJI: string[] = [...new Set(LOOSE_EMOJIS.map((e) => e.emoji))];
 
-  const { concepts } = analyzeQuery(q);
-  const out: PickedEmoji[] = [];
-  const used = new Set<string>();
-
-  // 1. Dopasowanie po rozpoznanych wątkach (Jev AI)
-  for (const c of concepts) {
-    // Szukamy pasującej emotki bezpośrednio w LOOSE_EMOJIS
-    const candidates = LOOSE_EMOJIS.filter((item) => item.conceptId === c.id);
-    const item = candidates[out.length % (candidates.length || 1)] ?? candidates[0];
-    if (item && !used.has(item.emoji)) {
-      used.add(item.emoji);
-      out.push({
-        id: `c-${c.id}-${item.emoji}`,
-        emoji: item.emoji,
-        conceptId: c.id,
-        label: c.label,
-      });
-    }
-    if (out.length >= MAX) break;
-  }
-
-  // 2. Dopasowanie po słowach kluczowych w etykietach i przykładowych zapytaniach sterty
-  if (out.length < MAX) {
-    const tokens = q.toLowerCase().split(/[\s,.-]+/).filter((w) => w.length >= 2);
-    for (const token of tokens) {
-      for (const item of LOOSE_EMOJIS) {
-        if (out.length >= MAX) break;
-        if (used.has(item.emoji)) continue;
-        if (
-          item.label.toLowerCase().includes(token) ||
-          item.sampleQuery.toLowerCase().includes(token) ||
-          item.conceptId.toLowerCase().includes(token)
-        ) {
-          used.add(item.emoji);
-          out.push({
-            id: `kw-${item.conceptId}-${item.emoji}`,
-            emoji: item.emoji,
-            conceptId: item.conceptId,
-            label: item.label,
-          });
-        }
-      }
-    }
-  }
-
-  // 3. Gdy zapytanie nie pasuje do żadnych reguł (np. wpisywanie w trakcie, testy offline)
-  // Wybieramy 2-3 emotki BEZPOŚREDNIO ze sterty według stabilnego hasha wpisanego tekstu.
-  // Dzięki temu pod polem NIGDY nie pojawiają się obce emotki znikąd.
-  if (out.length === 0) {
-    let hash = 0;
-    for (let i = 0; i < q.length; i++) {
-      hash = ((hash << 5) - hash + q.charCodeAt(i)) | 0;
-    }
-    const count = Math.min(3, Math.max(1, (Math.abs(hash) % 3) + 1));
-    for (let i = 0; i < count; i++) {
-      const idx = Math.abs((hash + i * 17) ^ (i * 31)) % LOOSE_EMOJIS.length;
-      const item = LOOSE_EMOJIS[idx];
-      if (item && !used.has(item.emoji)) {
-        used.add(item.emoji);
-        out.push({
-          id: `tray-${item.conceptId}-${item.emoji}`,
-          emoji: item.emoji,
-          conceptId: item.conceptId,
-          label: item.label,
-        });
-      }
-    }
-  }
-
-  return out;
-}
+/**
+ * Sterta w formie wysyłanej do Jev — bez pól czysto wizualnych (`tilt`,
+ * `jitterY`, `scale`), bo model ich nie potrzebuje i tylko zwiększałyby payload.
+ */
+export const EMOJI_CANDIDATES = LOOSE_EMOJIS.map(
+  ({ emoji, label, conceptId, sampleQuery }) => ({
+    emoji,
+    label,
+    conceptId,
+    sampleQuery,
+  }),
+);

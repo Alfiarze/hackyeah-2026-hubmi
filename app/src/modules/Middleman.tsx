@@ -12,6 +12,8 @@
 import { useMemo, useState } from "react";
 import { INNOVATIONS, type Innovation } from "../lib/data";
 import { foldDiacritics } from "../lib/text";
+import { toInnovation } from "../lib/matchApi";
+import { useDeepScan } from "../lib/useDeepScan";
 import {
   adapt,
   ORG_TYPES,
@@ -58,7 +60,7 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
     }).then((res) => {
       if (res.ok && res.data?.plan?.risks) {
         const notes = res.data.plan.risks.filter(
-          (r: string) => r.startsWith("Uwaga AI:") || r.startsWith("Ocena Jev:"),
+          (r: string) => r.startsWith("Uwaga AI:") || r.startsWith("Ocena AI:"),
         );
         setAiNotes(notes);
       }
@@ -75,6 +77,15 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
       foldDiacritics(`${i.name} ${i.catName} ${i.desc}`.toLowerCase()).includes(needle);
     return [...local.filter(hit), ...INNOVATIONS.filter((i) => i.ext && hit(i))].slice(0, 15);
   }, [needle]);
+
+  // Filtr po słowach nic nie znalazł → niech całą bazę przejrzy model.
+  // Warunek `options.length === 0` pilnuje, żeby nie wołać go bez potrzeby.
+  const scan = useDeepScan(
+    q,
+    "innovations",
+    options.length === 0 && q.trim().length >= 3,
+    8,
+  );
 
   const out = useMemo(
     () => (current ? adapt(current, profile) : null),
@@ -135,6 +146,35 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
                     </button>
                   </li>
                 ))}
+                {options.length === 0 && scan.loading && (
+                  <li className="hint">
+                    Po słowach nic nie pasuje — model przegląda całą bazę…
+                  </li>
+                )}
+                {options.length === 0 &&
+                  scan.hits.map((h) => {
+                    const inn = toInnovation(h.item);
+                    return (
+                      <li key={`scan-${inn.id}`}>
+                        <button
+                          type="button"
+                          className="btn ts__option"
+                          onClick={() => setPicked(inn)}
+                        >
+                          <span>{inn.name}</span>
+                          <span className="eyebrow">
+                            {inn.catName} · wskazał model (pewność{" "}
+                            {Math.round(h.confidence * 100)}%)
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                {options.length === 0 && !scan.loading && scan.hits.length === 0 && (
+                  <li className="hint">
+                    Nic nie pasuje — ani po słowach, ani po przejrzeniu bazy modelem.
+                  </li>
+                )}
               </ul>
             </div>
           )}
@@ -272,7 +312,7 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
 
               {aiNotes.length > 0 && (
                 <section className="mi__block" data-reveal style={{ borderColor: "var(--brand)" }}>
-                  <h3 style={{ color: "var(--brand)" }}>Diagnoza wdrożeniowa Jev (Decisions API)</h3>
+                  <h3 style={{ color: "var(--brand)" }}>Diagnoza wdrożeniowa AI</h3>
                   <ul className="mi__list">
                     {aiNotes.map((note, i) => (
                       <li key={i}><strong>{note}</strong></li>

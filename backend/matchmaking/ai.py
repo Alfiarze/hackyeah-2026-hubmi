@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import logging
 import re
+import time
 
 from django.conf import settings
 
@@ -73,12 +74,12 @@ def _answer(name: str, noul: float, threshold: float) -> dict:
     pewnosc = round(max(noul, 1 - noul) * 100)
     if related:
         powod = (
-            f"Jev uznaje związek ({noul:.2f}) — „{name}” odpowiada na opisany "
+            f"AI uznaje związek ({noul:.2f}) — „{name}” odpowiada na opisany "
             "problem, a nie tylko porusza ten sam temat."
         )
     else:
         powod = (
-            f"Jev nie dopatrzył się związku ({noul:.2f}) — „{name}” nie sięga "
+            f"AI nie widzi związku ({noul:.2f}) — „{name}” nie sięga "
             "opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec."
         )
     return {
@@ -309,7 +310,7 @@ def ask(question: str, sources: list[dict]) -> dict:
 
     noul_val = best.get("noul") or 0.8
     answer_text = (
-        f"Jev wytypował jako najbardziej adekwatną odpowiedź materiał: „{best['title']}” "
+        f"Model wytypował jako najbardziej adekwatną odpowiedź materiał: „{best['title']}” "
         f"(trafność {noul_val*100:.0f}%). "
         f"{best.get('snippet', '')}"
     )
@@ -322,3 +323,206 @@ def ask(question: str, sources: list[dict]) -> dict:
         "jev_model": result.get("model", settings.JEV_MODEL),
         "latency_ms": transport.last_ms(),
     }
+
+
+# --- emotki ----------------------------------------------------------------
+
+# Jedno pytanie `noul` na emotkę — Jev ocenia całą stertę w jednej przepustce.
+# Backticki wokół `emotka` i `zapytanie` są wymagane: bez nich model nie podpina
+# pól z `instructions` (ten sam mechanizm, co przy ``karta`` wyżej).
+EMOJI_INSTRUCTIONS = (
+    "Czy `emotka` trafnie ilustruje problem opisany w `zapytanie`? "
+    "Odpowiedź `true` tylko wtedy, gdy znaczenie emotki dotyczy tego samego "
+    "problemu, tej samej grupy osób albo tej samej przyczyny. "
+    "Emotka luźno skojarzona z tematem to `false`."
+)
+
+EMOJI_CRITERIA = {
+    "true": "Znaczenie emotki odpowiada problemowi z zapytania.",
+    "false": "Emotka dotyczy czegoś innego albo jest skojarzona tylko luźno.",
+}
+
+# Sterta ma ~40 pozycji; limit chroni endpoint przed żądaniem z 500 emotkami.
+EMOJI_MAX_CANDIDATES = 80
+
+
+def pick_emojis(query: str, candidates: list[dict], limit: int = 6) -> dict:
+    """
+    Wybór emotek do zapytania — **decyduje wyłącznie Jev**.
+
+    `candidates` to sterta z frontu: `{emoji, label, sampleQuery, conceptId}`.
+    Trzymamy ją w jednym miejscu (`app/src/lib/emojis.ts`), żeby emotka widoczna
+    pod polem zawsze istniała fizycznie w stercie na dole ekranu.
+
+    Zwraca `{source, picks[]}`. Gdy Jev milczy — `source="fallback"` i **pusta**
+    lista: lepiej nie pokazać nic, niż pokazać emotkę wybraną regułą, o której
+    mówimy jury, że jej nie ma. Front zachowuje wtedy poprzedni wybór.
+    """
+    pool = [
+        c for c in candidates
+        if isinstance(c, dict) and c.get("emoji") and c.get("label")
+    ][:EMOJI_MAX_CANDIDATES]
+    if not query.strip() or not pool:
+        return {"source": "brak-kandydatow", "picks": []}
+
+    questions = {
+        f"emoji_{i}": {
+            "type": "noul",
+            "instructions": {
+                "question": EMOJI_INSTRUCTIONS,
+                "emotka": {
+                    "znak": c["emoji"],
+                    "znaczenie": c["label"],
+                    "przyklad_problemu": (c.get("sampleQuery") or "")[:200],
+                },
+            },
+            "criteria": EMOJI_CRITERIA,
+        }
+        for i, c in enumerate(pool)
+    }
+
+    result = transport.evaluate({"zapytanie": query[:2000]}, questions)
+    if not result:
+        return {"source": "fallback", "picks": []}
+
+    threshold = settings.JEV_THRESHOLD
+    scored = []
+    for i, c in enumerate(pool):
+        noul = transport.noul_answer(result, f"emoji_{i}")
+        if noul is None or noul < threshold:
+            continue
+        scored.append(
+            {
+                "emoji": c["emoji"],
+                "label": c["label"],
+                "conceptId": c.get("conceptId") or "",
+                "confidence": round(noul, 3),
+            }
+        )
+
+    scored.sort(key=lambda p: -p["confidence"])
+    return {"source": "jev", "picks": scored[: max(1, min(limit, 12))]}
+
+
+# --- przeszukanie całej bazy przez Jev -------------------------------------
+
+# Ścieżka ostatniej szansy: zwykłe wyszukiwanie (BM25, filtr po stronie
+# przeglądarki, tsquery) nic nie znalazło, więc oddajemy decyzję modelowi i
+# pytamy go o KAŻDĄ pozycję w bazie. Jest to drogie, dlatego wolno tu wejść
+# tylko wtedy, gdy tania ścieżka zwróciła zero.
+SCAN_INSTRUCTIONS = (
+    "Czy `pozycja` może pomóc osobie, która opisała sprawę w `zapytanie`? "
+    "Odpowiedź `true`, gdy pozycja dotyczy tego samego problemu, tej samej "
+    "grupy osób albo tej samej przyczyny — nawet jeśli używa innych słów. "
+    "Odpowiedź `false`, gdy to inny temat."
+)
+
+SCAN_CRITERIA = {
+    "true": "Pozycja dotyczy tej samej sprawy co zapytanie, choćby innymi słowami.",
+    "false": "Pozycja dotyczy czegoś innego.",
+}
+
+# Ile pozycji pytamy w jednym wywołaniu. Jedna passa Jev obsługuje wiele pytań
+# naraz, ale payload rośnie liniowo — 40 to kompromis między liczbą round-tripów
+# i rozmiarem żądania.
+SCAN_BATCH = 40
+# Zabezpieczenie przed wejściem w to na bazie, która urosła do tysięcy pozycji.
+SCAN_MAX_BATCHES = 6
+# Przy przeglądaniu całej bazy próg jest wyższy niż zwykły: tu nie ma rankingu
+# leksykalnego, który by wynik podparł, więc luźne skojarzenia muszą wypaść.
+SCAN_MIN = 0.55
+
+
+def _scan_items(kind: str) -> list[dict]:
+    """Pozycje do przejrzenia: `innovations`, `library` albo oba."""
+    from catalog.models import Innovation, LibraryItem
+
+    out: list[dict] = []
+    if kind in ("innovations", "both"):
+        for i in Innovation.objects.all().only(
+            "id", "name", "problem", "target", "description"
+        ):
+            out.append(
+                {
+                    "kind": "innovation",
+                    "id": i.id,
+                    "payload": {
+                        "nazwa": i.name,
+                        "problem": (i.problem or i.description or "")[:400],
+                        "dla_kogo": (i.target or "")[:160],
+                    },
+                }
+            )
+    if kind in ("library", "both"):
+        for d in LibraryItem.objects.all().only("id", "title", "type", "desc"):
+            out.append(
+                {
+                    "kind": "library",
+                    "id": d.id,
+                    "payload": {
+                        "nazwa": d.title,
+                        "rodzaj": d.type or "dokument",
+                        "opis": (d.desc or "")[:400],
+                    },
+                }
+            )
+    return out
+
+
+def scan_all(query: str, kind: str = "both", limit: int = 6) -> dict:
+    """
+    „Przejrzyj wszystko" — Jev ocenia każdą pozycję w bazie, jedna po drugiej.
+
+    Wywoływane **tylko** gdy zwykłe wyszukiwanie zwróciło zero wyników, bo
+    kosztuje tyle wywołań, ile batchy (115 kart + 74 dokumenty ≈ 5 passów).
+
+    Zwraca `{source, kind, hits[]}`; `hits` to `{kind, id, confidence}` od
+    najwyższej pewności. Gdy Jev milczy — `source="fallback"` i pusta lista,
+    bo nie mamy czym go zastąpić na tym etapie (tania ścieżka już zawiodła).
+    """
+    q = (query or "").strip()
+    items = _scan_items(kind) if q else []
+    if not items:
+        return {"source": "brak-kandydatow", "kind": kind, "hits": []}
+
+    batches = [
+        items[i : i + SCAN_BATCH] for i in range(0, len(items), SCAN_BATCH)
+    ][:SCAN_MAX_BATCHES]
+
+    hits: list[dict] = []
+    answered = False
+    for batch in batches:
+        questions = {
+            f"item_{n}": {
+                "type": "noul",
+                "instructions": {
+                    "question": SCAN_INSTRUCTIONS,
+                    "pozycja": it["payload"],
+                },
+                "criteria": SCAN_CRITERIA,
+            }
+            for n, it in enumerate(batch)
+        }
+        _t = time.monotonic()
+        result = transport.evaluate({"zapytanie": q[:2000]}, questions)
+        log.info(
+            "Jev scan batch: %s pytan, %s ms, ok=%s",
+            len(batch), int((time.monotonic() - _t) * 1000), bool(result),
+        )
+        if not result:
+            continue
+        answered = True
+        for n, it in enumerate(batch):
+            noul = transport.noul_answer(result, f"item_{n}")
+            if noul is None or noul < SCAN_MIN:
+                continue
+            hits.append(
+                {"kind": it["kind"], "id": it["id"], "confidence": round(noul, 3)}
+            )
+
+    if not answered:
+        return {"source": "fallback", "kind": kind, "hits": []}
+
+    hits.sort(key=lambda h: -h["confidence"])
+    log.info("Jev scan: %s pozycji, %s trafien", len(items), len(hits))
+    return {"source": "jev", "kind": kind, "hits": hits[: max(1, min(limit, 20))]}

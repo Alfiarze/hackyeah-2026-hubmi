@@ -14,6 +14,7 @@ import { useEffect, useMemo, useState } from "react";
 import { INNOVATIONS, LIBRARY, CATEGORIES, subscribeCatalog, type Innovation } from "../lib/data";
 import { foldDiacritics } from "../lib/text";
 import { InnovationCard } from "../components/InnovationCard";
+import { ScanFallback } from "../components/ScanFallback";
 import { api } from "../lib/api";
 import "./library.css";
 
@@ -128,7 +129,7 @@ export function Library({ onAdapt, onTest }: Props) {
         {[
           { id: "innowacje", label: `Biblioteka innowacji (${inns.length})` },
           { id: "dokumenty", label: `Dokumenty i raporty (${docs.length})` },
-          { id: "pytanie", label: "Zapytaj bazę ze źródłami (Jev AI)" },
+          { id: "pytanie", label: "Zapytaj bazę ze źródłami (AI)" },
         ].map((x) => (
           <button
             key={x.id}
@@ -277,7 +278,7 @@ export function Library({ onAdapt, onTest }: Props) {
               <div className="lib__qa-head">
                 <span className="eyebrow">
                   {qaResult.source === "jev"
-                    ? "Odpowiedź modelu decyzyjnego Jev"
+                    ? "Odpowiedź modelu decyzyjnego"
                     : "Odpowiedź ze źródeł ROPS"}
                   {qaResult.latency_ms ? ` · ${qaResult.latency_ms} ms` : ""}
                 </span>
@@ -309,7 +310,16 @@ export function Library({ onAdapt, onTest }: Props) {
       {tab === "innowacje" && (
         <div id="panel-innowacje" role="tabpanel" aria-labelledby="tab-innowacje">
           {inns.length === 0 ? (
-            <Empty onReset={() => { setQ(""); setCat(""); setOnlyVideo(false); }} />
+            // Zero trafien po slowach -> model przeglada cala baze kart.
+            <ScanFallback
+              query={q}
+              kind="innovations"
+              onAdapt={onAdapt}
+              onTest={onTest}
+              fallback={
+                <Empty onReset={() => { setQ(""); setCat(""); setOnlyVideo(false); }} />
+              }
+            />
           ) : (
             <div className="results results--two" data-reveal="stagger">
               {inns.map((i) => (
@@ -323,7 +333,12 @@ export function Library({ onAdapt, onTest }: Props) {
       {tab === "dokumenty" && (
         <div id="panel-dokumenty" role="tabpanel" aria-labelledby="tab-dokumenty">
           {docs.length === 0 ? (
-            <Empty onReset={() => { setQ(""); setSection(""); }} />
+            // To samo dla dokumentow ROPS — pyta model, nie druga regula.
+            <ScanFallback
+              query={q}
+              kind="library"
+              fallback={<Empty onReset={() => { setQ(""); setSection(""); }} />}
+            />
           ) : (
             <ul className="lib__docs" data-reveal="stagger">
               {docs.map((d) => (

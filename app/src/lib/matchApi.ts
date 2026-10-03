@@ -41,7 +41,12 @@ const FIELD_KEYS: FieldKey[] = [
   "evidence",
 ];
 
-function toInnovation(row: BackendMatchResult): Innovation {
+/**
+ * Kształt karty z API → typ frontu. Eksportowane, bo tego samego mapowania
+ * potrzebuje ścieżka „przejrzyj całą bazę" (`useDeepScan`), która dostaje
+ * karty z tego samego serializera.
+ */
+export function toInnovation(row: any): Innovation {
   return {
     id: row.id,
     name: row.name,

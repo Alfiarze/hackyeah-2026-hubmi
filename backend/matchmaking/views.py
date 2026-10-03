@@ -27,7 +27,7 @@ from rest_framework.generics import get_object_or_404
 
 from accounts.permissions import IsHubmiAdmin, is_staff_role, role_of
 from catalog.models import Innovation, LibraryItem
-from catalog.serializers import InnovationSerializer
+from catalog.serializers import InnovationSerializer, LibraryItemSerializer
 from catalog.text_pl import snippet
 from catalog import search as hybrid
 
@@ -389,3 +389,101 @@ def relevance_detail(request, pk):
     obj = serializer.save()
     _evaluate_check(obj)
     return Response(RelevanceCheckSerializer(obj).data)
+
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def emoji_pick(request):
+    """
+    POST /api/match/emojis/ — które emotki pasują do opisu problemu.
+
+    Decyduje **wyłącznie Jev**: jedno wywołanie, jedno pytanie `noul` na emotkę
+    ze sterty przesłanej przez front. Zwraca emotki powyżej progu, od najwyższej
+    pewności.
+
+    Czego ten endpoint celowo NIE robi: nie zapisuje `SearchQuery`. To podgląd
+    przy pisaniu, nie zgłoszona potrzeba — inaczej każda litera zaśmiecałaby
+    zestawienie trendów w panelu ROPS.
+    """
+    data = request.data or {}
+    query = (data.get("q") or data.get("query") or "").strip()
+    if not query:
+        return Response(
+            {"detail": "Pole q jest puste."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+    candidates = data.get("candidates")
+    if not isinstance(candidates, list) or not candidates:
+        return Response(
+            {"detail": "Pole candidates musi być niepustą listą emotek."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+    try:
+        limit = min(max(int(data.get("limit", 6)), 1), 12)
+    except (TypeError, ValueError):
+        limit = 6
+
+    return Response(ai_service.pick_emojis(query, candidates, limit=limit))
+
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def deep_scan(request):
+    """
+    POST /api/match/scan/ — ostatnia szansa: Jev przegląda **całą** bazę.
+
+    Wołane dopiero, gdy zwykłe wyszukiwanie zwróciło zero: matchmaking z flagą
+    luki, filtr w Zasobniku wiedzy, lista w Middlemanie, sprawdzenie nowości
+    w Kreatorze. Dlatego nie ma tu żadnej logiki regułowej — o trafności
+    decyduje wyłącznie model.
+
+    Body: `{q, kind: "innovations"|"library"|"both", limit}`.
+    Zwraca trafienia z pewnością **oraz** gotowe obiekty do wyświetlenia, żeby
+    front nie musiał dociągać ich drugim żądaniem.
+    """
+    data = request.data or {}
+    query = (data.get("q") or data.get("query") or "").strip()
+    if not query:
+        return Response(
+            {"detail": "Pole q jest puste."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+    kind = data.get("kind") or "both"
+    if kind not in ("innovations", "library", "both"):
+        kind = "both"
+    try:
+        limit = min(max(int(data.get("limit", 6)), 1), 20)
+    except (TypeError, ValueError):
+        limit = 6
+
+    found = ai_service.scan_all(query, kind=kind, limit=limit)
+
+    inn_ids = [h["id"] for h in found["hits"] if h["kind"] == "innovation"]
+    lib_ids = [h["id"] for h in found["hits"] if h["kind"] == "library"]
+    innovations = {
+        i.id: InnovationSerializer(i).data
+        for i in Innovation.objects.select_related("category").filter(id__in=inn_ids)
+    }
+    library = {
+        d.id: LibraryItemSerializer(d).data
+        for d in LibraryItem.objects.filter(id__in=lib_ids)
+    }
+
+    results = []
+    for h in found["hits"]:
+        payload = (
+            innovations.get(h["id"]) if h["kind"] == "innovation"
+            else library.get(h["id"])
+        )
+        if not payload:
+            continue
+        results.append({**h, "item": payload})
+
+    return Response(
+        {
+            "source": found["source"],
+            "kind": found["kind"],
+            "query": query,
+            "results": results,
+        }
+    )

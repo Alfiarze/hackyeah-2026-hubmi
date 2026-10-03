@@ -287,6 +287,15 @@ class ApiClient {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
 
+    // Sygnał przerwania z zewnątrz (np. porzucone podpowiedzi emotek, gdy
+    // użytkownik pisze dalej) musi dołożyć się do limitu czasu, a nie go
+    // zastąpić — dlatego podpinamy go do tego samego kontrolera.
+    const external = options.signal;
+    if (external) {
+      if (external.aborted) controller.abort();
+      else external.addEventListener("abort", () => controller.abort(), { once: true });
+    }
+
     try {
       const res = await fetch(url, {
         ...options,
@@ -464,6 +473,77 @@ class ApiClient {
           body: JSON.stringify({ q, limit, cat, powiat, external }),
         },
         20000,
+      );
+    },
+
+    /**
+     * Dobór emotek do opisu problemu. Decyduje wyłącznie Jev — front wysyła
+     * stertę (`EMOJI_CANDIDATES`) i dostaje z niej podzbiór z pewnością.
+     *
+     * Timeout 12 s: to podgląd przy pisaniu, więc dłuższe czekanie nie ma
+     * sensu — lepiej zostawić poprzedni wybór niż trzymać pole w zawieszeniu.
+     */
+    emojis: async (
+      q: string,
+      candidates: {
+        emoji: string;
+        label: string;
+        conceptId?: string;
+        sampleQuery?: string;
+      }[],
+      limit = 6,
+      signal?: AbortSignal,
+    ) => {
+      return this.request<{
+        source: string;
+        picks: {
+          emoji: string;
+          label: string;
+          conceptId: string;
+          confidence: number;
+        }[];
+      }>(
+        "/match/emojis/",
+        {
+          method: "POST",
+          body: JSON.stringify({ q, candidates, limit }),
+          signal,
+        },
+        12000,
+      );
+    },
+
+    /**
+     * Ostatnia szansa: Jev przegląda **całą** bazę i sam decyduje, co pasuje.
+     *
+     * Wolno to wywołać tylko wtedy, gdy zwykłe wyszukiwanie zwróciło zero —
+     * backend pyta model o każdą pozycję (115 kart + 74 dokumenty ≈ 2,5 s),
+     * więc przy niepustym wyniku byłoby to palenie wywołań bez powodu.
+     */
+    scan: async (
+      q: string,
+      kind: "innovations" | "library" | "both" = "both",
+      limit = 6,
+      signal?: AbortSignal,
+    ) => {
+      return this.request<{
+        source: string;
+        kind: string;
+        query: string;
+        results: {
+          kind: "innovation" | "library";
+          id: string | number;
+          confidence: number;
+          item: any;
+        }[];
+      }>(
+        "/match/scan/",
+        {
+          method: "POST",
+          body: JSON.stringify({ q, kind, limit }),
+          signal,
+        },
+        30000,
       );
     },
 

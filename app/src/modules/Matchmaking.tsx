@@ -23,11 +23,12 @@ import {
   type Turn,
 } from "../lib/conversation";
 import { fetchMatches, reportGap as postGap, type MatchResponse } from "../lib/matchApi";
-import { LOOSE_EMOJIS, pickEmojis } from "../lib/emojis";
+import { LOOSE_EMOJIS } from "../lib/emojis";
+import { ScanFallback } from "../components/ScanFallback";
+import { useEmojiPicks } from "../lib/useEmojiPicks";
 import { type Innovation } from "../lib/data";
 import { plural } from "../lib/text";
 import { addLocalThread } from "../lib/store";
-import { QUIET_MS, useDebounced } from "../lib/useDebounced";
 import { useSpeech } from "../lib/useSpeech";
 import { useA11y } from "../lib/a11y";
 import { InnovationCard } from "../components/InnovationCard";
@@ -61,10 +62,10 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
   const [retryKey, setRetryKey] = useState(0);
   const liveRef = useRef<HTMLDivElement>(null);
 
-  // Rozpoznawanie wątków rusza dopiero po chwili ciszy. Bez tego krążek
-  // wylatuje i wraca przy każdej literze — a lot trwa teraz 1,5 s.
-  const quietDraft = useDebounced(draft);
-  const picks = useMemo(() => pickEmojis(quietDraft), [quietDraft]);
+  // O doborze emotek decyduje wyłącznie Jev (`POST /api/match/emojis/`).
+  // Hook sam pilnuje ciszy przed pytaniem, więc krążek nie wylatuje i nie
+  // wraca przy każdej literze — a lot trwa teraz 1,5 s.
+  const { picks } = useEmojiPicks(draft);
   const pickedEmojiSet = useMemo(() => new Set(picks.map((p) => p.emoji)), [picks]);
 
   const speech = useSpeech((text) => {
@@ -73,12 +74,12 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
     setDraft("");
   });
 
-  // Jedyne zapytanie o wyniki.
+  // Jedyne zapytanie o wyniki — rusza natychmiast, bez odczekiwania ciszy.
   //
-  // Startuje dopiero po QUIET_MS ciszy: klikanie po mapie albo poprawianie
-  // opisu wysyłałoby inaczej serię żądań, z których liczy się ostatnie —
-  // a każde z nich zapisuje się w bazie jako sygnał potrzeby i zaśmiecałoby
-  // trendy w panelu ROPS. Odpowiedź z nieaktualnego zapytania odrzucamy,
+  // Wcześniej czekało QUIET_MS, żeby klikanie po mapie nie wysyłało serii
+  // żądań (każde zapisuje się jako sygnał potrzeby w panelu ROPS). Zrezygnowano
+  // z tego świadomie: opis jest już zatwierdzony, więc opóźnienie dawało tylko
+  // wrażenie ociągania się. Odpowiedź z nieaktualnego zapytania nadal odrzucamy,
   // żeby wolniejsze żądanie nie nadpisało świeższego.
   useEffect(() => {
     if (!conv.done || !conv.problem) {
@@ -92,7 +93,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
     setPhase("loading");
     setError(null);
 
-    const timer = setTimeout(async () => {
+    void (async () => {
       try {
         const res = await fetchMatches(conv.problem, {
           limit: 6,
@@ -110,11 +111,10 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
         );
         setPhase("error");
       }
-    }, QUIET_MS);
+    })();
 
     return () => {
       active = false;
-      clearTimeout(timer);
     };
   }, [conv.done, conv.problem, powiatFilter, external, retryKey]);
 
@@ -439,6 +439,16 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                 <span className="mono">http://localhost:8000/api/health/</span>.
               </p>
             </section>
+          )}
+
+          {/* --- zanim uznamy to za lukę: niech model przejrzy całą bazę --- */}
+          {phase === "ready" && gap && conv.problem && (
+            <ScanFallback
+              query={conv.problem}
+              kind="both"
+              onAdapt={onAdapt}
+              onTest={onTest}
+            />
           )}
 
           {/* --- luka: problem bez rozwiązania staje się zadaniem dla Hubu --- */}

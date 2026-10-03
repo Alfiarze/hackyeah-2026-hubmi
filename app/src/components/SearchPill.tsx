@@ -23,8 +23,8 @@
  *  - etykieta pola jest `sr-only`, przyciski mają nazwy dostępne,
  *    a minimalny cel to 44×44 px (WCAG 2.5.5).
  */
-import { useLayoutEffect, useMemo, useRef, type FormEvent, type ReactNode } from "react";
-import { pickEmojis, type PickedEmoji } from "../lib/emojis";
+import { useLayoutEffect, useRef, type FormEvent, type ReactNode } from "react";
+import { type PickedEmoji } from "../lib/emojis";
 
 interface Props {
   value: string;
@@ -58,10 +58,10 @@ export function SearchPill({
   actions,
   status,
 }: Props) {
-  // Jeśli rodzic przekazał picks (np. Matchmaking współdzielący stan z dolną stertą),
-  // używamy ich bezpośrednio. W przeciwnym razie wyliczamy lokalnie.
-  const computedPicks = useMemo(() => pickEmojis(value), [value]);
-  const activePicks = picksProp ?? computedPicks;
+  // Dobór emotek należy wyłącznie do Jev i przychodzi z rodzica
+  // (`useEmojiPicks`). Pigułka nie liczy nic sama — pusty wybór to poprawny
+  // stan, nie błąd do zamaskowania regułą zapasową.
+  const activePicks = picksProp ?? [];
 
   return (
     <form className="mm__search" onSubmit={(e) => onSubmit(e)}>
@@ -90,13 +90,11 @@ export function SearchPill({
         {actions}
       </div>
 
-      {/* Pod pigułką: emotki przylatujące z dołu po rozpoznaniu przez Jev AI */}
+      {/* Pod pigułką: emotki przylatujące z dołu po rozpoznaniu modelu.
+          Bez znacznika „AI" — emotki mówią same za siebie, a plakietka tylko
+          hałasowała przy polu, w które użytkownik w tym momencie patrzy. */}
       {activePicks.length > 0 && (
         <div className="mm__picks mm__picks--active" aria-live="polite">
-          <span className="mm__ai-tag">
-            <span className="mm__ai-icon" aria-hidden="true">✦</span>
-            <span>Jev AI:</span>
-          </span>
           <div className="mm__picks-list">
             {activePicks.map((p, i) => (
               <FlyingPick key={p.emoji} pick={p} index={i} />

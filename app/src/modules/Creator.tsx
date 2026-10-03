@@ -14,6 +14,8 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { search } from "../lib/match";
+import { toInnovation } from "../lib/matchApi";
+import { useDeepScan } from "../lib/useDeepScan";
 import { addThread, type Fiszka } from "../lib/store";
 import { generateGrant, MAX_GRANT, type GrantDraft } from "../lib/grant";
 import { LIBRARY } from "../lib/data";
@@ -59,6 +61,17 @@ export function Creator() {
     if (text.replace(/\s/g, "").length < 15) return null;
     return search(text, { limit: 3 });
   }, [title, problem, f.istota, f.adresat]);
+
+  // Weryfikator nowości nie może orzekać „brak odpowiednika" tylko dlatego, że
+  // szukanie po słowach nic nie trafiło — to byłby argument do wniosku oparty
+  // na niedopatrzeniu. Przy zerze wyników całą bazę przegląda model.
+  const probeText = `${title} ${problem} ${f.istota} ${f.adresat}`.trim();
+  const scan = useDeepScan(
+    probeText,
+    "innovations",
+    Boolean(probe) && probe!.results.length === 0,
+    3,
+  );
 
   const canvas = LIBRARY.find((d) => d.title.toUpperCase().includes("SOCIAL CANVAS"));
 
@@ -306,7 +319,7 @@ export function Creator() {
           {aiFeedback && (
             <div className="cr__ai-feedback" role="status">
               <div className="cr__ai-head">
-                <span className="eyebrow">Asystent Kreatora (Jev Decisions)</span>
+                <span className="eyebrow">Asystent Kreatora</span>
                 {aiFeedback.obszar && <span className="mono">Obszar: {aiFeedback.obszar}</span>}
               </div>
               {aiFeedback.sugestie && aiFeedback.sugestie.length > 0 && (
@@ -329,7 +342,7 @@ export function Creator() {
               onClick={handleDevelopIdea}
               disabled={isDeveloping}
             >
-              {isDeveloping ? "Analiza Jev AI..." : "✨ Rozwiń z Jev AI"}
+              {isDeveloping ? "Analiza AI..." : "Rozwiń z AI"}
             </button>
             <button
               type="button"
@@ -372,13 +385,44 @@ export function Creator() {
               rozwiązanie było już testowane w Małopolsce i przygotuje argumentację do wniosku.
             </p>
           ) : probe.results.length === 0 ? (
-            <div className="cr__verdict cr__verdict--new">
-              <h3>Brak analogicznych innowacji w bazie</h3>
-              <p>
-                Wśród 115 przetestowanych innowacji ROPS nie ma odpowiednika. To kluczowy
-                argument potwierdzający nowość rozwiązania — powołaj go w sekcji 5 wniosku.
+            scan.loading ? (
+              <p className="muted" aria-live="polite">
+                Po słowach nie ma odpowiednika — model przegląda teraz wszystkie
+                115 kart, żeby sprawdzić, czy nie opisano tego innym językiem.
               </p>
-            </div>
+            ) : scan.hits.length > 0 ? (
+              <div className="cr__verdict cr__verdict--near">
+                <h3>Po słowach nic nie było, ale model znalazł zbliżone karty</h3>
+                <p>
+                  Te rozwiązania nie mają wspólnych słów z Twoim opisem — wskazał
+                  je model, oceniając każdą kartę osobno. Przeczytaj je, zanim
+                  powołasz się we wniosku na nowość pomysłu.
+                </p>
+                <ul className="cr__probe">
+                  {scan.hits.map((h) => {
+                    const inn = toInnovation(h.item);
+                    return (
+                      <li key={inn.id}>
+                        <strong>{inn.name}</strong>{" "}
+                        <span className="mono muted">
+                          pewność modelu {Math.round(h.confidence * 100)}%
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : (
+              <div className="cr__verdict cr__verdict--new">
+                <h3>Brak analogicznych innowacji w bazie</h3>
+                <p>
+                  Wśród 115 przetestowanych innowacji ROPS nie ma odpowiednika —
+                  sprawdzone po słowach i przez przejrzenie całej bazy modelem. To
+                  kluczowy argument potwierdzający nowość rozwiązania; powołaj go
+                  w sekcji 5 wniosku.
+                </p>
+              </div>
+            )
           ) : (
             <>
               <div

@@ -168,13 +168,13 @@ export function Comms({ state }: { state: AppState }) {
                   onClick={loadDigest}
                   disabled={loadingDigest}
                 >
-                  {loadingDigest ? "Analizuję wątek (Jev)..." : "⚡ Diagnoza AI wątku (Jev)"}
+                  {loadingDigest ? "Analizuję wątek..." : "Diagnoza AI wątku"}
                 </button>
               </div>
 
               {digest && (
                 <div className="card" style={{ borderColor: "var(--brand)", marginBottom: "var(--sp-4)", padding: "var(--sp-3)" }}>
-                  <p className="eyebrow" style={{ color: "var(--brand)", margin: 0 }}>Model Decyzyjny Jev (Live API):</p>
+                  <p className="eyebrow" style={{ color: "var(--brand)", margin: 0 }}>Diagnoza AI wątku:</p>
                   <p style={{ margin: "var(--sp-1) 0", fontSize: "var(--fs-sm)" }}>{digest}</p>
                 </div>
               )}

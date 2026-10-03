@@ -155,7 +155,7 @@ def _ai_notes(plan: dict, profile: dict, innovation) -> list[str]:
     )
 
     notes = [
-        f"Ocena Jev: poziom trudności to {ryzyko_label} (indeks {ryzyko_score:.1f}/3) — {rekom_text}.",
+        f"Ocena AI: poziom trudności to {ryzyko_label} (indeks {ryzyko_score:.1f}/3) — {rekom_text}.",
         f"Główny punkt uwagi: {bariera_text} (uwzględnij w harmonogramie wdrożenia).",
         szkolenie_text,
     ]

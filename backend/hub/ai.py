@@ -151,7 +151,7 @@ def develop_idea(problem: str, fiszka: dict, nearest: list[dict], top_score: int
     sugestie = []
     if rekom_choice == "wdroz_z_biblioteki" and top:
         sugestie.append(
-            f"Jev rekomenduje: w Bibliotece jest już bliskie rozwiązanie „{top['name']}” ({top['score']}/100) — "
+            f"AI rekomenduje: w Bibliotece jest już bliskie rozwiązanie „{top['name']}” ({top['score']}/100) — "
             "skorzystaj z gotowego pakietu lub zgłoś się jako gmina/NGO do testowania."
         )
     elif rekom_choice == "znajdz_partnera":
@@ -162,12 +162,12 @@ def develop_idea(problem: str, fiszka: dict, nearest: list[dict], top_score: int
     else:
         nowosc_proc = int((nowosc_val or 0.8) * 100)
         sugestie.append(
-            f"Jev ocenia nowość rozwiązania na {nowosc_proc}% — warto złożyć fiszkę w naborze IWS 2.0 "
+            f"AI ocenia nowość rozwiązania na {nowosc_proc}% — warto złożyć fiszkę w naborze IWS 2.0 "
             "(mikrogrant do 100 tys. zł na przetestowanie pomysłu)."
         )
 
     sugestie.append(
-        f"Główny obszar wg Jev: {obszar_name} — zdefiniuj grupę pilotażową i wskaźnik zmiany przed i po."
+        f"Główny obszar wg AI: {obszar_name} — zdefiniuj grupę pilotażową i wskaźnik zmiany przed i po."
     )
     sugestie.append(
         "Dopisz etapy: pomysł → prototyp → testowanie → wdrożenie. Ułatwi to ocenę merytoryczną w ROPS."
@@ -280,7 +280,7 @@ def thread_digest(title: str, messages: list[dict]) -> dict:
     )
 
     summary = (
-        f"Diagnoza Jev: {status_text} "
+        f"Diagnoza AI: {status_text} "
         f"Pilność: {pilnosc_text} (score {pilnosc_score:.1f}/3). "
         f"{kroki_text} "
         f"Liczba wpisów: {len(messages)}. Ostatni głos ({last.get('author_name', 'uczestnik')}): „{last.get('text', '')[:120]}”."
