@@ -42,11 +42,14 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
   const current = preselected ?? picked;
 
   const needle = foldDiacritics(q.trim().toLowerCase());
+  // Małopolska pierwsza: testowanie organizuje ROPS w regionie, karta z innej
+  // bazy jest możliwa, ale nie powinna wypychać lokalnej z listy.
   const options = useMemo(() => {
-    if (!needle) return INNOVATIONS.slice(0, 8);
-    return INNOVATIONS.filter((i) =>
-      foldDiacritics(`${i.name} ${i.catName}`.toLowerCase()).includes(needle),
-    ).slice(0, 12);
+    const local = INNOVATIONS.filter((i) => !i.ext);
+    if (!needle) return local.slice(0, 8);
+    const hit = (i: Innovation) =>
+      foldDiacritics(`${i.name} ${i.catName}`.toLowerCase()).includes(needle);
+    return [...local.filter(hit), ...INNOVATIONS.filter((i) => i.ext && hit(i))].slice(0, 12);
   }, [needle]);
 
   const myTests = threads.filter((t) => t.kind === "test");
@@ -187,7 +190,10 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
                   <li key={i.id}>
                     <button type="button" className="btn ts__option" onClick={() => setPicked(i)}>
                       <span>{i.name}</span>
-                      <span className="eyebrow">{i.catName}</span>
+                      <span className="eyebrow">
+                        {i.catName}
+                        {i.ext && ` · spoza Małopolski (${i.origin?.region ?? "inna baza"})`}
+                      </span>
                     </button>
                   </li>
                 ))}

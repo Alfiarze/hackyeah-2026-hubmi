@@ -34,7 +34,12 @@ export function Admin({ state }: { state: AppState }) {
   const [draft, setDraft] = useState("");
   const [filter, setFilter] = useState<ThreadStatus | "">("");
   const [powiat, setPowiat] = useState<string | null>(null);
-  const [innovationsList, setInnovationsList] = useState<Innovation[]>(INNOVATIONS);
+  // Panel ROPS zarządza katalogiem regionu i porównuje podaż z popytem w
+  // Małopolsce — karty z baz zewnętrznych zaburzyłyby oba te obrazy, więc tu
+  // nie wchodzą.
+  const [innovationsList, setInnovationsList] = useState<Innovation[]>(
+    INNOVATIONS.filter((i) => !i.ext),
+  );
   const [serverSummary, setServerSummary] = useState<any>(null);
 
   // Formularz dodawania innowacji (Wymóg §2.II i §2.VI)
@@ -55,7 +60,7 @@ export function Admin({ state }: { state: AppState }) {
 
   useEffect(() => {
     return subscribeCatalog(() => {
-      setInnovationsList([...INNOVATIONS]);
+      setInnovationsList(INNOVATIONS.filter((i) => !i.ext));
     });
   }, []);
 

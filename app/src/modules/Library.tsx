@@ -29,6 +29,9 @@ export function Library({ onAdapt, onTest }: Props) {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string>("");
   const [onlyVideo, setOnlyVideo] = useState(false);
+  // Zasobnik domyślnie pokazuje Małopolskę; karty i dokumenty z innych baz
+  // wchodzą na życzenie, bo to inny poziom wiarygodności dla ROPS.
+  const [onlyMalopolska, setOnlyMalopolska] = useState(true);
   const [section, setSection] = useState<string>("");
   const [innovations, setInnovations] = useState(INNOVATIONS);
   const [library, setLibrary] = useState(LIBRARY);
@@ -73,6 +76,7 @@ export function Library({ onAdapt, onTest }: Props) {
   const inns = useMemo(() => {
     return innovations.filter((i) => {
       if (cat && i.cat !== cat) return false;
+      if (onlyMalopolska && i.ext) return false;
       if (onlyVideo && !i.video) return false;
       if (!needle) return true;
       const hay = foldDiacritics(
@@ -80,7 +84,7 @@ export function Library({ onAdapt, onTest }: Props) {
       );
       return hay.includes(needle);
     });
-  }, [innovations, needle, cat, onlyVideo]);
+  }, [innovations, needle, cat, onlyVideo, onlyMalopolska]);
 
   const sections = useMemo(
     () => [...new Set(library.map((d) => d.section))],
@@ -89,13 +93,18 @@ export function Library({ onAdapt, onTest }: Props) {
 
   const docs = useMemo(() => {
     return library.filter((d) => {
+      if (onlyMalopolska && d.ext) return false;
       if (section && d.section !== section) return false;
       if (!needle) return true;
       return foldDiacritics(`${d.title} ${d.desc}`.toLowerCase()).includes(needle);
     });
-  }, [library, needle, section]);
+  }, [library, needle, section, onlyMalopolska]);
 
-  const videoCount = innovations.filter((i) => i.video).length;
+  const videoCount = innovations.filter((i) => i.video && !i.ext).length;
+  const localCount = innovations.filter((i) => !i.ext).length;
+  const extCount = innovations.length - localCount;
+  const localDocs = library.filter((d) => !d.ext).length;
+  const extDocs = library.length - localDocs;
 
   return (
     <div className="page wrap">
@@ -103,16 +112,22 @@ export function Library({ onAdapt, onTest }: Props) {
         <p className="page__mod">Moduł II · Zasobnik wiedzy</p>
         <h1>Co już wiemy o Małopolsce</h1>
         <p>
-          {innovations.length} przetestowanych innowacji, {videoCount} z filmem,
-          oraz {library.length} dokumentów ROPS — raporty, diagnozy, Mapa Wyzwań
+          {localCount} przetestowanych innowacji z Małopolski, {videoCount} z filmem,
+          oraz {localDocs} dokumentów ROPS — raporty, diagnozy, Mapa Wyzwań
           Społecznych i wzory wniosków grantowych.
+        </p>
+        <p className="hint">
+          Obok tego {extCount} innowacji i {extDocs} dokumentów z baz spoza regionu
+          (PO WER, ROPS Poznań, ESF+). Są wyłączone z widoku, dopóki nie włączysz ich
+          przyciskiem „Dołącz bazy spoza Małopolski” — i każda taka pozycja jest
+          oznaczona źródłem.
         </p>
       </div>
 
       <div className="lib__tabs" role="tablist" aria-label="Rodzaj zasobu" data-reveal>
         {[
-          { id: "innowacje", label: `Biblioteka innowacji (${innovations.length})` },
-          { id: "dokumenty", label: `Dokumenty i raporty (${library.length})` },
+          { id: "innowacje", label: `Biblioteka innowacji (${inns.length})` },
+          { id: "dokumenty", label: `Dokumenty i raporty (${docs.length})` },
           { id: "pytanie", label: "Zapytaj bazę ze źródłami (Jev AI)" },
         ].map((x) => (
           <button
@@ -173,6 +188,14 @@ export function Library({ onAdapt, onTest }: Props) {
                 >
                   Tylko z filmem
                 </button>
+                <button
+                  type="button"
+                  className="btn"
+                  aria-pressed={!onlyMalopolska}
+                  onClick={() => setOnlyMalopolska((v) => !v)}
+                >
+                  {onlyMalopolska ? "Dołącz bazy spoza Małopolski" : "Tylko Małopolska"}
+                </button>
               </>
             ) : (
               <div className="field">
@@ -191,8 +214,8 @@ export function Library({ onAdapt, onTest }: Props) {
 
           <p className="lib__count" role="status">
             {tab === "innowacje"
-              ? `${inns.length} z ${INNOVATIONS.length} innowacji`
-              : `${docs.length} z ${LIBRARY.length} dokumentów`}
+              ? `${inns.length} z ${onlyMalopolska ? localCount : INNOVATIONS.length} innowacji`
+              : `${docs.length} z ${onlyMalopolska ? localDocs : LIBRARY.length} dokumentów`}
           </p>
         </>
       )}
@@ -319,6 +342,11 @@ export function Library({ onAdapt, onTest }: Props) {
                     </a>
                   </h3>
                   <p className="eyebrow">{d.section}</p>
+                  {d.ext && d.origin?.source && (
+                    <p className="lib__doc-origin">
+                      Spoza Małopolski — {d.origin.source}
+                    </p>
+                  )}
                   {d.desc && <p className="lib__doc-desc">{d.desc}</p>}
                 </li>
               ))}

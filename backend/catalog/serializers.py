@@ -33,6 +33,7 @@ class InnovationSerializer(serializers.ModelSerializer):
             "id", "name", "cat", "catName", "problem", "desc", "target",
             "target_group", "benef", "evidence", "authors", "badges",
             "video", "pdf", "zip", "license", "url", "deployments",
+            "ext", "origin",
             "updated_at", "updated_by", "has_embedding",
         ]
 
@@ -91,4 +92,5 @@ class InnovationWriteSerializer(serializers.ModelSerializer):
 class LibraryItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = LibraryItem
-        fields = ["id", "section", "title", "year", "type", "url", "desc", "bytes", "featured"]
+        fields = ["id", "section", "title", "year", "type", "url", "desc", "bytes",
+                  "featured", "ext", "origin"]

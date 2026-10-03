@@ -76,6 +76,140 @@ def deployments(inn):
     return out
 
 
+# --- innowacje z baz spoza Malopolski ------------------------------------
+# Kategorie ROPS sa jedynym slownikiem, jaki rozumie front, wiec karty z innych
+# baz trzeba w nie wpasowac. Mapowanie po slowach kluczowych (PL + EN, bo czesc
+# zrodel jest angielska) - pierwsze trafienie wygrywa, dlatego kolejnosc idzie
+# od najbardziej szczegolowych grup do najszerszych.
+EXT_CAT_RULES = [
+    ("dla-osob-z-niepelnosprawnoscia-sensoryczna",
+     ("niewidom", "słabowidz", "niedowidz", "głuch", "niesłysz", "słabosłysz",
+      "sensoryczn", "braille", "migow", "blind", "deaf", "hearing impair",
+      "visually impair", "sign language")),
+    ("dla-osob-z-niepelnosprawnoscia-intelektualna",
+     ("intelektualn", "autyz", "spektrum autyzmu", "asd", "zespołem downa",
+      "zespół downa", "intellectual disab", "autis", "down syndrome",
+      "learning disab")),
+    ("dla-osob-o-ograniczonej-mobilnosci",
+     ("ograniczonej mobilnoś", "ruchow", "wózk", "protez", "bariery architektoniczn",
+      "poruszan", "wheelchair", "mobility impair", "reduced mobility")),
+    ("dla-cudzoziemcow",
+     ("cudzoziem", "migrant", "uchodź", "ukraiń", "repatri", "refugee",
+      "migrat", "foreigner", "newcomer")),
+    ("dla-osob-w-kryzysie-bezdomnosci",
+     ("bezdomn", "noclegowni", "housing first", "homeless")),
+    ("dla-seniorow",
+     ("senior", "starsz", "demencj", "otępien", "alzheim", "podeszłym wieku",
+      "elderly", "older people", "older adult", "ageing", "aging", "dementia")),
+    ("dla-dzieci-mlodziezy-i-rodziny",
+     ("dzieci", "dziecko", "młodzie", "rodzin", "uczni", "szkoł", "przedszkol",
+      "piecza zastępcza", "nastolat", "children", "youth", "famil", "pupil",
+      "school", "adolescen", "foster care")),
+    ("dla-rynku-pracy",
+     ("rynku pracy", "zatrudnien", "zawodow", "bezrobot", "pracodaw",
+      "employment", "labour market", "labor market", "job", "vocational",
+      "unemploy", "workplace")),
+    ("dla-zdrowia-i-medycyny",
+     ("zdrowi", "pacjent", "szpital", "psychiatr", "terapeut", "rehabilitac",
+      "opieki medyczn", "health", "patient", "hospital", "mental health",
+      "care", "therapy")),
+]
+EXT_CAT_FALLBACK = ("inne-obszary", "Inne obszary wsparcia")
+
+
+def _trim(text, limit):
+    text = (text or "").strip()
+    return text if len(text) <= limit else text[:limit].rsplit(" ", 1)[0] + "…"
+
+
+def ext_category(rec):
+    hay = " ".join(str(rec.get(k) or "") for k in
+                   ("name", "lead", "problem", "description", "target_group",
+                    "beneficiaries")).lower()
+    hay += " " + " ".join(rec.get("tags") or []).lower()
+    for slug, keys in EXT_CAT_RULES:
+        if any(k in hay for k in keys):
+            return slug
+    return EXT_CAT_FALLBACK[0]
+
+
+def external_innovations(cats):
+    """Karty z innych baz -> ten sam kształt rekordu, ale z blokiem `origin`
+    i bez `deployments`: geografia demo dotyczy powiatów Małopolski, a te
+    innowacje tam nie powstały i mapa nie ma prawa ich pokazywać."""
+    path = ROOT / "data" / "external_innovations.json"
+    if not path.exists():
+        return []
+    src = json.load(open(path, encoding="utf-8"))
+    out = []
+    for i in src.get("innovations", []):
+        o = i.get("origin") or {}
+        cat = ext_category(i)
+        if cat == EXT_CAT_FALLBACK[0]:
+            cats.setdefault(*EXT_CAT_FALLBACK)
+        files = (i.get("links") or {}).get("files") or []
+        pdf = next((f["url"] for f in files if (f.get("url") or "").lower().endswith(".pdf")), None)
+        # Bundle frontu jest wczytywany statycznie przy starcie, a kart z innych
+        # baz jest kilkaset - teksty ida przyciete. Pelna tresc zostaje w
+        # data/external_innovations.json i w bazie backendu, ktora liczy wyniki.
+        desc = _trim(i.get("description") or i.get("lead") or "", 900)
+        evidence = _trim(i.get("evidence") or "", 600)
+        out.append({
+            "id": i["slug"],
+            "name": i["name"],
+            "cat": cat,
+            "catName": cats.get(cat, cat),
+            "problem": _trim(i.get("problem") or "", 700),
+            "desc": desc,
+            "target": _trim(i.get("target_group") or "", 500),
+            "benef": _trim(i.get("beneficiaries") or "", 500),
+            "evidence": evidence,
+            "authors": i.get("authors") or [],
+            "badges": [],
+            "video": None,
+            "pdf": pdf,
+            "zip": None,
+            "license": o.get("license"),
+            "url": i["url"],
+            "deployments": [],
+            # Znacznik dla frontu: karta spoza Biblioteki ROPS Małopolska.
+            "ext": True,
+            "origin": {
+                "source": o.get("source"),
+                "sourceUrl": o.get("source_url"),
+                "scope": o.get("scope"),
+                "region": o.get("region"),
+                "malopolska": False,
+            },
+            "lang": i.get("lang") or "pl",
+            "files": [{"title": f.get("title"), "url": f.get("url")} for f in files[:4]],
+        })
+    return out
+
+
+def external_library():
+    path = ROOT / "data" / "external_resources.json"
+    if not path.exists():
+        return []
+    src = json.load(open(path, encoding="utf-8"))
+    out = []
+    for it in src.get("items", []):
+        o = it.get("origin") or {}
+        out.append({
+            "section": "Materiały z baz poza Małopolską",
+            "title": it["title"],
+            "year": it.get("year"),
+            "type": it.get("type") or "www",
+            "url": it["url"],
+            "desc": (it.get("desc") or "")[:900],
+            "bytes": it.get("bytes"),
+            "ext": True,
+            "origin": {"source": o.get("source"), "sourceUrl": o.get("source_url"),
+                       "region": o.get("region"), "malopolska": False},
+        })
+    return out
+
+
 def main():
     src = json.load(open(ROOT / "data" / "innovations.json", encoding="utf-8"))
     cats = {c["slug"]: c["title"] for c in src["categories"]}
@@ -100,11 +234,29 @@ def main():
             "license": i["links"].get("license"),
             "url": i["url"],
             "deployments": deployments(i),
+            "ext": False,
+            "origin": {"source": "Biblioteka Innowacji Społecznych ROPS Kraków",
+                       "sourceUrl": "https://rops.krakow.pl/innowacje-spoleczne/"
+                                    "biblioteka-innowacji-spolecznych/kategorie",
+                       "scope": "regionalna", "region": "Małopolska",
+                       "malopolska": True},
         })
+
+    ext = external_innovations(cats)
+    # Zewnetrzne karty ida na koniec listy, zeby domyslna kolejnosc (bez
+    # zapytania) zaczynala sie od innowacji malopolskich - to one sa przedmiotem
+    # zadania, reszta jest inspiracja.
+    inns += ext
 
     (APP / "innovations.json").write_text(json.dumps(
         {"categories": [{"slug": s, "title": t} for s, t in cats.items()],
          "innovations": inns,
+         "sources": {
+             "malopolska": len(inns) - len(ext),
+             "zewnetrzne": len(ext),
+             "note": "Karty z ext=true pochodzą z baz spoza Małopolski "
+                     "(origin.source) i nie mają wdrożeń w małopolskich powiatach.",
+         },
          "note": "Pola deployments[] to dane DEMO - ROPS nie publikuje lokalizacji wdrozen."},
         ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
@@ -131,13 +283,16 @@ def main():
                 "desc": d[:900] + ("…" if len(d) > 900 else ""),
                 "bytes": it.get("bytes"),
             })
+    ext_lib = [it for it in external_library() if it["url"] not in seen]
     lib.sort(key=lambda r: (r["section"], -(int(r["year"]) if r["year"] else 0), r["title"]))
+    lib += ext_lib
     (APP / "library.json").write_text(json.dumps(
         {"items": lib}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     for f in ("innovations.json", "library.json"):
         print(f"  {f}: {(APP / f).stat().st_size / 1024:.0f} KB")
-    print(f"{len(inns)} innowacji, {len(lib)} dokumentów, "
+    print(f"{len(inns)} innowacji ({len(inns) - len(ext)} Małopolska + {len(ext)} "
+          f"spoza regionu), {len(lib)} dokumentów ({len(ext_lib)} spoza regionu), "
           f"{sum(len(i['deployments']) for i in inns)} wdrożeń demo")
 
 

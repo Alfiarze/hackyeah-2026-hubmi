@@ -178,3 +178,12 @@
   margin: 0;
 }
 
+
+/* Dokument z bazy spoza Malopolski - jedno zdanie o zrodle, bez ozdob. */
+.lib__doc-origin {
+  margin: 0;
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  border-left: 3px solid var(--chart-2);
+  padding-left: var(--sp-2);
+}

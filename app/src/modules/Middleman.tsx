@@ -66,11 +66,14 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
   }, [current, profile]);
 
   const needle = foldDiacritics(q.trim().toLowerCase());
+  // Dopasowanie do instytucji ma sens także dla innowacji z innej bazy — ale
+  // lista startuje od Małopolski, a karty zewnętrzne idą na koniec i są podpisane.
   const options = useMemo(() => {
-    if (!needle) return INNOVATIONS.slice(0, 10);
-    return INNOVATIONS.filter((i) =>
-      foldDiacritics(`${i.name} ${i.catName} ${i.desc}`.toLowerCase()).includes(needle),
-    ).slice(0, 15);
+    const local = INNOVATIONS.filter((i) => !i.ext);
+    if (!needle) return local.slice(0, 10);
+    const hit = (i: Innovation) =>
+      foldDiacritics(`${i.name} ${i.catName} ${i.desc}`.toLowerCase()).includes(needle);
+    return [...local.filter(hit), ...INNOVATIONS.filter((i) => i.ext && hit(i))].slice(0, 15);
   }, [needle]);
 
   const out = useMemo(
@@ -125,7 +128,10 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
                   <li key={i.id}>
                     <button type="button" className="btn ts__option" onClick={() => setPicked(i)}>
                       <span>{i.name}</span>
-                      <span className="eyebrow">{i.catName}</span>
+                      <span className="eyebrow">
+                        {i.catName}
+                        {i.ext && ` · spoza Małopolski (${i.origin?.region ?? "inna baza"})`}
+                      </span>
                     </button>
                   </li>
                 ))}

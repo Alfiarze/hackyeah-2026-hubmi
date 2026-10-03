@@ -98,6 +98,49 @@ Filmy z YouTube (26 szt.) zostają jako linki — do embedowania w UI.
 - Strona Biblioteki ma banner: *„STRONA JEST W PRZEBUDOWIE. NIEKTÓRE LINKI POZOSTAJĄ
   NIEAKTYWNE"* — część linków może przestać działać; dlatego trzymamy lokalne kopie.
 
+## 4. Bazy spoza Małopolski — `external_innovations.json`, `external_resources.json`
+
+Pobrane 2026-10-03 skryptem `scripts/scrape_external.py --source <nazwa>` (cache HTML
+w `data/raw/external/`, więc ponowne uruchomienie dociąga tylko braki).
+
+**Każdy rekord ma blok `origin` z `malopolska: false`** oraz nazwą i adresem źródła.
+To nie kosmetyka: zadanie UMWM dotyczy innowacji *przetestowanych w Małopolsce*, więc
+karta z innej bazy musi być w interfejsie widocznie oznaczona, mieć niżej ważony wynik
+dopasowania (`EXTERNAL_PENALTY`) i nie może mieć wdrożeń w małopolskich powiatach.
+W aplikacji takie karty są domyślnie **wyłączone** — wchodzą przyciskiem
+„Dodaj bazy spoza Małopolski" w module I i „Dołącz bazy spoza Małopolski" w module II.
+
+| Adapter | Źródło | Zasięg | Co daje |
+|---|---|---|---|
+| `powerbase` | [Baza Innowacji Społecznych — PO WER / Katalizator](https://innowacjespoleczne.pl/lista-innowacji/) | Polska | 300 kart z pełną strukturą (problem, działanie, odbiorcy, rezultaty, pliki), CC BY 4.0 |
+| `poznan` | [ROPS Poznań — Włącznik](https://innowacje.rops.poznan.pl/znajdz-innowacje/) | Wielkopolska | 69 kart (opis, dla kogo, przez kogo, instrukcja wdrożenia, materiały PDF) |
+| `esfplus` | [Social Innovation Match — ESF+](https://european-social-fund-plus.ec.europa.eu/en/social-innovation-match/case-study) | UE | case studies po angielsku (problem addressed / innovative solution / key results), z krajem w `origin.region` |
+| `biblioteka` | [innowacjespoleczne.pl/biblioteka](https://innowacjespoleczne.pl/biblioteka/) | Polska | 190 publikacji metodycznych → Zasobnik wiedzy |
+| `zenodo` | [Social Innovation Pathways Dataset](https://zenodo.org/records/16901521) | świat | **dataset badawczy**, nie karty — kolumny to kody (`Case 1`, `Pathway of Change`, `Innovation Level`), bez nazw i opisów innowacji, więc trafia do Zasobnika jako jedno źródło, nie do matchmakingu |
+
+Sprawdzone i **odrzucone**:
+
+- **Katalizator Innowacji Społecznych (Stocznia)** — strona projektu, nie baza kart;
+  prowadzi do tej samej bazy co `powerbase`, więc byłby duplikat
+- **European Social Innovation Database (ESID)** — aplikacja Shiny bez API, a repo
+  `ESID_V2` zawiera tylko kod i modele ML (żadnego pliku z 11 441 projektami)
+- **SIMPACT case studies** — część portalu ESF+, więc wchodzi razem z `esfplus`
+- **crcresearch.org** — serwer odrzuca ruch automatyczny (HTTP 403 na brzegu Akamai)
+
+Uwaga o dopasowaniu: silnik liczy BM25 po polskich rdzeniach, więc karty angielskie
+(ESF+) trafiają głównie na zapytania z nazwami własnymi i terminami wspólnymi dla
+obu języków. To świadomy kompromis — tłumaczenie maszynowe 700 kart wymagałoby
+budżetu na API i odebrałoby wynikom wytłumaczalność.
+
+Wektory LSA (`scripts/build_embeddings.py` → `app/src/data/vectors.json`) liczymy
+**tylko na 115 kartach ROPS**. Wrzucenie do tej samej macierzy kilkuset kart, w tym
+angielskich, zabrałoby miejsce w słowniku (2400 rdzeni) i rozmyło przestrzeń, w której
+generalizują polskie zapytania do modułu obowiązkowego. Karty zewnętrzne są więc
+wyszukiwalne przez BM25 i wątki pojęciowe, ale nie mają wektora (`embedding = NULL`).
+
+Część pozycji w bazie PO WER ma w CMS puste karty szczegółowe (sam tytuł na liście,
+bez pól) — scraper je pomija, zamiast tworzyć rekordy bez treści.
+
 ## Źródła
 
 - https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie
@@ -106,3 +149,8 @@ Filmy z YouTube (26 szt.) zostają jako linki — do embedowania w UI.
 - https://rops.krakow.pl/innowacje-spoleczne/innowacje-w-malopolskich-modelach
 - https://rops.krakow.pl/mpliki/IS/IWS_20/za._nr_2._Mapa_Wyzwa_Spoecznych.pdf
 - https://obserwator.rops.krakow.pl — Internetowy Obserwator Statystyk Społecznych (wskaźniki, nie pobrane)
+- https://innowacjespoleczne.pl/lista-innowacji/ — baza PO WER / Katalizator (spoza Małopolski)
+- https://innowacje.rops.poznan.pl/znajdz-innowacje/ — ROPS Poznań (spoza Małopolski)
+- https://european-social-fund-plus.ec.europa.eu/en/social-innovation-match/case-study — ESF+ (UE)
+- https://zenodo.org/records/16901521 — dataset badawczy 121 przypadków (CC BY 4.0)
+- https://github.com/ppatrzyk/polska-geojson — geometrie powiatów do mapy

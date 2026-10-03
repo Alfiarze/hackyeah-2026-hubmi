@@ -210,9 +210,12 @@ export function Shell({
           </p>
           <p className="hint" style={{ maxWidth: "60ch" }}>
             Dane innowacji pochodzą z Biblioteki Innowacji Społecznych ROPS (115 kart,
-            w większości CC BY 4.0). Lokalizacje wdrożeń, kontakty realizatorów
-            i zgłoszenia w panelu są danymi demonstracyjnymi — prototyp nie używa
-            prawdziwych danych osobowych.
+            w większości CC BY 4.0). Dodatkowo, na wyraźne włączenie, Hub pokazuje karty
+            z baz spoza regionu — ogólnopolskiej bazy PO WER, ROPS Poznań i Social
+            Innovation Match ESF+. Każda z nich jest oznaczona źródłem i nie udaje
+            innowacji przetestowanej w Małopolsce. Lokalizacje wdrożeń, kontakty
+            realizatorów i zgłoszenia w panelu są danymi demonstracyjnymi — prototyp
+            nie używa prawdziwych danych osobowych.
           </p>
         </div>
       </footer>

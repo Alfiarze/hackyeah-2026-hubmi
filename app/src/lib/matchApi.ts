@@ -60,6 +60,8 @@ function toInnovation(row: BackendMatchResult): Innovation {
     license: row.license ?? null,
     url: row.url ?? "",
     deployments: row.deployments ?? [],
+    ext: Boolean(row.ext),
+    origin: row.origin ?? undefined,
   };
 }
 
@@ -102,13 +104,20 @@ export class MatchApiError extends Error {}
  */
 export async function fetchMatches(
   query: string,
-  opts: { limit?: number; powiat?: string | null; cat?: string | null } = {},
+  opts: {
+    limit?: number;
+    powiat?: string | null;
+    cat?: string | null;
+    /** dopuść karty z baz spoza Małopolski */
+    external?: boolean;
+  } = {},
 ): Promise<MatchResponse> {
   const res = await api.match.search(
     query,
     opts.limit ?? 6,
     opts.cat ?? undefined,
     opts.powiat ?? undefined,
+    opts.external ?? false,
   );
 
   if (!res.ok || !res.data) {
