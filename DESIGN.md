@@ -1,137 +1,148 @@
-# HubMI — kierunek wizualny
+# HubMI — system wizualny v1
 
 Ustalony raz, wyprowadzany we wszystkich widokach. Tokeny są **policzone pod
-WCAG 2.1 AA**, nie dobrane na oko — ratio w tabelach i w komentarzach
-`app/src/styles/tokens.css`.
+WCAG 2.1 AA** (liczby w komentarzach `app/src/styles/tokens.css`), nie dobrane
+na oko. Kolory zmieniaj tam, nigdy w komponentach.
 
-**Referencja:** [motionsites.ai](https://motionsites.ai). Ważne ustalenie z oglądu
-źródła, bo zmienia wszystko: **tam hero nie ma wideo w tle**. Tło to płaska
-czerń `#121212`, głębię robi rozmyta poświata, a materiały filmowe siedzą
-dopiero w kartach niżej. Wrażenie „drogiej strony" biorą z czego innego:
+**Źródło prawdy:** „HubMI — system wizualny.html" (6 planszy: fundamenty,
+ikony, patterny, mikroanimacje, karty i formularz, strona główna). Ten plik
+to jego streszczenie operacyjne.
 
-1. ogromny nagłówek wersalikami, waga 800–900, tracking ok. −0.035em;
-2. jedno słowo z gradientem i poświatą;
-3. pigułki — nadlinia, przyciski, filtry, wszystko zaokrąglone do 100px;
-4. siatka kart o dużym promieniu (16px) na płaskim ciemnym tle;
-5. bardzo dużo pustej przestrzeni wokół kompozycji wyśrodkowanej.
+## Idea
 
-Dzięki temu, że tekst stoi na stałym kolorze, a nie na zmiennym kadrze,
-ten kierunek **nie walczy z dostępnością** — co przy wideo pod tekstem byłoby
-nieuniknione.
+System, który **łączy** ludzi, potrzeby i rozwiązania. Lekki, jasny i czytelny
+— dla mieszkańców, NGO, samorządów, ROPS i ekspertów. **Turkus prowadzi,
+krakowskie kolory pojawiają się rzadko i z intencją.** Każdy element opowiada
+jedną drogę: od zgłoszonej potrzeby do wspólnie wdrożonego rozwiązania
+(Potrzeba → Wiedza → Dopasowanie → Współpraca → Rozwiązanie).
 
-## Przedmiot i zadanie strony
+Język form — cztery znaki, z których zbudowane są ikony, patterny i ilustracje:
 
-115 innowacji społecznych przetestowanych w Małopolsce. Z danych
-(`data/innovations.json`) wynika, że to mniej więcej równe trzy części: przedmioty
-fizyczne (~30), rozwiązania cyfrowe (~36), metody i modele usług (~38).
+1. **Koło** — człowiek, społeczność, potrzeba. Zawsze punkt wyjścia.
+2. **Miękki kwadrat** — rozwiązanie, zasób, narzędzie. Stabilny i konkretny.
+3. **Łuk** — droga, dopasowanie, przepływ wiedzy. Zawsze w turkusie.
+4. **Węzeł HubMI** — pełna kropka w miejscu spotkania. Znak rozpoznawczy marki.
 
-Tym, co je łączy — i co odróżnia Bibliotekę ROPS od każdego innego portalu
-z pomysłami — jest pole **„Czy to działa?"**: 111 ze 115 kart ma opisane wyniki
-realnego testu. To jedyny prawdziwy atut tych danych i na nim stoi cały projekt.
+## Paleta
 
-Zadanie strony: samorząd albo mieszkanka opisuje problem własnymi słowami
-i w kilka sekund dostaje rozwiązania, **które ktoś już przetestował** — z dowodem.
-
-## Teza i element sygnaturowy
-
-Nagłówek niesie tezę, a wyróżnione słowa to jej druga połowa:
-
-> OPISZ PROBLEM. **POKAŻEMY, CO JUŻ ZADZIAŁAŁO.**
-
-Gradient dostaje dokładnie ta część, która jest obietnicą produktu — nie losowy
-rzeczownik dobrany pod efekt.
-
-**Sygnatura: kino przechodzi w narzędzie.** Dopóki nikt nie opisał problemu, hero
-zajmuje ekran i świeci. W chwili pojawienia się wyników kurczy się, poświata
-gaśnie do 35%, nagłówek spada do rozmiaru sekcji — pierwszeństwo przejmuje
-powierzchnia robocza. To jedyny zaaranżowany ruch w całej aplikacji; reszta stoi.
-
-## Kolor
-
-### Ciemny (domyślny)
+Turkus HubMI `#2BB3A5` ma kontrast tylko 2,6:1 z bielą — więc pod tekstem
+i liniami ikon pracuje jego głęboka wersja, a sam turkus wypełnia przyciski
+z ciemnym tekstem, węzły i tła.
 
 | Token | Hex | Rola | Kontrast |
 |---|---|---|---|
-| `--bg` | `#0A0A0B` | tło strony | — |
-| `--surface` | `#16161A` | karty, panele | — |
-| `--surface-2` | `#1F1F24` | zagłębienia, chipy | — |
-| `--ink` | `#FAFAF9` | tekst główny | 18.95 ✓AA |
-| `--ink-2` | `#A1A1AA` | tekst drugorzędny | 7.72 ✓AA |
-| `--ink-3` | `#8A8A93` | najlżejszy dopuszczalny | 5.78 ✓AA |
-| `--accent` | `#E3B341` | akcent, focus, wyróżnienie | 10.17 ✓AA |
-| `--ok` | `#4ADE80` | „przetestowane" | 11.36 ✓AA |
-| `--err` | `#F87171` | błędy | 7.15 ✓AA |
-| `--line` | `#26262C` | linia dekoracyjna | — |
-| `--line-ui` | `#666670` | granica kontrolki | 3.49 ✓AA (1.4.11) |
+| `--turquoise` | `#2BB3A5` | CTA (tekst `#10343A`), węzły, łuki, patterny | 5,1:1 (z tekstem atramentu) |
+| `--turquoise-deep` | `#16756C` | linie ikon, linki, aktywne stany | 5,5:1 ✓AA |
+| `--ink` | `#10343A` | tekst, nagłówki, ramka focusu | 13,3:1 ✓AAA |
+| `--ink-2` | `#4A6266` | leady, podpisy, opisy pomocnicze | 6,5:1 ✓AA |
+| `--mist` | `#EAF6F4` | tła sekcji, kafle ikon, stany zaznaczenia | — |
+| `--krakow-yellow` | `#FFCC00` | podkreślenie słowa, znacznik „nowe" | nigdy jako kolor tekstu |
+| `--krakow-red` | `#E40521` | błędy i pola wymagane — zawsze z ikoną i tekstem | — |
+| `--beige` | `#CDB794` | ciepłe akcenty ilustracji, etykiety lokalne | — |
+| `--beige-light` | `#F7F2EA` | tło sekcji „lokalnych" i stopki | — |
+| `--bg` | `#FFFFFF` | główne tło | — |
+| `--line` | `#D5E3E0` | obramowania kart (bez cieni) | — |
+| `--line-ui` | `#9AB5B0` | granica kontrolki | 3,05:1 ✓ (1.4.11) |
 
-### Jasny (wybierany ręcznie)
-
-Nie jest odwróceniem ciemnego — to osobno dobrane kroki. Złoto musi pociemnieć
-do `#8A6100` (5.31), żeby czytało się na bieli.
-
-### Zasady
-
-- **Obramowanie zostaje tylko na kontrolkach** (pola, przyciski), bo tam jest
-  jedynym nośnikiem informacji i dlatego musi mieć 3:1. Karty, chipy i sekcje
-  nie mają obramowań — hierarchię niosą powierzchnia, cień i odstęp.
-- **Kolor nigdy nie jest jedynym nośnikiem** (1.4.1): status ma słowo albo znak,
-  druga seria na wykresach ma kreskowanie, aktywna pozycja menu ma wypełnienie
-  i wagę, nie sam kolor.
-- Gdyby kiedyś doszło **wideo pod tekstem**: `--scrim` = 0.68 jest wartością
-  policzoną, nie estetyczną — przy 0.65 biały tekst ma 6.04:1 nawet gdyby kadr
-  był całkowicie biały. Złoty tekst wymagałby 0.75, dlatego na materiale
-  kładziemy wyłącznie biel.
+**Proporcja akcentów na stronie (bez bieli):** turkus ok. 80% · atrament 10% ·
+beż, żółty, czerwony — razem poniżej 10%.
 
 ## Typografia
 
 Twardy wymóg: **pełne polskie diakrytyki**. Oba kroje mają subset `latin-ext`
-z zakresem `U+0100-02BA` (ą ć ę ł ń ś ź ż); ó siedzi w subsecie podstawowym.
+(ą ć ę ł ń ś ź ż); ó siedzi w subsecie podstawowym. Oba self-hosted
+(`app/src/assets/fonts/`) — demo nie może zależeć od wifi na sali.
 
 | Rola | Krój | Zastosowanie |
 |---|---|---|
-| Display | **Geist Variable** | nagłówki, nazwa produktu. Techniczny, ciasny, dobrze znosi wersaliki w dużym stopniu |
-| Treść | **Inter Variable** | wszystko pozostałe; projektowany pod długie czytanie w interfejsie |
+| Display | **Bricolage Grotesque 700–800** | nagłówki. Ludzki, lekko „ręczny" grotesk z charakterem — ciepły, ale poważny |
+| Treść | **Atkinson Hyperlegible Next 400/700** | wszystko pozostałe. Krój projektowany z myślą o osobach słabowidzących: wyraźnie odróżnia I/l/1 oraz O/0 |
 
-Liczby zawsze `font-variant-numeric: tabular-nums` — wyniki dopasowania, kwoty
-i daty stoją w kolumnach i nie mogą skakać.
+Skala (interlinia zawsze ≥ 1,05 dla nagłówków, 1,6 dla tekstu):
 
-**Bez osobnego kroju monospace.** Klasa `.mono` to ten sam krój z cyframi o równej
-szerokości: strona nie ma drugiego alfabetu do czytania.
+| Stopień | Wartość | Zastosowanie |
+|---|---|---|
+| H1 | 64 / 1.05 | nagłówek strony (hero) |
+| H2 | 40 / 1.1 | sekcja |
+| H3 | 24 / 1.2 | tytuł karty |
+| Lead | 20 / 1.6 | wprowadzenie do sekcji |
+| Body | 18 / 1.6 | tekst podstawowy — **nigdy poniżej 16 px** |
+| Small | 16 / 1.5 | podpisy, opisy pól, etykiety |
 
-### Skala
+Liczby zawsze `font-variant-numeric: tabular-nums`. Bez osobnego kroju
+monospace — klasa `.mono` to ten sam krój z cyframi o równej szerokości.
 
-Baza **18px**, nie 16px — grupa docelowa to m.in. seniorzy. Przełącznik podnosi
-do 22,5 i 27px. Nagłówek hero: `clamp(2.5rem, 7.5vw, 5.5rem)`, waga 800,
-tracking −0.035em, interlinia 0.95, wersaliki.
+## Ikony
 
-**Wersaliki wyłącznie w nagłówku hero.** Wcześniejsza wersja miała rozstrzelone
-wersaliki w nadliniach, nagłówkach tabel i etykietach — to był główny powód,
-dla którego czytała się jak zin, a nie jak produkt.
+Dwanaście ikon, jedna rodzina (`app/src/components/Icon.tsx`): matchmaking,
+need, community, ngo, knowledge, idea, test, expert, partnership, implement,
+access, local.
 
-## Podłoga dostępności — WCAG 2.1 AA
+- siatka 32×32, pole bezpieczne 2 px, linia 2 px, końce i narożniki zaokrąglone;
+- struktura w turkusie głębokim, łuk/węzeł w turkusie marki;
+- warianty tła: biel (dwukolorowa) · turkus (atrament) · atrament (biel);
+- min. 24 px; w kartach 40 px na kafelku 72 px z tłem mgiełki;
+- **nie mieszamy** z Lucide/Material/Font Awesome; bez wypełnień, gradientów,
+  cieni, 3D i emoji.
 
-Stan: **0 naruszeń axe-core** na 8 widokach (`npm run audit`), brak przewijania
-w poziomie przy 390 / 768 / 1440 px.
+## Patterny tła
 
-- Baza 18px, zoom 200% bez utraty treści (1.4.4, 1.4.10)
-- Focus 2px w kolorze akcentu z 2px odstępem; nigdzie `outline: none` bez zamiennika (2.4.7)
-- Dotyk min. 44×44px (2.5.5)
-- Pełna obsługa klawiaturą, w tym powiaty na mapie; skip-link (2.1.1, 2.4.3)
-- `prefers-reduced-motion` wyłącza wszystkie przejścia; wideo nie jest wtedy
-  nawet pobierane (2.3.3)
-- Ruchome tło, gdyby doszło, ma widoczną pauzę (2.2.2)
-- Gradient na słowie znika w trybie wysokiego kontrastu — litera musi być jednolita
-- Mapa i wykresy mają odpowiedniki tabelaryczne (1.1.1)
-- `lang="pl"` na `<html>` (3.1.1)
+Cztery powtarzalne kafle SVG (`Backdrop` + `Pattern.tsx`), zbudowane z tych
+samych znaków co ikony. Krycie 6–14%, linia 1,5 px w turkusie.
+
+| Kafel | Gdzie |
+|---|---|
+| A · Sieć węzłów | hero strony głównej, nagłówki podstron, puste stany |
+| B · Ścieżki | secje o matchmakingu i procesie |
+| C · Kręgi społeczności | secje lokalne, dobre praktyki, partnerzy (na beżu) |
+| D · Fala wiedzy | zasobnik, materiały, stopka |
+
+Tylko pod nagłówkami, w hero i stopce — **nigdy pod długim tekstem**.
+Jeden pattern na ekran. Tekst na patternie ≥ 4,5:1 względem najciemniejszego
+miejsca tła (przy kryciu ≤ 16% i atramencie wynik nie spada poniżej 10:1).
+
+## Ruch (mikroanimacje)
+
+Ruch tylko podpowiada: co się pojawiło, co jest aktywne, co się połączyło.
+
+| Token / klasa | Czas | Zastosowanie |
+|---|---|---|
+| `--hm-fast` / 300 ms | hover, focus, przełączniki |
+| `--hm-base` / 600 ms | pojawianie się treści (fade-up, +120 ms fala) |
+| `--hm-slow` / 1200 ms | rysowanie ikon, połączenia węzłów |
+| `--hm-ease` = `cubic-bezier(.2,.7,.2,1)` | krzywa wszystkiego |
+| `.hm-float` | 4 s pętla, 6 px — jedna ilustracja na ekran |
+| `.hm-pulse` | 1800 ms pętla — aktywny krok procesu, zawsze z tekstem |
+
+Animujemy wyłącznie `transform`, `opacity` i `stroke-dashoffset`.
+Stan końcowy jest stanem domyślnym — po wyłączeniu ruchu nic nie znika.
+`prefers-reduced-motion` i przełącznik „Ruch w tle" (WCAG 2.2.2) wyłączają
+wszystko.
+
+## Karty, formularz, przyciski
+
+- Karty bez cieni — **tylko linia 1 px `#D5E3E0`**, promień 24 px, padding 32 px.
+- Przyciski 48–52 px; główna akcja = turkus z tekstem atramentowym;
+  **jedna główna akcja na ekran**.
+- Fokus to **gruba ramka 3 px w kolorze atramentu** (`#10343A`), widoczna
+  na każdym tle.
+- Błąd: czerwona `#E40521`/`#B8001A` zawsze z ikoną i tekstem, nigdy sam kolor.
+- Siła dopasowania (matchmaking): kropki + słowo, nigdy sam kolor.
+
+## Tryby
+
+- **Jasny (domyślny)** — system wizualny v1.
+- **Ciemny** (`data-theme="dark"`) — wariant „nocny" tych samych odcieni:
+  atrament zostaje tłem, turkus głęboki rozjaśnia się dla kontrastu.
+- **Wysoki kontrast** (`data-contrast="high"`, osobny od motywu) — czysta
+  czerń/biel + pogrubione granice na wszystkim; patterny znikają.
 
 ## Czego nie robimy
 
-- Cream `#F4F1EA` + wysokokontrastowy serif + terakota — domyślny look AI
-  (pierwsza wersja tego projektu w to wpadła; zob. historia)
-- Broadsheet z hairline'ami i zerowym border-radius
-- Rozstrzelone wersaliki poza nagłówkiem hero
-- Obramowanie wokół każdej powierzchni
-- Wideo pod tekstem bez policzonego przyciemnienia i bez pauzy
-- Materiał filmowy typu „kosmos / render 3D / neon" — to świat startupu
-  kryptowalutowego, nie narzędzia samorządu. Jeśli wideo kiedyś dojdzie, ma być
-  z własnego świata tematu (zob. `app/src/lib/media.ts`)
+- Cienie, szkło, gradienty i „kinowe" ciemne tła — to świat startupu, nie
+  narzędzia samorządu (poprzednia wersja projektu w to wpadła; zob. historia).
+- Rozstrzelone wersaliki poza nadliniami znaków systemowych.
+- Emoji w miejscu ikon; ikony spoza rodziny HubMI.
+- Żółty/czerwony jako kolor tekstu; wideo pod tekstem.
+- Obramowanie wokół każdej powierzchni — hierarchię niosą linia, powierzchnia
+  i odstęp, nie ramki wszędzie.

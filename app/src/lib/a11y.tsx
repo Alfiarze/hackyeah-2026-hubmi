@@ -75,6 +75,11 @@ export function A11yProvider({ children }: { children: ReactNode }) {
     if (prefs.highContrast) root.setAttribute("data-contrast", "high");
     else root.removeAttribute("data-contrast");
 
+    /* „Ruch w tle" pauzuje animacje ambientowe (patterny, pulsowanie)
+       — atrybut czyta global.css (WCAG 2.2.2). */
+    if (prefs.bgMotion) root.removeAttribute("data-bg-motion");
+    else root.setAttribute("data-bg-motion", "off");
+
     root.style.setProperty("--fs-scale", String(prefs.fontScale));
     try {
       localStorage.setItem(KEY, JSON.stringify(prefs));

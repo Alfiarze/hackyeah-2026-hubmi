@@ -14,18 +14,14 @@
   .mm__hero h1 { font-size: var(--fs-2xl); max-width: none; }
 }
 
-/* --- rozmowa --- */
-/* Hero jest wyśrodkowany, ale formularz nie może być — czytanie etykiet,
+/* --- rozmowa ---
+   Hero jest wyśrodkowany, ale formularz nie może być — czytanie etykiet,
    podpowiedzi i wypowiedzi od środka jest męczące i wygląda na przypadek. */
-/* --- rozmowa: styl Apple iOS Glass Sheet z rozmyciem --- */
 .mm__conv {
   text-align: left;
-  background: var(--surface-glass-card);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  border: var(--glass-border);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: var(--glass-shadow-lg), var(--glass-highlight);
   padding: var(--sp-6);
   max-width: 48rem;
   margin-inline: auto;
@@ -43,21 +39,23 @@
 .mm__who {
   display: block;
   font-size: var(--fs-xs);
+  font-weight: 700;
   color: var(--ink-3);
   margin-bottom: var(--sp-1);
 }
-/* Dymki rozmowy w stylu iOS Messages */
+/* Dymki rozmowy: asystent na mgiełce turkusu z linią węzła,
+   użytkownik neutralny na zagłębieniu. */
 .mm__turn--bot {
   padding: var(--sp-3) var(--sp-4);
-  background: color-mix(in srgb, var(--accent) 10%, var(--surface-glass-thin));
+  background: var(--mist);
   border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   border-radius: var(--radius-sm);
   border-left: 3px solid var(--accent);
 }
 .mm__turn--user {
   padding: var(--sp-3) var(--sp-4);
-  background: var(--surface-glass-thin);
-  border: var(--glass-border-subtle);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   border-left: 3px solid var(--ink-3);
   color: var(--ink);
@@ -70,7 +68,7 @@
   margin-bottom: var(--sp-5);
 }
 
-/* --- wyszukiwarka w pigułce: styl Apple Spotlight / Safari Floating Glass Capsule --- */
+/* --- wyszukiwarka w pigułce: biała kapsułka z linią, focus w turkusie --- */
 .mm__search { max-width: 42rem; margin-inline: auto; }
 
 .mm__pill {
@@ -78,28 +76,16 @@
   align-items: center;
   gap: var(--sp-1);
   padding: 6px;
-  border: var(--glass-border);
+  border: 2px solid var(--line-ui);
   border-radius: var(--radius-pill);
-  background: var(--surface-glass-thick);
-  backdrop-filter: blur(var(--glass-blur-heavy)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  -webkit-backdrop-filter: blur(var(--glass-blur-heavy)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  box-shadow:
-    var(--glass-shadow),
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    var(--glass-highlight);
+  background: var(--surface);
   transition:
-    border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    border-color var(--hm-fast) ease,
+    box-shadow var(--hm-fast) ease;
 }
 .mm__pill:focus-within {
-  border-color: var(--accent);
-  background: var(--surface-glass);
-  box-shadow:
-    var(--glass-shadow-lg),
-    0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent),
-    var(--glass-highlight);
-  transform: translateY(-1px);
+  border-color: var(--accent-deep);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
 .mm__pill input {
@@ -110,18 +96,15 @@
   border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   box-shadow: none;
   color: var(--ink);
   font-family: var(--font);
   font-size: var(--fs-base);
-  letter-spacing: -0.01em;
 }
 .mm__pill input:focus-visible { outline: none; }
-.mm__pill input::placeholder { color: var(--ink-3); opacity: 0.85; }
+.mm__pill input::placeholder { color: var(--ink-3); opacity: 1; }
 
-/* Przyciski wewnątrz pigułki: sprężyste przyciski w stylu Apple */
+/* Przyciski wewnątrz pigułki: okrągłe 44 px */
 .mm__pillbtn {
   flex: none;
   display: inline-flex;
@@ -139,39 +122,36 @@
   cursor: pointer;
   touch-action: manipulation;
   transition:
-    background-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
-    color 160ms ease,
-    transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+    background-color var(--hm-fast) ease,
+    color var(--hm-fast) ease,
+    transform var(--hm-fast) var(--hm-ease);
 }
-.mm__pillbtn:hover { background: var(--surface-glass-thin); color: var(--ink); }
+.mm__pillbtn:hover { background: var(--mist); color: var(--ink); }
 .mm__pillbtn:active { transform: scale(0.92); }
 .mm__pillbtn[aria-pressed="true"] {
   background: var(--accent);
   color: var(--accent-ink);
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--accent) 45%, transparent);
 }
 
 .mm__pillgo {
   flex: none;
-  min-height: 44px;
+  min-height: 48px;
   padding-inline: var(--sp-5);
   border: 0;
   border-radius: var(--radius-pill);
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--accent);
+  color: var(--accent-ink);
   font-family: var(--font);
   font-size: var(--fs-sm);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 700;
   cursor: pointer;
   touch-action: manipulation;
-  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.35);
   transition:
-    filter 160ms ease,
-    box-shadow 160ms ease,
-    transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+    background-color var(--hm-fast) ease,
+    transform var(--hm-fast) var(--hm-ease);
 }
-.mm__pillgo:hover { filter: brightness(0.92); box-shadow: 0 6px 18px -2px rgba(0, 0, 0, 0.45); }
+.mm__pillgo:hover { background: #22a093; }
+:root[data-theme="dark"] .mm__pillgo:hover { background: #34c2b3; }
 .mm__pillgo:active:not(:disabled) { transform: scale(0.96); }
 .mm__pillgo:disabled { opacity: 0.4; cursor: not-allowed; }
 
@@ -199,11 +179,9 @@
   padding: 6px 14px;
   font-size: var(--fs-xs);
   color: var(--ink-3);
-  background: var(--surface-glass-thin);
-  border: var(--glass-border-subtle);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 .mm__ai-tag {
@@ -215,19 +193,16 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 14%, var(--surface-glass-thick));
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--accent-deep);
+  background: var(--mist);
+  border: 1px solid color-mix(in srgb, var(--accent-deep) 35%, transparent);
   border-radius: var(--radius-pill);
-  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 25%, transparent), var(--glass-highlight);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   animation: pick-rise 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .mm__ai-icon {
   font-size: 0.85rem;
-  color: var(--accent);
+  color: var(--accent-deep);
   display: inline-block;
   animation: ai-pulse 2.2s ease-in-out infinite;
 }
@@ -251,14 +226,8 @@
   justify-content: center;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  background: var(--surface-glass-thick);
-  border: var(--glass-border-bright);
-  box-shadow:
-    var(--glass-shadow-sm),
-    0 0 20px color-mix(in srgb, var(--accent) 30%, transparent),
-    var(--glass-highlight);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  background: var(--surface);
+  border: 1px solid var(--line);
   transform-origin: center bottom;
   will-change: transform, opacity;
 }
@@ -267,7 +236,6 @@
   font-size: 1.65rem;
   line-height: 1;
   display: inline-block;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
 }
 
 @keyframes pick-fly-from-bottom {
@@ -295,11 +263,11 @@
 .mm__listening {
   margin-top: var(--sp-2);
   font-size: var(--fs-sm);
-  color: var(--accent);
-  font-weight: 500;
+  color: var(--accent-deep);
+  font-weight: 700;
 }
 
-/* --- grawitacyjna taca na dole hero: emotki leżące jakby spadły na ziemię --- */
+/* --- taca emotek na dole hero: jasna tacka z linią, kamyki bez cieni --- */
 .mm__gravity-section {
   margin-top: var(--sp-6);
   padding-top: var(--sp-2);
@@ -310,24 +278,10 @@
   position: relative;
   border-radius: var(--radius-lg);
   padding: var(--sp-4) var(--sp-4) var(--sp-3);
-  background: linear-gradient(180deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.02) 40%,
-    rgba(255, 255, 255, 0.06) 100%
-  );
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 -14px 28px -12px rgba(0, 0, 0, 0.45);
+  background: var(--beige-light);
+  border: 1px solid var(--line);
 }
-
-:root[data-theme="light"] .mm__gravity-floor {
-  background: linear-gradient(180deg,
-    transparent 0%,
-    rgba(0, 0, 0, 0.01) 40%,
-    rgba(0, 0, 0, 0.04) 100%
-  );
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 -10px 20px -10px rgba(0, 0, 0, 0.08);
-}
+:root[data-theme="dark"] .mm__gravity-floor { background: var(--surface-2); }
 
 .mm__gravity-pit {
   display: flex;
@@ -348,45 +302,30 @@
   height: 52px;
   padding: 0;
   border-radius: 50%;
-  background: var(--surface-glass);
-  border: var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  /* Fizyczny cień kontaktowy z podłożem */
-  box-shadow:
-    0 6px 14px -2px rgba(0, 0, 0, 0.5),
-    0 2px 5px -1px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  background: var(--surface);
+  border: 1px solid var(--line);
   color: var(--ink);
   cursor: pointer;
   touch-action: manipulation;
   user-select: none;
-  /* Fizyka spoczynku: zróżnicowana wysokość (jitter), kąt obrotu i naturalna skala */
+  /* Fizyka spoczynku: zróżnicowana wysokość (jitter), kąt obrotu i skala */
   transform: translateY(var(--jitter-y, 0px)) rotate(var(--tilt, 0deg)) scale(var(--scale, 1));
   opacity: 1;
-  /* Animacja powrotu/opadania grawitacyjnego na ziemię z odbiciem */
   transition:
     transform 1560ms cubic-bezier(0.34, 1.56, 0.64, 1),
     opacity 1050ms cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 300ms ease,
-    background-color 200ms ease,
-    border-color 200ms ease;
+    background-color var(--hm-fast) ease,
+    border-color var(--hm-fast) ease;
   will-change: transform, opacity;
 }
 
 .mm__gravity-pebble:hover:not(:disabled) {
   transition:
     transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 200ms ease,
-    background-color 200ms ease,
-    border-color 200ms ease;
-  background: var(--surface-glass-thick);
-  border-color: var(--glass-border-bright);
-  box-shadow:
-    0 12px 24px -4px rgba(0, 0, 0, 0.6),
-    0 0 18px color-mix(in srgb, var(--accent) 40%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    background-color var(--hm-fast) ease,
+    border-color var(--hm-fast) ease;
+  background: var(--mist);
+  border-color: var(--accent-deep);
   transform: translateY(calc(var(--jitter-y, 0px) - 6px)) scale(1.18) rotate(0deg);
   z-index: 10;
 }
@@ -403,20 +342,16 @@
   pointer-events: none !important;
   transform: translateY(var(--jitter-y, 0px)) scale(0.86) rotate(var(--tilt, 0deg)) !important;
   filter: grayscale(1) contrast(0.6);
-  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.55) !important;
-  border-color: rgba(255, 255, 255, 0.05) !important;
   transition:
     opacity 600ms ease,
     transform 720ms ease,
-    filter 600ms ease,
-    box-shadow 720ms ease !important;
+    filter 600ms ease !important;
 }
 
 .mm__gravity-emoji {
   font-size: 1.7rem;
   line-height: 1;
   display: inline-block;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
   transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -440,6 +375,7 @@
   margin-top: var(--sp-4);
   padding: var(--sp-3) var(--sp-4);
   background: var(--ok-wash);
+  border: 1px solid color-mix(in srgb, var(--ok) 30%, transparent);
   border-radius: var(--radius-sm);
   color: var(--ink);
 }
@@ -466,7 +402,6 @@
   background: var(--surface) !important;
   border: 2px solid var(--line) !important;
   transform: none !important;
-  box-shadow: none !important;
 }
 
 [data-contrast="high"] .mm__gravity-pebble--lifted {

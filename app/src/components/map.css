@@ -10,11 +10,8 @@
 .map__shell {
   position: relative;
   border-radius: var(--radius);
-  background: var(--surface-glass-card);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  background: var(--surface);
+  border: 1px solid var(--line);
   padding: var(--sp-4);
 }
 
@@ -24,13 +21,13 @@
   height: auto;
 }
 
-/* Skala wypełnień: od papieru do kobaltu. Intensywność jest tylko dodatkiem —
+/* Skala wypełnień: od papieru do turkusu. Intensywność jest tylko dodatkiem —
    liczba wdrożeń siedzi w aria-label i w tabeli pod mapą (WCAG 1.4.1). */
 .map__unit {
   stroke: var(--surface);
   stroke-width: 0.8;
   cursor: pointer;
-  transition: fill 120ms ease;
+  transition: fill var(--hm-fast) ease;
 }
 .map__unit--b0 { fill: var(--surface-2); }
 .map__unit--b1 { fill: color-mix(in srgb, var(--chart-1) 12%, var(--surface)); }
@@ -67,12 +64,9 @@
   margin: 0;
   padding: var(--sp-2) var(--sp-3);
   list-style: none;
-  background: var(--surface-glass-thick);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: var(--glass-border-subtle);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
   font-size: var(--fs-xs);
   color: var(--ink-3);
 }
@@ -95,7 +89,7 @@
 }
 .map__table summary {
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .map__note {

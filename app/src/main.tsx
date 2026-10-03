@@ -1,14 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-// Dwa kroje, self-hostowane: Sora na nagłówki (geometryczna, techniczna —
-// wersaliki i duży tracking robią całą robotę), Manrope na treść (miękka,
-// humanistyczna, czytelna w długim tekście) — demo na hackathonie nie może
-// zależeć od wifi na sali. Oś wagi (wght) wystarcza; pliki zawierają subset
-// latin-ext z zakresem U+0100-02BA, czyli ą ć ę ł ń ś ź ż, a ó siedzi
-// w subsecie podstawowym. Przeglądarka pobiera tylko potrzebne zakresy.
-import "@fontsource-variable/sora/wght.css";
-import "@fontsource-variable/manrope/wght.css";
+// Kroje z systemu wizualnego HubMI, self-hostowane (demo nie może zależeć
+// od wifi na sali): Bricolage Grotesque na nagłówki, Atkinson Hyperlegible
+// Next na tekst — krój projektowany dla osób słabowidzących. Oś wght
+// wystarcza; subsety latin + latin-ext pokrywają ą ć ę ł ń ś ź ż i ó.
+import "./styles/fonts.css";
 
 import "./styles/tokens.css";
 import "./styles/global.css";

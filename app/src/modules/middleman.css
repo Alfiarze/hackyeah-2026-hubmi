@@ -97,7 +97,7 @@
 
 .mi__list { margin: 0; padding-left: var(--sp-5); display: grid; gap: var(--sp-3); }
 .mi__list > li { font-size: var(--fs-sm); line-height: 1.6; max-width: var(--measure); }
-.mi__list--adapt > li::marker { color: var(--accent); }
+.mi__list--adapt > li::marker { color: var(--accent-deep); }
 .mi__list--risk > li::marker { color: var(--warn); }
 
 .mi__actions { margin-top: var(--sp-6); }

@@ -119,7 +119,7 @@
 .grant__crit {
   font-family: var(--font);
   font-size: var(--fs-xs);
-  color: var(--accent);
+  color: var(--accent-deep);
   margin-bottom: var(--sp-2);
 }
 .grant__body {

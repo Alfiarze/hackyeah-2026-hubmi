@@ -9,7 +9,7 @@
 
 .ap__ok { color: var(--ok); font-weight: 700; }
 .ap__bad { color: var(--warn); font-weight: 700; }
-.ap__sc { color: var(--accent); white-space: nowrap; }
+.ap__sc { color: var(--accent-deep); white-space: nowrap; }
 
 .ap__viol {
   margin-top: var(--sp-5);

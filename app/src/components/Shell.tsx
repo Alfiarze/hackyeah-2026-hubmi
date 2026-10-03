@@ -8,6 +8,18 @@
 import type { ReactNode } from "react";
 import { useA11y, type FontScale } from "../lib/a11y";
 import { setRole, type Role, type AppState } from "../lib/store";
+import {
+  HubmiMark,
+  IconAccess,
+  IconExpert,
+  IconIdea,
+  IconKnowledge,
+  IconMatchmaking,
+  IconNgo,
+  IconPartnership,
+  IconTest,
+  type IconProps,
+} from "./Icon";
 import "./shell.css";
 
 export type Route =
@@ -20,15 +32,16 @@ export type Route =
   | "middleman"
   | "dostepnosc";
 
-const NAV: { id: Route; label: string; short: string; module: string }[] = [
-  { id: "matchmaking", label: "Znajdź rozwiązanie", short: "Szukaj", module: "I" },
-  { id: "biblioteka", label: "Zasobnik wiedzy", short: "Wiedza", module: "II" },
-  { id: "kreator", label: "Zgłoś pomysł", short: "Pomysł", module: "III" },
-  { id: "tester", label: "Testuj innowacje", short: "Testuj", module: "IV" },
-  { id: "komunikacja", label: "Komunikacja", short: "Rozmowy", module: "V" },
-  { id: "admin", label: "Panel ROPS", short: "Panel", module: "VI" },
-  { id: "middleman", label: "Middleman", short: "Middleman", module: "VII" },
-  { id: "dostepnosc", label: "Dostępność", short: "WCAG", module: "—" },
+/** Ikona modułu — jedna rodzina znaków, jedno znaczenie (system wizualny 02). */
+const NAV: { id: Route; label: string; short: string; icon: (p: IconProps) => JSX.Element }[] = [
+  { id: "matchmaking", label: "Znajdź rozwiązanie", short: "Szukaj", icon: IconMatchmaking },
+  { id: "biblioteka", label: "Zasobnik wiedzy", short: "Wiedza", icon: IconKnowledge },
+  { id: "kreator", label: "Zgłoś pomysł", short: "Pomysł", icon: IconIdea },
+  { id: "tester", label: "Testuj innowacje", short: "Testuj", icon: IconTest },
+  { id: "komunikacja", label: "Komunikacja", short: "Rozmowy", icon: IconExpert },
+  { id: "admin", label: "Panel ROPS", short: "Panel", icon: IconNgo },
+  { id: "middleman", label: "Middleman", short: "Middleman", icon: IconPartnership },
+  { id: "dostepnosc", label: "Dostępność", short: "WCAG", icon: IconAccess },
 ];
 
 interface Props {
@@ -153,7 +166,9 @@ export function Shell({
               onRoute("matchmaking");
             }}
           >
-            <span className="hdr__mark" aria-hidden="true" />
+            <span className="hdr__mark" aria-hidden="true">
+              <HubmiMark size={30} />
+            </span>
             <span>
               <strong>HubMI</strong>
               <span className="hdr__sub">Małopolski Hub Innowacji Społecznych</span>
@@ -175,6 +190,9 @@ export function Shell({
                         onRoute(n.id);
                       }}
                     >
+                      <span className="hdr__ic" aria-hidden="true">
+                        <n.icon size={20} />
+                      </span>
                       <span className="hdr__full">{n.label}</span>
                       <span className="hdr__short" aria-hidden="true">
                         {n.short}

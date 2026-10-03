@@ -49,7 +49,7 @@ const CRITERIA: { sc: string; name: string; what: string }[] = [
   {
     sc: "1.4.3",
     name: "Kontrast minimalny",
-    what: "Cała paleta policzona skryptem, nie dobrana na oko. Najsłabsza para tekstowa to 4.81:1, akcent 6.02:1, tekst główny 16.97:1.",
+    what: "Cała paleta policzona skryptem, nie dobrana na oko. Najsłabsza para tekstowa to 4.9:1, akcent tekstowy 5.5:1, tekst główny 13.3:1.",
   },
   {
     sc: "1.4.4",
@@ -64,7 +64,7 @@ const CRITERIA: { sc: string; name: string; what: string }[] = [
   {
     sc: "1.4.11",
     name: "Kontrast elementów nietekstowych",
-    what: "Granice kontrolek w osobnym tokenie (--line-ui, 3.12:1) — to jedyne miejsce, gdzie obramowanie zostaje, bo niesie informację. Linie dekoracyjne nigdy nie służą jako granica znacząca.",
+    what: "Granice kontrolek w osobnym tokenie (--line-ui, 3.05:1) — to jedyne miejsce, gdzie obramowanie zostaje, bo niesie informację. Linie dekoracyjne nigdy nie służą jako granica znacząca.",
   },
   {
     sc: "2.1.1",
@@ -94,7 +94,7 @@ const CRITERIA: { sc: string; name: string; what: string }[] = [
   {
     sc: "2.4.7",
     name: "Focus widoczny",
-    what: "2px obrys w kolorze akcentu z 2px odstępem. Nigdzie nie ma outline:none bez zamiennika.",
+    what: "3px obrys w kolorze atramentu z 3px odstępem — widoczny na każdym tle systemu. Nigdzie nie ma outline:none bez zamiennika.",
   },
   {
     sc: "2.5.5",

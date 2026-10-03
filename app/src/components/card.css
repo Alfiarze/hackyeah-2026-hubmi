@@ -1,4 +1,5 @@
-/* Fiszka innowacji: Apple iOS Frosted Widget z głębokim rozmyciem */
+/* Fiszka innowacji: biel + linia 1 px #D5E3E0, promień 24 px, zero cieni
+   (system wizualny, strona 05). */
 
 .fiszka {
   /* Celowo BEZ content-visibility: auto.
@@ -7,12 +8,9 @@
      i na wydruku, a wyszukiwanie w stronie potrafi ich nie znaleźć.
      Przy 115 kartach zysk nie równoważy tych strat; gdyby lista urosła
      do tysięcy pozycji, właściwą odpowiedzią jest wirtualizacja, nie to. */
-  background: var(--surface-glass-card);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  border: var(--glass-border);
-  border-radius: var(--radius);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
   padding: var(--sp-6);
   display: flex;
   flex-direction: column;
@@ -20,13 +18,11 @@
   container-type: inline-size;
   min-width: 0;
   transition:
-    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 260ms ease;
+    border-color var(--hm-fast) ease,
+    transform var(--hm-fast) var(--hm-ease);
 }
 .fiszka:hover {
-  border-color: var(--glass-border-bright);
-  box-shadow: var(--glass-shadow-lg), var(--glass-highlight);
+  border-color: var(--accent-deep);
   transform: translateY(-2px);
 }
 
@@ -43,14 +39,13 @@
   display: inline-flex;
   align-self: flex-start;
   padding: 3px var(--sp-3);
-  background: var(--surface-glass-thin);
-  border: var(--glass-border-subtle);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
   border-radius: var(--radius-pill);
   font-size: var(--fs-xs);
-  color: var(--ink-3);
+  color: var(--ink-2);
   margin: 0;
   max-width: none;
-  box-shadow: var(--glass-highlight);
 }
 
 .fiszka__fields {
@@ -61,8 +56,8 @@
 .fiszka__fields > div { min-width: 0; }
 .fiszka__fields dt {
   font-size: var(--fs-xs);
-  font-weight: 500;
-  color: var(--ink-3);
+  font-weight: 700;
+  color: var(--accent-deep);
   margin-bottom: var(--sp-1);
 }
 .fiszka__fields dd {
@@ -97,12 +92,10 @@
 .fiszka__ai-verdict {
   margin-top: var(--sp-2);
   padding: var(--sp-3) var(--sp-4);
-  background: var(--surface-glass-thin);
-  border-left: 3px solid var(--accent);
+  background: var(--surface-2);
+  border-left: 3px solid var(--accent-deep);
   border-radius: var(--radius-sm);
   font-size: var(--fs-xs);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 .fiszka__ai-verdict p {
   margin: var(--sp-1) 0 0;

@@ -1,11 +1,8 @@
 .chart {
   margin: 0;
-  background: var(--surface-glass-card);
-  backdrop-filter: blur(var(--glass-blur-heavy)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur-heavy)) saturate(var(--glass-saturate));
-  border: var(--glass-border);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
   padding: var(--sp-6);
 }
 .chart figcaption { margin-bottom: var(--sp-4); }
@@ -68,18 +65,16 @@
 .chart__tip {
   margin: var(--sp-3) 0 0;
   padding: var(--sp-2) var(--sp-3);
-  background: var(--surface-glass-thin);
-  border: var(--glass-border-subtle);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   font-size: var(--fs-sm);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 .chart__table { margin-top: var(--sp-4); font-size: var(--fs-sm); }
 .chart--empty { color: var(--ink-3); }
 
-/* --- kafle wskaźników: Apple Health style frosted cards --- */
+/* --- kafle wskaźników: biel + linia, wartość w kolorze tonu --- */
 .tiles {
   display: grid;
   gap: var(--sp-4);
@@ -90,29 +85,19 @@
   display: grid;
   gap: var(--sp-1);
   padding: var(--sp-5);
-  background: var(--surface-glass);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  border: var(--glass-border);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: var(--glass-shadow-sm), var(--glass-highlight);
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 200ms ease,
-    box-shadow 200ms ease;
+  transition: border-color var(--hm-fast) ease;
 }
-.tile:hover {
-  transform: translateY(-2px);
-  border-color: var(--glass-border-bright);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
-}
+.tile:hover { border-color: var(--accent-deep); }
 .tile__v {
   font-variant-numeric: tabular-nums;
   font-size: var(--fs-2xl);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.03em;
 }
-.tile__l { font-size: var(--fs-sm); font-weight: 500; color: var(--ink-2); }
+.tile__l { font-size: var(--fs-sm); font-weight: 700; color: var(--ink-2); }
 .tile__n { font-size: var(--fs-xs); color: var(--ink-3); }
 /* Ton kafla niesie kolor liczby i podpis, nie tło — tło zostaje neutralne,
    żeby rząd kafli nie wyglądał jak zestaw alarmów. */

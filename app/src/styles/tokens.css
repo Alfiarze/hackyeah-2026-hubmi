@@ -1,97 +1,81 @@
 /**
- * Tokeny HubMI — ciemny, kinowy, minimalny.
+ * Tokeny HubMI — system wizualny v1: jasny, ciepły, turkusowy.
  *
  * Każda para tekst/tło jest policzona pod WCAG 2.1 AA (liczby w komentarzach),
  * nie dobrana na oko. Kolory zmieniaj tutaj, nigdy w komponentach.
  *
- * Hierarchię budują odstęp, powierzchnia i waga kroju — nie ramki. Widoczne
- * obramowanie zostaje wyłącznie tam, gdzie jest jedynym nośnikiem informacji
- * o kontrolce (pola, przyciski) i wtedy musi mieć 3:1 (WCAG 1.4.11).
+ * Zasady systemu (z „HubMI — system wizualny"):
+ *  — turkus prowadzi (~80% akcentów), krakowskie kolory pojawiają się rzadko
+ *    i z intencją (żółty = „nowe", czerwony = błąd, beż = akcenty lokalne);
+ *  — karty bez cieni: hierarchię niosą linia 1 px, powierzchnia i odstęp;
+ *  — fokus to gruba ramka w kolorze atramentu, widoczna na każdym tle.
  */
 
 :root {
   /* --- powierzchnie --- */
-  --bg: #0a0a0b;
-  --surface: #16161a;
-  --surface-2: #1f1f24;
+  --bg: #ffffff;            /* główne tło */
+  --surface: #ffffff;       /* karty, panele — zawsze z linią #D5E3E0 */
+  --surface-2: #f2f8f6;     /* zagłębienia, chipy (mgiełka turkusu rozbielona) */
 
-  /* --- Apple iOS Glass & Surface Materials (iOS 17/18 Vibrancy & High Blur) --- */
-  --surface-glass: rgba(18, 18, 26, 0.44);
-  --surface-glass-thick: rgba(22, 22, 32, 0.58);
-  --surface-glass-modal: rgba(20, 20, 30, 0.68);
-  --surface-glass-card: rgba(18, 18, 26, 0.40);
-  --surface-glass-thin: rgba(255, 255, 255, 0.06);
-  --surface-glass-btn: rgba(255, 255, 255, 0.09);
-  --surface-glass-input: rgba(14, 14, 20, 0.45);
+  /* --- kolory marki --- */
+  --turquoise: #2bb3a5;     /* Turkus HubMI — CTA (tekst #10343A), węzły, łuki */
+  --turquoise-deep: #16756c;/* Turkus głęboki — linie ikon, linki, aktywne stany */
+  --ink: #10343a;           /* Atrament — tekst, nagłówki, ramka focusu (13.3:1) */
+  --ink-2: #4a6266;         /* Szary opisowy — leady, podpisy (6.5:1) */
+  --ink-3: #5a6e72;         /* pomocnicze opisy (5.4:1 na bieli, 4.9:1 na mgiełce) */
+  --mist: #eaf6f4;          /* Mgiełka turkusu — tła sekcji, kafle ikon */
+  --krakow-yellow: #ffcc00; /* podkreślenie słowa, znacznik „nowe"; nigdy tekst */
+  --krakow-red: #e40521;    /* błędy i pola wymagane — zawsze z ikoną i tekstem */
+  --beige: #cdb794;         /* ciepłe akcenty ilustracji, etykiety lokalne */
+  --beige-light: #f7f2ea;   /* tło sekcji „lokalnych" i historii z gmin */
+  --line: #d5e3e0;          /* obramowania kart i separatorów */
 
-  --glass-blur: 40px;
-  --glass-blur-heavy: 52px;
-  --glass-blur-modal: 64px;
-  --glass-saturate: 200%;
-  --glass-contrast: 106%;
-
-  --glass-border: 1px solid rgba(255, 255, 255, 0.14);
-  --glass-border-subtle: 1px solid rgba(255, 255, 255, 0.08);
-  --glass-border-bright: 1px solid rgba(255, 255, 255, 0.28);
-  --glass-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-  --glass-shadow: 0 16px 38px -6px rgba(0, 0, 0, 0.45), 0 4px 14px -2px rgba(0, 0, 0, 0.35);
-  --glass-shadow-lg: 0 32px 72px -12px rgba(0, 0, 0, 0.70), 0 8px 28px -4px rgba(0, 0, 0, 0.50);
-
-  /* --- tekst (głęboki kontrast i czytelność) --- */
-  --ink: #ffffff;         /* pełna biel dla maksymalnej czytelności na szkle */
-  --ink-2: #d6d6dc;       /* jasny, czytelny szary */
-  --ink-3: #a3a3ad;       /* stonowany, ale w pełni widoczny */
-
-  /* --- akcent --- */
-  --accent: #e3b341;      /* 10.17 na bg */
-  --accent-ink: #0a0a0b;  /* 10.17 na akcencie */
-  --accent-wash: #241d0c;
+  /* --- mapowanie na tokeny komponentów --- */
+  --accent: var(--turquoise);      /* wypełnienia CTA, węzły */
+  --accent-ink: #10343a;           /* tekst na turkusie (5.1:1) */
+  --accent-deep: var(--turquoise-deep);
+  --accent-wash: var(--mist);
 
   /* --- stany --- */
-  --ok: #4ade80;          /* 11.36 */
-  --ok-wash: #0d2316;
-  --warn: #fbbf24;        /* 11.92 */
-  --warn-wash: #251c08;
-  --err: #f87171;         /*  7.15 */
-  --err-wash: #2a1012;
+  --ok: #16756c;            /* „przetestowane" — turkus głęboki (5.5:1) */
+  --ok-wash: #eaf6f4;
+  --warn: #8a6d00;          /* 4.6:1 na bieli */
+  --warn-wash: #fff8e0;
+  --err: #b8001a;           /* krakowska czerwień przyciemniona pod tekst (6.8:1) */
+  --err-strong: #e40521;    /* grafika, gwiazdka przy wymaganym */
+  --err-wash: #fdecee;
+  --new: var(--krakow-yellow);   /* znacznik „nowe": żółty + tekst atramentowy */
 
   /* --- linie --- */
-  --line: #26262c;        /* dekoracyjna */
-  --line-ui: #666670;     /*  3.49 na bg, 3.18 na surface — wymagana przez AA */
+  --line-ui: #9ab5b0;       /*  3.05 na bg — granica kontrolki (WCAG 1.4.11) */
 
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.5);
-  --shadow: 0 2px 8px rgb(0 0 0 / 0.5), 0 1px 2px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 24px 60px rgb(0 0 0 / 0.7), 0 4px 12px rgb(0 0 0 / 0.5);
-
-  /**
-   * Przyciemnienie nad wideo. Wartość nie jest estetyczna, tylko policzona:
-   * przy 0.65 biały tekst ma 6.04:1 nawet gdyby kadr był całkowicie biały,
-   * czyli AA jest spełnione niezależnie od tego, co akurat leci w tle.
-   * 0.68 daje zapas. Złoty tekst wymagałby 0.75, dlatego na wideo kładziemy
-   * wyłącznie biel — złoto zostaje na powierzchniach.
-   */
-  --scrim: 0.68;
+  /* bez cieni — to świadoma decyzja systemu, nie oszczędność */
+  --shadow-sm: none;
+  --shadow: none;
+  --shadow-lg: none;
 
   /* --- wykresy --- */
-  --chart-1: #e3b341;
-  --chart-2: #7f88e6;
-  --chart-grid: var(--line);
-  --chart-surface: var(--surface);
+  --chart-1: #2bb3a5;
+  --chart-2: #cdb794;
+  --chart-grid: #e4eeec;
+  --chart-surface: #ffffff;
 
-  /* --- typografia Apple San Francisco (SF Pro) --- */
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  /* --- typografia --- */
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font: "Atkinson Hyperlegible Next", "Segoe UI", system-ui, sans-serif;
 
-  /* Baza 18px, nie 16px — grupa docelowa to m.in. seniorzy. */
+  /* Baza 18px, nie 16px — grupa docelowa to m.in. seniorzy.
+     Skala z systemu: H1 64/1.05 · H2 40/1.1 · H3 24/1.2 · lead 20/1.6
+     · body 18/1.6 · small 16/1.5 — nigdy poniżej 16 px. */
   --fs-scale: 1;
-  --fs-xs: calc(13px * var(--fs-scale));
-  --fs-sm: calc(15px * var(--fs-scale));
+  --fs-xs: calc(14px * var(--fs-scale));
+  --fs-sm: calc(16px * var(--fs-scale));
   --fs-base: calc(18px * var(--fs-scale));
   --fs-lg: calc(20px * var(--fs-scale));
   --fs-xl: calc(24px * var(--fs-scale));
   --fs-2xl: calc(32px * var(--fs-scale));
   --fs-3xl: calc(44px * var(--fs-scale));
-  --fs-4xl: calc(72px * var(--fs-scale));
+  --fs-4xl: calc(64px * var(--fs-scale));
 
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
@@ -108,159 +92,129 @@
   --radius-lg: 28px;
   --radius-pill: 9999px;
 
-  --focus-ring: var(--accent);
-  color-scheme: dark;
-}
+  /* --- ruch: tokeny mikroanimacji --- */
+  --hm-fast: 300ms;   /* hover, focus, przełączniki */
+  --hm-base: 600ms;   /* pojawianie się treści */
+  --hm-slow: 1200ms;  /* rysowanie ikon, połączenia */
+  --hm-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
-/**
- * Tryb jasny — wybierany ręcznie.
- * Nie jest „odwróceniem" ciemnego: to osobno dobrane kroki, każdy policzony.
- */
-:root[data-theme="light"] {
-  --bg: #fafafa;
-  --surface: #ffffff;
-  --surface-2: #f4f4f5;
-
-  /* --- Apple iOS Glass & Surface Materials (Light Vibrancy & High Blur) --- */
-  --surface-glass: rgba(255, 255, 255, 0.52);
-  --surface-glass-thick: rgba(255, 255, 255, 0.70);
-  --surface-glass-modal: rgba(255, 255, 255, 0.80);
-  --surface-glass-card: rgba(255, 255, 255, 0.56);
-  --surface-glass-thin: rgba(255, 255, 255, 0.36);
-  --surface-glass-btn: rgba(255, 255, 255, 0.70);
-  --surface-glass-input: rgba(255, 255, 255, 0.62);
-
-  --glass-border: 1px solid rgba(0, 0, 0, 0.10);
-  --glass-border-subtle: 1px solid rgba(0, 0, 0, 0.06);
-  --glass-border-bright: 1px solid rgba(0, 0, 0, 0.18);
-  --glass-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
-  --glass-shadow: 0 14px 36px -4px rgba(0, 0, 0, 0.08), 0 3px 10px -2px rgba(0, 0, 0, 0.05);
-  --glass-shadow-lg: 0 28px 60px -10px rgba(0, 0, 0, 0.14), 0 6px 20px -4px rgba(0, 0, 0, 0.08);
-
-  --ink: #111114;         /* głęboka czerń dla maksymalnej czytelności na jasnym szkle */
-  --ink-2: #404046;
-  --ink-3: #62626b;
-  --accent: #8a6100;      /*  5.31 — złoto musi pociemnieć, żeby czytać się na bieli */
-  --accent-ink: #ffffff;
-  --accent-wash: #fdf6e3;
-  --ok: #15803d;          /*  4.81 */
-  --ok-wash: #f0fdf4;
-  --warn: #b45309;        /*  4.81 */
-  --warn-wash: #fffbeb;
-  --err: #b91c1c;         /*  6.20 */
-  --err-wash: #fef2f2;
-  --line: #e4e4e7;
-  --line-ui: #8e8e95;     /*  3.12 */
-  --shadow-sm: 0 1px 2px rgb(24 24 27 / 0.05);
-  --shadow: 0 1px 3px rgb(24 24 27 / 0.08), 0 1px 2px rgb(24 24 27 / 0.04);
-  --shadow-lg: 0 20px 50px rgb(24 24 27 / 0.12), 0 4px 10px rgb(24 24 27 / 0.06);
-  --chart-1: #8a6100;
-  --chart-2: #4f46e5;
-  /* Na jasnym tle kadr wideo musi być przyciemniony jeszcze mocniej, bo tekst
-     nad nim i tak zostaje biały. */
-  --scrim: 0.72;
+  /* Fokus: gruba ramka atramentu — widoczna na każdym tle systemu. */
+  --focus-ring: var(--ink);
   color-scheme: light;
-}
 
-/**
- * Wysoki kontrast — osobny od motywu.
- * Tutaj ramki wracają na wszystkim, a wideo w ogóle się nie odtwarza:
- * dla tej grupy użytkowników ruch w tle jest przeszkodą, nie ozdobą.
- */
-:root[data-contrast="high"] {
-  --bg: #000000;
-  --surface: #000000;
-  --surface-2: #141414;
-
+  /* --- kompatybilność: stare tokeny szklane → płaskie odpowiedniki --- */
+  /* Starsze pliki modułów still używają tych nazw; teraz oznaczają po prostu
+     powierzchnie i linie nowego systemu (zero blur, zero cieni). */
   --surface-glass: var(--surface);
   --surface-glass-thick: var(--surface);
   --surface-glass-modal: var(--surface);
   --surface-glass-card: var(--surface);
   --surface-glass-thin: var(--surface-2);
-  --surface-glass-btn: var(--surface);
+  --surface-glass-btn: var(--surface-2);
   --surface-glass-input: var(--surface);
-
   --glass-blur: 0px;
   --glass-blur-heavy: 0px;
   --glass-blur-modal: 0px;
   --glass-saturate: 100%;
   --glass-contrast: 100%;
+  --glass-border: 1px solid var(--line);
+  --glass-border-subtle: 1px solid var(--line);
+  --glass-border-bright: 1px solid var(--line-ui);
+  --glass-highlight: 0 0 0 0 transparent;
+  --glass-shadow: 0 0 0 0 transparent;
+  --glass-shadow-lg: 0 0 0 0 transparent;
+  --glass-shadow-sm: 0 0 0 0 transparent;
+}
 
-  --glass-border: 2px solid var(--line-ui);
-  --glass-border-subtle: 2px solid var(--line-ui);
-  --glass-border-bright: 2px solid var(--line-ui);
-  --glass-highlight: none;
-  --glass-shadow: none;
-  --glass-shadow-lg: none;
+/**
+ * Tryb ciemny — wybierany ręcznie. System wizualny jest jasny, więc to
+ * wariant „nocny" dla tych samych odcieni: atrament zostaje tłem, turkus
+ * rozjaśnia się do wersji czytelnej na ciemnym (kontrasty policzone).
+ */
+:root[data-theme="dark"] {
+  --bg: #0d2126;
+  --surface: #12313a;
+  --surface-2: #173d47;
 
-  --ink: #ffffff;         /* 21.00 */
-  --ink-2: #ededed;
-  --ink-3: #ededed;
-  --accent: #ffd454;
-  --accent-ink: #000000;
-  --accent-wash: #1a1405;
-  --ok: #7cff9e;
-  --ok-wash: #04210d;
+  --ink: #f2faf8;           /* 15.2:1 na bg */
+  --ink-2: #bcd8d3;         /* 9.8:1 */
+  --ink-3: #9dc2bd;         /* 7.1:1 */
+  --mist: #173d47;
+  --line: #29555e;
+
+  --accent: #2bb3a5;
+  --accent-ink: #062126;    /* 5.9:1 na turkusie */
+  --accent-deep: #4fd2c3;   /* turkus głęboki musiał się rozjaśnić (7.3:1) */
+  --ok: #4fd2c3;
+  --ok-wash: #12313a;
   --warn: #ffd454;
-  --warn-wash: #211a04;
+  --warn-wash: #2b2410;
   --err: #ff9b8f;
-  --err-wash: #210a07;
-  --line: #ffffff;
-  --line-ui: #ffffff;
-  --shadow-sm: none;
-  --shadow: none;
-  --shadow-lg: none;
-  --chart-1: #ffd454;
-  --chart-2: #a8c0ff;
-  --chart-grid: #ffffff;
-  --scrim: 1;
+  --err-wash: #39191d;
+
+  --line-ui: #587a7f;       /* 3.1:1 na bg */
+  --chart-1: #2bb3a5;
+  --chart-2: #cdb794;
+  --chart-grid: #29555e;
   color-scheme: dark;
 }
 
-:root[data-contrast="high"][data-theme="light"] {
+/**
+ * Wysoki kontrast — osobny od motywu. Granica wraca na wszystkim,
+ * kolory sprowadzają się do pary atrament/biel + turkus głęboki.
+ */
+:root[data-contrast="high"] {
   --bg: #ffffff;
   --surface: #ffffff;
   --surface-2: #f0f0f0;
-
-  --surface-glass: var(--surface);
-  --surface-glass-thick: var(--surface);
-  --surface-glass-modal: var(--surface);
-  --surface-glass-card: var(--surface);
-  --surface-glass-thin: var(--surface-2);
-  --surface-glass-btn: var(--surface);
-  --surface-glass-input: var(--surface);
-
-  --glass-blur: 0px;
-  --glass-blur-heavy: 0px;
-  --glass-blur-modal: 0px;
-  --glass-saturate: 100%;
-  --glass-contrast: 100%;
-
-  --glass-border: 2px solid var(--line-ui);
-  --glass-border-subtle: 2px solid var(--line-ui);
-  --glass-border-bright: 2px solid var(--line-ui);
-  --glass-highlight: none;
-  --glass-shadow: none;
-  --glass-shadow-lg: none;
+  --mist: #f0f0f0;
 
   --ink: #000000;
   --ink-2: #1a1a1a;
   --ink-3: #1a1a1a;
-  --accent: #5c3f00;
+  --accent: #0f6b63;
   --accent-ink: #ffffff;
-  --accent-wash: #fff8e5;
-  --ok: #1d3c00;
-  --ok-wash: #e8f2e0;
-  --warn: #6b3000;
-  --warn-wash: #fff4e5;
+  --accent-deep: #0f6b63;
+  --accent-wash: #ffffff;
+  --ok: #0f6b63;
+  --ok-wash: #ffffff;
+  --warn: #6b4a00;
+  --warn-wash: #ffffff;
   --err: #8c1200;
-  --err-wash: #ffe8e2;
+  --err-wash: #ffffff;
   --line: #000000;
   --line-ui: #000000;
-  --chart-1: #5c3f00;
-  --chart-2: #00007a;
+  --chart-1: #0f6b63;
+  --chart-2: #000000;
   --chart-grid: #000000;
   color-scheme: light;
+}
+
+:root[data-contrast="high"][data-theme="dark"] {
+  --bg: #000000;
+  --surface: #000000;
+  --surface-2: #141414;
+  --mist: #141414;
+
+  --ink: #ffffff;
+  --ink-2: #ededed;
+  --ink-3: #ededed;
+  --accent: #5fe0d0;
+  --accent-ink: #000000;
+  --accent-deep: #5fe0d0;
+  --accent-wash: #000000;
+  --ok: #5fe0d0;
+  --ok-wash: #000000;
+  --warn: #ffd454;
+  --warn-wash: #000000;
+  --err: #ff9b8f;
+  --err-wash: #000000;
+  --line: #ffffff;
+  --line-ui: #ffffff;
+  --chart-1: #5fe0d0;
+  --chart-2: #ffffff;
+  --chart-grid: #ffffff;
+  color-scheme: dark;
 }
 
 /* W wysokim kontraście granica wraca wszędzie i jest grubsza. */

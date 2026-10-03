@@ -7,8 +7,8 @@
 
 .why__h {
   font-size: var(--fs-xs);
-  font-weight: 500;
-  color: var(--ink-3);
+  font-weight: 700;
+  color: var(--accent-deep);
   margin-bottom: var(--sp-3);
 }
 
@@ -23,7 +23,7 @@
   max-width: var(--measure);
 }
 .why__reasons li + li { margin-top: var(--sp-2); }
-.why__reasons li::marker { color: var(--ink-3); }
+.why__reasons li::marker { color: var(--accent-deep); }
 
 .why__chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 
@@ -36,14 +36,14 @@
   padding: var(--sp-2) 0;
   border-bottom: 1px solid var(--line);
 }
-.why__term-row dt { font-weight: 500; }
+.why__term-row dt { font-weight: 700; }
 .why__term-row dd { margin: 0; color: var(--ink-3); }
 
 @media (max-width: 40rem) {
   .why__term-row { grid-template-columns: 1fr; gap: var(--sp-1); }
 }
 
-/* --- wskaźnik wyniku: Apple iOS Frosted Capsule ze szkłem i rozmyciem --- */
+/* --- wskaźnik wyniku: pigułka na mgiełce turkusu --- */
 .dial {
   display: flex;
   align-items: baseline;
@@ -51,26 +51,21 @@
   flex: none;
   padding: 4px var(--sp-3);
   border-radius: var(--radius-pill);
-  background: var(--surface-glass-thin);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: var(--glass-border-subtle);
-  box-shadow: var(--glass-highlight);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
   line-height: 1.1;
 }
 .dial__num {
   font-variant-numeric: tabular-nums;
   font-size: var(--fs-xl);
   font-weight: 700;
-  letter-spacing: -0.03em;
 }
 .dial__den { font-size: var(--fs-xs); color: var(--ink-3); }
 /* Poziom dopasowania jest podpisany słownie, więc kolor tylko go wzmacnia
    (WCAG 1.4.1). */
 .dial__tier {
   font-size: var(--fs-xs);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 700;
   margin-left: var(--sp-2);
   align-self: center;
 }
@@ -81,12 +76,12 @@
 .dial--wysokie .dial__num, .dial--wysokie .dial__tier { color: var(--ok); }
 .dial--srednie {
   background: var(--accent-wash);
-  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+  border-color: color-mix(in srgb, var(--accent-deep) 35%, transparent);
 }
-.dial--srednie .dial__num, .dial--srednie .dial__tier { color: var(--accent); }
+.dial--srednie .dial__num, .dial--srednie .dial__tier { color: var(--accent-deep); }
 .dial--niskie {
-  background: var(--surface-glass-thin);
-  border-color: var(--glass-border-subtle);
+  background: var(--surface-2);
+  border-color: var(--line);
 }
 .dial--niskie .dial__num { color: var(--ink-2); }
 .dial--niskie .dial__tier { color: var(--ink-3); }

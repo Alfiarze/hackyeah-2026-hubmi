@@ -1,15 +1,19 @@
-/* Hero. Płaskie ciemne tło, ogromna typografia, jedno słowo z poświatą.
-   Referencja: motionsites.ai — tam hero NIE ma wideo w tle, tło jest płaskie,
-   a ruch siedzi dopiero w kartach niżej. Dzięki temu tekst stoi na stałym
-   kolorze i kontrast nie zależy od tego, co akurat leci w materiale. */
+/* Hero. Jasny system: ogromna typografia Bricolage, turkus + żółte
+   podkreślenie tezy, ilustracja sieci po prawej. Pattern kładzie Backdrop. */
 
 .hero {
   position: relative;
   isolation: isolate;
-  text-align: center;
   padding-block: var(--sp-8) var(--sp-6);
   overflow: hidden;
-  transition: padding 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: padding var(--hm-base) var(--hm-ease);
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: var(--sp-7);
+  align-items: center;
 }
 
 /* Sygnatura: po wejściu wyników hero kurczy się i oddaje pierwszeństwo
@@ -17,160 +21,68 @@
 .hero--receded {
   padding-block: var(--sp-5) var(--sp-4);
 }
+.hero--receded .hero__art { display: none; }
+.hero--receded .hero__inner { grid-template-columns: minmax(0, 1fr); }
 
-/* Poświata za nagłówkiem. Czysto dekoracyjna, pod tekstem, bardzo szeroka —
-   to ona daje wrażenie głębi bez żadnego materiału wideo. */
-.hero__glow {
-  position: absolute;
-  left: 50%;
-  top: 18%;
-  width: min(1100px, 120%);
-  aspect-ratio: 2 / 1;
-  translate: -50% 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(38% 42% at 50% 46%,
-      color-mix(in srgb, var(--accent) 55%, transparent) 0%,
-      transparent 68%),
-    radial-gradient(55% 50% at 28% 62%,
-      color-mix(in srgb, var(--chart-2) 34%, transparent) 0%,
-      transparent 70%);
-  filter: blur(90px);
-  opacity: 1;
-  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.hero--receded .hero__glow { opacity: 0.35; }
-
-/* Opcjonalne wideo: nie za tekstem, tylko jako cichy dalszy plan.
-   Domyślnie nieużywane — zob. lib/media.ts. */
-.hero__media {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  opacity: 0.3;
-}
-.hero__video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.hero__scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom,
-    color-mix(in srgb, var(--bg) calc(var(--scrim) * 100%), transparent) 0%,
-    var(--bg) 100%);
-}
-
-.hero__content { position: relative; }
-
-
-
-/* --- pigułka nad nagłówkiem: Apple iOS Frosted Capsule --- */
-.hero__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  margin: 0 auto var(--sp-5);
-  padding: var(--sp-1) var(--sp-4);
-  border: var(--glass-border-subtle);
-  border-radius: var(--radius-pill);
-  background: var(--surface-glass-thin);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  box-shadow: var(--glass-highlight);
-  font-size: var(--fs-xs);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--ink-2);
-  max-width: none;
-}
-
-/* --- nagłówek: Apple large title typography --- */
+/* --- nagłówek: H1 64/1.05 z systemu --- */
 .hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 7.5vw, 5.5rem);
+  font-size: clamp(2.4rem, 5.6vw, var(--fs-4xl));
   font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.96;
-  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   text-wrap: balance;
-  max-width: 18ch;
-  margin-inline: auto;
+  max-width: 20ch;
   margin-bottom: var(--sp-5);
 }
 .hero--receded h1 {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: clamp(1.5rem, 3vw, var(--fs-2xl));
   max-width: 28ch;
   margin-bottom: var(--sp-3);
 }
 
-/* Jedno słowo z gradientem — nośnik tezy, nie ozdoba.
-   Tekst pod spodem zostaje w DOM, więc czytnik ekranu czyta go normalnie,
-   a przy braku obsługi background-clip zadziała zwykły kolor. */
+/* Słowo tezy: turkus głęboki + grube żółte podkreślenie Krakowa.
+   Tekst pod spodem zostaje w DOM, czytnik czyta go normalnie. */
 .hero__accent {
-  color: var(--accent);
-  background: linear-gradient(100deg,
-    var(--accent) 0%,
-    color-mix(in srgb, var(--accent) 55%, var(--ink)) 55%,
-    var(--ink) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--accent-deep);
+  box-shadow: inset 0 -0.28em var(--krakow-yellow);
 }
-/* W wysokim kontraście gradient znika — litera musi być jednolita. */
+:root[data-theme="dark"] .hero__accent {
+  box-shadow: inset 0 -0.28em #8a6d00;
+}
+/* W wysokim kontraście podkreślenie znika — litera jednolita. */
 :root[data-contrast="high"] .hero__accent {
-  background: none;
-  -webkit-text-fill-color: var(--accent);
-  color: var(--accent);
+  color: var(--ink);
+  box-shadow: none;
 }
 
 .hero__lede {
   font-size: var(--fs-lg);
   color: var(--ink-2);
   max-width: 52ch;
-  margin-inline: auto;
   margin-bottom: var(--sp-6);
 }
 .hero--receded .hero__lede { display: none; }
 
-/* --- przycisk pauzy, gdy materiał jednak gra (WCAG 2.2.2): Apple Frosted Glass --- */
-.hero__pause {
-  position: absolute;
-  right: var(--sp-5);
-  bottom: var(--sp-5);
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  min-height: 44px;
-  padding: var(--sp-2) var(--sp-4);
-  border: var(--glass-border);
-  border-radius: var(--radius-pill);
-  background: var(--surface-glass-btn);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: var(--glass-highlight);
-  color: var(--ink);
-  font-family: var(--font);
-  font-size: var(--fs-xs);
-  font-weight: 500;
-  cursor: pointer;
-  touch-action: manipulation;
-  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+/* --- ilustracja: sieć + łuk rysowany raz + oddychające węzły --- */
+.hero__art { position: relative; }
+.hero__art-svg {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin-inline: auto;
 }
-.hero__pause:hover {
-  background: var(--surface-glass-thick);
-  border-color: var(--glass-border-bright);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
-}
-.hero__pause:active {
-  transform: scale(0.97);
+
+@media (max-width: 64rem) {
+  .hero__inner { grid-template-columns: minmax(0, 1fr); }
+  .hero__art { display: none; }
 }
 
 @media (max-width: 40rem) {
   .hero { padding-block: var(--sp-7) var(--sp-6); }
-  .hero__pause-label { display: none; }
   .hero__lede { font-size: var(--fs-base); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero, .hero__glow { transition: none; }
+  .hero { transition: none; }
 }

@@ -1,4 +1,9 @@
-/* Baza i komponenty. Bez frameworka CSS — wszystko z tokenów w tokens.css. */
+/* Baza i komponenty. Bez frameworka CSS — wszystko z tokenów w tokens.css.
+   Specyfikacja z „HubMI — system wizualny" v1:
+   — karty bez cieni, granica 1 px #D5E3E0;
+   — przyciski 48–52 px, jedna główna akcja na ekran;
+   — fokus = gruba ramka 3 px w kolorze atramentu, widoczna na każdym tle;
+   — ruch: tylko transform, opacity i stroke-dashoffset, tokeny --hm-*. */
 
 *,
 *::before,
@@ -23,7 +28,7 @@ body {
   font-synthesis-weight: none;
 }
 
-/* --- typografia: Apple San Francisco, hierarchia z wagi i ujemnego trackingu --- */
+/* --- typografia: Bricolage Grotesque na nagłówki, Atkinson na treść --- */
 h1,
 h2,
 h3,
@@ -36,47 +41,48 @@ h4 {
   text-wrap: balance;
 }
 
+/* Skala systemu: H1 64/1.05 · H2 40/1.1 · H3 24/1.2 — na małych ekranach
+   clamp ścina górę, nigdy poniżej czytelności. */
 h1 {
-  font-size: var(--fs-3xl);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.12;
+  font-size: clamp(2.4rem, 5.4vw, var(--fs-4xl));
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 h2 {
-  font-size: var(--fs-2xl);
+  font-size: clamp(1.75rem, 3.4vw, var(--fs-3xl));
   font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 h3 {
-  font-size: var(--fs-lg);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.3;
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  line-height: 1.2;
 }
 h4 {
-  font-size: var(--fs-base);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 p { margin: 0 0 var(--sp-4); max-width: var(--measure); }
 p:last-child { margin-bottom: 0; }
 
 a {
-  color: var(--accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  color: var(--accent-deep);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
-a:hover { text-decoration-thickness: 2px; }
+a:hover { text-decoration-thickness: 3px; }
 
-strong { font-weight: 600; }
+strong { font-weight: 700; }
 
-/* --- focus: zawsze widoczny (WCAG 2.4.7) --- */
+/* --- focus: gruba ramka atramentu, zawsze widoczna (WCAG 2.4.7) --- */
 :focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
 /* Nie zdejmujemy obrysu bez zamiennika — tylko chowamy go dla myszy. */
@@ -89,9 +95,9 @@ strong { font-weight: 600; }
   z-index: 100;
   padding: var(--sp-3) var(--sp-4);
   border-radius: var(--radius-sm);
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 600;
+  background: var(--ink);
+  color: #ffffff;
+  font-weight: 700;
   text-decoration: none;
   transition: top 140ms ease;
 }
@@ -99,19 +105,15 @@ strong { font-weight: 600; }
 
 /* --- utility --- */
 
-/* Nadlinia: mały, stonowany podpis sekcji. Bez wersalików i bez rozstrzelenia —
-   to był główny powód, dla którego poprzednia wersja czytała się jak zin. */
+/* Nadlinia: mały podpis sekcji w kolorze turkusu głębokiego. */
 .eyebrow {
   font-size: var(--fs-xs);
-  font-weight: 500;
-  color: var(--ink-3);
-  letter-spacing: 0;
+  font-weight: 700;
+  color: var(--accent-deep);
+  letter-spacing: 0.02em;
   text-transform: none;
 }
 
-/* Dawniej osobny krój monospace. Teraz ten sam krój z cyframi o równej
-   szerokości — liczby w kolumnach nie skaczą, a strona nie ma drugiego
-   alfabetu do czytania. */
 .mono {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.005em;
@@ -151,65 +153,56 @@ strong { font-weight: 600; }
   padding-inline: var(--sp-5);
 }
 
-/* --- kontrolki: styl Apple iOS (pigułki, szkło, sprężystość) min. 44×44px --- */
+/* --- kontrolki: turkusowe pigułki 48–52 px --- */
 .btn {
   touch-action: manipulation;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--sp-2);
-  min-height: 44px;
-  padding: var(--sp-2) var(--sp-4);
-  border: var(--glass-border);
+  min-height: 48px;
+  padding: var(--sp-2) var(--sp-5);
+  border: 2px solid transparent;
   border-radius: var(--radius-pill);
-  background: var(--surface-glass-btn);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--surface-2);
   color: var(--ink);
   font-family: var(--font);
   font-size: var(--fs-sm);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: var(--glass-highlight);
   transition:
-    background-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 160ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 160ms ease;
+    background-color var(--hm-fast) ease,
+    border-color var(--hm-fast) ease,
+    transform var(--hm-fast) var(--hm-ease);
 }
 .btn:hover {
-  background: color-mix(in srgb, var(--surface-glass-btn) 70%, var(--surface-2) 30%);
-  border-color: var(--glass-border-bright);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  background: var(--mist);
 }
 .btn:active:not(:disabled) {
   transform: scale(0.97);
 }
 .btn[aria-pressed="true"],
 .btn[aria-selected="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #ffffff;
+}
+/* Główna akcja: turkus z ciemnym tekstem (5,1:1). Jedna na ekran. */
+.btn--primary {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-ink);
-  box-shadow: 0 4px 14px -2px color-mix(in srgb, var(--accent) 50%, transparent);
-}
-/* Główna akcja: wyrazisty Apple button z wysokim kontrastem */
-.btn--primary {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--bg);
-  font-weight: 600;
-  padding-inline: var(--sp-5);
-  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.35);
+  font-weight: 700;
+  padding-inline: var(--sp-6);
+  min-height: 52px;
+  font-size: var(--fs-base);
 }
 .btn--primary:hover {
-  background: var(--ink);
-  border-color: var(--ink);
-  filter: brightness(0.93);
-  box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.45);
+  background: #22a093;
+  border-color: #22a093;
 }
+:root[data-theme="dark"] .btn--primary:hover { background: #34c2b3; border-color: #34c2b3; }
 .btn--primary:active:not(:disabled) {
   transform: scale(0.97);
 }
@@ -217,65 +210,54 @@ strong { font-weight: 600; }
 .btn--ghost {
   background: transparent;
   border-color: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   color: var(--ink-2);
 }
 .btn--ghost:hover {
-  background: var(--surface-glass-thin);
+  background: var(--mist);
   color: var(--ink);
-  border-color: var(--glass-border-subtle);
 }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.btn--icon { min-width: 44px; padding-inline: var(--sp-3); }
+.btn--icon { min-width: 48px; padding-inline: var(--sp-3); }
 
 input,
 textarea,
 select {
   touch-action: manipulation;
   width: 100%;
-  min-height: 44px;
+  min-height: 52px;
   padding: var(--sp-3) var(--sp-4);
-  border: var(--glass-border);
-  border-radius: var(--radius-sm);
-  background: var(--surface-glass-input);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid var(--line-ui);
+  border-radius: 14px;
+  background: var(--surface);
   color: var(--ink);
   font-family: var(--font);
   font-size: var(--fs-base);
   line-height: 1.5;
-  letter-spacing: -0.01em;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  transition: border-color var(--hm-fast) ease;
 }
 input:hover,
 textarea:hover,
-select:hover { border-color: var(--glass-border-bright); }
+select:hover { border-color: var(--accent-deep); }
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--accent);
+  border-color: var(--accent-deep);
   outline: none;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent),
-    inset 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 textarea { resize: vertical; }
 input::placeholder,
-textarea::placeholder { color: var(--ink-3); opacity: 0.9; }
+textarea::placeholder { color: var(--ink-3); opacity: 1; }
 
 label {
   display: block;
   font-size: var(--fs-sm);
-  font-weight: 500;
-  letter-spacing: -0.005em;
+  font-weight: 700;
   color: var(--ink);
   margin-bottom: var(--sp-2);
 }
 .field + .field { margin-top: var(--sp-4); }
 .hint {
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   color: var(--ink-3);
   margin-top: var(--sp-2);
   line-height: 1.5;
@@ -283,32 +265,28 @@ label {
 .error {
   font-size: var(--fs-sm);
   color: var(--err);
-  font-weight: 500;
+  font-weight: 700;
   margin-top: var(--sp-2);
 }
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--err-strong);
+}
 
-/* --- powierzchnie: Apple iOS Liquid / Frosted Glass z głębokim rozmyciem --- */
+/* --- powierzchnie: biel + linia 1 px, zero cieni --- */
 .card {
-  background: var(--surface-glass-card);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
-  border: var(--glass-border);
-  border-radius: var(--radius);
-  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
   padding: var(--sp-6);
-  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 260ms ease;
+  transition: border-color var(--hm-fast) ease;
 }
 .card:hover {
-  border-color: var(--glass-border-bright);
+  border-color: var(--accent-deep);
 }
 .card--flat {
-  box-shadow: none;
-  background: var(--surface-glass-thin);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: var(--glass-border-subtle);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
 }
 
 .chip {
@@ -316,35 +294,36 @@ label {
   align-items: center;
   gap: var(--sp-1);
   padding: 4px var(--sp-3);
-  border: var(--glass-border-subtle);
+  border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  background: var(--surface-glass-thin);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--surface-2);
   color: var(--ink-2);
   font-size: var(--fs-xs);
-  font-weight: 500;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
-  box-shadow: var(--glass-highlight);
 }
 .chip--match {
   background: var(--ok-wash);
   color: var(--ok);
-  border-color: color-mix(in srgb, var(--ok) 35%, transparent);
+  border-color: var(--ok);
 }
 .chip--miss {
-  background: var(--surface-glass-thin);
+  background: var(--surface-2);
   color: var(--ink-3);
 }
 
 /* Podświetlenie wspólnych słów. Nie polega na samym kolorze — dochodzi
-   podkreślenie (WCAG 1.4.1). */
+   podkreślenie (WCAG 1.4.1). Żółty Kraków nigdy jako kolor tekstu,
+   więc pracuje jako gruba kreska pod atramentem. */
 mark {
-  background: var(--accent-wash);
+  background: transparent;
   color: var(--ink);
   padding: 0 2px;
   border-radius: 3px;
-  box-shadow: inset 0 -2px 0 var(--accent);
+  box-shadow: inset 0 -0.35em var(--krakow-yellow);
+}
+:root[data-theme="dark"] mark {
+  box-shadow: inset 0 -0.35em #8a6d00;
 }
 
 /* --- tabela --- */
@@ -363,12 +342,12 @@ td {
 }
 th {
   font-size: var(--fs-xs);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--ink-3);
   text-transform: none;
   letter-spacing: 0;
 }
-tbody th { font-size: var(--fs-sm); color: var(--ink); font-weight: 500; }
+tbody th { font-size: var(--fs-sm); color: var(--ink); font-weight: 700; }
 
 /* Szerokie treści przewijają się same, body nigdy w poziomie. */
 .scroll-x {
@@ -378,16 +357,39 @@ tbody th { font-size: var(--fs-sm); color: var(--ink); font-weight: 500; }
 
 details > summary {
   cursor: pointer;
-  min-height: 44px;
+  min-height: 48px;
   display: flex;
   align-items: center;
   font-size: var(--fs-sm);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--ink-2);
 }
 details > summary:hover { color: var(--ink); }
 
-/* --- ruch: wyłączany na życzenie (WCAG 2.3.3) --- */
+/* --- ruch: tokeny i keyframes z systemu wizualnego --- */
+@keyframes hm-draw    { from { stroke-dashoffset: 1 } to { stroke-dashoffset: 0 } }
+@keyframes hm-fade-up { from { opacity: 0; transform: translateY(16px) } }
+@keyframes hm-float   { 50% { transform: translateY(-6px) } }
+@keyframes hm-pulse   {
+  from { transform: scale(1); opacity: 0.55 }
+  to   { transform: scale(2.6); opacity: 0 }
+}
+
+/* Rysowanie ikon: elementy SVG z pathLength="1". */
+.hm-draw {
+  stroke-dasharray: 1;
+  animation: hm-draw var(--hm-slow) var(--hm-ease) both;
+}
+.hm-fade-up { animation: hm-fade-up var(--hm-base) var(--hm-ease) both; }
+.hm-float   { animation: hm-float 4s ease-in-out infinite; }
+.hm-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hm-pulse 1800ms ease-out infinite;
+}
+
+/* Wyłącznik „Ruch w tle" z paska dostępności pauzuje animacje ambientowe
+   (WCAG 2.2.2) — prefers-reduced-motion robi to samo systemowo. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -397,6 +399,11 @@ details > summary:hover { color: var(--ink); }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+:root[data-bg-motion="off"] .hm-float,
+:root[data-bg-motion="off"] .hm-pulse,
+:root[data-bg-motion="off"] .hm-breathe {
+  animation: none !important;
 }
 
 img { max-width: 100%; height: auto; }

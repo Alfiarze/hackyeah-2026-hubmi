@@ -1,19 +1,14 @@
 /* Znacznik „przetestowane".
-   Wcześniej była to pieczątka z rozjechanym dwukolorowym nadrukiem — jedyny
-   efekt w projekcie. W kierunku minimalnym był najgłośniejszym elementem na
-   ekranie, więc został sprowadzony do cichego paska z jednym znakiem.
-   Informacja zostaje ta sama, hałas znika. */
+   Kafel mgiełki turkusu ze znakiem ✓ — informacja werbalna zostaje,
+   kolor tylko wzmacnia (WCAG 1.4.1). Zero szklanych efektów. */
 
 .stamp {
   display: block;
   padding: var(--sp-3) var(--sp-4);
   margin: 0;
   background: var(--ok-wash);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid color-mix(in srgb, var(--ok) 30%, transparent);
   border-radius: var(--radius-sm);
-  box-shadow: var(--glass-highlight);
   max-width: none;
 }
 
@@ -22,7 +17,7 @@
   align-items: center;
   gap: var(--sp-2);
   font-size: var(--fs-xs);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ok);
   margin-bottom: var(--sp-1);
 }
@@ -43,8 +38,8 @@
 
 /* Brak dowodu to osobny, jeszcze cichszy stan. Nie alarm — po prostu brak. */
 .stamp--none {
-  background: var(--surface-glass-thin);
-  border-color: var(--glass-border-subtle);
+  background: var(--surface-2);
+  border-color: var(--line);
 }
 .stamp--none .stamp__label { color: var(--ink-3); }
 .stamp--none .stamp__label::before { content: "—"; }

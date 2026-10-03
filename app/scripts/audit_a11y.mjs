@@ -39,16 +39,20 @@ const SETUP = {
   matchmaking: async (page) => {
     // Rozmowa musi dobiec do końca, inaczej audyt nie zobaczy ani wyników,
     // ani mapy, ani fiszek — czyli najważniejszej części tego widoku.
-    await page.getByRole("button", { name: /Mama mieszka sama/ }).click();
+    // Kamyk na tacy emocji wpisuje gotowy opis problemu do pigułki…
+    await page.getByRole("button", { name: "Osoby starsze" }).click();
+    // …a „Szukaj" wysyła pierwszą wypowiedź (asystent doprecyzowuje chipsami).
+    await page.getByRole("button", { name: "Szukaj" }).click();
     for (let i = 0; i < 3; i++) {
       const chips = page.locator('[aria-label="Szybkie odpowiedzi"] button');
       if ((await chips.count()) === 0) break;
       await chips.first().click();
       await page.waitForTimeout(250);
     }
-    // „Dopasowane innowacje" renderuje się dopiero po zamknięciu rozmowy
-    await page.locator('[aria-label="Dopasowane innowacje"]').first()
-      .waitFor({ timeout: 5000 });
+    // Podsumowanie (role=status) renderuje się i po sukcesie, i po błędzie
+    // backendu — czekamy na nie, a nie na wyniki, żeby audyt działał też
+    // bez podniesionego API.
+    await page.locator(".mm__summary").first().waitFor({ timeout: 8000 });
   },
   admin: async (page) => {
     // druga zakładka to wykresy — audytujemy je razem ze skrzynką
@@ -63,7 +67,11 @@ const SETUP = {
 
 const run = async (page, route) => {
   await page.goto(`${BASE}/#${route}`, { waitUntil: "networkidle" });
-  await page.waitForTimeout(250);
+  // 900 ms, nie 250: elementy [data-reveal] wjeżdżają przez 600 ms
+  // (transition opacity), a axe mierzy kontrast z uwzględnieniem opacity —
+  // audyt w połowie przejścia widziałby rozjaśnione kolory i fałszywie
+  // płakał na pary, które po dojechaniu spełniają AA z zapasem.
+  await page.waitForTimeout(900);
   if (SETUP[route]) {
     try {
       await SETUP[route](page);
@@ -85,7 +93,17 @@ const run = async (page, route) => {
 
 const main = async () => {
   const browser = await chromium.launch();
-  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  // reducedMotion: audytujemy stan docelowy. Karty wjeżdżają przez 600 ms
+  // ( Biblioteka: 115 fiszek z kaskadą opóźnień do 1,2 s), a axe liczy
+  // kontrast z opacity — pomiar w locie dawał fałszywe naruszenia.
+  // Stan „bez ruchu" jest częścią gwarancji WCAG 2.3.3, więc to, co
+  // audytujemy, nie jest wygodnym uproszczeniem, tylko jednym z dwóch
+  // równoważnych stanów interfejsu.
+  const context = await browser.newContext({
+    viewport: { width: 1280, height: 900 },
+    reducedMotion: "reduce",
+  });
+  const page = await context.newPage();
 
   const pages = [];
   const violations = [];

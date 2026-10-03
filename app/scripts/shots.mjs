@@ -12,14 +12,16 @@ const BASE = process.env.AUDIT_URL ?? "http://localhost:4173";
 const SHOTS = [
   { n: "01-matchmaking-start", r: "matchmaking" },
   { n: "02-matchmaking-wyniki", r: "matchmaking", setup: async (p) => {
-      await p.getByRole("button", { name: /Mama mieszka sama/ }).click();
+      // kamyk „Osoby starsze” wpisuje gotowy opis, „Szukaj” wysyła wypowiedź
+      await p.getByRole("button", { name: "Osoby starsze" }).click();
+      await p.getByRole("button", { name: "Szukaj" }).click();
       for (let i = 0; i < 3; i++) {
         const chips = p.locator('[aria-label="Szybkie odpowiedzi"] button');
         if ((await chips.count()) === 0) break;
         await chips.first().click();
         await p.waitForTimeout(250);
       }
-      await p.locator('[aria-label="Dopasowane innowacje"]').first().waitFor({ timeout: 5000 });
+      await p.locator(".mm__summary").first().waitFor({ timeout: 8000 });
     } },
   { n: "03-biblioteka", r: "biblioteka" },
   { n: "04-kreator", r: "kreator" },
@@ -50,9 +52,12 @@ for (const s of SHOTS) {
   const ctx = await b.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 2 });
   const p = await ctx.newPage();
   await p.goto(`${BASE}/#${s.r}`, { waitUntil: "networkidle" });
-  await p.waitForTimeout(300);
+  // 900 ms: karty wjeżdżają przez 600 ms — bez tego zrzuty wychodzą wyblakłe.
+  await p.waitForTimeout(900);
   if (s.setup) { try { await s.setup(p); } catch (e) { console.warn(`  ${s.n}: ${e.message.split("\n")[0]}`); } }
-  await p.screenshot({ path: join(OUT, `${s.n}.png`), fullPage: true });
+  // Biblioteka to ~30 000 px pionu przy deviceScaleFactor 2 — render z tego
+  // bywa dłuższy niż domyślnych 30 s.
+  await p.screenshot({ path: join(OUT, `${s.n}.png`), fullPage: true, timeout: 90000 });
   console.log(`✓ ${s.n}`);
   await ctx.close();
 }
