@@ -1,0 +1,271 @@
+---
+const title = "HubMI.pl — Małopolski Hub Innowacji Społecznych";
+const description =
+  "Cyfrowe serce Małopolskiego Hubu Innowacji Społecznych — matchmaking społeczny, zasobnik wiedzy, kreator pomysłów i tester innowacji.";
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Przejdź do treści głównej</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">H</span>
+          <span>HubMI<span class="brand-accent">.pl</span></span>
+        </a>
+        <nav aria-label="Nawigacja główna">
+          <ul class="nav-list">
+            <li><a href="#moduly">Moduły</a></li>
+            <li><a href="#dla-kogo">Dla kogo</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+          <p class="eyebrow">HackYeah 2026 · Zadanie partnerskie · Województwo Małopolskie + ROPS Kraków</p>
+          <h1 id="hero-title">Cyfrowe serce Małopolskiego Hubu&nbsp;Innowacji Społecznych</h1>
+          <p class="lead">
+            Platforma, która łączy mieszkańców, NGO, samorządy i ekspertów:
+            od zgłoszenia problemu, przez dopasowanie sprawdzonego rozwiązania,
+            po wdrożenie w społeczności lokalnej.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#moduly">Poznaj moduły</a>
+            <a class="btn btn-secondary" href="#kontakt">Zgłoś problem</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="moduly" aria-labelledby="moduly-title">
+        <div class="container">
+          <h2 id="moduly-title">Moduły platformy</h2>
+          <p class="section-lead">Siedem modułów — jedno miejsce wymiany wiedzy i współpracy międzysektorowej.</p>
+          <ul class="card-grid">
+            <li class="card card-featured">
+              <h3><span class="card-icon" aria-hidden="true">⭐</span> Matchmaking społeczny</h3>
+              <p>
+                Opisz problem — inteligentny mechanizm znajdzie podobne przypadki
+                i zaproponuje sprawdzone innowacje społeczne z bazy ROPS.
+              </p>
+              <p class="card-tag">Moduł obowiązkowy</p>
+            </li>
+            <li class="card">
+              <h3><span class="card-icon" aria-hidden="true">📚</span> Zasobnik wiedzy</h3>
+              <p>Mapa Wyzwań Społecznych, Biblioteka Innowacji, raporty — zawsze aktualne i dostępne.</p>
+            </li>
+            <li class="card">
+              <h3><span class="card-icon" aria-hidden="true">💡</span> Kreator pomysłów</h3>
+              <p>Fiszki pomysłów, generator wniosków grantowych, Canwy Innowacji i asystent AI kreatora.</p>
+            </li>
+            <li class="card">
+              <h3><span class="card-icon" aria-hidden="true">🧪</span> Tester innowacji</h3>
+              <p>Zgłoś się do testów, oceń rozwiązania, przekaż feedback twórcom.</p>
+            </li>
+            <li class="card">
+              <h3><span class="card-icon" aria-hidden="true">💬</span> Aktywna komunikacja</h3>
+              <p>Bezpośredni dialog z ROPS, wsparcie mentorów, budowanie partnerstw.</p>
+            </li>
+            <li class="card">
+              <h3><span class="card-icon" aria-hidden="true">🛠️</span> Panel administratora</h3>
+              <p>Szybka aktualizacja wiedzy, weryfikacja zgłoszeń, monitoring potrzeb i trendów.</p>
+            </li>
+            <li class="card">
+              <h3><span class="card-icon" aria-hidden="true">🤝</span> Middleman Innowacji</h3>
+              <p>Asystent AI dopasuje innowację do potrzeb Twojej instytucji — od pomysłu do usługi.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="dla-kogo" aria-labelledby="dla-kogo-title">
+        <div class="container">
+          <h2 id="dla-kogo-title">Dla kogo?</h2>
+          <div class="audience-grid">
+            <div class="audience">
+              <h3>Mieszkańcy i NGO</h3>
+              <p>Zgłaszajcie problemy i pomysły — prosto, bez biurokracji, w kilku krokach.</p>
+            </div>
+            <div class="audience">
+              <h3>JST (samorządy)</h3>
+              <p>Szukajcie sprawdzonych rozwiązań i wdrażajcie je lokalnie z gotowym wsparciem.</p>
+            </div>
+            <div class="audience">
+              <h3>Pracownicy ROPS</h3>
+              <p>Zarządzajcie wiedzą, monitorujcie zgłoszenia i rozmawiajcie z regionem.</p>
+            </div>
+            <div class="audience">
+              <h3>Eksperci branżowi</h3>
+              <p>Doradzajcie innowatorom, oceniajcie pomysły, dzielcie się doświadczeniem.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontakt" class="cta-section" aria-labelledby="kontakt-title">
+        <div class="container">
+          <h2 id="kontakt-title">Masz problem społeczny do zgłoszenia?</h2>
+          <p class="section-lead">
+            Matchmaking społeczny to pierwszy moduł, który budujemy.
+            Prototyp MVP powstaje na HackYeah 2026.
+          </p>
+          <a class="btn btn-primary" href="mailto:kontakt@hubmi.pl">kontakt@hubmi.pl</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          HubMI.pl — prototyp na HackYeah 2026 · Inicjator: Województwo Małopolskie (Host Region) ·
+          Realizator: ROPS Kraków
+        </p>
+      </div>
+    </footer>
+
+    <style>
+      :root {
+        --c-primary: #1d4ed8;
+        --c-primary-dark: #1e40af;
+        --c-ink: #111827;
+        --c-muted: #374151;
+        --c-bg: #ffffff;
+        --c-bg-alt: #f3f6fc;
+        --c-border: #d1d5db;
+        --radius: 14px;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        color: var(--c-ink);
+        background: var(--c-bg);
+        line-height: 1.6;
+        font-size: 1.05rem;
+      }
+
+      .container { max-width: 68rem; margin-inline: auto; padding-inline: 1.25rem; }
+
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--c-primary);
+        color: #fff;
+        padding: 0.75rem 1.25rem;
+        border-radius: 0 0 var(--radius) 0;
+        z-index: 10;
+      }
+      .skip-link:focus { left: 0; }
+
+      .site-header {
+        border-bottom: 1px solid var(--c-border);
+        background: var(--c-bg);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+      .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.85rem; }
+      .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.25rem; color: var(--c-ink); text-decoration: none; }
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        inline-size: 2rem;
+        block-size: 2rem;
+        background: var(--c-primary);
+        color: #fff;
+        border-radius: 8px;
+        font-weight: 800;
+      }
+      .brand-accent { color: var(--c-primary); }
+      .nav-list { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+      .nav-list a { color: var(--c-muted); text-decoration: none; font-weight: 500; }
+      .nav-list a:hover, .nav-list a:focus-visible { color: var(--c-primary); text-decoration: underline; }
+
+      .hero { background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg)); padding-block: 4.5rem 3.5rem; }
+      .eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; font-weight: 600; color: var(--c-primary-dark); margin: 0 0 1rem; }
+      h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); line-height: 1.15; margin: 0 0 1rem; max-width: 46ch; }
+      .lead { font-size: 1.2rem; color: var(--c-muted); max-width: 52ch; margin: 0 0 2rem; }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 1.6rem;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 1.05rem;
+      }
+      .btn-primary { background: var(--c-primary); color: #fff; }
+      .btn-primary:hover, .btn-primary:focus-visible { background: var(--c-primary-dark); }
+      .btn-secondary { color: var(--c-primary-dark); border: 2px solid var(--c-primary); }
+      .btn-secondary:hover, .btn-secondary:focus-visible { background: #e8eefc; }
+
+      section { padding-block: 3.5rem; }
+      #dla-kogo { background: var(--c-bg-alt); }
+      h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: 0 0 0.75rem; }
+      .section-lead { color: var(--c-muted); font-size: 1.12rem; max-width: 60ch; margin: 0 0 2rem; }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+        gap: 1.25rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .card {
+        background: var(--c-bg);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius);
+        padding: 1.4rem 1.5rem;
+      }
+      .card h3 { margin: 0 0 0.6rem; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem; }
+      .card p { margin: 0; color: var(--c-muted); }
+      .card-featured { border-color: var(--c-primary); border-width: 2px; background: #f6f9ff; }
+      .card-tag {
+        display: inline-block;
+        margin-top: 0.9rem;
+        padding: 0.2rem 0.7rem;
+        border-radius: 999px;
+        background: var(--c-primary);
+        color: #fff;
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+
+      .audience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.25rem; }
+      .audience { background: var(--c-bg); border-radius: var(--radius); padding: 1.3rem 1.4rem; border: 1px solid var(--c-border); }
+      .audience h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+      .audience p { margin: 0; color: var(--c-muted); }
+
+      .cta-section { text-align: center; background: var(--c-primary-dark); color: #fff; }
+      .cta-section h2 { color: #fff; }
+      .cta-section .section-lead { color: #dbe4ff; margin-inline: auto; }
+      .cta-section .btn-primary { background: #fff; color: var(--c-primary-dark); }
+
+      .site-footer { border-top: 1px solid var(--c-border); padding-block: 1.6rem; color: var(--c-muted); font-size: 0.92rem; }
+
+      :focus-visible { outline: 3px solid var(--c-primary-dark); outline-offset: 3px; border-radius: 4px; }
+
+      @media (prefers-reduced-motion: no-preference) {
+        html { scroll-behavior: smooth; }
+      }
+    </style>
+  </body>
+</html>
