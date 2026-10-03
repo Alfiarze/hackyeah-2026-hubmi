@@ -1,13 +1,13 @@
 /**
  * Rama aplikacji: skip-link, nagłówek, nawigacja, pasek dostępności.
  *
- * Przełącznik roli (mieszkaniec / ROPS / ekspert) nie jest zabawką — bez niego
- * nie da się pokazać zamkniętej pętli komunikacji na jednym ekranie podczas
- * prezentacji. W wersji produkcyjnej zastępuje go logowanie.
+ * Rola demonstracyjnej (mieszkaniec / ROPS / ekspert) nie przełącza się
+ * już globalnie z paska — siedzi tam, gdzie jest potrzebna: przy formularzu
+ * odpowiedzi w module Komunikacja. W wersji produkcyjnej zastępuje ją
+ * logowanie.
  */
 import type { ReactNode } from "react";
 import { useA11y, type FontScale } from "../lib/a11y";
-import { setRole, type Role, type AppState } from "../lib/store";
 import {
   HubmiMark,
   IconAccess,
@@ -40,14 +40,17 @@ const NAV: { id: Route; label: string; short: string; icon: (p: IconProps) => JS
   { id: "tester", label: "Testuj innowacje", short: "Testuj", icon: IconTest },
   { id: "komunikacja", label: "Komunikacja", short: "Rozmowy", icon: IconExpert },
   { id: "admin", label: "Panel ROPS", short: "Panel", icon: IconNgo },
-  { id: "middleman", label: "Middleman", short: "Middleman", icon: IconPartnership },
-  { id: "dostepnosc", label: "Dostępność", short: "WCAG", icon: IconAccess },
+];
+
+/** Moduły zapasowe: nie są ścieżką główną, więc żyją w stopce, nie w pasku. */
+const FOOTER_NAV: { id: Route; label: string; icon: (p: IconProps) => JSX.Element }[] = [
+  { id: "middleman", label: "Middleman Innowacji", icon: IconPartnership },
+  { id: "dostepnosc", label: "Dostępność (WCAG)", icon: IconAccess },
 ];
 
 interface Props {
   route: Route;
   onRoute: (r: Route) => void;
-  state: AppState;
   adminUnread: number;
   authorUnseen: number;
   children: ReactNode;
@@ -62,7 +65,6 @@ const SCALES: { v: FontScale; label: string; aria: string }[] = [
 export function Shell({
   route,
   onRoute,
-  state,
   adminUnread,
   authorUnseen,
   children,
@@ -135,24 +137,6 @@ export function Shell({
               Ruch w tle
             </button>
           </div>
-
-          <div className="a11ybar__role">
-            <label htmlFor="role-switch" className="sr-only">
-              Rola w demonstracji
-            </label>
-            <span className="eyebrow" aria-hidden="true">
-              Demo — jestem:
-            </span>
-            <select
-              id="role-switch"
-              value={state.role}
-              onChange={(e) => setRole(e.target.value as Role)}
-            >
-              <option value="mieszkaniec">mieszkanka / NGO / gmina</option>
-              <option value="ROPS">pracownik ROPS</option>
-              <option value="ekspert">ekspert branżowy</option>
-            </select>
-          </div>
         </div>
       </div>
 
@@ -222,6 +206,28 @@ export function Shell({
 
       <footer className="ftr" data-reveal>
         <div className="wrap stack">
+          <nav className="ftr__nav" aria-label="Moduły dodatkowe">
+            <ul>
+              {FOOTER_NAV.map((n) => (
+                <li key={n.id}>
+                  <a
+                    href={`#${n.id}`}
+                    aria-current={route === n.id ? "page" : undefined}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onRoute(n.id);
+                    }}
+                  >
+                    <span className="hdr__ic" aria-hidden="true">
+                      <n.icon size={20} />
+                    </span>
+                    {n.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
           <p className="mono">
             Prototyp na HackYeah 2026 · zadanie Województwa Małopolskiego, realizator
             ROPS Kraków
@@ -240,5 +246,3 @@ export function Shell({
     </>
   );
 }
-
-export { NAV };

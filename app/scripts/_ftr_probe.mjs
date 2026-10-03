@@ -1,0 +1,12 @@
+import { chromium } from '@playwright/test';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+const errors = [];
+page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text().slice(0, 150)); });
+page.on('pageerror', (e) => errors.push('PAGEERROR ' + String(e).slice(0, 150)));
+await page.goto('http://localhost:5173/#matchmaking', { waitUntil: 'domcontentloaded' });
+await page.waitForTimeout(1500);
+console.log('ftr__nav count:', await page.locator('.ftr__nav').count());
+console.log('footer html:', (await page.locator('.ftr').count()) ? (await page.evaluate(() => document.querySelector('.ftr')?.innerHTML.slice(0, 200))) : 'NO FOOTER');
+console.log('console errors:', errors.slice(0, 5));
+await browser.close();
