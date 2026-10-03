@@ -132,6 +132,62 @@ def noul_answer(result: dict[str, Any] | None, key: str) -> float | None:
         return None
 
 
+def choice_answer(result: dict[str, Any] | None, key: str) -> dict[str, Any] | None:
+    """
+    Wyciąga odpowiedź `choice` z wyniku `evaluate()`.
+    Zwraca słownik: {'choice': str, 'confidence': float, 'probabilities': dict}
+    lub None.
+    """
+    if not result:
+        return None
+    ans = (result.get("answers") or {}).get(key) or {}
+    if not isinstance(ans, dict) or ans.get("choice") is None:
+        return None
+    return {
+        "choice": str(ans["choice"]),
+        "confidence": float(ans.get("confidence", 1.0)),
+        "probabilities": ans.get("probabilities") or {},
+    }
+
+
+def score_answer(result: dict[str, Any] | None, key: str) -> dict[str, Any] | None:
+    """
+    Wyciąga odpowiedź `score` z wyniku `evaluate()`.
+    Zwraca słownik: {'score': float, 'confidence': float, 'probabilities': dict, 'legend': dict}
+    lub None.
+    """
+    if not result:
+        return None
+    ans = (result.get("answers") or {}).get(key) or {}
+    if not isinstance(ans, dict) or ans.get("score") is None:
+        return None
+    try:
+        val = float(ans["score"])
+    except (TypeError, ValueError):
+        return None
+    return {
+        "score": round(val, 2),
+        "confidence": float(ans.get("confidence", 1.0)),
+        "probabilities": ans.get("probabilities") or {},
+        "legend": ans.get("legend") or {},
+    }
+
+
+def ping() -> bool:
+    """Szybki test łączności z Jev — sprawdza czy klucz i API odpowiadają."""
+    res = evaluate(
+        "ping",
+        {
+            "test": {
+                "type": "noul",
+                "instructions": "Czy to test?",
+                "criteria": {"true": "tak", "false": "nie"},
+            }
+        },
+    )
+    return res is not None
+
+
 def last_ms() -> int | None:
     """Czas ostatniego wywołania Jev w ms (None, gdy jeszcze nie było)."""
     return _last.get("ms")

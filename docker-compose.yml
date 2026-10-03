@@ -1,38 +1,28 @@
 name: hubmi
 
-# Dwa kontenery, w których trzymamy całość:
-#   db      — Postgres 17 + pgvector (dane trwałe, nie localStorage)
-#   backend — Django + DRF: API wszystkich 7 modułów
-#
-# AI siedzi W backendzie i jest stąd jedno: Jev (TypeSafe AI) — model decyzyjny
-# wołany przez Decisions API OpenRouter. Odpowiada, czy zapytanie jest powiązane
-# z innowacją, i liczy oceny w /api/relevance/. Żadnego OpenAI, Anthropic ani
-# Ollamy — te kontenery i zmienne zostały usunięte.
-#
-# Start:  docker compose up --build   (w .env wpisz JEV_API_KEY)
-# API:    http://localhost:8000/api/health/
-
 services:
   db:
     image: pgvector/pgvector:pg17
+    container_name: hubmi-db
+    restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-hubmi}
       POSTGRES_USER: ${POSTGRES_USER:-hubmi}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hubmi}
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      # rozszerzenie vector musi być dostępne od pierwszego startu
+      - db_data:/var/lib/postgresql/data
       - ./backend/sql/001_extensions.sql:/docker-entrypoint-initdb.d/001_extensions.sql:ro
-    ports:
-      - "${POSTGRES_PORT:-5433}:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
-      interval: 5s
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-hubmi} -d ${POSTGRES_DB:-hubmi}"]
+      interval: 10s
       timeout: 5s
-      retries: 30
+      retries: 5
+      start_period: 10s
 
   backend:
     build: ./backend
+    container_name: hubmi-backend
+    restart: unless-stopped
     environment:
       DJANGO_DEBUG: ${DJANGO_DEBUG:-1}
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-only-zmien-przy-deployu}
@@ -43,8 +33,6 @@ services:
       DB_USER: ${POSTGRES_USER:-hubmi}
       DB_PASSWORD: ${POSTGRES_PASSWORD:-hubmi}
       # --- AI: wyłącznie Jev (Decisions API OpenRouter) ---------------------
-      # Bez JEV_API_KEY backend wstaje i działa na fallbacku, tylko werdykty
-      # „czy powiązane” schodzą z progów silnika zamiast z modelu.
       JEV_API_KEY: ${JEV_API_KEY:-}
       JEV_URL: ${JEV_URL:-https://openrouter.ai/api/alpha/decisions}
       JEV_MODEL: ${JEV_MODEL:-typesafe/jev-1.13}
@@ -59,11 +47,18 @@ services:
       - ./backend:/app
       - ./data:/srv/data:ro
       - ./app/src/data:/srv/app_data:ro
-    ports:
-      - "${BACKEND_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  landing:
+    build:
+      context: ./landing
+    container_name: hubmi-landing
+    restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
 
 volumes:
-  pgdata:
+  db_data:

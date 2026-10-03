@@ -1,0 +1,11 @@
+# Local dev only — copy to docker-compose.override.yml. Not used on Coolify.
+services:
+  db:
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+  backend:
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+  landing:
+    ports:
+      - "8080:8080"

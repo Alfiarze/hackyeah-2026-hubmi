@@ -175,20 +175,24 @@ def check_related(text: str, context: str = "", *, threshold: float | None = Non
     się słów — tylko po to, by demo miało cokolwiek.
     """
     limit = settings.JEV_THRESHOLD if threshold is None else float(threshold)
+    ctx_clean = (context or "").strip()
+    state = {
+        "tresc": text[:2000],
+        "kontekst": ctx_clean[:2000] or "(brak kontekstu — oceniaj samą treść)",
+    }
     question = {
         "type": "noul",
-        "instructions": {
-            "question": (
-                "Czy `tresc` realnie dotyczy tego samego problemu co `kontekst`? "
-                "Odpowiedź dotyczy znaczenia, a nie samych powtórzonych słów."
-            ),
-            "tresc": text[:4000],
-            "kontekst": context[:4000] or "(brak kontekstu — oceniaj samą treść)",
+        "instructions": (
+            "Czy `tresc` realnie dotyczy tego samego problemu lub tej samej grupy odbiorców co `kontekst`? "
+            "Odpowiedź dotyczy znaczenia i realnej potrzeby, a nie samych powtórzonych słów."
+        ),
+        "criteria": {
+            "true": "Tresc i kontekst odnoszą się do tego samego problemu lub zbieżnej potrzeby społecznej.",
+            "false": "Tresc i kontekst dotyczą zupełnie innych spraw lub nie ma między nimi merytorycznego związku.",
         },
-        "criteria": RELATED_CRITERIA,
     }
 
-    result = transport.evaluate({"zapytanie": text[:2000]}, {"powiazane": question})
+    result = transport.evaluate(state, {"powiazane": question})
     noul = transport.noul_answer(result, "powiazane")
 
     if noul is None:
@@ -234,9 +238,8 @@ def ask(question: str, sources: list[dict]) -> dict:
     """
     Pytanie do materiałów ROPS (moduł II).
 
-    Jev nie generuje tekstu, więc żadnej prozy nie złożymy — zwracamy same
-    źródła (uczciwie, bez udawania odpowiedzi). Zasobnik ma 76 dokumentów
-    i 115 kart, więc użytkownik dostaje to, po co przyszedł.
+    Wykorzystuje model decyzyjny Jev do wytypowania najbardziej trafnego źródła
+    spośród dokumentów i kart oraz oceny powiązania każdego ze źródeł (noul + choice).
     """
     if not sources:
         return {
@@ -244,12 +247,78 @@ def ask(question: str, sources: list[dict]) -> dict:
             "answer": "Nie znaleźliśmy w materiałach ROPS nic na ten temat.",
             "sources": [],
         }
+
+    questions = {}
+    criteria_choice = {}
+    for i, s in enumerate(sources[:5]):
+        key = f"src_{i}"
+        questions[key] = {
+            "type": "noul",
+            "instructions": {
+                "question": "Czy `zrodlo` zawiera merytoryczną odpowiedź, procedurę lub rozwiązanie problemu z `pytanie`?",
+                "zrodlo": {
+                    "tytul": s.get("title", ""),
+                    "typ": s.get("type", "dokument"),
+                    "fragment": s.get("snippet", "")[:400],
+                },
+            },
+            "criteria": {
+                "true": "Źródło bezpośrednio odpowiada na zadane pytanie lub zawiera potrzebne informacje.",
+                "false": "Źródło nie odpowiada na to pytanie lub jest tylko luźno powiązane.",
+            },
+        }
+        criteria_choice[key] = f"{s.get('title', '')[:60]}: {s.get('snippet', '')[:100]}"
+
+    questions["najlepsze"] = {
+        "type": "choice",
+        "instructions": "Które z wymienionych źródeł najlepiej i najpełniej odpowiada na `pytanie`?",
+        "criteria": criteria_choice,
+    }
+
+    result = transport.evaluate({"pytanie": question[:2000]}, questions)
+
+    if not result:
+        return {
+            "source": "fallback",
+            "answer": (
+                f"W materiałach ROPS znaleziono {len(sources)} pasujących pozycji. "
+                "Poniżej lista wraz z odnośnikami do źródeł."
+            ),
+            "sources": sources,
+            "best_source": sources[0] if sources else None,
+        }
+
+    best_choice = transport.choice_answer(result, "najlepsze")
+    best_key = best_choice["choice"] if best_choice else "src_0"
+    try:
+        best_idx = int(best_key.replace("src_", ""))
+    except (ValueError, AttributeError):
+        best_idx = 0
+
+    evaluated_sources = []
+    for i, s in enumerate(sources[:5]):
+        noul = transport.noul_answer(result, f"src_{i}")
+        s_copy = dict(s)
+        s_copy["noul"] = round(noul, 4) if noul is not None else 0.5
+        s_copy["related"] = (noul is not None and noul >= settings.JEV_THRESHOLD)
+        s_copy["is_best"] = (i == best_idx)
+        evaluated_sources.append(s_copy)
+
+    evaluated_sources.sort(key=lambda x: (x.get("is_best", False), x.get("noul", 0)), reverse=True)
+    best = evaluated_sources[0] if evaluated_sources else sources[0]
+
+    noul_val = best.get("noul") or 0.8
+    answer_text = (
+        f"Jev wytypował jako najbardziej adekwatną odpowiedź materiał: „{best['title']}” "
+        f"(trafność {noul_val*100:.0f}%). "
+        f"{best.get('snippet', '')}"
+    )
+
     return {
-        "source": "fallback",
-        "answer": (
-            "Odpowiedź generowaną wyłączyliśmy na rzecz modelu decyzyjnego Jev "
-            "(nie pisze on tekstu). Poniżej materiały, które pasują do Twojego "
-            "pytania — każdy z linkiem do źródła."
-        ),
-        "sources": sources,
+        "source": "jev",
+        "answer": answer_text,
+        "best_source": best,
+        "sources": evaluated_sources,
+        "jev_model": result.get("model", settings.JEV_MODEL),
+        "latency_ms": transport.last_ms(),
     }
