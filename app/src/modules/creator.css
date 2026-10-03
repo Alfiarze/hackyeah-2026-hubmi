@@ -64,7 +64,7 @@
 }
 .cr__verdict h3 { font-size: var(--fs-lg); margin-bottom: var(--sp-2); }
 .cr__verdict p { font-size: var(--fs-sm); margin: 0; }
-/* Każdy werdykt ma własny nagłówek słowny — kolor tylko go wzmacnia. */
+/* Każdy werdykt ma własny nagłówek słowny - kolor tylko go wzmacnia. */
 .cr__verdict--new {
   background: var(--ok-wash);
   border-left: 3px solid var(--ok);

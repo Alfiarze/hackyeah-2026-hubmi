@@ -1,10 +1,10 @@
 /**
- * Moduł I — Matchmaking społeczny (obowiązkowy).
+ * Moduł I - Matchmaking społeczny (obowiązkowy).
  *
  * Rozmowa zamiast formularza: użytkownik opisuje problem potocznie albo
  * dyktuje go głosem, asystent dopytuje najwyżej dwa razy, dopiero potem
  * dopasowuje. Każde trafienie ma rozliczenie „dlaczego to pasuje”, a brak
- * trafienia nie kończy się pustą listą — zgłoszenie staje się luką w ofercie
+ * trafienia nie kończy się pustą listą - zgłoszenie staje się luką w ofercie
  * Hubu i trafia do panelu ROPS.
  *
  * Wyniki, analiza zapytania, flaga luki i werdykty Jev pochodzą wyłącznie
@@ -69,7 +69,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
   const pickedEmojiSet = useMemo(() => new Set(picks.map((p) => p.emoji)), [picks]);
 
   const speech = useSpeech((text) => {
-    // dyktowanie od razu wysyła wypowiedź — senior nie musi szukać przycisku
+    // dyktowanie od razu wysyła wypowiedź - senior nie musi szukać przycisku
     setConv((c) => advance(c, text));
     setDraft("");
   });
@@ -89,7 +89,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
       return;
     }
     let active = true;
-    // „Szukam…” pokazujemy od razu — czekanie w ciszy wygląda jak zawieszenie.
+    // „Szukam…” pokazujemy od razu - czekanie w ciszy wygląda jak zawieszenie.
     setPhase("loading");
     setError(null);
 
@@ -127,7 +127,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
     [results],
   );
 
-  /** Ile wdrożeń ma każdy powiat — ale tylko wśród dopasowanych innowacji. */
+  /** Ile wdrożeń ma każdy powiat - ale tylko wśród dopasowanych innowacji. */
   const counts = useMemo(() => {
     const m = new Map<string, number>();
     for (const r of results) {
@@ -165,7 +165,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
 
   const retry = useCallback(() => setRetryKey((k) => k + 1), []);
 
-  // Lukę zakłada backend — tylko ta ścieżka wiąże zgłoszenie z zapytaniem,
+  // Lukę zakłada backend - tylko ta ścieżka wiąże zgłoszenie z zapytaniem,
   // więc koordynator ROPS widzi, skąd się wzięło i co użytkownik wpisał.
   const reportGap = async (extra: string) => {
     if (!data) return;
@@ -210,7 +210,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
         <h1>
           {t("Opisz problem.", "Napisz, co się dzieje.")}{" "}
           {/* Wyróżnione słowa niosą tezę produktu, nie są ozdobą: cała obietnica
-              HubMI to „już zadziałało” — rozwiązanie z udokumentowanym testem. */}
+              HubMI to „już zadziałało” - rozwiązanie z udokumentowanym testem. */}
           <span className="hero__accent">
             {t("Pokażemy, co już zadziałało.", "Pokażemy pomoc, która działa.")}
           </span>
@@ -309,7 +309,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
               <div
                 className="mm__gravity-pit"
                 role="group"
-                aria-label="Wyzwania społeczne Małopolski — kliknij, by wpisać do wyszukiwarki"
+                aria-label="Wyzwania społeczne Małopolski - kliknij, by wpisać do wyszukiwarki"
               >
                 {LOOSE_EMOJIS.map((item) => {
                   const isLifted = pickedEmojiSet.has(item.emoji);
@@ -327,7 +327,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                       onClick={() => setDraft(item.sampleQuery)}
                       disabled={isLifted}
                       aria-hidden={isLifted ? "true" : undefined}
-                      title={`${item.label} — kliknij, by wpisać: „${item.sampleQuery}”`}
+                      title={`${item.label} - kliknij, by wpisać: „${item.sampleQuery}”`}
                       aria-label={item.label}
                     >
                       <span className="mm__gravity-emoji" aria-hidden="true">{item.emoji}</span>
@@ -385,7 +385,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                   </h2>
                   {extCount > 0 && (
                     <p className="muted">
-                      {extCount} z nich pochodzi z baz poza Małopolską — każda taka karta
+                      {extCount} z nich pochodzi z baz poza Małopolską - każda taka karta
                       jest tak opisana i ma niżej ważony wynik.
                     </p>
                   )}
@@ -429,7 +429,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
               <p className="page__mod">Brak połączenia z serwerem</p>
               <h3>Nie pokazujemy wyników, których nie policzył serwer</h3>
               <p>
-                Dopasowanie liczy backend HubMI — tam jest baza innowacji, tam
+                Dopasowanie liczy backend HubMI - tam jest baza innowacji, tam
                 zapisuje się zgłoszenie jako sygnał potrzeby i stamtąd pochodzi
                 weryfikacja każdego trafienia. Wynik udawany po stronie
                 przeglądarki nie trafiłby do panelu ROPS, więc go nie pokazujemy.
@@ -455,12 +455,12 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
           {phase === "ready" && gap && (
             <section className="mm__gap card" data-reveal>
               <p className="page__mod">Luka w ofercie Hubu</p>
-              <h3>Twoje zgłoszenie jest tu wartościowe właśnie dlatego, że nic nie pasuje</h3>
+              <h3>Na ten problem nie ma jeszcze rozwiązania w bazie</h3>
               <p>
                 Problem, na który nikt jeszcze nie odpowiedział, jest dla ROPS
                 informacją o tym, czego w regionie brakuje. Po zgłoszeniu trafi do
                 panelu koordynatora w zestawieniu „niezaspokojone potrzeby i trendy”
-                — i może stać się tematem kolejnego naboru grantowego.
+                - i może stać się tematem kolejnego naboru grantowego.
               </p>
               {analysis && analysis.unknown.length > 0 && (
                 <p className="hint">
@@ -472,7 +472,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
               {gapSent ? (
                 <p className="mm__sent" role="status">
                   <strong>Zgłoszone.</strong> Koordynator ROPS widzi już powiadomienie
-                  w panelu — zajrzyj do modułu VI, żeby zobaczyć je z drugiej strony.
+                  w panelu - zajrzyj do modułu VI, żeby zobaczyć je z drugiej strony.
                 </p>
               ) : (
                 <>
@@ -505,7 +505,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                   onSelect={setPowiatFilter}
                   caption={
                     "Im ciemniejszy powiat, tym więcej dopasowanych innowacji zostało " +
-                    "tam wdrożonych. Kliknij powiat, aby zawęzić wyniki — a potem użyj " +
+                    "tam wdrożonych. Kliknij powiat, aby zawęzić wyniki - a potem użyj " +
                     "przycisku „Skontaktuj się z realizatorem” na fiszce, żeby napisać " +
                     "do instytucji, która to samo już u siebie zrobiła."
                   }
@@ -577,7 +577,7 @@ function GapForm({
         />
       </div>
       <p className="hint">
-        Nie podawaj danych osobowych — ani swoich, ani osób, o których piszesz.
+        Nie podawaj danych osobowych - ani swoich, ani osób, o których piszesz.
         Zgłoszenie służy do zliczania potrzeb, nie do prowadzenia sprawy.
       </p>
       <div className="row">

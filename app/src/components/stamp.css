@@ -1,5 +1,5 @@
 /* Znacznik „przetestowane".
-   Kafel mgiełki turkusu ze znakiem ✓ — informacja werbalna zostaje,
+   Kafel mgiełki turkusu ze znakiem ✓ - informacja werbalna zostaje,
    kolor tylko wzmacnia (WCAG 1.4.1). Zero szklanych efektów. */
 
 .stamp {
@@ -22,7 +22,7 @@
   margin-bottom: var(--sp-1);
 }
 /* Znak jest dekoracją wzmacniającą słowo „Przetestowane", nie jego zamiennikiem
-   — treść pozostaje czytelna dla czytnika ekranu bez niego. */
+   - treść pozostaje czytelna dla czytnika ekranu bez niego. */
 .stamp__label::before {
   content: "✓";
   font-size: 1.05em;
@@ -36,10 +36,10 @@
   color: var(--ink-2);
 }
 
-/* Brak dowodu to osobny, jeszcze cichszy stan. Nie alarm — po prostu brak. */
+/* Brak dowodu to osobny, jeszcze cichszy stan. Nie alarm - po prostu brak. */
 .stamp--none {
   background: var(--surface-2);
   border-color: var(--line);
 }
 .stamp--none .stamp__label { color: var(--ink-3); }
-.stamp--none .stamp__label::before { content: "—"; }
+.stamp--none .stamp__label::before { content: "-"; }

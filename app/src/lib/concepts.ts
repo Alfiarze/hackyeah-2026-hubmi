@@ -7,7 +7,7 @@
  * Bez tej warstwy dopasowanie leksykalne nie znajdzie niczego.
  *
  * Terminy zostały dobrane pod rzeczywiste słownictwo 115 kart (zob.
- * scripts/scrape_rops.py) — nie są listą zgadniętą z sufitu.
+ * scripts/scrape_rops.py) - nie są listą zgadniętą z sufitu.
  */
 import { stem } from "./text";
 
@@ -38,11 +38,11 @@ export const CONCEPTS: Concept[] = [
     "psychika", "psychiatra", "psycholog", "kryzys", "przygnębienie", "stres",
     "wypalenie", "samobójczy", "nastrój" ] },
   // Celowo rozdzielone od "bariery": ktoś na wózku może nie mieć problemu
-  // z dostępem do budynku, a ktoś z wózkiem dziecięcym — odwrotnie.
+  // z dostępem do budynku, a ktoś z wózkiem dziecięcym - odwrotnie.
   // Zlanie tych wątków w jeden powodowało, że ochrona protez przed
   // zamoknięciem wychodziła jako odpowiedź na schody w urzędzie.
   //
-  // Nie ma tu słowa "niepełnosprawność" ani "dysfunkcja" — występują w 101
+  // Nie ma tu słowa "niepełnosprawność" ani "dysfunkcja" - występują w 101
   // z 115 kart, więc jako wyzwalacz wątku są bezwartościowe.
   { id: "ruch", label: "ograniczona mobilność", terms: [
     "wózek", "wózkach", "wózkowy", "ruchowy", "ruchowa", "mobilność", "poruszanie",

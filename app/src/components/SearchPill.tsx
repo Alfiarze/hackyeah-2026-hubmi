@@ -1,17 +1,17 @@
 /**
- * Wyszukiwarka problemu w stylu pigułki — pole, pod którym „z dołu" wjeżdżają
+ * Wyszukiwarka problemu w stylu pigułki - pole, pod którym „z dołu" wjeżdżają
  * emotki dobrane przez analizę zapytania.
  *
- * Skąd ten kształt: referencja (zrzut z filmu) — jedno duże, zaokrąglone
+ * Skąd ten kształt: referencja (zrzut z filmu) - jedno duże, zaokrąglone
  * pole zawieszone na tle, bez ramki formularza, a pod nim emotki, które
  * lecą z ogólnej sterty na dole ekranu w górę, pod pole. U nas sterta siedzi
  * na dole hero (`EmojiPile`), a wynik analizy wjeżdża tutaj, pod pigułką.
  *
- * Kto „decyduje", które emotki pasują: to nie model i nie losowanie — tekst
+ * Kto „decyduje", które emotki pasują: to nie model i nie losowanie - tekst
  * trafia do `analyzeQuery`, tego samego silnika, który dopasowuje innowacje,
  * i każdy rozpoznany wątek dostaje swoją emotkę (zob. lib/emojis.ts).
  * Dzięki temu „Mama mieszka sama na wsi" konsekwentnie dostaje 👵🌾,
- * a nie coś, co akurat wyszło z losowania — i da się to wytłumaczyć jury.
+ * a nie coś, co akurat wyszło z losowania - i da się to wytłumaczyć jury.
  *
  * Dostępność:
  *  - emotki są dekoracją (`aria-hidden`): informacja o rozpoznanych wątkach
@@ -29,7 +29,7 @@ import { type PickedEmoji } from "../lib/emojis";
 interface Props {
   value: string;
   picks?: PickedEmoji[];
-  /** tekst dopowiadany przez dyktowanie — pokazany obok wpisanego */
+  /** tekst dopowiadany przez dyktowanie - pokazany obok wpisanego */
   interim?: string;
   onChange: (v: string) => void;
   onSubmit: (e?: FormEvent) => void;
@@ -133,7 +133,7 @@ function FlyingPick({ pick, index }: { pick: PickedEmoji; index: number }) {
     const deltaX = pebbleRect.left + pebbleRect.width / 2 - (elRect.left + elRect.width / 2);
     const deltaY = pebbleRect.top + pebbleRect.height / 2 - (elRect.top + elRect.height / 2);
 
-    // Lot trwa 1,5 s — dla kogoś z nadwrażliwością przedsionkową to już nie
+    // Lot trwa 1,5 s - dla kogoś z nadwrażliwością przedsionkową to już nie
     // ozdobnik, tylko przeszkoda. Przy wyłączonym ruchu emotka pojawia się
     // od razu na miejscu.
     const reduced =

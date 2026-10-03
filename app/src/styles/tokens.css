@@ -1,31 +1,31 @@
 /**
- * Tokeny HubMI — system wizualny v1: jasny, ciepły, turkusowy.
+ * Tokeny HubMI - system wizualny v1: jasny, ciepły, turkusowy.
  *
  * Każda para tekst/tło jest policzona pod WCAG 2.1 AA (liczby w komentarzach),
  * nie dobrana na oko. Kolory zmieniaj tutaj, nigdy w komponentach.
  *
- * Zasady systemu (z „HubMI — system wizualny"):
- *  — turkus prowadzi (~80% akcentów), krakowskie kolory pojawiają się rzadko
+ * Zasady systemu (z „HubMI - system wizualny"):
+ *  - turkus prowadzi (~80% akcentów), krakowskie kolory pojawiają się rzadko
  *    i z intencją (żółty = „nowe", czerwony = błąd, beż = akcenty lokalne);
- *  — karty bez cieni: hierarchię niosą linia 1 px, powierzchnia i odstęp;
- *  — fokus to gruba ramka w kolorze atramentu, widoczna na każdym tle.
+ *  - karty bez cieni: hierarchię niosą linia 1 px, powierzchnia i odstęp;
+ *  - fokus to gruba ramka w kolorze atramentu, widoczna na każdym tle.
  */
 
 :root {
   /* --- powierzchnie --- */
   --bg: #ffffff;            /* główne tło */
-  --surface: #ffffff;       /* karty, panele — zawsze z linią #D5E3E0 */
+  --surface: #ffffff;       /* karty, panele - zawsze z linią #D5E3E0 */
   --surface-2: #f2f8f6;     /* zagłębienia, chipy (mgiełka turkusu rozbielona) */
 
   /* --- kolory marki --- */
-  --turquoise: #2bb3a5;     /* Turkus HubMI — CTA (tekst #10343A), węzły, łuki */
-  --turquoise-deep: #16756c;/* Turkus głęboki — linie ikon, linki, aktywne stany */
-  --ink: #10343a;           /* Atrament — tekst, nagłówki, ramka focusu (13.3:1) */
-  --ink-2: #4a6266;         /* Szary opisowy — leady, podpisy (6.5:1) */
+  --turquoise: #2bb3a5;     /* Turkus HubMI - CTA (tekst #10343A), węzły, łuki */
+  --turquoise-deep: #16756c;/* Turkus głęboki - linie ikon, linki, aktywne stany */
+  --ink: #10343a;           /* Atrament - tekst, nagłówki, ramka focusu (13.3:1) */
+  --ink-2: #4a6266;         /* Szary opisowy - leady, podpisy (6.5:1) */
   --ink-3: #5a6e72;         /* pomocnicze opisy (5.4:1 na bieli, 4.9:1 na mgiełce) */
-  --mist: #eaf6f4;          /* Mgiełka turkusu — tła sekcji, kafle ikon */
+  --mist: #eaf6f4;          /* Mgiełka turkusu - tła sekcji, kafle ikon */
   --krakow-yellow: #ffcc00; /* podkreślenie słowa, znacznik „nowe"; nigdy tekst */
-  --krakow-red: #e40521;    /* błędy i pola wymagane — zawsze z ikoną i tekstem */
+  --krakow-red: #e40521;    /* błędy i pola wymagane - zawsze z ikoną i tekstem */
   --beige: #cdb794;         /* ciepłe akcenty ilustracji, etykiety lokalne */
   --beige-light: #f7f2ea;   /* tło sekcji „lokalnych" i historii z gmin */
   --line: #d5e3e0;          /* obramowania kart i separatorów */
@@ -37,7 +37,7 @@
   --accent-wash: var(--mist);
 
   /* --- stany --- */
-  --ok: #16756c;            /* „przetestowane" — turkus głęboki (5.5:1) */
+  --ok: #16756c;            /* „przetestowane" - turkus głęboki (5.5:1) */
   --ok-wash: #eaf6f4;
   --warn: #8a6d00;          /* 4.6:1 na bieli */
   --warn-wash: #fff8e0;
@@ -47,9 +47,9 @@
   --new: var(--krakow-yellow);   /* znacznik „nowe": żółty + tekst atramentowy */
 
   /* --- linie --- */
-  --line-ui: #9ab5b0;       /*  3.05 na bg — granica kontrolki (WCAG 1.4.11) */
+  --line-ui: #9ab5b0;       /*  3.05 na bg - granica kontrolki (WCAG 1.4.11) */
 
-  /* bez cieni — to świadoma decyzja systemu, nie oszczędność */
+  /* bez cieni - to świadoma decyzja systemu, nie oszczędność */
   --shadow-sm: none;
   --shadow: none;
   --shadow-lg: none;
@@ -64,9 +64,9 @@
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font: "Atkinson Hyperlegible Next", "Segoe UI", system-ui, sans-serif;
 
-  /* Baza 18px, nie 16px — grupa docelowa to m.in. seniorzy.
+  /* Baza 18px, nie 16px - grupa docelowa to m.in. seniorzy.
      Skala z systemu: H1 64/1.05 · H2 40/1.1 · H3 24/1.2 · lead 20/1.6
-     · body 18/1.6 · small 16/1.5 — nigdy poniżej 16 px. */
+     · body 18/1.6 · small 16/1.5 - nigdy poniżej 16 px. */
   --fs-scale: 1;
   --fs-xs: calc(14px * var(--fs-scale));
   --fs-sm: calc(16px * var(--fs-scale));
@@ -98,7 +98,7 @@
   --hm-slow: 1200ms;  /* rysowanie ikon, połączenia */
   --hm-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
-  /* Fokus: gruba ramka atramentu — widoczna na każdym tle systemu. */
+  /* Fokus: gruba ramka atramentu - widoczna na każdym tle systemu. */
   --focus-ring: var(--ink);
   color-scheme: light;
 
@@ -127,7 +127,7 @@
 }
 
 /**
- * Tryb ciemny — wybierany ręcznie. System wizualny jest jasny, więc to
+ * Tryb ciemny - wybierany ręcznie. System wizualny jest jasny, więc to
  * wariant „nocny" dla tych samych odcieni: atrament zostaje tłem, turkus
  * rozjaśnia się do wersji czytelnej na ciemnym (kontrasty policzone).
  */
@@ -160,7 +160,7 @@
 }
 
 /**
- * Wysoki kontrast — osobny od motywu. Granica wraca na wszystkim,
+ * Wysoki kontrast - osobny od motywu. Granica wraca na wszystkim,
  * kolory sprowadzają się do pary atrament/biel + turkus głęboki.
  */
 :root[data-contrast="high"] {

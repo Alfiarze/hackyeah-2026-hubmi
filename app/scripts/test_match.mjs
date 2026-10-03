@@ -1,5 +1,5 @@
 /**
- * Test silnika dopasowania na potocznych zapytaniach — uruchamiany bez przeglądarki.
+ * Test silnika dopasowania na potocznych zapytaniach - uruchamiany bez przeglądarki.
  * Kompiluje moduły lib/ przez esbuild (bundlowany z Vite) i odpytuje je w Node.
  *
  *   node app/scripts/test_match.mjs  (z katalogu app: node scripts/test_match.mjs)
@@ -60,7 +60,7 @@ for (const q of QUERIES) {
   }
   const gr = m.gapReason(analysis, results);
   if (gr) {
-    console.log("  >> LUKA (" + gr + ") — trafia do widoku niezaspokojonych potrzeb");
+    console.log("  >> LUKA (" + gr + ") - trafia do widoku niezaspokojonych potrzeb");
   }
   for (const r of results) {
     console.log(
@@ -69,7 +69,7 @@ for (const q of QUERIES) {
     );
     console.log(
       "        pokrywa: " +
-        (r.matched.map((x) => x.label).join(", ") || "—") +
+        (r.matched.map((x) => x.label).join(", ") || "-") +
         (r.missed.length ? "  | nie pokrywa: " + r.missed.map((x) => x.label).join(", ") : ""),
     );
     if (r.reasons[0]) console.log("        → " + r.reasons[0]);

@@ -21,7 +21,7 @@
   height: auto;
 }
 
-/* Skala wypełnień: od papieru do turkusu. Intensywność jest tylko dodatkiem —
+/* Skala wypełnień: od papieru do turkusu. Intensywność jest tylko dodatkiem -
    liczba wdrożeń siedzi w aria-label i w tabeli pod mapą (WCAG 1.4.1). */
 .map__unit {
   stroke: var(--surface);

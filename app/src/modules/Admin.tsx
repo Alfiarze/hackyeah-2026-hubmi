@@ -1,5 +1,5 @@
 /**
- * Moduł VI — Panel administratora + zestawienie trendów + zarządzanie wiedzą.
+ * Moduł VI - Panel administratora + zestawienie trendów + zarządzanie wiedzą.
  *
  * Spełnia wymogi zadania (§2.II i §2.VI):
  * 1. Ścieżka powiadomienia i odpowiedzi (nowe zgłoszenie → skrzynka → odpowiedź).
@@ -35,7 +35,7 @@ export function Admin({ state }: { state: AppState }) {
   const [filter, setFilter] = useState<ThreadStatus | "">("");
   const [powiat, setPowiat] = useState<string | null>(null);
   // Panel ROPS zarządza katalogiem regionu i porównuje podaż z popytem w
-  // Małopolsce — karty z baz zewnętrznych zaburzyłyby oba te obrazy, więc tu
+  // Małopolsce - karty z baz zewnętrznych zaburzyłyby oba te obrazy, więc tu
   // nie wchodzą.
   const [innovationsList, setInnovationsList] = useState<Innovation[]>(
     INNOVATIONS.filter((i) => !i.ext),
@@ -117,7 +117,7 @@ export function Admin({ state }: { state: AppState }) {
       .map(({ label, values, note }) => ({ label, values, note }));
   }, [innovationsList, threads]);
 
-  /** Słowa, których silnik nie rozpoznał — słownik, którego brakuje Bibliotece. */
+  /** Słowa, których silnik nie rozpoznał - słownik, którego brakuje Bibliotece. */
   const unknownWords = useMemo<BarRow[]>(() => {
     const freq = new Map<string, number>();
     for (const t of threads) {
@@ -130,7 +130,7 @@ export function Admin({ state }: { state: AppState }) {
       .map(([label, n]) => ({ label, values: [n] }));
   }, [threads]);
 
-  /** Liczba zgłoszeń w każdym powiecie — dane z wątków. */
+  /** Liczba zgłoszeń w każdym powiecie - dane z wątków. */
   const countsByPowiat = useMemo(() => {
     const m = new Map<string, number>();
     for (const t of threads) {
@@ -345,7 +345,7 @@ export function Admin({ state }: { state: AppState }) {
                         <strong>{t.title}</strong>
                       </td>
                       <td>{t.author}</td>
-                      <td>{t.powiat ?? "—"}</td>
+                      <td>{t.powiat ?? "-"}</td>
                       <td className="mono">{new Date(t.createdAt).toLocaleDateString("pl-PL")}</td>
                       <td className="mono">{t.messages.length}</td>
                       <td>
@@ -499,12 +499,12 @@ export function Admin({ state }: { state: AppState }) {
 
           <p className="ad__lede" data-reveal>
             Wykresy powstają z zapytań mieszkańców do matchmakingu oraz zgłoszonych
-            luk. Gdy nic nie pasuje, zapytanie nie znika — staje się daną diagnostyczną
+            luk. Gdy nic nie pasuje, zapytanie nie znika - staje się daną diagnostyczną
             dla ROPS o brakujących innowacjach w regionie.
           </p>
 
           <section data-reveal>
-            <h3>Podaż vs Popyt — gdzie brakuje innowacji w Małopolsce</h3>
+            <h3>Podaż vs Popyt - gdzie brakuje innowacji w Małopolsce</h3>
             <p className="hint">
               Porównanie: udział tematu w Bibliotece 115 innowacji (podaż) z udziałem w zgłoszeniach (popyt).
               Tematy na samej górze to bezpośrednie rekomendacje do kolejnego naboru IWS 2.0.
@@ -545,7 +545,7 @@ export function Admin({ state }: { state: AppState }) {
           </section>
 
           <section className="ad__gaps" data-reveal>
-            <h3>Niezaspokojone potrzeby — lista zgłoszeń bez pokrycia</h3>
+            <h3>Niezaspokojone potrzeby - lista zgłoszeń bez pokrycia</h3>
             {gaps.length === 0 ? (
               <p className="muted">
                 Brak zgłoszonych luk. Pojawią się tutaj automatycznie, gdy matchmaking nie znajdzie
@@ -786,7 +786,7 @@ export function Admin({ state }: { state: AppState }) {
                           PDF
                         </a>
                       ) : (
-                        "—"
+                        "-"
                       )}
                     </td>
                   </tr>

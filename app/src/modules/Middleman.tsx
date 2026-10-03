@@ -1,5 +1,5 @@
 /**
- * Moduł VII — Middleman Innowacji.
+ * Moduł VII - Middleman Innowacji.
  *
  * Karta ROPS opisuje rozwiązanie w ogóle. Wójt gminy wiejskiej do 5 tys.
  * mieszkańców potrzebuje wiedzieć, co to znaczy u niego: ile to kosztuje
@@ -68,7 +68,7 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
   }, [current, profile]);
 
   const needle = foldDiacritics(q.trim().toLowerCase());
-  // Dopasowanie do instytucji ma sens także dla innowacji z innej bazy — ale
+  // Dopasowanie do instytucji ma sens także dla innowacji z innej bazy - ale
   // lista startuje od Małopolski, a karty zewnętrzne idą na koniec i są podpisane.
   const options = useMemo(() => {
     const local = INNOVATIONS.filter((i) => !i.ext);
@@ -226,7 +226,7 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
                 onChange={(e) => setProfile({ ...profile, budget: Number(e.target.value) })}
                 style={{ minHeight: "44px" }}
               />
-              <p className="hint">Ustaw 0 zł, jeśli jeszcze nie wiesz — pominiemy ocenę wykonalności.</p>
+              <p className="hint">Ustaw 0 zł, jeśli jeszcze nie wiesz - pominiemy ocenę wykonalności.</p>
             </div>
 
             <div className="field">
@@ -252,7 +252,7 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
             <div className="mi__placeholder">
               <h3>Wybierz innowację z listy obok</h3>
               <p>
-                Pokażemy tę samą innowację rozpisaną jako usługę Twojej jednostki —
+                Pokażemy tę samą innowację rozpisaną jako usługę Twojej jednostki -
                 z kalkulacją kosztów przy Twojej skali, harmonogramem wdrożenia
                 i wytycznymi adaptacyjnymi.
               </p>
@@ -266,13 +266,13 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
                 <div className={`mi__num${out.affordable ? "" : " mi__num--warn"}`}>
                   <span className="eyebrow">Koszt wdrożenia</span>
                   <strong>
-                    {out.costLow.toLocaleString("pl-PL")}–
+                    {out.costLow.toLocaleString("pl-PL")}-
                     {out.costHigh.toLocaleString("pl-PL")} zł
                   </strong>
                   <span className="hint">
                     {out.affordable
                       ? "mieści się w podanym budżecie"
-                      : "powyżej podanego budżetu — zobacz ryzyka"}
+                      : "powyżej podanego budżetu - zobacz ryzyka"}
                   </span>
                 </div>
                 <div className="mi__num">
@@ -355,7 +355,7 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
               <p className="hint mi__disclaimer">
                 Widełki kosztów i obsady są szacunkiem wyliczonym z typu rozwiązania
                 i podanej skali, nie ofertą. Przed uchwałą budżetową potwierdź je
-                u realizatora, który wdrożył to u siebie — przycisk „Skontaktuj się
+                u realizatora, który wdrożył to u siebie - przycisk „Skontaktuj się
                 z realizatorem" jest na fiszce w module I i II.
               </p>
             </>

@@ -1,12 +1,12 @@
 /**
- * Patterny tła HubMI — cztery powtarzalne kafle zbudowane z tych samych
+ * Patterny tła HubMI - cztery powtarzalne kafle zbudowane z tych samych
  * znaków co ikony (koło, miękki kwadrat, łuk, węzeł).
  *
  * Reguły (strona 03 systemu wizualnego):
- *  — krycie 6–14%, jedna linia 1,5 px w turkusie;
- *  — tylko pod nagłówkami, w hero i stopce — nigdy pod długim tekstem;
- *  — jeden pattern na ekran;
- *  — tekst na patternie ≥ 4,5:1 względem najciemniejszego miejsca tła
+ *  - krycie 6-14%, jedna linia 1,5 px w turkusie;
+ *  - tylko pod nagłówkami, w hero i stopce - nigdy pod długim tekstem;
+ *  - jeden pattern na ekran;
+ *  - tekst na patternie ≥ 4,5:1 względem najciemniejszego miejsca tła
  *    (przy kryciu ≤ 16% i atramencie wynik nie spada poniżej 10:1).
  */
 import { useId, type CSSProperties } from "react";
@@ -15,7 +15,7 @@ type Variant = "network" | "paths" | "rings" | "wave";
 
 interface Props {
   variant?: Variant;
-  /** krycie kafla — domyślnie wartość z systemu dla wariantu */
+  /** krycie kafla - domyślnie wartość z systemu dla wariantu */
   opacity?: number;
   className?: string;
   style?: CSSProperties;

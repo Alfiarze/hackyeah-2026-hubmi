@@ -43,10 +43,20 @@ export default function App() {
   /** Innowacja przekazana między modułami przyciskami na fiszce. */
   const [handoff, setHandoff] = useState<Innovation | null>(null);
 
+  /** Tyknięcie przy każdym `go()` - także przy kliknięciu bieżącej zakładki,
+   *  kiedy `route` się nie zmienia, a widok i tak ma wrócić na górę. */
+  const [navTick, setNavTick] = useState(0);
+
   useEffect(() => {
     const onHash = () => setRoute(readHash());
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  // Przeglądarka nie może wracać do zapamiętanej pozycji przewinięcia przy
+  // nawigacji po hashach (wstecz/dalej też jest zmianą zakładki).
+  useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   }, []);
 
   useEffect(() => {
@@ -60,11 +70,19 @@ export default function App() {
   const go = useCallback((r: Route) => {
     window.location.hash = r;
     setRoute(r);
-    // Nowy widok zaczyna się od góry; focus wraca na <main>, żeby czytnik
-    // nie czytał od nowa całej nawigacji.
-    window.scrollTo({ top: 0 });
-    document.getElementById("main")?.focus();
+    setNavTick((n) => n + 1);
   }, []);
+
+  // Nowy widok zaczyna się od góry - dopiero PO renderze, bo scrollTo
+  // w samym handlerze potrafi zostać nadpisane przez przywracanie pozycji
+  // przy nawigacji hashowej, a focus(<main>) bez preventScroll dociągał
+  // stronę do nagłówka zamiast do samej góry. Focus wraca na <main>, żeby
+  // czytnik nie czytał od nowa całej nawigacji.
+  useEffect(() => {
+    if (navTick === 0) return; // pierwsze wejście - nic nie przewijamy
+    window.scrollTo({ top: 0 });
+    document.getElementById("main")?.focus({ preventScroll: true });
+  }, [route, navTick]);
 
   const toMiddleman = useCallback(
     (inn: Innovation) => {
@@ -88,7 +106,6 @@ export default function App() {
       <Shell
         route={route}
         onRoute={go}
-        state={state}
         adminUnread={unreadForAdmin(state).length}
         authorUnseen={unseenRepliesForAuthor(state).length}
       >

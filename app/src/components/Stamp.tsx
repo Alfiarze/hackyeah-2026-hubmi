@@ -2,10 +2,10 @@
  * Znacznik „przetestowane".
  *
  * 111 ze 115 kart ROPS ma opisany wynik realnego testu i to jest najmocniejsza
- * rzecz w tych danych — ale nośnikiem tej informacji jest treść, nie ozdoba.
+ * rzecz w tych danych - ale nośnikiem tej informacji jest treść, nie ozdoba.
  * Dlatego znacznik jest cichy: jedno słowo, znak potwierdzenia i cytat
  * z karty. Brak wyników dostaje osobny, jeszcze spokojniejszy wariant,
- * bo to nie jest błąd — to po prostu brak danych.
+ * bo to nie jest błąd - to po prostu brak danych.
  */
 import "./stamp.css";
 
@@ -21,7 +21,7 @@ export function Stamp({ evidence, compact }: Props) {
       <p className="stamp stamp--none" role="note">
         <span className="stamp__label">Brak opisanych wyników testu</span>
         <span className="stamp__text">
-          Ta karta nie zawiera pola „Czy to działa?" — traktuj jako pomysł do
+          Ta karta nie zawiera pola „Czy to działa?" - traktuj jako pomysł do
           sprawdzenia, nie rozwiązanie gotowe do wdrożenia.
         </span>
       </p>

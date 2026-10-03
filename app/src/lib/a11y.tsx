@@ -1,5 +1,5 @@
 /**
- * Preferencje dostępności — przełączniki widoczne w nagłówku.
+ * Preferencje dostępności - przełączniki widoczne w nagłówku.
  *
  * Nie są ozdobą pod ocenę: „prosty język", „duża czcionka" i „wysoki kontrast"
  * to trzy najczęstsze bariery u grup docelowych z zadania (seniorzy, osoby
@@ -27,7 +27,7 @@ export interface A11yPrefs {
   simpleLanguage: boolean;
   /**
    * Animowane tło (parallax, plamy światła). Osobno od `prefers-reduced-motion`,
-   * bo to wybór użytkownika na tej konkretnej stronie, nie ustawienie systemowe —
+   * bo to wybór użytkownika na tej konkretnej stronie, nie ustawienie systemowe -
    * WCAG 2.2.2 wymaga pauzy dla ruchu trwającego dłużej niż 5 s, nawet gdy
    * system nic nie mówi o preferencjach.
    */
@@ -58,7 +58,7 @@ function read(): A11yPrefs {
     const raw = localStorage.getItem(KEY);
     if (raw) return { ...DEFAULTS, ...(JSON.parse(raw) as Partial<A11yPrefs>) };
   } catch {
-    // uszkodzony wpis — wracamy do domyślnych
+    // uszkodzony wpis - wracamy do domyślnych
   }
   return DEFAULTS;
 }
@@ -68,7 +68,7 @@ export function A11yProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    // theme="auto" nie stawia atrybutu — wtedy decyduje prefers-color-scheme
+    // theme="auto" nie stawia atrybutu - wtedy decyduje prefers-color-scheme
     if (prefs.theme === "auto") root.removeAttribute("data-theme");
     else root.setAttribute("data-theme", prefs.theme);
 
@@ -76,7 +76,7 @@ export function A11yProvider({ children }: { children: ReactNode }) {
     else root.removeAttribute("data-contrast");
 
     /* „Ruch w tle" pauzuje animacje ambientowe (patterny, pulsowanie)
-       — atrybut czyta global.css (WCAG 2.2.2). */
+       - atrybut czyta global.css (WCAG 2.2.2). */
     if (prefs.bgMotion) root.removeAttribute("data-bg-motion");
     else root.setAttribute("data-bg-motion", "off");
 
@@ -84,7 +84,7 @@ export function A11yProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem(KEY, JSON.stringify(prefs));
     } catch {
-      // tryb prywatny — ustawienia działają do zamknięcia karty
+      // tryb prywatny - ustawienia działają do zamknięcia karty
     }
   }, [prefs]);
 

@@ -1,11 +1,11 @@
 /**
- * Moduł IV — Tester innowacji.
+ * Moduł IV - Tester innowacji.
  *
  * Dwie drogi: zgłoszenie chęci udziału w testach oraz ocena rozwiązania,
  * które ktoś już u siebie uruchomił. Oba kończą się wątkiem w tej samej
  * skrzynce Hubu, więc koordynator ROPS ma jedno miejsce do obsługi.
  *
- * Ocena jest 1–5 z wymaganym komentarzem: sama gwiazdka nic nie mówi
+ * Ocena jest 1-5 z wymaganym komentarzem: sama gwiazdka nic nie mówi
  * autorowi innowacji o tym, co poprawić.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -67,7 +67,7 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
     if (comment.trim().length < 15) {
       setErr(
         mode === "ocena"
-          ? "Napisz, co konkretnie działa, a co nie — autor innowacji nic nie zrobi z samą gwiazdką."
+          ? "Napisz, co konkretnie działa, a co nie - autor innowacji nic nie zrobi z samą gwiazdką."
           : "Napisz dwa zdania o tym, kto i gdzie chce testować.",
       );
       return;
@@ -77,8 +77,8 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
       kind: "test",
       title:
         mode === "ocena"
-          ? `Ocena ${rating}/5 — ${current.name}`
-          : `Zgłoszenie do testów — ${current.name}`,
+          ? `Ocena ${rating}/5 - ${current.name}`
+          : `Zgłoszenie do testów - ${current.name}`,
       body:
         (role.trim() ? `Zgłaszający: ${role.trim()}\n\n` : "") +
         comment.trim(),
@@ -128,7 +128,7 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
         <p className="page__mod">Moduł IV · Tester innowacji</p>
         <h1>Przetestuj albo oceń</h1>
         <p>
-          Innowacja bez testu to pomysł. Zgłoś się do testów albo powiedz, jak
+          Zgłoś gotowość do przetestowania innowacji albo opisz, jak
           sprawdziło się rozwiązanie, które już u siebie uruchomiliście.
         </p>
       </div>
@@ -183,7 +183,7 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
                 aria-describedby="ts-list-hint"
               />
               <p id="ts-list-hint" className="hint">
-                {needle ? `${options.length} dopasowań` : "Pokazujemy pierwsze 8 — zacznij pisać, aby filtrować."}
+                {needle ? `${options.length} dopasowań` : "Pokazujemy pierwsze 8 - zacznij pisać, aby filtrować."}
               </p>
               <ul className="ts__options">
                 {options.map((i) => (
@@ -217,7 +217,7 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
                     <span aria-hidden="true">{n}</span>
                     <span className="sr-only">
                       {n} na 5
-                      {n === 1 ? " — nie zadziałało" : n === 5 ? " — zadziałało bardzo dobrze" : ""}
+                      {n === 1 ? " - nie zadziałało" : n === 5 ? " - zadziałało bardzo dobrze" : ""}
                     </span>
                   </label>
                 ))}
@@ -233,7 +233,7 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
               onChange={(e) => setRole(e.target.value)}
               placeholder="np. CUS w gminie wiejskiej, 3 tys. mieszkańców…"
             />
-            <p className="hint">Nie podawaj imienia i nazwiska — wystarczy typ instytucji.</p>
+            <p className="hint">Nie podawaj imienia i nazwiska - wystarczy typ instytucji.</p>
           </div>
 
           <div className="field">

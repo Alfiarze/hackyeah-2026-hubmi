@@ -103,4 +103,4 @@ if (problems.length) {
   for (const x of problems) console.log(" - " + x);
   process.exit(1);
 }
-console.log("\nOK — reveal i tło działają na wszystkich podstronach.");
+console.log("\nOK - reveal i tło działają na wszystkich podstronach.");

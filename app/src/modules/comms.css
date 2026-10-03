@@ -93,7 +93,7 @@
   gap: var(--sp-2);
 }
 .cm__msg p { margin: 0; font-size: var(--fs-sm); line-height: 1.6; white-space: pre-wrap; }
-/* Autor wypowiedzi jest zawsze podpisany — strona rozmowy nie zależy od koloru. */
+/* Autor wypowiedzi jest zawsze podpisany - strona rozmowy nie zależy od koloru. */
 .cm__msg--author {
   background: var(--surface-glass-thin);
   backdrop-filter: blur(16px);
@@ -121,6 +121,25 @@
   border-top: 1px solid var(--line);
 }
 .cm__reply .btn { margin-top: var(--sp-3); }
+
+/* Przełącznik roli przy odpowiedzi: w demo zastępuje logowanie.
+   Aktywna rola = atramentowa pigułka (aria-pressed), nie sam kolor. */
+.cm__who-label {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  margin-bottom: var(--sp-2);
+}
+.cm__who {
+  gap: var(--sp-1);
+  margin-bottom: var(--sp-3);
+}
+.cm__who .btn {
+  min-height: 40px;
+  padding-inline: var(--sp-3);
+  font-size: var(--fs-xs);
+  margin-top: 0;
+}
 
 .cm__empty { max-width: 42rem; }
 .cm__empty h3 { margin-bottom: var(--sp-3); }

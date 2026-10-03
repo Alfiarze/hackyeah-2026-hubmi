@@ -1,9 +1,9 @@
 /**
- * Moduł V — Platforma aktywnej komunikacji.
+ * Moduł V - Platforma aktywnej komunikacji.
  *
  * Strona użytkownika tej samej skrzynki, którą koordynator widzi w module VI.
  * Jury pyta wprost: „jak system powiadamia administratora o nowym pomyśle
- * i jak wygląda ścieżka odpowiedzi do autora" — to jest ta druga połowa
+ * i jak wygląda ścieżka odpowiedzi do autora" - to jest ta druga połowa
  * odpowiedzi. Kropka „nowa odpowiedź" gaśnie dopiero po otwarciu wątku.
  */
 import { useEffect, useState } from "react";
@@ -11,7 +11,9 @@ import {
   markSeenByAuthor,
   reply,
   addThread,
+  setRole,
   type AppState,
+  type Role,
   type Thread,
 } from "../lib/store";
 import { api } from "../lib/api";
@@ -23,6 +25,13 @@ const KIND_LABEL: Record<Thread["kind"], string> = {
   pytanie: "Pytanie",
   test: "Testowanie",
 };
+
+/** Role do przełączania przy odpowiedzi - spójne z lib/store.ts. */
+const DEMO_ROLES: { v: Role; label: string; aria: string }[] = [
+  { v: "mieszkaniec", label: "Mieszkaniec", aria: "Odpowiedz jako mieszkaniec lub NGO" },
+  { v: "ROPS", label: "ROPS", aria: "Odpowiedz jako pracownik ROPS" },
+  { v: "ekspert", label: "Ekspert", aria: "Odpowiedz jako ekspert branżowy" },
+];
 
 export function Comms({ state }: { state: AppState }) {
   const [open, setOpen] = useState<string | null>(null);
@@ -64,7 +73,7 @@ export function Comms({ state }: { state: AppState }) {
         <p className="page__mod">Moduł V · Platforma aktywnej komunikacji</p>
         <h1>Rozmowy z Hubem</h1>
         <p>
-          Każde zgłoszenie — pomysł, pytanie, zgłoszona luka — zostaje wątkiem.
+          Każde zgłoszenie - pomysł, pytanie, zgłoszona luka - zostaje wątkiem.
           Nic nie ginie w mailu i każdy widzi, na czym stoi sprawa.
         </p>
       </div>
@@ -156,7 +165,7 @@ export function Comms({ state }: { state: AppState }) {
                   </div>
                   <div>
                     <dt>Obszar</dt>
-                    <dd>{current.fiszka.obszar || "—"}</dd>
+                    <dd>{current.fiszka.obszar || "-"}</dd>
                   </div>
                 </dl>
               )}
@@ -214,15 +223,34 @@ export function Comms({ state }: { state: AppState }) {
                   setDraft("");
                 }}
               >
-                <label htmlFor="cm-reply">
-                  Odpowiedz jako <strong>{state.role}</strong>
-                </label>
+                <span className="cm__who-label" id="cm-who">
+                  Odpowiedz jako
+                </span>
+                <div className="row cm__who" role="group" aria-labelledby="cm-who">
+                  {DEMO_ROLES.map((r) => (
+                    <button
+                      key={r.v}
+                      type="button"
+                      className="btn btn--ghost"
+                      aria-pressed={state.role === r.v}
+                      onClick={() => setRole(r.v)}
+                    >
+                      <span aria-hidden="true">{r.label}</span>
+                      <span className="sr-only">{r.aria}</span>
+                    </button>
+                  ))}
+                </div>
                 <textarea
                   id="cm-reply"
                   rows={3}
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
                   placeholder={
+                    isStaff
+                      ? "Odpowiedź koordynatora albo eksperta"
+                      : "Dopytaj albo uzupełnij zgłoszenie"
+                  }
+                  aria-label={
                     isStaff
                       ? "Odpowiedź koordynatora albo eksperta"
                       : "Dopytaj albo uzupełnij zgłoszenie"

@@ -1,8 +1,8 @@
 /**
- * Stan aplikacji — hybrydowy store (lokalny stan z automatyczną synchronizacją z API).
+ * Stan aplikacji - hybrydowy store (lokalny stan z automatyczną synchronizacją z API).
  *
  * Zasada działania:
- *  1. Zawsze startuje natychmiast z danych lokalnych (localStorage / seed) — zero opóźnień
+ *  1. Zawsze startuje natychmiast z danych lokalnych (localStorage / seed) - zero opóźnień
  *     przy pierwszym renderze, 100% odporność na brak sieci (offline-first).
  *  2. W tle weryfikuje łączność z backendem Django (`/api/health/`).
  *  3. Gdy backend jest dostępny, automatycznie dociąga wątki z serwera (`/api/threads/`)
@@ -28,7 +28,7 @@ export interface Thread {
   id: string;
   kind: ThreadKind;
   title: string;
-  /** autor — w demo zawsze pseudonim, nigdy prawdziwe dane osobowe */
+  /** autor - w demo zawsze pseudonim, nigdy prawdziwe dane osobowe */
   author: string;
   authorRole: Role;
   powiat?: string;
@@ -39,13 +39,13 @@ export interface Thread {
   /** przy luce: wątki rozpoznane i nierozpoznane w zapytaniu */
   concepts?: string[];
   unknownTerms?: string[];
-  /** przy luce: najlepszy wynik dopasowania, 0–100 */
+  /** przy luce: najlepszy wynik dopasowania, 0-100 */
   topScore?: number;
   /** przy pomyśle: dane fiszki */
   fiszka?: Fiszka;
   /** przy zgłoszeniu na testera: id innowacji */
   innovationId?: string;
-  /** ocena innowacji 1–5 (moduł IV) */
+  /** ocena innowacji 1-5 (moduł IV) */
   rating?: number;
   /** czy admin oznaczył jako przeczytane */
   read?: boolean;
@@ -60,7 +60,7 @@ export interface Fiszka {
 
 export interface AppState {
   threads: Thread[];
-  /** kto jest „zalogowany" — przełącznik roli na potrzeby demo */
+  /** kto jest „zalogowany" - przełącznik roli na potrzeby demo */
   role: Role;
   seenByAuthor: string[];
   backendConnected: boolean;
@@ -173,7 +173,7 @@ function seed(): Thread[] {
           text:
             "Dziękujemy za zgłoszenie. Pomysł jest ciekawy, ale wymaga " +
             "sprawdzenia pod kątem prawa farmaceutycznego. Proponujemy " +
-            "konsultację specjalistyczną — czy pasuje Państwu termin w " +
+            "konsultację specjalistyczną - czy pasuje Państwu termin w " +
             "przyszłym tygodniu?",
           at: now - 26 * h,
         },
@@ -226,7 +226,7 @@ function load(): AppState {
       };
     }
   } catch {
-    // uszkodzony wpis — startujemy od danych demo
+    // uszkodzony wpis - startujemy od danych demo
   }
   return { threads: seed(), role: "mieszkaniec", seenByAuthor: [], backendConnected: false };
 }
@@ -239,7 +239,7 @@ function commit(next: AppState) {
   try {
     localStorage.setItem(KEY, JSON.stringify(state));
   } catch {
-    // brak miejsca / tryb prywatny — stan zostaje w pamięci
+    // brak miejsca / tryb prywatny - stan zostaje w pamięci
   }
   listeners.forEach((l) => l());
 }
@@ -276,7 +276,7 @@ export interface NewThread {
 }
 
 /**
- * Wkłada do stanu wątek, który backend już utworzył — bez ponownego POST-a.
+ * Wkłada do stanu wątek, który backend już utworzył - bez ponownego POST-a.
  *
  * Używa tego moduł I: lukę zakłada `POST /api/match/gaps/`, bo tylko ta ścieżka
  * wiąże wątek z zapytaniem (`SearchQuery`) i zasila trendy. Gdybyśmy wywołali
@@ -345,7 +345,7 @@ export function addThread(t: NewThread): Thread {
   return thread;
 }
 
-/** Odpowiedź ROPS lub eksperta — domyka pętlę komunikacji. */
+/** Odpowiedź ROPS lub eksperta - domyka pętlę komunikacji. */
 export function reply(threadId: string, text: string, from: Role = "ROPS", author?: string) {
   const authorName = author || (from === "ROPS" ? "Koordynator ROPS (demo)" : "Ekspert (demo)");
   const newMsg: Message = {
@@ -415,7 +415,7 @@ export function markRead(threadId: string) {
   })();
 }
 
-/** Autor przeczytał odpowiedź — kropka „nowa odpowiedź" gaśnie. */
+/** Autor przeczytał odpowiedź - kropka „nowa odpowiedź" gaśnie. */
 export function markSeenByAuthor(threadId: string) {
   if (state.seenByAuthor.includes(threadId)) return;
   commit({ ...state, seenByAuthor: [...state.seenByAuthor, threadId] });

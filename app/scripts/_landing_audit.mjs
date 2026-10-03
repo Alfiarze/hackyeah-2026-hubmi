@@ -24,7 +24,7 @@ for (const w of WIDTHS) {
   const over = await page.evaluate(
     () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
   );
-  console.log(`${w}px — przewijanie w poziomie: ${over}px ${over > 0 ? "FAIL" : "ok"}`);
+  console.log(`${w}px - przewijanie w poziomie: ${over}px ${over > 0 ? "FAIL" : "ok"}`);
   if (over > 0) fails++;
   await ctx.close();
 }
@@ -50,7 +50,7 @@ for (const mode of MODES) {
   const v = res.violations;
   console.log(`axe [${mode.name}]: ${v.length} naruszeń`);
   v.forEach((x) =>
-    console.log(`   · ${x.id} (${x.impact}) ×${x.nodes.length} — ${x.nodes[0].target.join(" ")}`),
+    console.log(`   · ${x.id} (${x.impact}) ×${x.nodes.length} - ${x.nodes[0].target.join(" ")}`),
   );
   fails += v.length;
   await ctx.close();
