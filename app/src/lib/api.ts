@@ -74,30 +74,94 @@ export interface BackendThread {
   updated_at?: string;
 }
 
+/** Jedna karta z `/api/match/search/` — pełna fiszka + rozliczenie dopasowania. */
+export interface BackendMatchResult {
+  id: string;
+  name: string;
+  cat: string;
+  catName: string;
+  problem: string;
+  desc: string;
+  target: string;
+  benef: string;
+  evidence: string;
+  authors: string[];
+  badges: string[];
+  video: string | null;
+  pdf: string | null;
+  zip: string | null;
+  license: string | null;
+  url: string;
+  deployments: {
+    powiat: string;
+    org: string;
+    year: number;
+    email: string;
+    phone: string;
+    demo: boolean;
+  }[];
+  match: {
+    score: number;
+    tier: "wysokie" | "średnie" | "niskie";
+    coverage: number;
+    matched: {
+      id: string;
+      label: string;
+      fields: string[];
+      terms: string[];
+      strength: number;
+    }[];
+    missed: { id: string; label: string }[];
+    reasons: string[];
+    /** offsety [start, end] w znakach, per pole karty */
+    highlights: Record<string, [number, number][]>;
+  };
+  ai: {
+    related: boolean | null;
+    confidence: number | null;
+    reason: string;
+    source: string;
+  };
+}
+
+/** Pełna odpowiedź `/api/match/search/`. Kształt 1:1 z `matchmaking/views.py`. */
 export interface MatchSearchResult {
+  /** id zapisanego SearchQuery — wymagane przy zgłoszeniu luki */
+  query_id: number;
   query: string;
   analysis: {
-    concepts: { id: string; label: string; score: number }[];
-    unknown_terms: string[];
-    top_score: number;
-    has_concepts: boolean;
+    concepts: { id: string; label: string }[];
+    stems: string[];
+    unknown: string[];
   };
-  results: {
-    innovation_id: string;
-    score: number;
-    tier: string;
-    reasons: {
-      matched_concepts: string[];
-      unmatched_concepts: string[];
-      top_terms: { term: string; field: string; weight: number }[];
-      field_scores: Record<string, number>;
-    };
-  }[];
-  verdicts?: {
+  results: BackendMatchResult[];
+  gap: {
+    is_gap: boolean;
+    reason: "brak-watkow" | "brak-trafien" | "slabe-pokrycie" | null;
+    text: string;
+  };
+  ai: {
     source: string;
-    verdicts: Record<string, { related: boolean; confidence: number; reason: string }>;
+    werdykty: {
+      id: string;
+      powiazane: boolean;
+      pewnosc: number;
+      noul: number;
+      powod: string;
+    }[];
   };
-  is_gap: boolean;
+  role: string;
+}
+
+/** Odpowiedź `POST /api/match/gaps/` — luka zarejestrowana jako wątek dla ROPS. */
+export interface GapReport {
+  id: number;
+  query: number;
+  query_text: string;
+  thread: string;
+  thread_title: string;
+  status: string;
+  created_at: string;
 }
 
 export interface GrantGenerateResult {
@@ -369,10 +433,39 @@ class ApiClient {
   // --- Moduł I: Matchmaking Społeczny ---------------------------------------
 
   public match = {
+    /**
+     * Jedyne źródło wyników modułu I. Backend liczy ranking (BM25 + wątki),
+     * dokłada werdykty Jev i zapisuje zapytanie jako sygnał potrzeby — dlatego
+     * front nie liczy niczego równolegle.
+     *
+     * Timeout 20 s, bo w ścieżce stoi wywołanie Jev Decisions; typowo ~1,5 s,
+     * ale pierwsze zapytanie po starcie kontenera potrafi być wolniejsze.
+     */
     search: async (q: string, limit = 5, cat?: string, powiat?: string) => {
-      return this.request<MatchSearchResult>("/match/search/", {
+      return this.request<MatchSearchResult>(
+        "/match/search/",
+        {
+          method: "POST",
+          body: JSON.stringify({ q, limit, cat, powiat }),
+        },
+        20000,
+      );
+    },
+
+    /**
+     * Zgłoszenie luki: problem bez rozwiązania staje się wątkiem `luka`
+     * powiązanym z zapytaniem, więc koordynator ROPS widzi źródło zgłoszenia.
+     */
+    reportGap: async (payload: {
+      query_id: number;
+      title?: string;
+      body?: string;
+      powiat?: string;
+      author?: string;
+    }) => {
+      return this.request<GapReport>("/match/gaps/", {
         method: "POST",
-        body: JSON.stringify({ q, limit, cat, powiat }),
+        body: JSON.stringify(payload),
       });
     },
 

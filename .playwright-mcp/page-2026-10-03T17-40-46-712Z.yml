@@ -1,0 +1,573 @@
+- generic [ref=e2]:
+  - paragraph [ref=e3]: "Tło strony: abstrakcyjne, powoli przesuwające się cząstki światła na ciemnym tle."
+  - link "Przejdź do treści" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=e6]:
+    - paragraph [ref=e7]: Dostosuj widok
+    - group "Dostosuj widok" [ref=e8]:
+      - button "Prosty język" [ref=e9] [cursor=pointer]
+      - group "Rozmiar tekstu" [ref=e10]:
+        - button "Czcionka normalna, 18 pikseli" [pressed] [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: A
+        - button "Czcionka duża, 22 piksele" [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: A+
+        - button "Czcionka bardzo duża, 27 pikseli" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: A++
+      - button "Wysoki kontrast" [ref=e20] [cursor=pointer]
+      - button "Ciemny motyw" [ref=e21] [cursor=pointer]
+      - button "Ruch w tle" [pressed] [ref=e22] [cursor=pointer]
+    - generic [ref=e23]:
+      - generic [ref=e24]: Rola w demonstracji
+      - generic [aria-hidden] [ref=e25]: "Demo — jestem:"
+      - combobox "Rola w demonstracji" [ref=e26]:
+        - option "mieszkanka / NGO / gmina" [selected]
+        - option "pracownik ROPS"
+        - option "ekspert branżowy"
+  - banner [ref=e27]:
+    - generic [ref=e28]:
+      - link [ref=e29] [cursor=pointer]:
+        - /url: "#matchmaking"
+        - strong [ref=e32]: HubMI
+      - navigation "Moduły Hubu" [ref=e33]:
+        - list [ref=e34]:
+          - listitem [ref=e35]:
+            - link [ref=e36] [cursor=pointer]:
+              - /url: "#matchmaking"
+              - generic [aria-hidden] [ref=e37]: Szukaj
+          - listitem [ref=e38]:
+            - link [ref=e39] [cursor=pointer]:
+              - /url: "#biblioteka"
+              - generic [aria-hidden] [ref=e40]: Wiedza
+          - listitem [ref=e41]:
+            - link [ref=e42] [cursor=pointer]:
+              - /url: "#kreator"
+              - generic [aria-hidden] [ref=e43]: Pomysł
+          - listitem [ref=e44]:
+            - link [ref=e45] [cursor=pointer]:
+              - /url: "#tester"
+              - generic [aria-hidden] [ref=e46]: Testuj
+          - listitem [ref=e47]:
+            - link ", 6 nowych powiadomień" [ref=e169] [cursor=pointer]:
+              - /url: "#komunikacja"
+              - generic [aria-hidden] [ref=e49]: Rozmowy
+              - generic [aria-hidden] [ref=e50]: "6"
+          - listitem [ref=e52]:
+            - link ", 8 nowych powiadomień" [ref=e170] [cursor=pointer]:
+              - /url: "#admin"
+              - generic [aria-hidden] [ref=e54]: Panel
+              - generic [aria-hidden] [ref=e55]: "8"
+          - listitem [ref=e57]:
+            - link [ref=e58] [cursor=pointer]:
+              - /url: "#middleman"
+              - generic [aria-hidden] [ref=e59]: Middleman
+          - listitem [ref=e60]:
+            - link [ref=e61] [cursor=pointer]:
+              - /url: "#dostepnosc"
+              - generic [aria-hidden] [ref=e62]: WCAG
+  - main [ref=e63]:
+    - generic [ref=e64]:
+      - generic [ref=e66]:
+        - heading "Opisz problem. Pokażemy, co już zadziałało." [level=1] [ref=e67]
+        - region "Wyszukiwanie rozwiązań" [ref=e68]:
+          - list [ref=e69]:
+            - listitem [ref=e1200]:
+              - generic [ref=e1201]: HubMI
+              - paragraph [ref=e1202]: Opisz problem lub wyzwanie w swojej okolicy. Wystarczą 1–2 zdania zwykłym, codziennym językiem.
+            - listitem [ref=e1295]:
+              - generic [ref=e1296]: Ty
+              - paragraph [ref=e1297]: hodowla pstrąga w stawie i wędzenie ryb na sprzedaż
+            - listitem [ref=e1298]:
+              - generic [ref=e1299]: HubMI
+              - paragraph [ref=e1300]: Kogo ten problem dotyczy w pierwszej kolejności?
+            - listitem [ref=e1308]:
+              - generic [ref=e1309]: Ty
+              - paragraph [ref=e1310]: mieszkańcy gminy, społeczność lokalna
+            - listitem [ref=e1311]:
+              - generic [ref=e1312]: HubMI
+              - paragraph [ref=e1313]: W jakiej gminie lub powiecie występuje ten problem? Pozwoli to sprawdzić lokalne wdrożenia i kontakt do realizatorów.
+            - listitem [ref=e1321]:
+              - generic [ref=e1322]: HubMI
+              - paragraph [ref=e1323]: "Rozpoznane obszary: obszary wiejskie, instytucje i samorząd. Porównuję zgłoszenie z bazą przetestowanych innowacji."
+      - generic [ref=e189]:
+        - status [active] [ref=e1324]:
+          - generic [ref=e1325]:
+            - heading "6 rozwiązań z Biblioteki" [level=2] [ref=e1326]
+            - paragraph [ref=e1327]: "Rozpoznane wątki: obszary wiejskie, instytucje i samorząd."
+          - button "Zacznij od nowa" [ref=e1329] [cursor=pointer]
+        - generic [ref=e1330]:
+          - heading "Gdzie podobny problem już rozwiązano" [level=2] [ref=e1331]
+          - figure "Im ciemniejszy powiat, tym więcej dopasowanych innowacji zostało tam wdrożonych. Kliknij powiat, aby zawęzić wyniki — a potem użyj przycisku „Skontaktuj się z realizatorem” na fiszce, żeby napisać do instytucji, która to samo już u siebie zrobiła." [ref=e1332]:
+            - generic [ref=e1334]:
+              - group "Mapa województwa małopolskiego — 22 powiaty i miasta" [ref=e1335]:
+                - 'button "m. Kraków: 0 wdrożeń" [ref=e1337] [cursor=pointer]'
+                - 'button "m. Nowy Sącz: 0 wdrożeń" [ref=e1339] [cursor=pointer]'
+                - 'button "m. Tarnów: 1 wdrożenie" [ref=e1341] [cursor=pointer]'
+                - 'button "pow. bocheński: 4 wdrożenia" [ref=e1343] [cursor=pointer]'
+                - 'button "pow. brzeski: 0 wdrożeń" [ref=e1345] [cursor=pointer]'
+                - 'button "pow. chrzanowski: 0 wdrożeń" [ref=e1347] [cursor=pointer]'
+                - 'button "pow. dąbrowski: 1 wdrożenie" [ref=e1349] [cursor=pointer]'
+                - 'button "pow. gorlicki: 0 wdrożeń" [ref=e1351] [cursor=pointer]'
+                - 'button "pow. krakowski: 0 wdrożeń" [ref=e1353] [cursor=pointer]'
+                - 'button "pow. limanowski: 1 wdrożenie" [ref=e1355] [cursor=pointer]'
+                - 'button "pow. miechowski: 0 wdrożeń" [ref=e1357] [cursor=pointer]'
+                - 'button "pow. myślenicki: 0 wdrożeń" [ref=e1359] [cursor=pointer]'
+                - 'button "pow. nowosądecki: 0 wdrożeń" [ref=e1361] [cursor=pointer]'
+                - 'button "pow. nowotarski: 1 wdrożenie" [ref=e1363] [cursor=pointer]'
+                - 'button "pow. olkuski: 1 wdrożenie" [ref=e1365] [cursor=pointer]'
+                - 'button "pow. oświęcimski: 1 wdrożenie" [ref=e1367] [cursor=pointer]'
+                - 'button "pow. proszowicki: 0 wdrożeń" [ref=e1369] [cursor=pointer]'
+                - 'button "pow. suski: 1 wdrożenie" [ref=e1371] [cursor=pointer]'
+                - 'button "pow. tarnowski: 0 wdrożeń" [ref=e1373] [cursor=pointer]'
+                - 'button "pow. tatrzański: 0 wdrożeń" [ref=e1375] [cursor=pointer]'
+                - 'button "pow. wadowicki: 1 wdrożenie" [ref=e1377] [cursor=pointer]'
+                - 'button "pow. wielicki: 0 wdrożeń" [ref=e1379] [cursor=pointer]'
+              - list [aria-hidden] [ref=e1380]:
+                - listitem [ref=e1381]: brak
+                - listitem [ref=e1383]: mniej
+                - listitem [ref=e1385]
+                - listitem [ref=e1387]
+                - listitem [ref=e1389]: więcej
+            - group [ref=e1391]:
+              - generic "Te same dane jako tabela" [ref=e1392] [cursor=pointer]
+            - paragraph [ref=e1393]:
+              - strong [ref=e1394]: Dane demo.
+              - text: Biblioteka Innowacji Społecznych ROPS nie publikuje lokalizacji wdrożeń, więc rozmieszczenie zostało wygenerowane na potrzeby prototypu (deterministycznie, z charakteru innowacji). Granice powiatów są prawdziwe. Po wdrożeniu to pole wypełniają realne zgłoszenia realizatorów.
+        - region "Dopasowane innowacje" [ref=e1395]:
+          - article [ref=e1396]:
+            - generic [ref=e1397]:
+              - generic [ref=e1398]:
+                - paragraph [ref=e1399]: Dla osób w kryzysie bezdomności
+                - heading [level=3] [ref=e1400]:
+                  - mark [ref=e1401]: Wiejski
+                  - text: program pomocy osobom w kryzysie bezdomności - Ścieżka Feniksa
+              - generic [ref=e1402]:
+                - generic [ref=e1403]: "97"
+                - generic [aria-hidden] [ref=e1404]: /100
+                - generic [ref=e1405]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e1406]: wysokie
+            - paragraph [ref=e1407]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e1408]:
+              - generic [ref=e1409]: ✓ Przetestowane
+              - generic [ref=e1410]: W ramach testowania zidentyfikowano pozytywnie mechanizm prowadzący do wystąpienia efektów – spełnione zostały założenia warunkujące zmiany. Szczególn…
+            - generic [ref=e1411]:
+              - generic [ref=e1412]:
+                - term [ref=e1413]: Na czym polega
+                - definition [ref=e1414]:
+                  - text: "Model wiejskiego programu pomocy osobom w kryzysie bezdomności „Ścieżka Feniksa” łączy w sobie następujące elementy: długofalowe, holistyczne wsparcie w procesie wychodzenia z bezdomności w środowisku"
+                  - mark [ref=e1415]: lokalnym
+                  - text: podejście ekologiczne i rozwiązania z zakresu gospodarki o zamkniętym obiegu w procesie pr…
+              - generic [ref=e1416]:
+                - term [ref=e1417]: Jakiego problemu dotyczy
+                - definition [ref=e1418]:
+                  - text: Projekt odpowiada na problem braku długofalowych, holistycznych rozwiązań dla osób w kryzysie bezdomności z małych
+                  - mark [ref=e1419]: gmin
+                  - text: ", zwłaszcza"
+                  - mark [ref=e1420]: wiejskich
+                  - text: .
+              - generic [ref=e1421]:
+                - term [ref=e1422]: Dla kogo
+                - definition [ref=e1423]: Osoby w kryzysie bezdomności.
+              - generic [ref=e1424]:
+                - term [ref=e1425]: Kto może wdrożyć
+                - definition [ref=e1426]:
+                  - mark [ref=e1427]: Gminy
+                  - text: ", gminne ośroki pomocy społecznej, organizacje wspierające osoby w kryzysie bezdomności."
+            - generic [ref=e1428]:
+              - generic [ref=e1429]: Weryfikacja Jev Decisions · pewność 99%
+              - paragraph [ref=e1430]: Jev nie dopatrzył się związku (0.01) — „Wiejski program pomocy osobom w kryzysie bezdomności - Ścieżka Feniksa” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e1431]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e1432]
+              - paragraph [ref=e1433]:
+                - text: Pokrywa
+                - strong [ref=e1434]: "2"
+                - text: z
+                - strong [ref=e1435]: "2"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e1436]: (siła pokrycia 100%)
+              - list [ref=e1437]:
+                - listitem [ref=e1438]: "Odpowiada na ten sam problem: obszary wiejskie, instytucje i samorząd."
+                - listitem [ref=e1439]: "Było testowane: W ramach testowania zidentyfikowano pozytywnie mechanizm prowadzący do wystąpienia efektów – spełnione zostały założenia warunkujące zmiany."
+              - generic [ref=e1440]:
+                - generic [ref=e1441]:
+                  - generic [aria-hidden] [ref=e1442]: ✓
+                  - generic [ref=e1443]:
+                    - text: obszary wiejskie
+                    - generic [ref=e1444]: · opis rozwiązania, opis problemu, wyniki testu, nazwa, kto może skorzystać
+                - generic [ref=e1445]:
+                  - generic [aria-hidden] [ref=e1446]: ✓
+                  - generic [ref=e1447]:
+                    - text: instytucje i samorząd
+                    - generic [ref=e1448]: · opis rozwiązania, wyniki testu, opis problemu, kto może skorzystać
+              - group [ref=e1449]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e1450] [cursor=pointer]
+            - paragraph [ref=e1451]: Wdrożono w bocheński (dane demo)
+            - generic [ref=e1452]:
+              - button "Skontaktuj się z realizatorem" [ref=e1453] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e1454] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e1455] [cursor=pointer]
+              - button "Pełna karta" [ref=e1456] [cursor=pointer]
+          - article [ref=e1457]:
+            - generic [ref=e1458]:
+              - generic [ref=e1459]:
+                - paragraph [ref=e1460]: Dla rynku pracy
+                - heading "Mobilna giełda pracy" [level=3] [ref=e1461]
+              - generic [ref=e1462]:
+                - generic [ref=e1463]: "87"
+                - generic [aria-hidden] [ref=e1464]: /100
+                - generic [ref=e1465]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e1466]: wysokie
+            - paragraph [ref=e1467]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e1468]:
+              - generic [ref=e1469]: ✓ Przetestowane
+              - generic [ref=e1470]: Końcową użyteczność innowacji można ocenić jako neutralną. Tylko w ograniczonym stopniu udało się zaobserwować pozytywne efekty tj. wzrost motywacji,…
+            - generic [ref=e1471]:
+              - generic [ref=e1472]:
+                - term [ref=e1473]: Na czym polega
+                - definition [ref=e1474]:
+                  - text: Mobilnej Giełdy Pracy (MGP) to model wsparcia kobiet nieaktywnych zawodowo zamieszkujących obszary
+                  - mark [ref=e1475]: wiejskie
+                  - text: i małomiasteczkowe. Opiera się na współpracy
+                  - mark [ref=e1476]: samorządu
+                  - mark [ref=e1477]: lokalnego
+                  - text: wraz z
+                  - mark [ref=e1478]: lokalnymi
+                  - text: przedsiębiorcami i instytucjami rynku pracy na rzecz dostarczenia mobilnych usług publicznych i społecznych w…
+              - generic [ref=e1479]:
+                - term [ref=e1480]: Jakiego problemu dotyczy
+                - definition [ref=e1481]:
+                  - text: Innowacja odpowiada na problem aktywizacji zawodowej kobiet na terenach
+                  - mark [ref=e1482]: wiejskich
+                  - text: .
+              - generic [ref=e1483]:
+                - term [ref=e1484]: Dla kogo
+                - definition [ref=e1485]:
+                  - text: Innowacja skierowana jest do kobiet nieaktywnych zawodowo, mieszkanek obszarów
+                  - mark [ref=e1486]: wiejskich
+                  - text: ", które z uwagi na miejsce zamieszkania (tereny"
+                  - mark [ref=e1487]: wiejskie
+                  - text: ) mają trudności w dostępie do rynku pracy i nie widzą s…
+              - generic [ref=e1488]:
+                - term [ref=e1489]: Kto może wdrożyć
+                - definition [ref=e1490]:
+                  - mark [ref=e1491]: Samorządy
+                  - text: gminne, w tym zwłaszcza ośrodki pomocy społecznej,
+                  - mark [ref=e1492]: powiatowe
+                  - mark [ref=e1493]: urzędy
+                  - text: pracy,
+                  - mark [ref=e1494]: lokalne
+                  - text: organizacje pozarządowe prowadzące działania z zakresu rynku pracy, przedsiębiorcy i pracodawcy zainteresow…
+            - generic [ref=e1495]:
+              - generic [ref=e1496]: Weryfikacja Jev Decisions · pewność 97%
+              - paragraph [ref=e1497]: Jev nie dopatrzył się związku (0.03) — „Mobilna giełda pracy” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e1498]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e1499]
+              - paragraph [ref=e1500]:
+                - text: Pokrywa
+                - strong [ref=e1501]: "2"
+                - text: z
+                - strong [ref=e1502]: "2"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e1503]: (siła pokrycia 80%)
+              - list [ref=e1504]:
+                - listitem [ref=e1505]: "Odpowiada na ten sam problem: obszary wiejskie."
+                - listitem [ref=e1506]: "Grupa docelowa się zgadza — karta wymienia obszary wiejskie: Innowacja skierowana jest do kobiet nieaktywnych zawodowo, mieszkanek obszarów wiejskich, które z uwagi na miejsce zamie…"
+                - listitem [ref=e1507]: "Było testowane: Końcową użyteczność innowacji można ocenić jako neutralną. Tylko w ograniczonym stopniu udało się zaobserwować pozytywne efekty tj."
+              - generic [ref=e1508]:
+                - generic [ref=e1509]:
+                  - generic [aria-hidden] [ref=e1510]: ✓
+                  - generic [ref=e1511]:
+                    - text: obszary wiejskie
+                    - generic [ref=e1512]: · grupa docelowa, opis rozwiązania, opis problemu
+                - generic [ref=e1513]:
+                  - generic [aria-hidden] [ref=e1514]: ✓
+                  - generic [ref=e1515]:
+                    - text: instytucje i samorząd
+                    - generic [ref=e1516]: · opis rozwiązania, kto może skorzystać
+              - group [ref=e1517]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e1518] [cursor=pointer]
+            - paragraph [ref=e1519]: Wdrożono w wadowicki (dane demo)
+            - generic [ref=e1520]:
+              - button "Skontaktuj się z realizatorem" [ref=e1521] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e1522] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e1523] [cursor=pointer]
+              - button "Pełna karta" [ref=e1524] [cursor=pointer]
+          - article [ref=e1525]:
+            - generic [ref=e1526]:
+              - generic [ref=e1527]:
+                - paragraph [ref=e1528]: Dla dzieci, młodzieży i rodziny
+                - heading "Czas na aktywność!" [level=3] [ref=e1529]
+              - generic [ref=e1530]:
+                - generic [ref=e1531]: "58"
+                - generic [aria-hidden] [ref=e1532]: /100
+                - generic [ref=e1533]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e1534]: wysokie
+            - paragraph [ref=e1535]: INNOWACJA WYBRANA DO UPOWSZECHNIANIA W RAMACH PROJEKTU "MAŁOPOLSKI INKUBATOR INNOWACJI SPOŁECZNYCH"
+            - note "Wynik testu innowacji" [ref=e1536]:
+              - generic [ref=e1537]: ✓ Przetestowane
+              - generic [ref=e1538]: Rozwiązanie trafnie odpowiada na potrzeby grupy docelowej i pozwala samodzielnie organizaować swój czas wolny i budować więzi społeczne.
+            - generic [ref=e1539]:
+              - generic [ref=e1540]:
+                - term [ref=e1541]: Na czym polega
+                - definition [ref=e1542]:
+                  - text: "\"Czas na aktywność!\" to internetowa platforma dla dorosłych osób z zespołem Downa, która umożliwia im prowadzenie aktywnego i samodzielnego życia kulturalno-społecznego (z asystą wolontariuszy) w swojej"
+                  - mark [ref=e1543]: miejscowości
+                  - text: na miarę swoich potrzeb i możliwości. Poprzez uproszczony interfejs, zbudowany z ele…
+              - generic [ref=e1544]:
+                - term [ref=e1545]: Jakiego problemu dotyczy
+                - definition [ref=e1546]: Innowacja odpowiada na problem bierności społecznej znacznej ilości osób z niepełnosprawnością inetelektualnie po ukończeniu edukacji szkolnej. Samodzielnie rzadko podejmują działania, z trudem korzystają z oferty miasta, choć jest ona dla nich interesująca, bazując głównie na propozycjach kierowany…
+              - generic [ref=e1547]:
+                - term [ref=e1548]: Dla kogo
+                - definition [ref=e1549]: Osoby z niepełnosprawnością intelektualną w wieku 18-25 lat. Innowacja szczególnie kierowana jest do dorosłych osób z zespołem Downa
+              - generic [ref=e1550]:
+                - term [ref=e1551]: Kto może wdrożyć
+                - definition [ref=e1552]: "Instytucje wspierające i świadczące usługi na rzecz osób niepełnoprawnych intelektualnie, w tym osób z zespołem Downa, np.: Środowiskowe Domy Samopomocy, Warsztaty Terapii Zajęciowej, szkoły,organizac…"
+            - generic [ref=e1553]:
+              - generic [ref=e1554]: Weryfikacja Jev Decisions · pewność 98%
+              - paragraph [ref=e1555]: Jev nie dopatrzył się związku (0.02) — „Czas na aktywność!” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e1556]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e1557]
+              - paragraph [ref=e1558]:
+                - text: Pokrywa
+                - strong [ref=e1559]: "2"
+                - text: z
+                - strong [ref=e1560]: "2"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e1561]: (siła pokrycia 67%)
+              - list [ref=e1562]:
+                - listitem [ref=e1563]: "Odpowiada na ten sam problem: instytucje i samorząd."
+                - listitem [ref=e1564]: "Było testowane: Rozwiązanie trafnie odpowiada na potrzeby grupy docelowej i pozwala samodzielnie organizaować swój czas wolny i budować więzi społeczne."
+              - generic [ref=e1565]:
+                - generic [ref=e1566]:
+                  - generic [aria-hidden] [ref=e1567]: ✓
+                  - generic [ref=e1568]:
+                    - text: instytucje i samorząd
+                    - generic [ref=e1569]: · opis problemu
+                - generic [ref=e1570]:
+                  - generic [aria-hidden] [ref=e1571]: ✓
+                  - generic [ref=e1572]:
+                    - text: obszary wiejskie
+                    - generic [ref=e1573]: · opis rozwiązania
+              - group [ref=e1574]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e1575] [cursor=pointer]
+            - paragraph [ref=e1576]: Wdrożono w dąbrowski, olkuski, oświęcimski (dane demo)
+            - generic [ref=e1577]:
+              - button "Skontaktuj się z realizatorem" [ref=e1578] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e1579] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e1580] [cursor=pointer]
+              - button "Pełna karta" [ref=e1581] [cursor=pointer]
+          - article [ref=e1582]:
+            - generic [ref=e1583]:
+              - generic [ref=e1584]:
+                - paragraph [ref=e1585]: Dla osób z niepełnosprawnością sensoryczną
+                - heading [level=3] [ref=e1586]:
+                  - text: Dostępny
+                  - mark [ref=e1587]: wniosek
+                  - text: dla g/Głuchych
+              - generic [ref=e1588]:
+                - generic [ref=e1589]: "49"
+                - generic [aria-hidden] [ref=e1590]: /100
+                - generic [ref=e1591]: na 100 punktów, dopasowanie średnie
+                - generic [ref=e1592]: średnie
+            - paragraph [ref=e1593]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e1594]:
+              - generic [ref=e1595]: ✓ Przetestowane
+              - generic [ref=e1596]: Materiały przygotowane w ramach projektu w opinii testerów są wysoko przydatnymi i efektywnymi produktami. Wypracowane rozwiązanie zwiększa dostęp do…
+            - generic [ref=e1597]:
+              - generic [ref=e1598]:
+                - term [ref=e1599]: Na czym polega
+                - definition [ref=e1600]:
+                  - text: W ramach innowacji opracowano i przetestowano 3 wzory dokumentów urzędowych będących wnioskami o zapewnienie dostępności w określonym obszarze usług publicznych. Rozwiązanie ma na celu ułatwienie osobom g/Głuchym przejście przez
+                  - mark [ref=e1601]: urzędowe
+                  - mark [ref=e1602]: procedury
+                  - text: ", w placówkach nie zapewniających natychmiastowego ws…"
+              - generic [ref=e1603]:
+                - term [ref=e1604]: Jakiego problemu dotyczy
+                - definition [ref=e1605]:
+                  - text: "Innowacja odpowiada na problemy i potrzeby osób głuchych, takie jak: brak szybkiej ścieżki dostępu do usługi tłumaczenia w instytucjach publicznych, brak formalnych dokumentów zrozumiałych dla g/Głuchych chcących załatwić sprawę"
+                  - mark [ref=e1606]: urzędową
+                  - text: i w efekcie konieczność wypełniania dokumentów w języku polski…
+              - generic [ref=e1607]:
+                - term [ref=e1608]: Dla kogo
+                - definition [ref=e1609]: Osoby g/Głuche i niedosłyszące posługujące się Polskim Językiem Migowym
+              - generic [ref=e1610]:
+                - term [ref=e1611]: Kto może wdrożyć
+                - definition [ref=e1612]: Podmioty administracji publicznej, jednostki prywatne oraz organizacje pozarządowe wspierające dostępność dla osób g/Głuchych.
+            - generic [ref=e1613]:
+              - generic [ref=e1614]: Weryfikacja Jev Decisions · pewność 99%
+              - paragraph [ref=e1615]: Jev nie dopatrzył się związku (0.01) — „Dostępny wniosek dla g/Głuchych” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e1616]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e1617]
+              - paragraph [ref=e1618]:
+                - text: Pokrywa
+                - strong [ref=e1619]: "1"
+                - text: z
+                - strong [ref=e1620]: "2"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e1621]: (siła pokrycia 50%)
+              - list [ref=e1622]:
+                - listitem [ref=e1623]: "Odpowiada na ten sam problem: instytucje i samorząd."
+                - listitem [ref=e1624]: "Było testowane: Materiały przygotowane w ramach projektu w opinii testerów są wysoko przydatnymi i efektywnymi produktami."
+                - listitem [ref=e1625]: "Nie pokrywa: obszary wiejskie — sprawdź, czy to dla Ciebie istotne."
+              - generic [ref=e1626]:
+                - generic [ref=e1627]:
+                  - generic [aria-hidden] [ref=e1628]: ✓
+                  - generic [ref=e1629]:
+                    - text: instytucje i samorząd
+                    - generic [ref=e1630]: · opis rozwiązania, wyniki testu, nazwa, opis problemu
+                - generic [ref=e1631]:
+                  - generic [aria-hidden] [ref=e1632]: —
+                  - generic [ref=e1633]: obszary wiejskie nie pokryte
+              - group [ref=e1634]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e1635] [cursor=pointer]
+            - paragraph [ref=e1636]: Wdrożono w bocheński, Tarnów (dane demo)
+            - generic [ref=e1637]:
+              - button "Skontaktuj się z realizatorem" [ref=e1638] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e1639] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e1640] [cursor=pointer]
+              - button "Pełna karta" [ref=e1641] [cursor=pointer]
+          - article [ref=e1642]:
+            - generic [ref=e1643]:
+              - generic [ref=e1644]:
+                - paragraph [ref=e1645]: Dla seniorów
+                - heading "Mobilne centrum pomocy dla osób starszych" [level=3] [ref=e1646]
+              - generic [ref=e1647]:
+                - generic [ref=e1648]: "46"
+                - generic [aria-hidden] [ref=e1649]: /100
+                - generic [ref=e1650]: na 100 punktów, dopasowanie średnie
+                - generic [ref=e1651]: średnie
+            - paragraph [ref=e1652]: sprawdź zasady
+            - note [ref=e1653]:
+              - generic [ref=e1654]: — Brak opisanych wyników testu
+              - generic [ref=e1655]: Ta karta nie zawiera pola „Czy to działa?" — traktuj jako pomysł do sprawdzenia, nie rozwiązanie gotowe do wdrożenia.
+            - generic [ref=e1656]:
+              - generic [ref=e1657]:
+                - term [ref=e1658]: Na czym polega
+                - definition [ref=e1659]:
+                  - text: Innowacja to forma wsparcia seniorów z terenów
+                  - mark [ref=e1660]: wiejskich
+                  - text: ", znacznie"
+                  - mark [ref=e1661]: oddalonych
+                  - text: "od dużych aglomeracji, z utrudnionym dojazdem do miasta. Metodę tworzą następujące elementy: coaching senioralny, jako narzędzie wspierania seniora; mobilność usługi – projekt zakłada dotarcie z ofertą usługi do domu klien…"
+              - generic [ref=e1662]:
+                - term [ref=e1663]: Jakiego problemu dotyczy
+                - definition [ref=e1664]: Osoby starsze często wycofują się z aktywnego życia, popadają w przygnębienie i apatię. Czują się osamotnione, odtrącone, niepotrzebne. Dotykają ich problemy komunikacyjne, izolacja społeczna czy trudności w realizacji spraw urzędowych.
+              - generic [ref=e1665]:
+                - term [ref=e1666]: Dla kogo
+                - definition [ref=e1667]:
+                  - text: Osoby starsze, niesamodzielne, mieszkające na
+                  - mark [ref=e1668]: wsi
+                  - text: .
+              - generic [ref=e1669]:
+                - term [ref=e1670]: Kto może wdrożyć
+                - definition [ref=e1671]:
+                  - mark [ref=e1672]: Samorządy
+                  - mark [ref=e1673]: lokalne
+                  - text: ", gminne ośrodki pomocy społecznej, organizacje pozarządowe."
+            - generic [ref=e1674]:
+              - generic [ref=e1675]: Weryfikacja Jev Decisions · pewność 98%
+              - paragraph [ref=e1676]: Jev nie dopatrzył się związku (0.02) — „Mobilne centrum pomocy dla osób starszych” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e1677]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e1678]
+              - paragraph [ref=e1679]:
+                - text: Pokrywa
+                - strong [ref=e1680]: "2"
+                - text: z
+                - strong [ref=e1681]: "2"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e1682]: (siła pokrycia 48%)
+              - list [ref=e1683]:
+                - listitem [ref=e1684]: "Grupa docelowa się zgadza — karta wymienia obszary wiejskie: Osoby starsze, niesamodzielne, mieszkające na wsi."
+                - listitem [ref=e1685]: Ta karta nie ma opisanych wyników testu, więc wynik dopasowania został obniżony — tematycznie pasuje, ale nikt nie udokumentował, czy działa.
+              - generic [ref=e1686]:
+                - generic [ref=e1687]:
+                  - generic [aria-hidden] [ref=e1688]: ✓
+                  - generic [ref=e1689]:
+                    - text: obszary wiejskie
+                    - generic [ref=e1690]: · opis rozwiązania, grupa docelowa
+                - generic [ref=e1691]:
+                  - generic [aria-hidden] [ref=e1692]: ✓
+                  - generic [ref=e1693]:
+                    - text: instytucje i samorząd
+                    - generic [ref=e1694]: · kto może skorzystać
+              - group [ref=e1695]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e1696] [cursor=pointer]
+            - paragraph [ref=e1697]: Wdrożono w bocheński, limanowski, suski (dane demo)
+            - generic [ref=e1698]:
+              - button "Skontaktuj się z realizatorem" [ref=e1699] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e1700] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e1701] [cursor=pointer]
+              - button "Pełna karta" [ref=e1702] [cursor=pointer]
+          - article [ref=e1703]:
+            - generic [ref=e1704]:
+              - generic [ref=e1705]:
+                - paragraph [ref=e1706]: Dla rynku pracy
+                - heading "Oddawacze" [level=3] [ref=e1707]
+              - generic [ref=e1708]:
+                - generic [ref=e1709]: "35"
+                - generic [aria-hidden] [ref=e1710]: /100
+                - generic [ref=e1711]: na 100 punktów, dopasowanie średnie
+                - generic [ref=e1712]: średnie
+            - paragraph [ref=e1713]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e1714]:
+              - generic [ref=e1715]: ✓ Przetestowane
+              - generic [ref=e1716]: Pomysł utworzenia platformy wymiany obejmującej 3 strony (oddającą, odbierającą oraz organizację charytatywną) wydaje się być rokujący na przyszłość,…
+            - generic [ref=e1717]:
+              - generic [ref=e1718]:
+                - term [ref=e1719]: Na czym polega
+                - definition [ref=e1720]: Proekologiczny marketplace przedmiotów używanych w postacji aplikacji mobilnej, dzięki której osoby posiadające zbędne przedmioty mogą się ich pozbyć i przy okazji wesprzeć cele charytatywne. „Oddający” przy oddawaniu używanych przedmiotów wskazuje konkretny cel charytatywny, na który trafi symbolic…
+              - generic [ref=e1721]:
+                - term [ref=e1722]: Jakiego problemu dotyczy
+                - definition [ref=e1723]:
+                  - text: Innowacja odpowiada na brak dostępu do przedmiotów codziennego użytku o wysokiej jakości/trwałości przez osoby o niskim statusie materialnym, ograniczony rozwój organizacji
+                  - mark [ref=e1724]: lokalnych
+                  - text: ", dezintegrację"
+                  - mark [ref=e1725]: społeczności
+                  - mark [ref=e1726]: lokalnej
+                  - text: i zaśmiecanie planety.
+              - generic [ref=e1727]:
+                - term [ref=e1728]: Dla kogo
+                - definition [ref=e1729]: Osoby ubogie
+              - generic [ref=e1730]:
+                - term [ref=e1731]: Kto może wdrożyć
+                - definition [ref=e1732]:
+                  - text: Organizacje pozarządowe działające lokalnie, miasta i
+                  - mark [ref=e1733]: gminy
+                  - text: .
+            - generic [ref=e1734]:
+              - generic [ref=e1735]: Weryfikacja Jev Decisions · pewność 97%
+              - paragraph [ref=e1736]: Jev nie dopatrzył się związku (0.03) — „Oddawacze” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e1737]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e1738]
+              - paragraph [ref=e1739]:
+                - text: Pokrywa
+                - strong [ref=e1740]: "2"
+                - text: z
+                - strong [ref=e1741]: "2"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e1742]: (siła pokrycia 19%)
+              - list [ref=e1743]:
+                - listitem [ref=e1744]: "Wspólne wątki: instytucje i samorząd, obszary wiejskie."
+                - listitem [ref=e1745]: "Było testowane: Pomysł utworzenia platformy wymiany obejmującej 3 strony (oddającą, odbierającą oraz organizację charytatywną) wydaje się być rokujący na przyszłość,…"
+              - generic [ref=e1746]:
+                - generic [ref=e1747]:
+                  - generic [aria-hidden] [ref=e1748]: ✓
+                  - generic [ref=e1749]:
+                    - text: instytucje i samorząd
+                    - generic [ref=e1750]: · wyniki testu, kto może skorzystać
+                - generic [ref=e1751]:
+                  - generic [aria-hidden] [ref=e1752]: ✓
+                  - generic [ref=e1753]:
+                    - text: obszary wiejskie
+                    - generic [ref=e1754]: · kto może skorzystać
+              - group [ref=e1755]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e1756] [cursor=pointer]
+            - paragraph [ref=e1757]: Wdrożono w bocheński, nowotarski (dane demo)
+            - generic [ref=e1758]:
+              - button "Skontaktuj się z realizatorem" [ref=e1759] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e1760] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e1761] [cursor=pointer]
+              - button "Pełna karta" [ref=e1762] [cursor=pointer]
+  - contentinfo [ref=e165]:
+    - generic [ref=e166]:
+      - paragraph [ref=e167]: Prototyp na HackYeah 2026 · zadanie Województwa Małopolskiego, realizator ROPS Kraków
+      - paragraph [ref=e168]: Dane innowacji pochodzą z Biblioteki Innowacji Społecznych ROPS (115 kart, w większości CC BY 4.0). Lokalizacje wdrożeń, kontakty realizatorów i zgłoszenia w panelu są danymi demonstracyjnymi — prototyp nie używa prawdziwych danych osobowych.

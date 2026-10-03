@@ -1,0 +1,509 @@
+/* Układ strony opisowej. Rama (pasek dostępności, nagłówek, hero, stopka)
+   jest przepisana z aplikacji, żeby wejście na landing i wejście do prototypu
+   wyglądało jak ta sama strona. Nowe jest tylko to, czego aplikacja nie ma:
+   rytm sekcji, siatka modułów, mostek pojęciowy i zestawienie kosztów. */
+
+/* --- pasek dostępności (app/src/components/shell.css) --- */
+.a11ybar {
+  background: var(--surface-glass);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-xs);
+}
+.a11ybar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  padding-block: var(--sp-2);
+}
+.a11ybar__label {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  margin: 0;
+}
+.a11ybar .btn {
+  min-height: 36px;
+  padding-inline: var(--sp-3);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  border-color: transparent;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  color: var(--ink-2);
+}
+.a11ybar .btn:hover { background: var(--surface-glass-thin); color: var(--ink); }
+.a11ybar .btn[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.a11ybar__group {
+  gap: 2px;
+  background: var(--surface-glass-thin);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 2px;
+}
+
+/* --- nagłówek --- */
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--surface-glass-thick);
+  backdrop-filter: blur(var(--glass-blur-heavy)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur-heavy)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.25);
+}
+.hdr__inner {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  padding-block: var(--sp-3);
+}
+.hdr__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--ink);
+  text-decoration: none;
+  min-height: 44px;
+}
+.hdr__mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--chart-2));
+  flex: none;
+}
+.hdr__brand strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.hdr__sub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+.hdr__nav { margin-left: auto; min-width: 0; }
+.hdr__nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hdr__nav a {
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-pill);
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms ease;
+}
+.hdr__nav a:hover { background: var(--surface-glass-thin); color: var(--ink); }
+.hdr__cta { flex: none; }
+
+@media (max-width: 64rem) {
+  .hdr__sub { display: none; }
+}
+@media (max-width: 52rem) {
+  .hdr__nav { margin-left: 0; width: 100%; max-width: 100%; order: 3; }
+  .hdr__nav ul {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--sp-1);
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .hdr__nav ul::-webkit-scrollbar { display: none; }
+  .hdr__nav li { flex: none; }
+  .hdr__nav a { white-space: nowrap; }
+  .hdr__cta { margin-left: auto; }
+}
+
+main { min-height: 60vh; }
+
+/* --- hero (app/src/components/hero.css) --- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  text-align: center;
+  padding-block: var(--sp-8) var(--sp-7);
+  overflow: hidden;
+}
+.hero__glow {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  width: min(1100px, 120%);
+  aspect-ratio: 2 / 1;
+  translate: -50% 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 42% at 50% 46%,
+      color-mix(in srgb, var(--accent) 55%, transparent) 0%,
+      transparent 68%),
+    radial-gradient(55% 50% at 28% 62%,
+      color-mix(in srgb, var(--chart-2) 34%, transparent) 0%,
+      transparent 70%);
+  filter: blur(90px);
+  opacity: 1;
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Sygnatura przeniesiona z aplikacji: gdy czytelnik zejdzie z hero do treści,
+   poświata gaśnie — kino oddaje pierwszeństwo narzędziu. */
+.hero--past .hero__glow { opacity: 0.35; }
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 0 auto var(--sp-5);
+  padding: var(--sp-1) var(--sp-4);
+  border: var(--glass-border-subtle);
+  border-radius: var(--radius-pill);
+  background: var(--surface-glass-thin);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: var(--glass-highlight);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink-2);
+  max-width: none;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7.5vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+  text-transform: uppercase;
+  text-wrap: balance;
+  max-width: 18ch;
+  margin-inline: auto;
+  margin-bottom: var(--sp-5);
+}
+/* Wersaliki wyłącznie tutaj — poza hero nigdzie na stronie. */
+
+/* Druga połowa tezy, nie losowy rzeczownik dobrany pod efekt. */
+.hero__accent {
+  color: var(--accent);
+  background: linear-gradient(100deg,
+    var(--accent) 0%,
+    color-mix(in srgb, var(--accent) 55%, var(--ink)) 55%,
+    var(--ink) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+:root[data-contrast="high"] .hero__accent {
+  background: none;
+  -webkit-text-fill-color: var(--accent);
+  color: var(--accent);
+}
+
+.hero__lede {
+  font-size: var(--fs-lg);
+  color: var(--ink-2);
+  max-width: 56ch;
+  margin-inline: auto;
+  margin-bottom: var(--sp-6);
+}
+.hero__actions { justify-content: center; }
+
+@media (max-width: 40rem) {
+  .hero { padding-block: var(--sp-7) var(--sp-6); }
+  .hero__lede { font-size: var(--fs-base); }
+}
+
+/* --- rytm sekcji --- */
+.sect { padding-block: var(--sp-8); }
+.sect__head { max-width: 62ch; margin-bottom: var(--sp-6); }
+.sect__head h2 { margin-bottom: var(--sp-3); }
+.sect__head p { font-size: var(--fs-lg); color: var(--ink-2); }
+
+/* --- liczby --- */
+/* Jedna liczba prowadzi (111 ze 115), reszta ją podpiera. Liczby stoją
+   w kroju tekstowym z cyframi o równej szerokości — bez drugiego alfabetu. */
+.figures {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--sp-4);
+  align-items: stretch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.figure { display: flex; flex-direction: column; }
+.figure--lead { grid-column: span 3; }
+.figure--lead .figure__meter { margin-top: auto; }
+.figure__num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.figure__label {
+  display: block;
+  margin-top: var(--sp-2);
+  color: var(--ink-2);
+  max-width: 34ch;
+}
+/* Miara 111/115 — pasek jest powtórzeniem liczby, nie jej jedynym nośnikiem. */
+.figure__meter {
+  margin-top: var(--sp-5);
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-glass-thin);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.figure__meter span {
+  display: block;
+  height: 100%;
+  width: 96.5%;
+  border-radius: var(--radius-pill);
+  background: var(--ok);
+}
+/* Liczby podpierające — mniejsze, żeby prowadząca naprawdę prowadziła. */
+.figure:not(.figure--lead) .figure__num { font-size: var(--fs-2xl); }
+.figure:not(.figure--lead) .figure__label { font-size: var(--fs-sm); }
+
+@media (max-width: 64rem) {
+  .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .figure--lead { grid-column: span 2; }
+}
+@media (max-width: 40rem) {
+  .figures { grid-template-columns: 1fr; }
+  .figure--lead { grid-column: auto; }
+}
+
+/* --- moduły --- */
+/* Numeracja I–VII nie jest ozdobą: tak są ponumerowane moduły w treści
+   zadania i tak są podpisane w nawigacji prototypu. */
+.mods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: var(--sp-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mod { display: flex; flex-direction: column; gap: var(--sp-3); }
+.mod__top { display: flex; align-items: baseline; gap: var(--sp-3); }
+.mod__no {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  min-width: 2.5ch;
+}
+.mod p { font-size: var(--fs-sm); color: var(--ink-2); margin: 0; }
+.mod--lead { grid-column: 1 / -1; }
+.mod--lead p { font-size: var(--fs-base); max-width: 70ch; }
+
+/* --- mostek pojęciowy: element sygnaturowy strony --- */
+/* Pokazuje jedyną rzecz, której nie widać z opisu: zdanie potoczne po lewej
+   i język Biblioteki ROPS po prawej. Podświetlone słowa to realne wyzwalacze
+   z `app/src/lib/concepts.ts`. */
+.bridge {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: var(--sp-5);
+  align-items: center;
+}
+.bridge__side { min-width: 0; }
+.bridge__quote {
+  font-size: var(--fs-lg);
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: none;
+}
+.bridge__arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: var(--glass-border-subtle);
+  background: var(--surface-glass-thin);
+  color: var(--ink-3);
+  flex: none;
+}
+.bridge__threads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bridge__foot {
+  margin-top: var(--sp-5);
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  max-width: 78ch;
+}
+@media (max-width: 56rem) {
+  .bridge { grid-template-columns: 1fr; justify-items: start; }
+  .bridge__arrow { rotate: 90deg; }
+}
+
+/* Rozliczenie wyniku: 65% pokrycia wątków + 35% siły leksykalnej. */
+.formula {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  align-items: center;
+  margin-top: var(--sp-5);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.formula b { color: var(--ink); font-weight: 600; }
+
+/* --- cztery rozstrzygnięcia --- */
+/* Dwie na dwie, nie trzy plus sierota: układ ma pokazywać, że to jeden
+   zestaw czterech decyzji. */
+.points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: var(--sp-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.point h3 { margin-bottom: var(--sp-2); }
+.point p { font-size: var(--fs-sm); color: var(--ink-2); margin: 0; }
+
+/* --- dostępność --- */
+.a11y-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--sp-4);
+}
+.a11y-list { margin: 0; padding: 0; list-style: none; }
+.a11y-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--sp-3);
+  padding-block: var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.a11y-list li:last-child { border-bottom: 0; }
+.a11y-list b { color: var(--ink); font-weight: 600; }
+/* Znak przy pozycji — informacja nie leży w samym kolorze (WCAG 1.4.1). */
+.a11y-list span[aria-hidden] { color: var(--ok); font-weight: 700; }
+@media (max-width: 56rem) {
+  .a11y-grid { grid-template-columns: 1fr; }
+}
+
+/* --- koszt --- */
+.cost {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: var(--sp-4);
+}
+.cost__sum {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.cost__sum { flex-wrap: wrap; }
+.cost__sum b {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  /* Kwota nie może się łamać na „~63" i „000 zł". */
+  white-space: nowrap;
+}
+.cost__sum span { color: var(--ink-3); font-size: var(--fs-sm); }
+
+/* --- zamknięcie --- */
+.closer { text-align: center; }
+.closer h2 { margin-bottom: var(--sp-3); }
+.closer p { margin-inline: auto; }
+.closer .row { justify-content: center; margin-top: var(--sp-6); }
+
+/* --- stopka --- */
+.ftr {
+  margin-top: var(--sp-8);
+  padding-block: var(--sp-6);
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: var(--fs-sm);
+}
+.ftr p { max-width: 70ch; }
+
+/* --- pojawianie się przy przewijaniu (app/src/styles/reveal.css) --- */
+/* Dopiero z klasą z JS: bez JS treść jest widoczna, nie odwrotnie. */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js-reveal [data-reveal].reveal--in { opacity: 1; transform: none; }
+.js-reveal [data-reveal="stagger"] > * {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js-reveal [data-reveal="stagger"].reveal--in > * { opacity: 1; transform: none; }
+.js-reveal [data-reveal="stagger"].reveal--in > *:nth-child(2) { transition-delay: 70ms; }
+.js-reveal [data-reveal="stagger"].reveal--in > *:nth-child(3) { transition-delay: 140ms; }
+.js-reveal [data-reveal="stagger"].reveal--in > *:nth-child(4) { transition-delay: 210ms; }
+.js-reveal [data-reveal="stagger"].reveal--in > *:nth-child(5) { transition-delay: 280ms; }
+.js-reveal [data-reveal="stagger"].reveal--in > *:nth-child(n + 6) { transition-delay: 350ms; }
+/* Focus wygrywa z animacją: element pod klawiszem musi być widoczny
+   natychmiast (WCAG 2.4.7), nie po 600 ms. */
+.js-reveal [data-reveal]:focus-within {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal [data-reveal],
+  .js-reveal [data-reveal="stagger"] > * { opacity: 1; transform: none; }
+}
+@media print {
+  .js-reveal [data-reveal],
+  .js-reveal [data-reveal="stagger"] > * { opacity: 1 !important; transform: none !important; }
+}

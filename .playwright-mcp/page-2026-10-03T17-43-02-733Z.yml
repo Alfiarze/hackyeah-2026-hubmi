@@ -1,0 +1,659 @@
+- generic [ref=e2]:
+  - paragraph [ref=e3]: "Tło strony: abstrakcyjne, powoli przesuwające się cząstki światła na ciemnym tle."
+  - link "Przejdź do treści" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=e6]:
+    - paragraph [ref=e7]: Dostosuj widok
+    - group "Dostosuj widok" [ref=e8]:
+      - button "Prosty język" [ref=e9] [cursor=pointer]
+      - group "Rozmiar tekstu" [ref=e10]:
+        - button "Czcionka normalna, 18 pikseli" [pressed] [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: A
+        - button "Czcionka duża, 22 piksele" [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: A+
+        - button "Czcionka bardzo duża, 27 pikseli" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: A++
+      - button "Wysoki kontrast" [ref=e20] [cursor=pointer]
+      - button "Ciemny motyw" [ref=e21] [cursor=pointer]
+      - button "Ruch w tle" [pressed] [ref=e22] [cursor=pointer]
+    - generic [ref=e23]:
+      - generic [ref=e24]: Rola w demonstracji
+      - generic [aria-hidden] [ref=e25]: "Demo — jestem:"
+      - combobox "Rola w demonstracji" [ref=e26]:
+        - option "mieszkanka / NGO / gmina" [selected]
+        - option "pracownik ROPS"
+        - option "ekspert branżowy"
+  - banner [ref=e27]:
+    - generic [ref=e28]:
+      - link [ref=e29] [cursor=pointer]:
+        - /url: "#matchmaking"
+        - strong [ref=e32]: HubMI
+      - navigation "Moduły Hubu" [ref=e33]:
+        - list [ref=e34]:
+          - listitem [ref=e35]:
+            - link [ref=e36] [cursor=pointer]:
+              - /url: "#matchmaking"
+              - generic [aria-hidden] [ref=e37]: Szukaj
+          - listitem [ref=e38]:
+            - link [ref=e39] [cursor=pointer]:
+              - /url: "#biblioteka"
+              - generic [aria-hidden] [ref=e40]: Wiedza
+          - listitem [ref=e41]:
+            - link [ref=e42] [cursor=pointer]:
+              - /url: "#kreator"
+              - generic [aria-hidden] [ref=e43]: Pomysł
+          - listitem [ref=e44]:
+            - link [ref=e45] [cursor=pointer]:
+              - /url: "#tester"
+              - generic [aria-hidden] [ref=e46]: Testuj
+          - listitem [ref=e47]:
+            - link ", 6 nowych powiadomień" [ref=e169] [cursor=pointer]:
+              - /url: "#komunikacja"
+              - generic [aria-hidden] [ref=e49]: Rozmowy
+              - generic [aria-hidden] [ref=e50]: "6"
+          - listitem [ref=e52]:
+            - link ", 9 nowych powiadomień" [ref=e2226] [cursor=pointer]:
+              - /url: "#admin"
+              - generic [aria-hidden] [ref=e54]: Panel
+              - generic [aria-hidden] [ref=e55]: "9"
+          - listitem [ref=e57]:
+            - link [ref=e58] [cursor=pointer]:
+              - /url: "#middleman"
+              - generic [aria-hidden] [ref=e59]: Middleman
+          - listitem [ref=e60]:
+            - link [ref=e61] [cursor=pointer]:
+              - /url: "#dostepnosc"
+              - generic [aria-hidden] [ref=e62]: WCAG
+  - main [ref=e63]:
+    - generic [ref=e64]:
+      - generic [ref=e66]:
+        - heading "Opisz problem. Pokażemy, co już zadziałało." [level=1] [ref=e67]
+        - region "Wyszukiwanie rozwiązań" [ref=e68]:
+          - list [ref=e69]:
+            - listitem [ref=e2229]:
+              - generic [ref=e2230]: HubMI
+              - paragraph [ref=e2231]: Opisz problem lub wyzwanie w swojej okolicy. Wystarczą 1–2 zdania zwykłym, codziennym językiem.
+            - listitem [ref=e2324]:
+              - generic [ref=e2325]: Ty
+              - paragraph [ref=e2326]: brak windy w urzędzie dla osoby na wózku, senior nie wejdzie na piętro
+            - listitem [ref=e2327]:
+              - generic [ref=e2328]: HubMI
+              - paragraph [ref=e2329]: W jakiej gminie lub powiecie występuje ten problem? Pozwoli to sprawdzić lokalne wdrożenia i kontakt do realizatorów.
+            - listitem [ref=e2339]:
+              - generic [ref=e2340]: HubMI
+              - paragraph [ref=e2341]: "Rozpoznane obszary: bariery architektoniczne, ograniczona mobilność, osoby starsze. Porównuję zgłoszenie z bazą przetestowanych innowacji."
+      - generic [ref=e189]:
+        - status [active] [ref=e2342]:
+          - generic [ref=e2343]:
+            - heading "6 rozwiązań z Biblioteki" [level=2] [ref=e2354]
+            - paragraph [ref=e2355]: "Rozpoznane wątki: bariery architektoniczne, ograniczona mobilność, osoby starsze."
+          - button "Zacznij od nowa" [ref=e2348] [cursor=pointer]
+        - generic [ref=e2356]:
+          - heading "Gdzie podobny problem już rozwiązano" [level=2] [ref=e2357]
+          - figure "Im ciemniejszy powiat, tym więcej dopasowanych innowacji zostało tam wdrożonych. Kliknij powiat, aby zawęzić wyniki — a potem użyj przycisku „Skontaktuj się z realizatorem” na fiszce, żeby napisać do instytucji, która to samo już u siebie zrobiła." [ref=e2358]:
+            - generic [ref=e2360]:
+              - group "Mapa województwa małopolskiego — 22 powiaty i miasta" [ref=e2361]:
+                - 'button "m. Kraków: 0 wdrożeń" [ref=e2363] [cursor=pointer]'
+                - 'button "m. Nowy Sącz: 1 wdrożenie" [ref=e2365] [cursor=pointer]'
+                - 'button "m. Tarnów: 0 wdrożeń" [ref=e2367] [cursor=pointer]'
+                - 'button "pow. bocheński: 0 wdrożeń" [ref=e2369] [cursor=pointer]'
+                - 'button "pow. brzeski: 1 wdrożenie" [ref=e2371] [cursor=pointer]'
+                - 'button "pow. chrzanowski: 0 wdrożeń" [ref=e2373] [cursor=pointer]'
+                - 'button "pow. dąbrowski: 1 wdrożenie" [ref=e2375] [cursor=pointer]'
+                - 'button "pow. gorlicki: 0 wdrożeń" [ref=e2377] [cursor=pointer]'
+                - 'button "pow. krakowski: 1 wdrożenie" [ref=e2379] [cursor=pointer]'
+                - 'button "pow. limanowski: 0 wdrożeń" [ref=e2381] [cursor=pointer]'
+                - 'button "pow. miechowski: 2 wdrożenia" [ref=e2383] [cursor=pointer]'
+                - 'button "pow. myślenicki: 0 wdrożeń" [ref=e2385] [cursor=pointer]'
+                - 'button "pow. nowosądecki: 1 wdrożenie" [ref=e2387] [cursor=pointer]'
+                - 'button "pow. nowotarski: 1 wdrożenie" [ref=e2389] [cursor=pointer]'
+                - 'button "pow. olkuski: 1 wdrożenie" [ref=e2391] [cursor=pointer]'
+                - 'button "pow. oświęcimski: 1 wdrożenie" [ref=e2393] [cursor=pointer]'
+                - 'button "pow. proszowicki: 2 wdrożenia" [ref=e2395] [cursor=pointer]'
+                - 'button "pow. suski: 0 wdrożeń" [ref=e2397] [cursor=pointer]'
+                - 'button "pow. tarnowski: 2 wdrożenia" [ref=e2399] [cursor=pointer]'
+                - 'button "pow. tatrzański: 1 wdrożenie" [ref=e2401] [cursor=pointer]'
+                - 'button "pow. wadowicki: 0 wdrożeń" [ref=e2403] [cursor=pointer]'
+                - 'button "pow. wielicki: 0 wdrożeń" [ref=e2405] [cursor=pointer]'
+              - list [aria-hidden] [ref=e2406]:
+                - listitem [ref=e2407]: brak
+                - listitem [ref=e2409]: mniej
+                - listitem [ref=e2411]
+                - listitem [ref=e2413]
+                - listitem [ref=e2415]: więcej
+            - group [ref=e2417]:
+              - generic "Te same dane jako tabela" [ref=e2418] [cursor=pointer]
+            - paragraph [ref=e2419]:
+              - strong [ref=e2420]: Dane demo.
+              - text: Biblioteka Innowacji Społecznych ROPS nie publikuje lokalizacji wdrożeń, więc rozmieszczenie zostało wygenerowane na potrzeby prototypu (deterministycznie, z charakteru innowacji). Granice powiatów są prawdziwe. Po wdrożeniu to pole wypełniają realne zgłoszenia realizatorów.
+        - region "Dopasowane innowacje" [ref=e2421]:
+          - article [ref=e2422]:
+            - generic [ref=e2423]:
+              - generic [ref=e2424]:
+                - paragraph [ref=e2425]: Dla osób o ograniczonej mobilności
+                - heading [level=3] [ref=e2426]:
+                  - text: Puzzle's
+                  - mark [ref=e2427]: Ramp
+              - generic [ref=e2428]:
+                - generic [ref=e2429]: "92"
+                - generic [aria-hidden] [ref=e2430]: /100
+                - generic [ref=e2431]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e2432]: wysokie
+            - paragraph [ref=e2433]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e2434]:
+              - generic [ref=e2435]: ✓ Przetestowane
+              - generic [ref=e2436]: Na podstawie doświadczeń z etapu testowania, można stwierdzić, że rozwiązanie umożliwia samodzielne dostosowanie przestrzeni w zakresie kilku/ kilkuna…
+            - generic [ref=e2437]:
+              - generic [ref=e2438]:
+                - term [ref=e2439]: Na czym polega
+                - definition [ref=e2440]:
+                  - text: Uniwersalny typoszereg klocków/puzzli, w postaci gumowych kształtowników, z których można zbudować dowolnej wysokości gładki
+                  - mark [ref=e2441]: podjazd
+                  - text: . Rozwiązanie służy do trwałego lub tymczasowego, szybkiego i niskobudżetowego usuwania przeszkód
+                  - mark [ref=e2442]: architektonicznych
+                  - text: w postaci
+                  - mark [ref=e2443]: progów
+                  - text: ","
+                  - mark [ref=e2444]: krawężników
+                  - text: ", uskoków, pojedynczyc…"
+              - generic [ref=e2445]:
+                - term [ref=e2446]: Jakiego problemu dotyczy
+                - definition [ref=e2447]:
+                  - text: Innowacja odpowiada na trudności z dostępnością
+                  - mark [ref=e2448]: architektoniczną
+                  - text: lub transportową dla osób o ograniczonej
+                  - mark [ref=e2449]: mobilności
+                  - text: np. poruszających się na
+                  - mark [ref=e2450]: wózkach
+                  - text: .
+              - generic [ref=e2451]:
+                - term [ref=e2452]: Dla kogo
+                - definition [ref=e2453]:
+                  - text: Osoby posiadające problemy z poruszaniem się np. osoby otyłe,
+                  - mark [ref=e2454]: starsze
+                  - text: ", poruszające się o lasce, przy pomocy balkonika rehabilitacyjnego lub na"
+                  - mark [ref=e2455]: wózku
+                  - text: ", a także osoby z"
+                  - mark [ref=e2456]: wózkami
+                  - text: dziecięcymi.
+              - generic [ref=e2457]:
+                - term [ref=e2458]: Kto może wdrożyć
+                - definition [ref=e2459]: Placówki użyteczności publicznej, podmioty prywatne, osoby prywatne.
+            - generic [ref=e2460]:
+              - generic [ref=e2461]: Weryfikacja Jev Decisions · pewność 57%
+              - paragraph [ref=e2462]: Jev nie dopatrzył się związku (0.43) — „Puzzle's Ramp” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2463]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2464]
+              - paragraph [ref=e2465]:
+                - text: Pokrywa
+                - strong [ref=e2466]: "3"
+                - text: z
+                - strong [ref=e2467]: "3"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e2468]: (siła pokrycia 88%)
+              - list [ref=e2469]:
+                - listitem [ref=e2470]: "Odpowiada na ten sam problem: bariery architektoniczne, ograniczona mobilność."
+                - listitem [ref=e2471]: "Grupa docelowa się zgadza — karta wymienia ograniczona mobilność, osoby starsze: Osoby posiadające problemy z poruszaniem się np. osoby otyłe, starsze, poruszające się o lasce, przy pomocy balkonika re…"
+                - listitem [ref=e2472]: "Było testowane: Na podstawie doświadczeń z etapu testowania, można stwierdzić, że rozwiązanie umożliwia samodzielne dostosowanie przestrzeni w zakresie kilku/ kilkuna…"
+              - generic [ref=e2473]:
+                - generic [ref=e2474]:
+                  - generic [aria-hidden] [ref=e2475]: ✓
+                  - generic [ref=e2476]:
+                    - text: bariery architektoniczne
+                    - generic [ref=e2477]: · opis rozwiązania, nazwa, opis problemu
+                - generic [ref=e2478]:
+                  - generic [aria-hidden] [ref=e2479]: ✓
+                  - generic [ref=e2480]:
+                    - text: ograniczona mobilność
+                    - generic [ref=e2481]: · grupa docelowa, opis rozwiązania, opis problemu, kategoria, wyniki testu
+                - generic [ref=e2482]:
+                  - generic [aria-hidden] [ref=e2483]: ✓
+                  - generic [ref=e2484]:
+                    - text: osoby starsze
+                    - generic [ref=e2485]: · grupa docelowa
+              - group [ref=e2486]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e2487] [cursor=pointer]
+            - paragraph [ref=e2488]: Wdrożono w nowosądecki, nowotarski, oświęcimski, proszowicki (dane demo)
+            - generic [ref=e2489]:
+              - button "Skontaktuj się z realizatorem" [ref=e2490] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2491] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2492] [cursor=pointer]
+              - button "Pełna karta" [ref=e2493] [cursor=pointer]
+          - article [ref=e2494]:
+            - generic [ref=e2495]:
+              - generic [ref=e2496]:
+                - paragraph [ref=e2497]: Dla seniorów
+                - heading "Żeglowanie w wyobraźni - czyli sposób na strachy na wodzie" [level=3] [ref=e2498]
+              - generic [ref=e2499]:
+                - generic [ref=e2500]: "77"
+                - generic [aria-hidden] [ref=e2501]: /100
+                - generic [ref=e2502]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e2503]: wysokie
+            - paragraph [ref=e2504]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e2505]:
+              - generic [ref=e2506]: ✓ Przetestowane
+              - generic [ref=e2507]: Aplikacja została pozytywnie oceniona przez użytkowników testu oraz specjalistów od żeglowania. Była prezentowana także na forum międzynarodowym, gdzi…
+            - generic [ref=e2508]:
+              - generic [ref=e2509]:
+                - term [ref=e2510]: Na czym polega
+                - definition [ref=e2511]:
+                  - text: Innowacja stanowi model wsparcia oraz pokonywania
+                  - mark [ref=e2512]: barier
+                  - text: i lęku osób
+                  - mark [ref=e2513]: starszych
+                  - text: (60+) przed wejściem na jacht i żaglowaniem, a także umożliwienie dzieciom i młodzieży z niepełnosprawnością
+                  - mark [ref=e2514]: ruchową
+                  - text: zdobycia doświadczenia żeglarskiego za pomocą wirtualnej rzeczywistości. W innowacji wykorzystanie znala…
+              - generic [ref=e2515]:
+                - term [ref=e2516]: Jakiego problemu dotyczy
+                - definition [ref=e2517]:
+                  - text: Innowacja odpowiada na
+                  - mark [ref=e2518]: brak
+                  - mark [ref=e2519]: dostępu
+                  - text: do żeglarstwa osób z niepełnosprawnością
+                  - mark [ref=e2520]: ruchową
+                  - text: i lęk przed wodą.
+              - generic [ref=e2521]:
+                - term [ref=e2522]: Dla kogo
+                - definition [ref=e2523]:
+                  - text: Osoby
+                  - mark [ref=e2524]: starsze
+                  - text: o ograniczonej
+                  - mark [ref=e2525]: mobilności
+                  - text: i percepcji, młodzież i dzieci z niepełnosprawnością
+                  - mark [ref=e2526]: ruchową
+                  - text: ", osoby odczuwające lęk przed wodą."
+              - generic [ref=e2527]:
+                - term [ref=e2528]: Kto może wdrożyć
+                - definition [ref=e2529]:
+                  - text: Organizatorzy turystyki żaglowej/wodnej, ośrodki opieki nad
+                  - mark [ref=e2530]: seniorami
+                  - text: ", instytucje wspierające osoby z niepełnosprawnością"
+                  - mark [ref=e2531]: ruchową
+                  - text: .
+            - generic [ref=e2532]:
+              - generic [ref=e2533]: Weryfikacja Jev Decisions · pewność 98%
+              - paragraph [ref=e2534]: Jev nie dopatrzył się związku (0.02) — „Żeglowanie w wyobraźni - czyli sposób na strachy na wodzie” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2535]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2536]
+              - paragraph [ref=e2537]:
+                - text: Pokrywa
+                - strong [ref=e2538]: "3"
+                - text: z
+                - strong [ref=e2539]: "3"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e2540]: (siła pokrycia 91%)
+              - list [ref=e2541]:
+                - listitem [ref=e2542]: "Odpowiada na ten sam problem: ograniczona mobilność, bariery architektoniczne."
+                - listitem [ref=e2543]: "Grupa docelowa się zgadza — karta wymienia ograniczona mobilność, osoby starsze: Osoby starsze o ograniczonej mobilności i percepcji, młodzież i dzieci z niepełnosprawnością ruchową, osoby odczuwające…"
+                - listitem [ref=e2544]: "Było testowane: Aplikacja została pozytywnie oceniona przez użytkowników testu oraz specjalistów od żeglowania."
+              - generic [ref=e2545]:
+                - generic [ref=e2546]:
+                  - generic [aria-hidden] [ref=e2547]: ✓
+                  - generic [ref=e2548]:
+                    - text: ograniczona mobilność
+                    - generic [ref=e2549]: · grupa docelowa, opis rozwiązania, opis problemu, kto może skorzystać
+                - generic [ref=e2550]:
+                  - generic [aria-hidden] [ref=e2551]: ✓
+                  - generic [ref=e2552]:
+                    - text: bariery architektoniczne
+                    - generic [ref=e2553]: · opis rozwiązania, opis problemu
+                - generic [ref=e2554]:
+                  - generic [aria-hidden] [ref=e2555]: ✓
+                  - generic [ref=e2556]:
+                    - text: osoby starsze
+                    - generic [ref=e2557]: · kategoria, opis rozwiązania, grupa docelowa, kto może skorzystać
+              - group [ref=e2558]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e2559] [cursor=pointer]
+            - paragraph [ref=e2560]: Wdrożono w miechowski, olkuski, proszowicki, tarnowski (dane demo)
+            - generic [ref=e2561]:
+              - button "Skontaktuj się z realizatorem" [ref=e2562] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2563] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2564] [cursor=pointer]
+              - button "Pełna karta" [ref=e2565] [cursor=pointer]
+          - article [ref=e2566]:
+            - generic [ref=e2567]:
+              - generic [ref=e2568]:
+                - paragraph [ref=e2569]: Dla osób o ograniczonej mobilności
+                - heading [level=3] [ref=e2570]:
+                  - text: Zakupy bez
+                  - mark [ref=e2571]: barier
+              - generic [ref=e2572]:
+                - generic [ref=e2573]: "73"
+                - generic [aria-hidden] [ref=e2574]: /100
+                - generic [ref=e2575]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e2576]: wysokie
+            - paragraph [ref=e2577]: INNOWACJA WYBRANA DO UPOWSZECHNIANIA W RAMACH PROJEKTU "MAŁOPOLSKI INKUBATOR INNOWACJI SPOŁECZNYCH"
+            - note "Wynik testu innowacji" [ref=e2578]:
+              - generic [ref=e2579]: ✓ Przetestowane
+              - generic [ref=e2580]: Test rozwiązania wykazał jego wysoką skuteczność ułatwiając lub wręcz umożliwiając dokonanie samodzielnych zakupów dla osób z niepełnosprawnościami. D…
+            - generic [ref=e2581]:
+              - generic [ref=e2582]:
+                - term [ref=e2583]: Na czym polega
+                - definition [ref=e2584]: System dzwonka, który zapewnia osobie zależnej dyskretną asystę podczas wykonywania zakupów. Przeszkolony pracownik sklepu, wspiera klienta zgodnie z jego potrzebami, np. wskazuje osobom niewidomym, gdzie znajduje się dany produkt, sprawdzi skład, gramaturę, datę ważności. Osobom poruszającym się na…
+              - generic [ref=e2585]:
+                - term [ref=e2586]: Jakiego problemu dotyczy
+                - definition [ref=e2587]:
+                  - text: Ograniczona
+                  - mark [ref=e2588]: dostępność
+                  - text: sklepów samoobsługowych dla osób z niepełnosprawnościami, która wiąże się z trudnościami w samodzielnym funkcjonowaniu osób z niepełnosprawnościami i osób
+                  - mark [ref=e2589]: starszych
+                  - text: .
+              - generic [ref=e2590]:
+                - term [ref=e2591]: Dla kogo
+                - definition [ref=e2592]:
+                  - text: Rozwiązanie kierowane jest do osób z niepełnosprawnościami (np. niewidzących, z dysfunkcja narządu
+                  - mark [ref=e2593]: ruchu
+                  - text: ", z niepełnosprawnością intelektualną) i do osób"
+                  - mark [ref=e2594]: starszych
+                  - text: .
+              - generic [ref=e2595]:
+                - term [ref=e2596]: Kto może wdrożyć
+                - definition [ref=e2597]:
+                  - text: Sklepy wielkopowierzchniowe, jednostki publiczne, które mogą podjąć się koordynacji „Zakupów bez
+                  - mark [ref=e2598]: barier
+                  - text: ” na swoim terenie (Urzędy Gmin, Ośrodki Pomocy Społecznej lub inne podmioty realizujące politykę…
+            - generic [ref=e2599]:
+              - generic [ref=e2600]: Weryfikacja Jev Decisions · pewność 96%
+              - paragraph [ref=e2601]: Jev nie dopatrzył się związku (0.04) — „Zakupy bez barier” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2602]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2603]
+              - paragraph [ref=e2604]:
+                - text: Pokrywa
+                - strong [ref=e2605]: "3"
+                - text: z
+                - strong [ref=e2606]: "3"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e2607]: (siła pokrycia 91%)
+              - list [ref=e2608]:
+                - listitem [ref=e2609]: "Odpowiada na ten sam problem: bariery architektoniczne, osoby starsze."
+                - listitem [ref=e2610]: "Grupa docelowa się zgadza — karta wymienia osoby starsze, ograniczona mobilność: Rozwiązanie kierowane jest do osób z niepełnosprawnościami (np."
+                - listitem [ref=e2611]: "Było testowane: Test rozwiązania wykazał jego wysoką skuteczność ułatwiając lub wręcz umożliwiając dokonanie samodzielnych zakupów dla osób z niepełnosprawnościami."
+              - generic [ref=e2612]:
+                - generic [ref=e2613]:
+                  - generic [aria-hidden] [ref=e2614]: ✓
+                  - generic [ref=e2615]:
+                    - text: bariery architektoniczne
+                    - generic [ref=e2616]: · opis rozwiązania, opis problemu, wyniki testu, nazwa, kto może skorzystać
+                - generic [ref=e2617]:
+                  - generic [aria-hidden] [ref=e2618]: ✓
+                  - generic [ref=e2619]:
+                    - text: osoby starsze
+                    - generic [ref=e2620]: · grupa docelowa, opis problemu
+                - generic [ref=e2621]:
+                  - generic [aria-hidden] [ref=e2622]: ✓
+                  - generic [ref=e2623]:
+                    - text: ograniczona mobilność
+                    - generic [ref=e2624]: · kategoria, opis rozwiązania, grupa docelowa
+              - group [ref=e2625]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e2626] [cursor=pointer]
+            - paragraph [ref=e2627]: Wdrożono w tatrzański (dane demo)
+            - generic [ref=e2628]:
+              - button "Skontaktuj się z realizatorem" [ref=e2629] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2630] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2631] [cursor=pointer]
+              - button "Pełna karta" [ref=e2632] [cursor=pointer]
+          - article [ref=e2633]:
+            - generic [ref=e2634]:
+              - generic [ref=e2635]:
+                - paragraph [ref=e2636]: Dla seniorów
+                - heading [level=3] [ref=e2637]:
+                  - text: Kody QR na pomoc
+                  - mark [ref=e2638]: seniorom
+              - generic [ref=e2639]:
+                - generic [ref=e2640]: "70"
+                - generic [aria-hidden] [ref=e2641]: /100
+                - generic [ref=e2642]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e2643]: wysokie
+            - paragraph [ref=e2644]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e2645]:
+              - generic [ref=e2646]: ✓ Przetestowane
+              - generic [ref=e2647]: Choć użyteczność innowacji można ocenić wysoko, rozwiązanie wymaga udoskonalenia przede wszystkim w zakresie komunikacji i zapewnienia bezpieczeństwa…
+            - generic [ref=e2648]:
+              - generic [ref=e2649]:
+                - term [ref=e2650]: Na czym polega
+                - definition [ref=e2651]:
+                  - text: Innowacja dostarcza narzędzia w postaci unikalnych kodów QR dla
+                  - mark [ref=e2652]: seniorów
+                  - text: ", generowanych poprzez specjalnie do tego przygotowaną platformę internetową. Model składa się z fizycznie dostępnych naszywek lub naklejek z kodami, umieszczanych na ubraniu"
+                  - mark [ref=e2653]: seniora
+                  - text: ", innych częściach garderoby, czy rzeczach oso…"
+              - generic [ref=e2654]:
+                - term [ref=e2655]: Jakiego problemu dotyczy
+                - definition [ref=e2656]:
+                  - text: Innowacja odpowiada na trudności w samodzielnym
+                  - mark [ref=e2657]: poruszaniu
+                  - text: się
+                  - mark [ref=e2658]: seniorów
+                  - text: poza domem i problemów wynikających z zaburzeń pamięci, chorób przewlekłych bądź otępiennych.
+              - generic [ref=e2659]:
+                - term [ref=e2660]: Dla kogo
+                - definition [ref=e2661]:
+                  - text: Osoby
+                  - mark [ref=e2662]: starsze
+                  - text: ", w tym osoby z zaburzeniami pamięci czy chorobami otępiennymi"
+              - generic [ref=e2663]:
+                - term [ref=e2664]: Kto może wdrożyć
+                - definition [ref=e2665]:
+                  - text: Organizacje pozarządowe, służby ratownictwa medycznego, placówki podstawowej opieki zdrowotnej, jednostki organizacyjne pomocy społecznej, instytucje publiczne działające na rzecz
+                  - mark [ref=e2666]: seniorów
+                  - text: ", np. Centra…"
+            - generic [ref=e2667]:
+              - generic [ref=e2668]: Weryfikacja Jev Decisions · pewność 95%
+              - paragraph [ref=e2669]: Jev nie dopatrzył się związku (0.05) — „Kody QR na pomoc seniorom” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2670]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2671]
+              - paragraph [ref=e2672]:
+                - text: Pokrywa
+                - strong [ref=e2673]: "3"
+                - text: z
+                - strong [ref=e2674]: "3"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e2675]: (siła pokrycia 79%)
+              - list [ref=e2676]:
+                - listitem [ref=e2677]: "Odpowiada na ten sam problem: osoby starsze, ograniczona mobilność."
+                - listitem [ref=e2678]: "Grupa docelowa się zgadza — karta wymienia osoby starsze: Osoby starsze, w tym osoby z zaburzeniami pamięci czy chorobami otępiennymi"
+                - listitem [ref=e2679]: "Było testowane: Choć użyteczność innowacji można ocenić wysoko, rozwiązanie wymaga udoskonalenia przede wszystkim w zakresie komunikacji i zapewnienia bezpieczeństwa…"
+              - generic [ref=e2680]:
+                - generic [ref=e2681]:
+                  - generic [aria-hidden] [ref=e2682]: ✓
+                  - generic [ref=e2683]:
+                    - text: osoby starsze
+                    - generic [ref=e2684]: · grupa docelowa, opis rozwiązania, opis problemu, kategoria, nazwa, kto może skorzystać
+                - generic [ref=e2685]:
+                  - generic [aria-hidden] [ref=e2686]: ✓
+                  - generic [ref=e2687]:
+                    - text: ograniczona mobilność
+                    - generic [ref=e2688]: · opis problemu
+                - generic [ref=e2689]:
+                  - generic [aria-hidden] [ref=e2690]: ✓
+                  - generic [ref=e2691]:
+                    - text: bariery architektoniczne
+                    - generic [ref=e2692]: · opis rozwiązania, wyniki testu
+              - group [ref=e2693]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e2694] [cursor=pointer]
+            - paragraph [ref=e2695]: Wdrożono w miechowski (dane demo)
+            - generic [ref=e2696]:
+              - button "Skontaktuj się z realizatorem" [ref=e2697] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2698] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2699] [cursor=pointer]
+              - button "Pełna karta" [ref=e2700] [cursor=pointer]
+          - article [ref=e2701]:
+            - generic [ref=e2702]:
+              - generic [ref=e2703]:
+                - paragraph [ref=e2704]: Dla osób o ograniczonej mobilności
+                - heading "Marina Pai" [level=3] [ref=e2705]
+              - generic [ref=e2706]:
+                - generic [ref=e2707]: "66"
+                - generic [aria-hidden] [ref=e2708]: /100
+                - generic [ref=e2709]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e2710]: wysokie
+            - paragraph [ref=e2711]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e2712]:
+              - generic [ref=e2713]: ✓ Przetestowane
+              - generic [ref=e2714]: Innowacja oceniona została jako skuteczna w inicjowaniu zmian, ale tylko częściowo skuteczna w doprowadzeniu do ich materializacji. Osiągnięcie efektó…
+            - generic [ref=e2715]:
+              - generic [ref=e2716]:
+                - term [ref=e2717]: Na czym polega
+                - definition [ref=e2718]:
+                  - text: Narzędzie do autodiagnozy
+                  - mark [ref=e2719]: dostępności
+                  - text: marin i przystani na wodach morskich, które stanowi wsparcie w zakresie zwiększania
+                  - mark [ref=e2720]: dostępności
+                  - text: marin dla osób
+                  - mark [ref=e2721]: starszych
+                  - text: o ograniczonej
+                  - mark [ref=e2722]: mobilności
+                  - text: oraz osób z niepełnosprawnością narządu wzroku i
+                  - mark [ref=e2723]: ruchu
+                  - text: ". Na narzędzie składa się: schemat autodiagnozy"
+                  - mark [ref=e2724]: dostępności
+                  - text: m…
+              - generic [ref=e2725]:
+                - term [ref=e2726]: Jakiego problemu dotyczy
+                - definition [ref=e2727]:
+                  - text: Innowacja stanowi odpowiedź na niedostosowanej infrastruktury marin i przystani na wodach morskich dla osób
+                  - mark [ref=e2728]: starszych
+                  - text: i z niepełnosprawności (obecnie średnią
+                  - mark [ref=e2729]: wieku
+                  - text: żeglarzy na zachodniopomorskim szlaku żeglarskim szacuje się na przedział 55-60 lat).
+              - generic [ref=e2730]:
+                - term [ref=e2731]: Dla kogo
+                - definition [ref=e2732]:
+                  - text: Zarządcy i projektanci marin oraz osoby
+                  - mark [ref=e2733]: starsze
+                  - text: mające trudności w
+                  - mark [ref=e2734]: poruszaniu
+                  - text: się, osoby z niepełnosprawnością narządu wzroku i
+                  - mark [ref=e2735]: ruchu
+                  - text: ", które posiadają doświadczenie w zakresie uprawiania żeglarstwa."
+              - generic [ref=e2736]:
+                - term [ref=e2737]: Kto może wdrożyć
+                - definition [ref=e2738]: Zarządcy i projektanci marin (morskich i śródlądowych)
+            - generic [ref=e2739]:
+              - generic [ref=e2740]: Weryfikacja Jev Decisions · pewność 92%
+              - paragraph [ref=e2741]: Jev nie dopatrzył się związku (0.08) — „Marina Pai” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2742]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2743]
+              - paragraph [ref=e2744]:
+                - text: Pokrywa
+                - strong [ref=e2745]: "3"
+                - text: z
+                - strong [ref=e2746]: "3"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e2747]: (siła pokrycia 82%)
+              - list [ref=e2748]:
+                - listitem [ref=e2749]: "Odpowiada na ten sam problem: osoby starsze."
+                - listitem [ref=e2750]: "Grupa docelowa się zgadza — karta wymienia osoby starsze, ograniczona mobilność: Zarządcy i projektanci marin oraz osoby starsze mające trudności w poruszaniu się, osoby z niepełnosprawnością narządu w…"
+                - listitem [ref=e2751]: "Było testowane: Innowacja oceniona została jako skuteczna w inicjowaniu zmian, ale tylko częściowo skuteczna w doprowadzeniu do ich materializacji."
+              - generic [ref=e2752]:
+                - generic [ref=e2753]:
+                  - generic [aria-hidden] [ref=e2754]: ✓
+                  - generic [ref=e2755]:
+                    - text: osoby starsze
+                    - generic [ref=e2756]: · grupa docelowa, opis rozwiązania, wyniki testu, opis problemu
+                - generic [ref=e2757]:
+                  - generic [aria-hidden] [ref=e2758]: ✓
+                  - generic [ref=e2759]:
+                    - text: ograniczona mobilność
+                    - generic [ref=e2760]: · kategoria, opis rozwiązania, grupa docelowa
+                - generic [ref=e2761]:
+                  - generic [aria-hidden] [ref=e2762]: ✓
+                  - generic [ref=e2763]:
+                    - text: bariery architektoniczne
+                    - generic [ref=e2764]: · opis rozwiązania, wyniki testu
+              - group [ref=e2765]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e2766] [cursor=pointer]
+            - paragraph [ref=e2767]: Wdrożono w brzeski, dąbrowski, krakowski, tarnowski (dane demo)
+            - generic [ref=e2768]:
+              - button "Skontaktuj się z realizatorem" [ref=e2769] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2770] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2771] [cursor=pointer]
+              - button "Pełna karta" [ref=e2772] [cursor=pointer]
+          - article [ref=e2773]:
+            - generic [ref=e2774]:
+              - generic [ref=e2775]:
+                - paragraph [ref=e2776]: Dla osób o ograniczonej mobilności
+                - heading "Innotextil" [level=3] [ref=e2777]
+              - generic [ref=e2778]:
+                - generic [ref=e2779]: "64"
+                - generic [aria-hidden] [ref=e2780]: /100
+                - generic [ref=e2781]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e2782]: wysokie
+            - paragraph [ref=e2783]: INNOWACJA WYBRANA DO UPOWSZECHNIANIA W RAMACH PROJEKTU "MAŁOPOLSKI INKUBATOR INNOWACJI SPOŁECZNYCH"
+            - note "Wynik testu innowacji" [ref=e2784]:
+              - generic [ref=e2785]: ✓ Przetestowane
+              - generic [ref=e2786]: „Innotextil” może być optymalnym rozwiązaniem dla wszystkich osób, które chcą stale monitorować poziom swojej sprawności fizycznej oraz systematycznie…
+            - generic [ref=e2787]:
+              - generic [ref=e2788]:
+                - term [ref=e2789]: Na czym polega
+                - definition [ref=e2790]:
+                  - text: Innowacyjna forma odzieży oraz przypisana do niej aplikacja umożliwia użytkownikowi stałą i dyskretną kontrolę swojego
+                  - mark [ref=e2791]: ruchu
+                  - text: oraz powiadamia go o konieczności korekty chodu w czasie rzeczywistym. Legginsy charakteryzują się sportową formą i uniwersalnym krojem oraz są dostępne w wersji damskiej i mę…
+              - generic [ref=e2792]:
+                - term [ref=e2793]: Jakiego problemu dotyczy
+                - definition [ref=e2794]:
+                  - text: Innowacja stanowi odpowiedź na trudności w
+                  - mark [ref=e2795]: dostępie
+                  - text: do usług fizjoterapeuty (np. dla osób
+                  - mark [ref=e2796]: starszych
+                  - text: ", o ograniczonym budżecie) i tym samym ograniczenie możliwości potrzymywania efektór terapuetycznych przez osoby"
+                  - mark [ref=e2797]: starsze
+                  - text: czy osoby np. po urazach kolan.
+              - generic [ref=e2798]:
+                - term [ref=e2799]: Dla kogo
+                - definition [ref=e2800]:
+                  - text: Grupę docelową rozwiązania stanowią osoby
+                  - mark [ref=e2801]: starsze
+                  - text: (dzięki samodzielnej rehabilitacji w warunkach domowych seniorzy mają możliwość zyskania większej niezależności i podtrzymania sprawności fizycznej) o…
+              - generic [ref=e2802]:
+                - term [ref=e2803]: Kto może wdrożyć
+                - definition [ref=e2804]:
+                  - text: Firmy odzieżowe, placówki specjalizujące się w rehabilitacji osób
+                  - mark [ref=e2805]: starszych
+                  - text: czy placówki medyczne.
+            - generic [ref=e2806]:
+              - generic [ref=e2807]: Weryfikacja Jev Decisions · pewność 97%
+              - paragraph [ref=e2808]: Jev nie dopatrzył się związku (0.03) — „Innotextil” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2809]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2810]
+              - paragraph [ref=e2811]:
+                - text: Pokrywa
+                - strong [ref=e2812]: "3"
+                - text: z
+                - strong [ref=e2813]: "3"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e2814]: (siła pokrycia 87%)
+              - list [ref=e2815]:
+                - listitem [ref=e2816]: "Odpowiada na ten sam problem: osoby starsze, bariery architektoniczne."
+                - listitem [ref=e2817]: "Grupa docelowa się zgadza — karta wymienia osoby starsze, ograniczona mobilność: Grupę docelową rozwiązania stanowią osoby starsze (dzięki samodzielnej rehabilitacji w warunkach domowych seniorzy mają…"
+                - listitem [ref=e2818]: "Było testowane: „Innotextil” może być optymalnym rozwiązaniem dla wszystkich osób, które chcą stale monitorować poziom swojej sprawności fizycznej oraz systematycznie…"
+              - generic [ref=e2819]:
+                - generic [ref=e2820]:
+                  - generic [aria-hidden] [ref=e2821]: ✓
+                  - generic [ref=e2822]:
+                    - text: osoby starsze
+                    - generic [ref=e2823]: · grupa docelowa, opis problemu, kto może skorzystać
+                - generic [ref=e2824]:
+                  - generic [aria-hidden] [ref=e2825]: ✓
+                  - generic [ref=e2826]:
+                    - text: ograniczona mobilność
+                    - generic [ref=e2827]: · kategoria, opis rozwiązania, grupa docelowa
+                - generic [ref=e2828]:
+                  - generic [aria-hidden] [ref=e2829]: ✓
+                  - generic [ref=e2830]:
+                    - text: bariery architektoniczne
+                    - generic [ref=e2831]: · opis problemu
+              - group [ref=e2832]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e2833] [cursor=pointer]
+            - paragraph [ref=e2834]: Wdrożono w Nowy Sącz (dane demo)
+            - generic [ref=e2835]:
+              - button "Skontaktuj się z realizatorem" [ref=e2836] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2837] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2838] [cursor=pointer]
+              - button "Pełna karta" [ref=e2839] [cursor=pointer]
+  - contentinfo [ref=e165]:
+    - generic [ref=e166]:
+      - paragraph [ref=e167]: Prototyp na HackYeah 2026 · zadanie Województwa Małopolskiego, realizator ROPS Kraków
+      - paragraph [ref=e168]: Dane innowacji pochodzą z Biblioteki Innowacji Społecznych ROPS (115 kart, w większości CC BY 4.0). Lokalizacje wdrożeń, kontakty realizatorów i zgłoszenia w panelu są danymi demonstracyjnymi — prototyp nie używa prawdziwych danych osobowych.

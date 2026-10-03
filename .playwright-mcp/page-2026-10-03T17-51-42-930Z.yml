@@ -1,0 +1,168 @@
+- generic [ref=e2]:
+  - paragraph [ref=e3]: "Tło strony: abstrakcyjne, powoli przesuwające się cząstki światła na ciemnym tle."
+  - link "Przejdź do treści" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=e6]:
+    - paragraph [ref=e7]: Dostosuj widok
+    - group "Dostosuj widok" [ref=e8]:
+      - button "Prosty język" [ref=e9] [cursor=pointer]
+      - group "Rozmiar tekstu" [ref=e10]:
+        - button "Czcionka normalna, 18 pikseli" [pressed] [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: A
+        - button "Czcionka duża, 22 piksele" [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: A+
+        - button "Czcionka bardzo duża, 27 pikseli" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: A++
+      - button "Wysoki kontrast" [ref=e20] [cursor=pointer]
+      - button "Ciemny motyw" [ref=e21] [cursor=pointer]
+      - button "Ruch w tle" [pressed] [ref=e22] [cursor=pointer]
+    - generic [ref=e23]:
+      - generic [ref=e24]: Rola w demonstracji
+      - generic [aria-hidden] [ref=e25]: "Demo — jestem:"
+      - combobox "Rola w demonstracji" [ref=e26]:
+        - option "mieszkanka / NGO / gmina" [selected]
+        - option "pracownik ROPS"
+        - option "ekspert branżowy"
+  - banner [ref=e27]:
+    - generic [ref=e28]:
+      - link [ref=e29] [cursor=pointer]:
+        - /url: "#matchmaking"
+        - strong [ref=e32]: HubMI
+      - navigation "Moduły Hubu" [ref=e33]:
+        - list [ref=e34]:
+          - listitem [ref=e35]:
+            - link [ref=e36] [cursor=pointer]:
+              - /url: "#matchmaking"
+              - generic [aria-hidden] [ref=e37]: Szukaj
+          - listitem [ref=e38]:
+            - link [ref=e39] [cursor=pointer]:
+              - /url: "#biblioteka"
+              - generic [aria-hidden] [ref=e40]: Wiedza
+          - listitem [ref=e41]:
+            - link [ref=e42] [cursor=pointer]:
+              - /url: "#kreator"
+              - generic [aria-hidden] [ref=e43]: Pomysł
+          - listitem [ref=e44]:
+            - link [ref=e45] [cursor=pointer]:
+              - /url: "#tester"
+              - generic [aria-hidden] [ref=e46]: Testuj
+          - listitem [ref=e47]:
+            - link ", 6 nowych powiadomień" [ref=e48] [cursor=pointer]:
+              - /url: "#komunikacja"
+              - generic [aria-hidden] [ref=e49]: Rozmowy
+              - generic [aria-hidden] [ref=e50]: "6"
+          - listitem [ref=e52]:
+            - link ", 9 nowych powiadomień" [ref=e53] [cursor=pointer]:
+              - /url: "#admin"
+              - generic [aria-hidden] [ref=e54]: Panel
+              - generic [aria-hidden] [ref=e55]: "9"
+          - listitem [ref=e57]:
+            - link [ref=e58] [cursor=pointer]:
+              - /url: "#middleman"
+              - generic [aria-hidden] [ref=e59]: Middleman
+          - listitem [ref=e60]:
+            - link [ref=e61] [cursor=pointer]:
+              - /url: "#dostepnosc"
+              - generic [aria-hidden] [ref=e62]: WCAG
+  - main [ref=e63]:
+    - generic [ref=e66]:
+      - heading "Opisz problem. Pokażemy, co już zadziałało." [level=1] [ref=e67]
+      - region "Wyszukiwanie rozwiązań" [ref=e68]:
+        - list [ref=e69]:
+          - listitem [ref=e70]:
+            - generic [ref=e71]: HubMI
+            - paragraph [ref=e72]: Opisz problem lub wyzwanie w swojej okolicy. Wystarczą 1–2 zdania zwykłym, codziennym językiem.
+        - generic [ref=e73]:
+          - generic [ref=e74]: Opisz problem
+          - generic [ref=e75]:
+            - textbox "Opisz problem" [ref=e76]:
+              - /placeholder: Opisz sytuację, np. brak windy, samotny senior, dojazd do lekarza…
+            - button "Dyktuj głosem" [ref=e77] [cursor=pointer]:
+              - generic [aria-hidden] [ref=e78]: 🎤
+            - button "Szukaj" [disabled] [ref=e80]
+          - paragraph [ref=e81]: Wpisz i naciśnij Enter albo naciśnij mikrofon i powiedz.
+        - group "Wyzwania społeczne Małopolski — kliknij, by wpisać do wyszukiwarki" [ref=e84]:
+          - button "Osoby starsze" [ref=e85] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e86]: 👵
+          - button "Seniorzy i emeryci" [ref=e87] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e88]: 👴
+          - button "Obszary wiejskie" [ref=e89] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e90]: 🌾
+          - button "Sołectwa i peryferie" [ref=e91] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e92]: 🏡
+          - button "Dostępność architektoniczna" [ref=e93] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e94]: ♿
+          - button "Ograniczona mobilność" [ref=e95] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e96]: 🦽
+          - button "Windy i pochylnie" [ref=e97] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e98]: 🛗
+          - button "Zdrowie psychiczne" [ref=e99] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e100]: 🧠
+          - button "Wyciszenie i terapia" [ref=e101] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e102]: 🌿
+          - button "Spektrum autyzmu" [ref=e103] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e104]: 🧩
+          - button "Wsparcie sensoryczne" [ref=e105] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e106]: 🧸
+          - button "Osoby głuche (PJM)" [ref=e107] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e108]: 🧏
+          - button "Niedosłuch" [ref=e109] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e110]: 👂
+          - button "Niewidomi i słabowidzący" [ref=e111] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e112]: 🦯
+          - button "Wzrok i dostępność cyfrowa" [ref=e113] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e114]: 👁️
+          - button "Samotność i relacje" [ref=e115] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e116]: 🫂
+          - button "Rozmowa i kontakt" [ref=e117] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e118]: 💬
+          - button "Dzieci i młodzież" [ref=e119] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e120]: 🧒
+          - button "Wsparcie szkolne" [ref=e121] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e122]: 🎒
+          - button "Wsparcie rodziny" [ref=e123] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e124]: 👨‍👩‍👧
+          - button "Opieka wytchnieniowa" [ref=e125] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e126]: 💛
+          - button "Zdrowie i lekarze" [ref=e127] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e128]: 🩺
+          - button "Leki i demencja" [ref=e129] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e130]: 💊
+          - button "Rehabilitacja" [ref=e131] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e132]: 🏥
+          - button "Transport lokalny" [ref=e133] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e134]: 🚌
+          - button "Przystanki i dojazdy" [ref=e135] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e136]: 🚏
+          - button "Kompetencje cyfrowe" [ref=e137] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e138]: 💻
+          - button "Smartfony i aplikacje" [ref=e139] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e140]: 📱
+          - button "Aktywizacja zawodowa" [ref=e141] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e142]: 💼
+          - button "Warsztaty terapii zajęciowej" [ref=e143] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e144]: 🛠️
+          - button "Kryzys bezdomności" [ref=e145] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e146]: 🏠
+          - button "Noclegownie i ogrzewalnie" [ref=e147] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e148]: 🛏️
+          - button "Samopomoc i wolontariat" [ref=e149] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e150]: 🤝
+          - button "Urząd bez barier" [ref=e151] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e152]: 🏛️
+          - button "Integracja przez kulturę" [ref=e153] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e154]: 🎨
+          - button "Teatr i ekspresja" [ref=e155] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e156]: 🎭
+          - button "Sport i rekreacja" [ref=e157] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e158]: ⚽
+          - button "Integracja obcokrajowców" [ref=e159] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e160]: 🌍
+          - button "Bariera językowa" [ref=e161] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e162]: 🗣️
+          - button "Sytuacje kryzysowe" [ref=e163] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e164]: 🆘
+  - contentinfo [ref=e165]:
+    - generic [ref=e166]:
+      - paragraph [ref=e167]: Prototyp na HackYeah 2026 · zadanie Województwa Małopolskiego, realizator ROPS Kraków
+      - paragraph [ref=e168]: Dane innowacji pochodzą z Biblioteki Innowacji Społecznych ROPS (115 kart, w większości CC BY 4.0). Lokalizacje wdrożeń, kontakty realizatorów i zgłoszenia w panelu są danymi demonstracyjnymi — prototyp nie używa prawdziwych danych osobowych.

@@ -275,6 +275,29 @@ export interface NewThread {
   rating?: number;
 }
 
+/**
+ * Wkłada do stanu wątek, który backend już utworzył — bez ponownego POST-a.
+ *
+ * Używa tego moduł I: lukę zakłada `POST /api/match/gaps/`, bo tylko ta ścieżka
+ * wiąże wątek z zapytaniem (`SearchQuery`) i zasila trendy. Gdybyśmy wywołali
+ * tu `addThread`, powstałby drugi, osierocony wątek o tej samej treści.
+ */
+export function addLocalThread(t: NewThread & { id: string }): Thread {
+  const { id, ...rest } = t;
+  const thread: Thread = {
+    id,
+    status: "nowe",
+    createdAt: Date.now(),
+    messages: [],
+    author: t.author?.trim() || "Mieszkaniec (demo)",
+    authorRole: "mieszkaniec",
+    read: false,
+    ...rest,
+  };
+  commit({ ...state, threads: [thread, ...state.threads], backendConnected: true });
+  return thread;
+}
+
 /** Tworzy zgłoszenie natychmiast w UI, a przy dostępnym backendzie wysyła do Django. */
 export function addThread(t: NewThread): Thread {
   const localId = uid();

@@ -1,0 +1,669 @@
+- generic [ref=e2]:
+  - paragraph [ref=e3]: "Tło strony: abstrakcyjne, powoli przesuwające się cząstki światła na ciemnym tle."
+  - link "Przejdź do treści" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=e6]:
+    - paragraph [ref=e7]: Dostosuj widok
+    - group "Dostosuj widok" [ref=e8]:
+      - button "Prosty język" [ref=e9] [cursor=pointer]
+      - group "Rozmiar tekstu" [ref=e10]:
+        - button "Czcionka normalna, 18 pikseli" [pressed] [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: A
+        - button "Czcionka duża, 22 piksele" [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: A+
+        - button "Czcionka bardzo duża, 27 pikseli" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: A++
+      - button "Wysoki kontrast" [ref=e20] [cursor=pointer]
+      - button "Ciemny motyw" [ref=e21] [cursor=pointer]
+      - button "Ruch w tle" [pressed] [ref=e22] [cursor=pointer]
+    - generic [ref=e23]:
+      - generic [ref=e24]: Rola w demonstracji
+      - generic [aria-hidden] [ref=e25]: "Demo — jestem:"
+      - combobox "Rola w demonstracji" [ref=e26]:
+        - option "mieszkanka / NGO / gmina" [selected]
+        - option "pracownik ROPS"
+        - option "ekspert branżowy"
+  - banner [ref=e27]:
+    - generic [ref=e28]:
+      - link [ref=e29] [cursor=pointer]:
+        - /url: "#matchmaking"
+        - strong [ref=e32]: HubMI
+      - navigation "Moduły Hubu" [ref=e33]:
+        - list [ref=e34]:
+          - listitem [ref=e35]:
+            - link [ref=e36] [cursor=pointer]:
+              - /url: "#matchmaking"
+              - generic [aria-hidden] [ref=e37]: Szukaj
+          - listitem [ref=e38]:
+            - link [ref=e39] [cursor=pointer]:
+              - /url: "#biblioteka"
+              - generic [aria-hidden] [ref=e40]: Wiedza
+          - listitem [ref=e41]:
+            - link [ref=e42] [cursor=pointer]:
+              - /url: "#kreator"
+              - generic [aria-hidden] [ref=e43]: Pomysł
+          - listitem [ref=e44]:
+            - link [ref=e45] [cursor=pointer]:
+              - /url: "#tester"
+              - generic [aria-hidden] [ref=e46]: Testuj
+          - listitem [ref=e47]:
+            - link ", 6 nowych powiadomień" [ref=e169] [cursor=pointer]:
+              - /url: "#komunikacja"
+              - generic [aria-hidden] [ref=e49]: Rozmowy
+              - generic [aria-hidden] [ref=e50]: "6"
+          - listitem [ref=e52]:
+            - link ", 8 nowych powiadomień" [ref=e170] [cursor=pointer]:
+              - /url: "#admin"
+              - generic [aria-hidden] [ref=e54]: Panel
+              - generic [aria-hidden] [ref=e55]: "8"
+          - listitem [ref=e57]:
+            - link [ref=e58] [cursor=pointer]:
+              - /url: "#middleman"
+              - generic [aria-hidden] [ref=e59]: Middleman
+          - listitem [ref=e60]:
+            - link [ref=e61] [cursor=pointer]:
+              - /url: "#dostepnosc"
+              - generic [aria-hidden] [ref=e62]: WCAG
+  - main [ref=e63]:
+    - generic [ref=e64]:
+      - generic [ref=e66]:
+        - heading "Opisz problem. Pokażemy, co już zadziałało." [level=1] [ref=e67]
+        - region "Wyszukiwanie rozwiązań" [ref=e68]:
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - generic [ref=e71]: HubMI
+              - paragraph [ref=e72]: Opisz problem lub wyzwanie w swojej okolicy. Wystarczą 1–2 zdania zwykłym, codziennym językiem.
+            - listitem [ref=e171]:
+              - generic [ref=e172]: Ty
+              - paragraph [ref=e173]: samotny senior na wsi nie ma jak dojechać do lekarza
+            - listitem [ref=e174]:
+              - generic [ref=e175]: HubMI
+              - paragraph [ref=e176]: W jakiej gminie lub powiecie występuje ten problem? Pozwoli to sprawdzić lokalne wdrożenia i kontakt do realizatorów.
+            - listitem [ref=e186]:
+              - generic [ref=e187]: HubMI
+              - paragraph [ref=e188]: "Rozpoznane obszary: samotność i izolacja, osoby starsze, obszary wiejskie, zdrowie i medycyna. Porównuję zgłoszenie z bazą przetestowanych innowacji."
+      - generic [ref=e189]:
+        - status [active] [ref=e190]:
+          - generic [ref=e191]:
+            - heading "6 rozwiązania z Biblioteki" [level=2] [ref=e192]
+            - paragraph [ref=e193]: "Rozpoznane wątki: samotność i izolacja, osoby starsze, obszary wiejskie, zdrowie i medycyna."
+          - button "Zacznij od nowa" [ref=e195] [cursor=pointer]
+        - generic [ref=e196]:
+          - heading "Gdzie podobny problem już rozwiązano" [level=2] [ref=e197]
+          - figure "Im ciemniejszy powiat, tym więcej dopasowanych innowacji zostało tam wdrożonych. Kliknij powiat, aby zawęzić wyniki — a potem użyj przycisku „Skontaktuj się z realizatorem” na fiszce, żeby napisać do instytucji, która to samo już u siebie zrobiła." [ref=e198]:
+            - generic [ref=e200]:
+              - group "Mapa województwa małopolskiego — 22 powiaty i miasta" [ref=e201]:
+                - 'button "m. Kraków: 1 wdrożenie" [ref=e203] [cursor=pointer]'
+                - 'button "m. Nowy Sącz: 1 wdrożenie" [ref=e205] [cursor=pointer]'
+                - 'button "m. Tarnów: 1 wdrożenie" [ref=e207] [cursor=pointer]'
+                - 'button "pow. bocheński: 3 wdrożenia" [ref=e209] [cursor=pointer]'
+                - 'button "pow. brzeski: 0 wdrożeń" [ref=e211] [cursor=pointer]'
+                - 'button "pow. chrzanowski: 0 wdrożeń" [ref=e213] [cursor=pointer]'
+                - 'button "pow. dąbrowski: 0 wdrożeń" [ref=e215] [cursor=pointer]'
+                - 'button "pow. gorlicki: 0 wdrożeń" [ref=e217] [cursor=pointer]'
+                - 'button "pow. krakowski: 2 wdrożenia" [ref=e219] [cursor=pointer]'
+                - 'button "pow. limanowski: 1 wdrożenie" [ref=e221] [cursor=pointer]'
+                - 'button "pow. miechowski: 1 wdrożenie" [ref=e223] [cursor=pointer]'
+                - 'button "pow. myślenicki: 0 wdrożeń" [ref=e225] [cursor=pointer]'
+                - 'button "pow. nowosądecki: 3 wdrożenia" [ref=e227] [cursor=pointer]'
+                - 'button "pow. nowotarski: 0 wdrożeń" [ref=e229] [cursor=pointer]'
+                - 'button "pow. olkuski: 0 wdrożeń" [ref=e231] [cursor=pointer]'
+                - 'button "pow. oświęcimski: 0 wdrożeń" [ref=e233] [cursor=pointer]'
+                - 'button "pow. proszowicki: 0 wdrożeń" [ref=e235] [cursor=pointer]'
+                - 'button "pow. suski: 1 wdrożenie" [ref=e237] [cursor=pointer]'
+                - 'button "pow. tarnowski: 0 wdrożeń" [ref=e239] [cursor=pointer]'
+                - 'button "pow. tatrzański: 0 wdrożeń" [ref=e241] [cursor=pointer]'
+                - 'button "pow. wadowicki: 2 wdrożenia" [ref=e243] [cursor=pointer]'
+                - 'button "pow. wielicki: 1 wdrożenie" [ref=e245] [cursor=pointer]'
+              - list [aria-hidden] [ref=e246]:
+                - listitem [ref=e247]: brak
+                - listitem [ref=e249]: mniej
+                - listitem [ref=e251]
+                - listitem [ref=e253]
+                - listitem [ref=e255]: więcej
+            - group [ref=e257]:
+              - generic "Te same dane jako tabela" [ref=e258] [cursor=pointer]
+            - paragraph [ref=e259]:
+              - strong [ref=e260]: Dane demo.
+              - text: Biblioteka Innowacji Społecznych ROPS nie publikuje lokalizacji wdrożeń, więc rozmieszczenie zostało wygenerowane na potrzeby prototypu (deterministycznie, z charakteru innowacji). Granice powiatów są prawdziwe. Po wdrożeniu to pole wypełniają realne zgłoszenia realizatorów.
+        - region "Dopasowane innowacje" [ref=e261]:
+          - article [ref=e262]:
+            - generic [ref=e263]:
+              - generic [ref=e264]:
+                - paragraph [ref=e265]: Dla seniorów
+                - heading [level=3] [ref=e266]:
+                  - text: Mobilne centrum pomocy dla osób
+                  - mark [ref=e267]: starszych
+              - generic [ref=e268]:
+                - generic [ref=e269]: "66"
+                - generic [aria-hidden] [ref=e270]: /100
+                - generic [ref=e271]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e272]: wysokie
+            - paragraph [ref=e273]: sprawdź zasady
+            - note [ref=e274]:
+              - generic [ref=e275]: — Brak opisanych wyników testu
+              - generic [ref=e276]: Ta karta nie zawiera pola „Czy to działa?" — traktuj jako pomysł do sprawdzenia, nie rozwiązanie gotowe do wdrożenia.
+            - generic [ref=e277]:
+              - generic [ref=e278]:
+                - term [ref=e279]: Na czym polega
+                - definition [ref=e280]:
+                  - text: Innowacja to forma wsparcia
+                  - mark [ref=e281]: seniorów
+                  - text: z terenów
+                  - mark [ref=e282]: wiejskich
+                  - text: ", znacznie"
+                  - mark [ref=e283]: oddalonych
+                  - text: "od dużych aglomeracji, z utrudnionym dojazdem do miasta. Metodę tworzą następujące elementy: coaching senioralny, jako narzędzie wspierania"
+                  - mark [ref=e284]: seniora
+                  - text: ; mobilność usługi – projekt zakłada dotarcie z ofertą usługi do domu klien…
+              - generic [ref=e285]:
+                - term [ref=e286]: Jakiego problemu dotyczy
+                - definition [ref=e287]:
+                  - text: Osoby
+                  - mark [ref=e288]: starsze
+                  - text: często wycofują się z aktywnego życia, popadają w przygnębienie i apatię. Czują się osamotnione, odtrącone, niepotrzebne. Dotykają ich problemy komunikacyjne,
+                  - mark [ref=e289]: izolacja
+                  - text: społeczna czy trudności w realizacji spraw urzędowych.
+              - generic [ref=e290]:
+                - term [ref=e291]: Dla kogo
+                - definition [ref=e292]:
+                  - text: Osoby
+                  - mark [ref=e293]: starsze
+                  - text: ", niesamodzielne, mieszkające na"
+                  - mark [ref=e294]: wsi
+                  - text: .
+              - generic [ref=e295]:
+                - term [ref=e296]: Kto może wdrożyć
+                - definition [ref=e297]: Samorządy lokalne, gminne ośrodki pomocy społecznej, organizacje pozarządowe.
+            - generic [ref=e298]:
+              - generic [ref=e299]: Weryfikacja Jev Decisions · pewność 85%
+              - paragraph [ref=e300]: Jev nie dopatrzył się związku (0.15) — „Mobilne centrum pomocy dla osób starszych” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e301]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e302]
+              - paragraph [ref=e303]:
+                - text: Pokrywa
+                - strong [ref=e304]: "4"
+                - text: z
+                - strong [ref=e305]: "4"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e306]: (siła pokrycia 79%)
+              - list [ref=e307]:
+                - listitem [ref=e308]: "Odpowiada na ten sam problem: osoby starsze, samotność i izolacja."
+                - listitem [ref=e309]: "Grupa docelowa się zgadza — karta wymienia osoby starsze, obszary wiejskie: Osoby starsze, niesamodzielne, mieszkające na wsi."
+                - listitem [ref=e310]: Ta karta nie ma opisanych wyników testu, więc wynik dopasowania został obniżony — tematycznie pasuje, ale nikt nie udokumentował, czy działa.
+              - generic [ref=e311]:
+                - generic [ref=e312]:
+                  - generic [aria-hidden] [ref=e313]: ✓
+                  - generic [ref=e314]:
+                    - text: osoby starsze
+                    - generic [ref=e315]: · grupa docelowa, opis rozwiązania, opis problemu, kategoria, nazwa
+                - generic [ref=e316]:
+                  - generic [aria-hidden] [ref=e317]: ✓
+                  - generic [ref=e318]:
+                    - text: obszary wiejskie
+                    - generic [ref=e319]: · opis rozwiązania, grupa docelowa
+                - generic [ref=e320]:
+                  - generic [aria-hidden] [ref=e321]: ✓
+                  - generic [ref=e322]:
+                    - text: samotność i izolacja
+                    - generic [ref=e323]: · opis problemu
+                - generic [ref=e324]:
+                  - generic [aria-hidden] [ref=e325]: ✓
+                  - generic [ref=e326]:
+                    - text: zdrowie i medycyna
+                    - generic [ref=e327]: · opis rozwiązania
+              - group [ref=e328]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e329] [cursor=pointer]
+            - paragraph [ref=e330]: Wdrożono w bocheński, limanowski, suski (dane demo)
+            - generic [ref=e331]:
+              - button "Skontaktuj się z realizatorem" [ref=e332] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e333] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e334] [cursor=pointer]
+              - button "Pełna karta" [ref=e335] [cursor=pointer]
+          - article [ref=e336]:
+            - generic [ref=e337]:
+              - generic [ref=e338]:
+                - paragraph [ref=e339]: Dla seniorów
+                - heading "Obu – obuwie po domu" [level=3] [ref=e340]
+              - generic [ref=e341]:
+                - generic [ref=e342]: "59"
+                - generic [aria-hidden] [ref=e343]: /100
+                - generic [ref=e344]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e345]: wysokie
+            - paragraph [ref=e346]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e347]:
+              - generic [ref=e348]: ✓ Przetestowane
+              - generic [ref=e349]: Zaprojektowane obuwie domowe wpływa korzystnie na zwiększenie mobilności i bezpieczeństwa osób starszych. Dzięki specjalnemu obuwiu seniorzy poruszają…
+            - generic [ref=e350]:
+              - generic [ref=e351]:
+                - term [ref=e352]: Na czym polega
+                - definition [ref=e353]:
+                  - text: Innowacją jest model obuwia domowego dla osób
+                  - mark [ref=e354]: starszych
+                  - text: . Obuwie to charakteryzuje się antypoślizgowością, optymalnym dopasowaniem do stopy, a także antybakteryjnością, dzięki czemu łatwo jest je utrzymać w czystości. Zadbano również o to, aby obuwie było łatwe do włożenia i zapewniało komfort ciepln…
+              - generic [ref=e355]:
+                - term [ref=e356]: Jakiego problemu dotyczy
+                - definition [ref=e357]:
+                  - text: Innowacja jest odpowiedzią na zwiększone ryzyko upadków
+                  - mark [ref=e358]: seniorów
+                  - text: "- według badań co trzecia osoba po 65. roku życia jest narażona na upadek przynajmniej raz w roku. Do większości wypadków dochodzi w domu (80% wypadków w grupie wiekowej 85-89 lat). Jedną z przyczyn są śliskie podłogi i nieodpowiednie,…"
+              - generic [ref=e359]:
+                - term [ref=e360]: Dla kogo
+                - definition [ref=e361]:
+                  - text: Osoby
+                  - mark [ref=e362]: starsze
+                  - text: ", powyżej 65. roku życia, z dysfunkcjami w zakresie małej i/lub dużej motoryki (w tym problemy z fizjonomią stopy, np. tzw. haluksy) oraz dysfunkcjami wzroku."
+              - generic [ref=e363]:
+                - term [ref=e364]: Kto może wdrożyć
+                - definition [ref=e365]:
+                  - text: Podmioty gospodarcze zajmujące się produkcją obuwia, ośrodki wsparcia dla osób
+                  - mark [ref=e366]: starszych
+                  - text: (miejskie dzienne domy pomocy społecznej, domy pomocy społecznej itp.), sanatoria, ośrodki
+                  - mark [ref=e367]: rehabilitacyjne
+                  - text: ", oso…"
+            - generic [ref=e368]:
+              - generic [ref=e369]: Weryfikacja Jev Decisions · pewność 97%
+              - paragraph [ref=e370]: Jev nie dopatrzył się związku (0.03) — „Obu – obuwie po domu” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e371]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e372]
+              - paragraph [ref=e373]:
+                - text: Pokrywa
+                - strong [ref=e374]: "3"
+                - text: z
+                - strong [ref=e375]: "4"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e376]: (siła pokrycia 69%)
+              - list [ref=e377]:
+                - listitem [ref=e378]: "Odpowiada na ten sam problem: osoby starsze, zdrowie i medycyna, samotność i izolacja."
+                - listitem [ref=e379]: "Grupa docelowa się zgadza — karta wymienia osoby starsze: Osoby starsze, powyżej 65. roku życia, z dysfunkcjami w zakresie małej i/lub dużej motoryki (w tym problemy z fizjonomią…"
+                - listitem [ref=e380]: "Było testowane: Zaprojektowane obuwie domowe wpływa korzystnie na zwiększenie mobilności i bezpieczeństwa osób starszych."
+                - listitem [ref=e381]: "Nie pokrywa: obszary wiejskie — sprawdź, czy to dla Ciebie istotne."
+              - generic [ref=e382]:
+                - generic [ref=e383]:
+                  - generic [aria-hidden] [ref=e384]: ✓
+                  - generic [ref=e385]:
+                    - text: osoby starsze
+                    - generic [ref=e386]: · grupa docelowa, opis rozwiązania, opis problemu, kategoria, wyniki testu, kto może skorzystać
+                - generic [ref=e387]:
+                  - generic [aria-hidden] [ref=e388]: ✓
+                  - generic [ref=e389]:
+                    - text: zdrowie i medycyna
+                    - generic [ref=e390]: · opis rozwiązania, wyniki testu, opis problemu, kto może skorzystać
+                - generic [ref=e391]:
+                  - generic [aria-hidden] [ref=e392]: ✓
+                  - generic [ref=e393]:
+                    - text: samotność i izolacja
+                    - generic [ref=e394]: · opis problemu
+                - generic [ref=e395]:
+                  - generic [aria-hidden] [ref=e396]: —
+                  - generic [ref=e397]: obszary wiejskie nie pokryte
+              - group [ref=e398]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e399] [cursor=pointer]
+            - paragraph [ref=e400]: Wdrożono w bocheński, krakowski, nowosądecki (dane demo)
+            - generic [ref=e401]:
+              - button "Skontaktuj się z realizatorem" [ref=e402] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e403] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e404] [cursor=pointer]
+              - button "Pełna karta" [ref=e405] [cursor=pointer]
+          - article [ref=e406]:
+            - generic [ref=e407]:
+              - generic [ref=e408]:
+                - paragraph [ref=e409]: Dla zdrowia i medycyny
+                - heading "Telerehabilitacja oddechowa" [level=3] [ref=e410]
+              - generic [ref=e411]:
+                - generic [ref=e412]: "57"
+                - generic [aria-hidden] [ref=e413]: /100
+                - generic [ref=e414]: na 100 punktów, dopasowanie wysokie
+                - generic [ref=e415]: wysokie
+            - paragraph [ref=e416]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e417]:
+              - generic [ref=e418]: ✓ Przetestowane
+              - generic [ref=e419]: Innowacja spotkała się z pozytywnymi opiniami grupy testującej. Ankiety przeprowadzone przez fizjoterapeutkę oraz zestaw ćwiczeń diagnostycznych na po…
+            - generic [ref=e420]:
+              - generic [ref=e421]:
+                - term [ref=e422]: Na czym polega
+                - definition [ref=e423]:
+                  - text: Telerehabilitacja oddechowa to rozwiązanie dedykowane
+                  - mark [ref=e424]: pacjentom
+                  - text: o ograniczonej z powodu
+                  - mark [ref=e425]: wieku
+                  - text: mobilności oraz osobom z niepełnosprawnościami i zamieszkującym tereny
+                  - mark [ref=e426]: oddalone
+                  - text: ", niedostępne komunikacyjnie. W ramach innowacji powstał model zawierający materiały multimedialne (schematy postępowania"
+                  - mark [ref=e427]: terap…
+              - generic [ref=e428]:
+                - term [ref=e429]: Jakiego problemu dotyczy
+                - definition [ref=e430]:
+                  - text: Innowacja odpowiada na brak pełnego, bezpiecznego dostępu do ujednoliconej
+                  - mark [ref=e431]: rehabilitacji
+                  - text: oddechowej prowadzonej metodą zdalną.
+              - generic [ref=e432]:
+                - term [ref=e433]: Dla kogo
+                - definition [ref=e434]:
+                  - text: Osoby z dysfunkcją układu oddechowego, osoby
+                  - mark [ref=e435]: starsze
+                  - text: o ograniczonej mobilności, osoby z terenów
+                  - mark [ref=e436]: oddalonych
+                  - text: ", osoby z niepełnosprawnością."
+              - generic [ref=e437]:
+                - term [ref=e438]: Kto może wdrożyć
+                - definition [ref=e439]:
+                  - text: Podmioty (w tym
+                  - mark [ref=e440]: przychodnie
+                  - mark [ref=e441]: rehabilitacyjne
+                  - text: ) zapewniające wsparcie dla osób dysfunkcją układu oddechowego, naturalni opiekunowie tych
+                  - mark [ref=e442]: pacjentów
+                  - text: .
+            - generic [ref=e443]:
+              - generic [ref=e444]: Weryfikacja Jev Decisions · pewność 77%
+              - paragraph [ref=e445]: Jev nie dopatrzył się związku (0.23) — „Telerehabilitacja oddechowa” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e446]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e447]
+              - paragraph [ref=e448]:
+                - text: Pokrywa
+                - strong [ref=e449]: "3"
+                - text: z
+                - strong [ref=e450]: "4"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e451]: (siła pokrycia 63%)
+              - list [ref=e452]:
+                - listitem [ref=e453]: "Odpowiada na ten sam problem: zdrowie i medycyna."
+                - listitem [ref=e454]: "Grupa docelowa się zgadza — karta wymienia osoby starsze, obszary wiejskie: Osoby z dysfunkcją układu oddechowego, osoby starsze o ograniczonej mobilności, osoby z terenów oddalonych, osoby z niep…"
+                - listitem [ref=e455]: "Było testowane: Innowacja spotkała się z pozytywnymi opiniami grupy testującej. Ankiety przeprowadzone przez fizjoterapeutkę oraz zestaw ćwiczeń diagnostycznych na po…"
+                - listitem [ref=e456]: "Nie pokrywa: samotność i izolacja — sprawdź, czy to dla Ciebie istotne."
+              - generic [ref=e457]:
+                - generic [ref=e458]:
+                  - generic [aria-hidden] [ref=e459]: ✓
+                  - generic [ref=e460]:
+                    - text: zdrowie i medycyna
+                    - generic [ref=e461]: · opis rozwiązania, opis problemu, kto może skorzystać
+                - generic [ref=e462]:
+                  - generic [aria-hidden] [ref=e463]: ✓
+                  - generic [ref=e464]:
+                    - text: osoby starsze
+                    - generic [ref=e465]: · opis rozwiązania, grupa docelowa
+                - generic [ref=e466]:
+                  - generic [aria-hidden] [ref=e467]: ✓
+                  - generic [ref=e468]:
+                    - text: obszary wiejskie
+                    - generic [ref=e469]: · opis rozwiązania, grupa docelowa
+                - generic [ref=e470]:
+                  - generic [aria-hidden] [ref=e471]: —
+                  - generic [ref=e472]: samotność i izolacja nie pokryte
+              - group [ref=e473]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e474] [cursor=pointer]
+            - paragraph [ref=e475]: Wdrożono w Kraków, nowosądecki (dane demo)
+            - generic [ref=e476]:
+              - button "Skontaktuj się z realizatorem" [ref=e477] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e478] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e479] [cursor=pointer]
+              - button "Pełna karta" [ref=e480] [cursor=pointer]
+          - article [ref=e481]:
+            - generic [ref=e482]:
+              - generic [ref=e483]:
+                - paragraph [ref=e484]: Dla seniorów
+                - heading [level=3] [ref=e485]:
+                  - text: Kody QR na pomoc
+                  - mark [ref=e486]: seniorom
+              - generic [ref=e487]:
+                - generic [ref=e488]: "52"
+                - generic [aria-hidden] [ref=e489]: /100
+                - generic [ref=e490]: na 100 punktów, dopasowanie średnie
+                - generic [ref=e491]: średnie
+            - paragraph [ref=e492]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e493]:
+              - generic [ref=e494]: ✓ Przetestowane
+              - generic [ref=e495]: Choć użyteczność innowacji można ocenić wysoko, rozwiązanie wymaga udoskonalenia przede wszystkim w zakresie komunikacji i zapewnienia bezpieczeństwa…
+            - generic [ref=e496]:
+              - generic [ref=e497]:
+                - term [ref=e498]: Na czym polega
+                - definition [ref=e499]:
+                  - text: Innowacja dostarcza narzędzia w postaci unikalnych kodów QR dla
+                  - mark [ref=e500]: seniorów
+                  - text: ", generowanych poprzez specjalnie do tego przygotowaną platformę internetową. Model składa się z fizycznie dostępnych naszywek lub naklejek z kodami, umieszczanych na ubraniu"
+                  - mark [ref=e501]: seniora
+                  - text: ", innych częściach garderoby, czy rzeczach oso…"
+              - generic [ref=e502]:
+                - term [ref=e503]: Jakiego problemu dotyczy
+                - definition [ref=e504]:
+                  - text: Innowacja odpowiada na trudności w samodzielnym poruszaniu się
+                  - mark [ref=e505]: seniorów
+                  - text: poza domem i problemów wynikających z zaburzeń pamięci,
+                  - mark [ref=e506]: chorób
+                  - text: przewlekłych bądź otępiennych.
+              - generic [ref=e507]:
+                - term [ref=e508]: Dla kogo
+                - definition [ref=e509]:
+                  - text: Osoby
+                  - mark [ref=e510]: starsze
+                  - text: ", w tym osoby z zaburzeniami pamięci czy"
+                  - mark [ref=e511]: chorobami
+                  - text: otępiennymi
+              - generic [ref=e512]:
+                - term [ref=e513]: Kto może wdrożyć
+                - definition [ref=e514]:
+                  - text: Organizacje pozarządowe, służby ratownictwa medycznego, placówki podstawowej opieki zdrowotnej, jednostki organizacyjne pomocy społecznej, instytucje publiczne działające na rzecz
+                  - mark [ref=e515]: seniorów
+                  - text: ", np. Centra…"
+            - generic [ref=e516]:
+              - generic [ref=e517]: Weryfikacja Jev Decisions · pewność 70%
+              - paragraph [ref=e518]: Jev nie dopatrzył się związku (0.30) — „Kody QR na pomoc seniorom” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e519]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e520]
+              - paragraph [ref=e521]:
+                - text: Pokrywa
+                - strong [ref=e522]: "2"
+                - text: z
+                - strong [ref=e523]: "4"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e524]: (siła pokrycia 50%)
+              - list [ref=e525]:
+                - listitem [ref=e526]: "Odpowiada na ten sam problem: osoby starsze, zdrowie i medycyna."
+                - listitem [ref=e527]: "Grupa docelowa się zgadza — karta wymienia osoby starsze, zdrowie i medycyna: Osoby starsze, w tym osoby z zaburzeniami pamięci czy chorobami otępiennymi"
+                - listitem [ref=e528]: "Było testowane: Choć użyteczność innowacji można ocenić wysoko, rozwiązanie wymaga udoskonalenia przede wszystkim w zakresie komunikacji i zapewnienia bezpieczeństwa…"
+                - listitem [ref=e529]: "Nie pokrywa: samotność i izolacja, obszary wiejskie — sprawdź, czy to dla Ciebie istotne."
+              - generic [ref=e530]:
+                - generic [ref=e531]:
+                  - generic [aria-hidden] [ref=e532]: ✓
+                  - generic [ref=e533]:
+                    - text: osoby starsze
+                    - generic [ref=e534]: · grupa docelowa, opis rozwiązania, opis problemu, kategoria, nazwa, kto może skorzystać
+                - generic [ref=e535]:
+                  - generic [aria-hidden] [ref=e536]: ✓
+                  - generic [ref=e537]:
+                    - text: zdrowie i medycyna
+                    - generic [ref=e538]: · grupa docelowa, opis rozwiązania, opis problemu
+                - generic [ref=e539]:
+                  - generic [aria-hidden] [ref=e540]: —
+                  - generic [ref=e541]: samotność i izolacja nie pokryte
+                - generic [ref=e542]:
+                  - generic [aria-hidden] [ref=e543]: —
+                  - generic [ref=e544]: obszary wiejskie nie pokryte
+              - group [ref=e545]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e546] [cursor=pointer]
+            - paragraph [ref=e547]: Wdrożono w miechowski (dane demo)
+            - generic [ref=e548]:
+              - button "Skontaktuj się z realizatorem" [ref=e549] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e550] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e551] [cursor=pointer]
+              - button "Pełna karta" [ref=e552] [cursor=pointer]
+          - article [ref=e553]:
+            - generic [ref=e554]:
+              - generic [ref=e555]:
+                - paragraph [ref=e556]: Dla seniorów
+                - heading "Wirtualne izby pamięci" [level=3] [ref=e557]
+              - generic [ref=e558]:
+                - generic [ref=e559]: "52"
+                - generic [aria-hidden] [ref=e560]: /100
+                - generic [ref=e561]: na 100 punktów, dopasowanie średnie
+                - generic [ref=e562]: średnie
+            - paragraph [ref=e563]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e564]:
+              - generic [ref=e565]: ✓ Przetestowane
+              - generic [ref=e566]: Test wykazał stosunkowo niski poziom przydatności dla grupy docelowej - mimo zdobycia pewnych informacji z zakresu polskiego dizajnu testerom trudno b…
+            - generic [ref=e567]:
+              - generic [ref=e568]:
+                - term [ref=e569]: Na czym polega
+                - definition [ref=e570]:
+                  - text: Model pracy z
+                  - mark [ref=e571]: seniorami
+                  - text: ", dotyczący przekazywania wartości kulturowych i historycznych związanych z dizajnem sztuki użytkowej oraz rozwoju kompetencji cyfrowych"
+                  - mark [ref=e572]: seniorów
+                  - text: . W ramach testu innowacji powstał podręcznik opisujący metodę pracy, wirtualna galeria
+                  - mark [ref=e573]: seniorów
+                  - text: "oraz 5 tutoriali dotyczących: przep…"
+              - generic [ref=e574]:
+                - term [ref=e575]: Jakiego problemu dotyczy
+                - definition [ref=e576]:
+                  - text: Innowacja społeczna dotyczy problemów związanych z
+                  - mark [ref=e577]: wykluczeniem
+                  - text: społecznym
+                  - mark [ref=e578]: seniorów
+                  - text: ", którego przyczynami są m.in. osłabione relacje społeczne i ich"
+                  - mark [ref=e579]: izolacja
+                  - text: ", słabe relacje międzypokoleniowe oraz słabe kompetencje cyfrowe, które są jednymi z kluczowych kompetencji współczesnego społeczeństwa."
+              - generic [ref=e580]:
+                - term [ref=e581]: Dla kogo
+                - definition [ref=e582]:
+                  - text: Osoby
+                  - mark [ref=e583]: starsze
+              - generic [ref=e584]:
+                - term [ref=e585]: Kto może wdrożyć
+                - definition [ref=e586]:
+                  - text: Centra aktywności
+                  - mark [ref=e587]: seniora
+                  - text: ", lokalne grupy wsparcia"
+                  - mark [ref=e588]: seniorów
+                  - text: ", organizacje pozarządowe, insytutcje kultury."
+            - generic [ref=e589]:
+              - generic [ref=e590]: Weryfikacja Jev Decisions · pewność 96%
+              - paragraph [ref=e591]: Jev nie dopatrzył się związku (0.04) — „Wirtualne izby pamięci” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e592]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e593]
+              - paragraph [ref=e594]:
+                - text: Pokrywa
+                - strong [ref=e595]: "2"
+                - text: z
+                - strong [ref=e596]: "4"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e597]: (siła pokrycia 50%)
+              - list [ref=e598]:
+                - listitem [ref=e599]: "Odpowiada na ten sam problem: samotność i izolacja, osoby starsze."
+                - listitem [ref=e600]: "Grupa docelowa się zgadza — karta wymienia osoby starsze: Osoby starsze"
+                - listitem [ref=e601]: "Było testowane: Test wykazał stosunkowo niski poziom przydatności dla grupy docelowej - mimo zdobycia pewnych informacji z zakresu polskiego dizajnu testerom trudno b…"
+                - listitem [ref=e602]: "Nie pokrywa: obszary wiejskie, zdrowie i medycyna — sprawdź, czy to dla Ciebie istotne."
+              - generic [ref=e603]:
+                - generic [ref=e604]:
+                  - generic [aria-hidden] [ref=e605]: ✓
+                  - generic [ref=e606]:
+                    - text: samotność i izolacja
+                    - generic [ref=e607]: · wyniki testu, opis problemu
+                - generic [ref=e608]:
+                  - generic [aria-hidden] [ref=e609]: ✓
+                  - generic [ref=e610]:
+                    - text: osoby starsze
+                    - generic [ref=e611]: · grupa docelowa, opis rozwiązania, opis problemu, kategoria, wyniki testu, kto może skorzystać
+                - generic [ref=e612]:
+                  - generic [aria-hidden] [ref=e613]: —
+                  - generic [ref=e614]: obszary wiejskie nie pokryte
+                - generic [ref=e615]:
+                  - generic [aria-hidden] [ref=e616]: —
+                  - generic [ref=e617]: zdrowie i medycyna nie pokryte
+              - group [ref=e618]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e619] [cursor=pointer]
+            - paragraph [ref=e620]: Wdrożono w bocheński, Nowy Sącz, Tarnów, wadowicki (dane demo)
+            - generic [ref=e621]:
+              - button "Skontaktuj się z realizatorem" [ref=e622] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e623] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e624] [cursor=pointer]
+              - button "Pełna karta" [ref=e625] [cursor=pointer]
+          - article [ref=e626]:
+            - generic [ref=e627]:
+              - generic [ref=e628]:
+                - paragraph [ref=e629]: Dla seniorów
+                - heading "Centrum antydepresyjne" [level=3] [ref=e630]
+              - generic [ref=e631]:
+                - generic [ref=e632]: "51"
+                - generic [aria-hidden] [ref=e633]: /100
+                - generic [ref=e634]: na 100 punktów, dopasowanie średnie
+                - generic [ref=e635]: średnie
+            - paragraph [ref=e636]: sprawdź zasady
+            - note [ref=e637]:
+              - generic [ref=e638]: — Brak opisanych wyników testu
+              - generic [ref=e639]: Ta karta nie zawiera pola „Czy to działa?" — traktuj jako pomysł do sprawdzenia, nie rozwiązanie gotowe do wdrożenia.
+            - generic [ref=e640]:
+              - generic [ref=e641]:
+                - term [ref=e642]: Na czym polega
+                - definition [ref=e643]:
+                  - text: Rozwiązanie stanowi nowatorską metodę pracy z
+                  - mark [ref=e644]: seniorem
+                  - text: w stanach depresyjnych z zastosowaniem dogo- i felinoterapii, które mają na celu zmniejszenie ryzyka wystąpienia epizodów depresyjnych i zachowań suicydalnych. Opiera się na świadczeniu wsparcia w środowisku domowym osoby
+                  - mark [ref=e645]: starszej
+                  - text: oraz osób z je…
+              - generic [ref=e646]:
+                - term [ref=e647]: Jakiego problemu dotyczy
+                - definition [ref=e648]:
+                  - text: Innowacja jest odpowiedzią na niski dostęp do metod pracy z
+                  - mark [ref=e649]: samotnymi
+                  - text: osobami
+                  - mark [ref=e650]: starszymi
+                  - text: ", u których występuje ryzyko depresji, prób samobójczych itp., które mieszkają na terenach"
+                  - mark [ref=e651]: wiejskich
+                  - text: .
+              - generic [ref=e652]:
+                - term [ref=e653]: Dla kogo
+                - definition [ref=e654]:
+                  - text: Osoby
+                  - mark [ref=e655]: starsze
+                  - text: wymagające opieki w miejscu zamieszkania i ich opiekunowie
+              - generic [ref=e656]:
+                - term [ref=e657]: Kto może wdrożyć
+                - definition [ref=e658]: Podmioty organizujące usługi opiekuńcze w miejscu zamieszkania, w tym jednostki samorządu terytorialnego, organizacje pozarządowe, podmioty ekonomii społecznej.
+            - generic [ref=e659]:
+              - generic [ref=e660]: Weryfikacja Jev Decisions · pewność 91%
+              - paragraph [ref=e661]: Jev nie dopatrzył się związku (0.09) — „Centrum antydepresyjne” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e662]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e663]
+              - paragraph [ref=e664]:
+                - text: Pokrywa
+                - strong [ref=e665]: "3"
+                - text: z
+                - strong [ref=e666]: "4"
+                - text: wątków rozpoznanych w Twoim opisie
+                - generic [ref=e667]: (siła pokrycia 63%)
+              - list [ref=e668]:
+                - listitem [ref=e669]: "Odpowiada na ten sam problem: osoby starsze, samotność i izolacja, obszary wiejskie."
+                - listitem [ref=e670]: "Grupa docelowa się zgadza — karta wymienia osoby starsze: Osoby starsze wymagające opieki w miejscu zamieszkania i ich opiekunowie"
+                - listitem [ref=e671]: Ta karta nie ma opisanych wyników testu, więc wynik dopasowania został obniżony — tematycznie pasuje, ale nikt nie udokumentował, czy działa.
+                - listitem [ref=e672]: "Nie pokrywa: zdrowie i medycyna — sprawdź, czy to dla Ciebie istotne."
+              - generic [ref=e673]:
+                - generic [ref=e674]:
+                  - generic [aria-hidden] [ref=e675]: ✓
+                  - generic [ref=e676]:
+                    - text: osoby starsze
+                    - generic [ref=e677]: · grupa docelowa, opis rozwiązania, kategoria, opis problemu
+                - generic [ref=e678]:
+                  - generic [aria-hidden] [ref=e679]: ✓
+                  - generic [ref=e680]:
+                    - text: samotność i izolacja
+                    - generic [ref=e681]: · opis problemu
+                - generic [ref=e682]:
+                  - generic [aria-hidden] [ref=e683]: ✓
+                  - generic [ref=e684]:
+                    - text: obszary wiejskie
+                    - generic [ref=e685]: · opis problemu
+                - generic [ref=e686]:
+                  - generic [aria-hidden] [ref=e687]: —
+                  - generic [ref=e688]: zdrowie i medycyna nie pokryte
+              - group [ref=e689]:
+                - generic "Które słowa w karcie to uruchomiły" [ref=e690] [cursor=pointer]
+            - paragraph [ref=e691]: Wdrożono w krakowski, nowosądecki, wadowicki, wielicki (dane demo)
+            - generic [ref=e692]:
+              - button "Skontaktuj się z realizatorem" [ref=e693] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e694] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e695] [cursor=pointer]
+              - button "Pełna karta" [ref=e696] [cursor=pointer]
+  - contentinfo [ref=e165]:
+    - generic [ref=e166]:
+      - paragraph [ref=e167]: Prototyp na HackYeah 2026 · zadanie Województwa Małopolskiego, realizator ROPS Kraków
+      - paragraph [ref=e168]: Dane innowacji pochodzą z Biblioteki Innowacji Społecznych ROPS (115 kart, w większości CC BY 4.0). Lokalizacje wdrożeń, kontakty realizatorów i zgłoszenia w panelu są danymi demonstracyjnymi — prototyp nie używa prawdziwych danych osobowych.

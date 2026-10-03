@@ -3,11 +3,17 @@
  *
  * Rozmowa zamiast formularza: użytkownik opisuje problem potocznie albo
  * dyktuje go głosem, asystent dopytuje najwyżej dwa razy, dopiero potem
- * dopasowuje. Każde trafienie ma rozliczenie „dlaczego to pasuje", a brak
+ * dopasowuje. Każde trafienie ma rozliczenie „dlaczego to pasuje”, a brak
  * trafienia nie kończy się pustą listą — zgłoszenie staje się luką w ofercie
  * Hubu i trafia do panelu ROPS.
+ *
+ * Wyniki, analiza zapytania, flaga luki i werdykty Jev pochodzą wyłącznie
+ * z `POST /api/match/search/`. Nie ma tu drugiego, przeglądarkowego rankingu:
+ * backend przy okazji zapisuje zapytanie jako sygnał potrzeby (z tego powstają
+ * trendy w panelu ROPS), więc wynik policzony lokalnie rozjechałby się z tym,
+ * co widzi koordynator. Gdy backend milczy, moduł mówi to wprost.
  */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   advance,
   applyChip,
@@ -16,11 +22,12 @@ import {
   type ConvState,
   type Turn,
 } from "../lib/conversation";
-import { buildIndex, search, gapReason, GAP_REASON_TEXT, type MatchResult } from "../lib/match";
+import { fetchMatches, reportGap as postGap, type MatchResponse } from "../lib/matchApi";
 import { LOOSE_EMOJIS, pickEmojis } from "../lib/emojis";
-import { INNOVATIONS, type Innovation } from "../lib/data";
-import { addThread } from "../lib/store";
-import { api } from "../lib/api";
+import { type Innovation } from "../lib/data";
+import { plural } from "../lib/text";
+import { addLocalThread } from "../lib/store";
+import { QUIET_MS, useDebounced } from "../lib/useDebounced";
 import { useSpeech } from "../lib/useSpeech";
 import { useA11y } from "../lib/a11y";
 import { InnovationCard } from "../components/InnovationCard";
@@ -30,26 +37,31 @@ import { Hero } from "../components/Hero";
 import { SearchPill } from "../components/SearchPill";
 import "./matchmaking.css";
 
-buildIndex(INNOVATIONS);
-
 interface Props {
   onAdapt: (inn: Innovation) => void;
   onTest: (inn: Innovation) => void;
 }
+
+type Phase = "idle" | "loading" | "ready" | "error";
 
 export function Matchmaking({ onAdapt, onTest }: Props) {
   const { t } = useA11y();
   const [conv, setConv] = useState<ConvState>(initConversation);
   const [draft, setDraft] = useState("");
   const [powiatFilter, setPowiatFilter] = useState<string | null>(null);
+  const [phase, setPhase] = useState<Phase>("idle");
+  const [data, setData] = useState<MatchResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [gapSent, setGapSent] = useState(false);
+  const [gapError, setGapError] = useState<string | null>(null);
   const [gapOpen, setGapOpen] = useState(false);
-  const [serverVerdicts, setServerVerdicts] = useState<
-    Record<string, { related?: boolean; confidence?: number; reason?: string; source?: string }>
-  >({});
+  const [retryKey, setRetryKey] = useState(0);
   const liveRef = useRef<HTMLDivElement>(null);
 
-  const picks = useMemo(() => pickEmojis(draft), [draft]);
+  // Rozpoznawanie wątków rusza dopiero po chwili ciszy. Bez tego krążek
+  // wylatuje i wraca przy każdej literze — a lot trwa teraz 1,5 s.
+  const quietDraft = useDebounced(draft);
+  const picks = useMemo(() => pickEmojis(quietDraft), [quietDraft]);
   const pickedEmojiSet = useMemo(() => new Set(picks.map((p) => p.emoji)), [picks]);
 
   const speech = useSpeech((text) => {
@@ -58,64 +70,66 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
     setDraft("");
   });
 
-  const { analysis, results } = useMemo(
-    () =>
-      conv.done && conv.problem
-        ? search(conv.problem, { limit: 6, powiat: powiatFilter ?? undefined })
-        : { analysis: { concepts: [], stems: [], unknown: [] }, results: [] as MatchResult[] },
-    [conv.done, conv.problem, powiatFilter],
-  );
-
-  // Synchronizacja z backendem DRF: rejestruje SearchQuery w Postgres (zasilając Trendy)
-  // oraz pobiera werdykty modelu decyzyjnego Jev dla poszczególnych innowacji
+  // Jedyne zapytanie o wyniki.
+  //
+  // Startuje dopiero po QUIET_MS ciszy: klikanie po mapie albo poprawianie
+  // opisu wysyłałoby inaczej serię żądań, z których liczy się ostatnie —
+  // a każde z nich zapisuje się w bazie jako sygnał potrzeby i zaśmiecałoby
+  // trendy w panelu ROPS. Odpowiedź z nieaktualnego zapytania odrzucamy,
+  // żeby wolniejsze żądanie nie nadpisało świeższego.
   useEffect(() => {
-    if (!conv.done || !conv.problem) return;
+    if (!conv.done || !conv.problem) {
+      setPhase("idle");
+      setData(null);
+      setError(null);
+      return;
+    }
     let active = true;
-    (async () => {
+    // „Szukam…” pokazujemy od razu — czekanie w ciszy wygląda jak zawieszenie.
+    setPhase("loading");
+    setError(null);
+
+    const timer = setTimeout(async () => {
       try {
-        const res = await api.match.search(conv.problem, 6, undefined, powiatFilter ?? undefined);
-        if (!active || !res.ok || !res.data) return;
-        const vMap: Record<string, { related?: boolean; confidence?: number; reason?: string; source?: string }> = {};
-        if (Array.isArray(res.data.results)) {
-          for (const item of res.data.results) {
-            const id = (item as any).id || (item as any).innovation_id;
-            const ai = (item as any).ai;
-            if (id && ai) {
-              vMap[id] = {
-                related: ai.related,
-                confidence: typeof ai.confidence === "number" ? ai.confidence : undefined,
-                reason: ai.reason,
-                source: ai.source,
-              };
-            }
-          }
-        }
-        setServerVerdicts(vMap);
-      } catch {
-        // graceful fallback do dopasowania lokalnego
+        const res = await fetchMatches(conv.problem, { limit: 6, powiat: powiatFilter });
+        if (!active) return;
+        setData(res);
+        setPhase("ready");
+      } catch (err) {
+        if (!active) return;
+        setData(null);
+        setError(
+          err instanceof Error ? err.message : "Nie udało się połączyć z serwerem HubMI.",
+        );
+        setPhase("error");
       }
-    })();
+    }, QUIET_MS);
+
     return () => {
       active = false;
+      clearTimeout(timer);
     };
-  }, [conv.done, conv.problem, powiatFilter]);
+  }, [conv.done, conv.problem, powiatFilter, retryKey]);
 
-  const gap = conv.done ? gapReason(analysis, results) : null;
+  const results = data?.results ?? [];
+  const analysis = data?.analysis;
+  const gap = data?.gap.isGap ? data.gap : null;
 
   /** Ile wdrożeń ma każdy powiat — ale tylko wśród dopasowanych innowacji. */
   const counts = useMemo(() => {
     const m = new Map<string, number>();
-    const pool = results.length ? results.map((r) => r.innovation) : [];
-    for (const inn of pool) {
-      for (const d of inn.deployments) m.set(d.powiat, (m.get(d.powiat) ?? 0) + 1);
+    for (const r of results) {
+      for (const d of r.innovation.deployments) {
+        m.set(d.powiat, (m.get(d.powiat) ?? 0) + 1);
+      }
     }
     return m;
   }, [results]);
 
   // Po dopasowaniu przenosimy uwagę czytnika na podsumowanie wyników.
   useEffect(() => {
-    if (conv.done) liveRef.current?.focus();
-  }, [conv.done, results.length]);
+    if (phase === "ready" || phase === "error") liveRef.current?.focus();
+  }, [phase, results.length]);
 
   const send = (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -131,20 +145,45 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
     setDraft("");
     setPowiatFilter(null);
     setGapSent(false);
+    setGapError(null);
+    setData(null);
+    setError(null);
+    setPhase("idle");
   };
 
-  const reportGap = (extra: string) => {
-    addThread({
-      kind: "luka",
-      title: conv.problem.slice(0, 90) + (conv.problem.length > 90 ? "…" : ""),
-      body: conv.problem + (extra ? `\n\nDopisek zgłaszającego: ${extra}` : ""),
-      powiat: conv.powiat ?? undefined,
-      concepts: analysis.concepts.map((c) => c.label),
-      unknownTerms: analysis.unknown,
-      topScore: results[0]?.score ?? 0,
-    });
-    setGapSent(true);
-    setGapOpen(false);
+  const retry = useCallback(() => setRetryKey((k) => k + 1), []);
+
+  // Lukę zakłada backend — tylko ta ścieżka wiąże zgłoszenie z zapytaniem,
+  // więc koordynator ROPS widzi, skąd się wzięło i co użytkownik wpisał.
+  const reportGap = async (extra: string) => {
+    if (!data) return;
+    setGapError(null);
+    const title = conv.problem.slice(0, 90) + (conv.problem.length > 90 ? "…" : "");
+    const body = conv.problem + (extra ? `\n\nDopisek zgłaszającego: ${extra}` : "");
+    try {
+      const threadId = await postGap({
+        queryId: data.queryId,
+        title,
+        body,
+        powiat: conv.powiat,
+      });
+      addLocalThread({
+        id: threadId,
+        kind: "luka",
+        title,
+        body,
+        powiat: conv.powiat ?? undefined,
+        concepts: (analysis?.concepts ?? []).map((c) => c.label),
+        unknownTerms: analysis?.unknown ?? [],
+        topScore: results[0]?.score ?? 0,
+      });
+      setGapSent(true);
+      setGapOpen(false);
+    } catch (err) {
+      setGapError(
+        err instanceof Error ? err.message : "Nie udało się zapisać zgłoszenia w ROPS.",
+      );
+    }
   };
 
   // Ostatnie pytanie asystenta może mieć gotowe odpowiedzi do kliknięcia.
@@ -156,19 +195,14 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
   return (
     <div className="page--hero">
       <Hero receded={conv.done}>
-        <p className="hero__eyebrow">115 przetestowanych innowacji z Małopolski</p>
         <h1>
           {t("Opisz problem.", "Napisz, co się dzieje.")}{" "}
           {/* Wyróżnione słowa niosą tezę produktu, nie są ozdobą: cała obietnica
-              HubMI to „już zadziałało" — rozwiązanie z udokumentowanym testem. */}
+              HubMI to „już zadziałało” — rozwiązanie z udokumentowanym testem. */}
           <span className="hero__accent">
             {t("Pokażemy, co już zadziałało.", "Pokażemy pomoc, która działa.")}
           </span>
         </h1>
-        <p className="hero__lede">
-          Opisz sytuację zwykłym językiem lub podyktuj głosem.
-          Wskażemy przetestowane rozwiązania z Małopolski i bezpośredni kontakt do realizatorów.
-        </p>
 
       {/* --- rozmowa --- */}
       <section className="mm__conv" aria-label="Wyszukiwanie rozwiązań">
@@ -308,37 +342,89 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
             aria-live="polite"
           >
             <div>
-              <h2>
-                {gap
-                  ? "Nie mamy na to gotowego rozwiązania"
-                  : `${results.length} ${
-                      results.length === 1 ? "rozwiązanie" : "rozwiązania"
-                    } z Biblioteki`}
-              </h2>
-              <p className="muted">
-                {gap
-                  ? GAP_REASON_TEXT[gap]
-                  : `Szukaliśmy wśród 115 przetestowanych innowacji. ` +
-                    `Rozpoznane wątki: ${analysis.concepts.map((c) => c.label).join(", ")}.`}
-              </p>
+              {phase === "loading" && (
+                <>
+                  <h2>Szukam w bazie innowacji…</h2>
+                  <p className="muted">
+                    Porównujemy zgłoszenie z kartami w bazie ROPS i weryfikujemy
+                    każde trafienie modelem decyzyjnym.
+                  </p>
+                </>
+              )}
+
+              {phase === "error" && (
+                <>
+                  <h2>Nie udało się pobrać wyników</h2>
+                  <p className="muted">{error}</p>
+                </>
+              )}
+
+              {phase === "ready" && (
+                <>
+                  <h2>
+                    {gap
+                      ? "Nie mamy na to gotowego rozwiązania"
+                      : `${results.length} ${plural(
+                          results.length,
+                          "rozwiązanie",
+                          "rozwiązania",
+                          "rozwiązań",
+                        )} z Biblioteki`}
+                  </h2>
+                  <p className="muted">
+                    {gap
+                      ? gap.text
+                      : analysis && analysis.concepts.length > 0
+                        ? `Rozpoznane wątki: ${analysis.concepts
+                            .map((c) => c.label)
+                            .join(", ")}.`
+                        : "Dopasowanie oparte na słowach z Twojego opisu."}
+                  </p>
+                </>
+              )}
             </div>
-            <button type="button" className="btn" onClick={restart}>
-              Zacznij od nowa
-            </button>
+
+            <div className="row">
+              {phase === "error" && (
+                <button type="button" className="btn btn--primary" onClick={retry}>
+                  Spróbuj ponownie
+                </button>
+              )}
+              <button type="button" className="btn" onClick={restart}>
+                Zacznij od nowa
+              </button>
+            </div>
           </div>
 
+          {phase === "error" && (
+            <section className="mm__gap card" data-reveal>
+              <p className="page__mod">Brak połączenia z serwerem</p>
+              <h3>Nie pokazujemy wyników, których nie policzył serwer</h3>
+              <p>
+                Dopasowanie liczy backend HubMI — tam jest baza innowacji, tam
+                zapisuje się zgłoszenie jako sygnał potrzeby i stamtąd pochodzi
+                weryfikacja każdego trafienia. Wynik udawany po stronie
+                przeglądarki nie trafiłby do panelu ROPS, więc go nie pokazujemy.
+              </p>
+              <p className="hint">
+                Jeśli uruchamiasz projekt lokalnie: backend powinien odpowiadać na{" "}
+                <span className="mono">http://localhost:8000/api/health/</span>.
+              </p>
+            </section>
+          )}
+
           {/* --- luka: problem bez rozwiązania staje się zadaniem dla Hubu --- */}
-          {gap && (
+          {phase === "ready" && gap && (
             <section className="mm__gap card" data-reveal>
               <p className="page__mod">Luka w ofercie Hubu</p>
               <h3>Twoje zgłoszenie jest tu wartościowe właśnie dlatego, że nic nie pasuje</h3>
               <p>
                 Problem, na który nikt jeszcze nie odpowiedział, jest dla ROPS
                 informacją o tym, czego w regionie brakuje. Po zgłoszeniu trafi do
-                panelu koordynatora w zestawieniu „niezaspokojone potrzeby i trendy"
+                panelu koordynatora w zestawieniu „niezaspokojone potrzeby i trendy”
                 — i może stać się tematem kolejnego naboru grantowego.
               </p>
-              {analysis.unknown.length > 0 && (
+              {analysis && analysis.unknown.length > 0 && (
                 <p className="hint">
                   Słowa, których nie rozpoznaliśmy jako znanego obszaru:{" "}
                   <span className="mono">{analysis.unknown.slice(0, 8).join(", ")}</span>.
@@ -351,20 +437,27 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                   w panelu — zajrzyj do modułu VI, żeby zobaczyć je z drugiej strony.
                 </p>
               ) : (
-                <div className="row">
-                  <button
-                    type="button"
-                    className="btn btn--primary"
-                    onClick={() => setGapOpen(true)}
-                  >
-                    Zgłoś tę potrzebę do ROPS
-                  </button>
-                </div>
+                <>
+                  {gapError && (
+                    <p className="error" role="alert">
+                      {gapError}
+                    </p>
+                  )}
+                  <div className="row">
+                    <button
+                      type="button"
+                      className="btn btn--primary"
+                      onClick={() => setGapOpen(true)}
+                    >
+                      Zgłoś tę potrzebę do ROPS
+                    </button>
+                  </div>
+                </>
               )}
             </section>
           )}
 
-          {results.length > 0 && (
+          {phase === "ready" && results.length > 0 && (
             <>
               <section className="mm__map" data-reveal>
                 <h2>Gdzie podobny problem już rozwiązano</h2>
@@ -386,7 +479,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                   <InnovationCard
                     key={r.innovation.id}
                     result={r}
-                    aiVerdict={serverVerdicts[r.innovation.id]}
+                    aiVerdict={data?.verdicts[r.innovation.id]}
                     onAdapt={onAdapt}
                     onTest={onTest}
                   />
@@ -412,16 +505,22 @@ function GapForm({
   onCancel,
 }: {
   problem: string;
-  onSubmit: (extra: string) => void;
+  onSubmit: (extra: string) => void | Promise<void>;
   onCancel: () => void;
 }) {
   const [extra, setExtra] = useState("");
+  const [sending, setSending] = useState(false);
   return (
     <form
       className="stack"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        onSubmit(extra.trim());
+        setSending(true);
+        try {
+          await onSubmit(extra.trim());
+        } finally {
+          setSending(false);
+        }
       }}
     >
       <div className="field">
@@ -444,8 +543,8 @@ function GapForm({
         Zgłoszenie służy do zliczania potrzeb, nie do prowadzenia sprawy.
       </p>
       <div className="row">
-        <button type="submit" className="btn btn--primary">
-          Wyślij do ROPS
+        <button type="submit" className="btn btn--primary" disabled={sending}>
+          {sending ? "Wysyłam…" : "Wyślij do ROPS"}
         </button>
         <button type="button" className="btn btn--ghost" onClick={onCancel}>
           Anuluj

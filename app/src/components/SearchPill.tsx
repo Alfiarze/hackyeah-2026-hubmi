@@ -135,8 +135,15 @@ function FlyingPick({ pick, index }: { pick: PickedEmoji; index: number }) {
     const deltaX = pebbleRect.left + pebbleRect.width / 2 - (elRect.left + elRect.width / 2);
     const deltaY = pebbleRect.top + pebbleRect.height / 2 - (elRect.top + elRect.height / 2);
 
+    // Lot trwa 1,5 s — dla kogoś z nadwrażliwością przedsionkową to już nie
+    // ozdobnik, tylko przeszkoda. Przy wyłączonym ruchu emotka pojawia się
+    // od razu na miejscu.
+    const reduced =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     // Animujemy DOKŁADNIE z fizycznej pozycji krążka na dole aż pod input
-    if (Math.abs(deltaY) > 8 && typeof el.animate === "function") {
+    if (!reduced && Math.abs(deltaY) > 8 && typeof el.animate === "function") {
       el.animate(
         [
           {
@@ -155,8 +162,10 @@ function FlyingPick({ pick, index }: { pick: PickedEmoji; index: number }) {
           },
         ],
         {
-          duration: 500,
-          delay: Math.min(160, index * 40),
+          // Lot krążka z tacy pod pole wyszukiwania celowo trwa długo:
+          // ma być czytelny jako „to słowo pochodzi stąd”, a nie mignąć.
+          duration: 1500,
+          delay: Math.min(480, index * 120),
           easing: "cubic-bezier(0.16, 1, 0.3, 1)",
           fill: "both",
         }

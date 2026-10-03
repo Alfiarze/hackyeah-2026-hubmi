@@ -1,0 +1,414 @@
+- generic [ref=e2]:
+  - paragraph [ref=e3]: "Tło strony: abstrakcyjne, powoli przesuwające się cząstki światła na ciemnym tle."
+  - link "Przejdź do treści" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=e6]:
+    - paragraph [ref=e7]: Dostosuj widok
+    - group "Dostosuj widok" [ref=e8]:
+      - button "Prosty język" [ref=e9] [cursor=pointer]
+      - group "Rozmiar tekstu" [ref=e10]:
+        - button "Czcionka normalna, 18 pikseli" [pressed] [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: A
+        - button "Czcionka duża, 22 piksele" [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: A+
+        - button "Czcionka bardzo duża, 27 pikseli" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: A++
+      - button "Wysoki kontrast" [ref=e20] [cursor=pointer]
+      - button "Ciemny motyw" [ref=e21] [cursor=pointer]
+      - button "Ruch w tle" [pressed] [ref=e22] [cursor=pointer]
+    - generic [ref=e23]:
+      - generic [ref=e24]: Rola w demonstracji
+      - generic [aria-hidden] [ref=e25]: "Demo — jestem:"
+      - combobox "Rola w demonstracji" [ref=e26]:
+        - option "mieszkanka / NGO / gmina" [selected]
+        - option "pracownik ROPS"
+        - option "ekspert branżowy"
+  - banner [ref=e27]:
+    - generic [ref=e28]:
+      - link [ref=e29] [cursor=pointer]:
+        - /url: "#matchmaking"
+        - strong [ref=e32]: HubMI
+      - navigation "Moduły Hubu" [ref=e33]:
+        - list [ref=e34]:
+          - listitem [ref=e35]:
+            - link [ref=e36] [cursor=pointer]:
+              - /url: "#matchmaking"
+              - generic [aria-hidden] [ref=e37]: Szukaj
+          - listitem [ref=e38]:
+            - link [ref=e39] [cursor=pointer]:
+              - /url: "#biblioteka"
+              - generic [aria-hidden] [ref=e40]: Wiedza
+          - listitem [ref=e41]:
+            - link [ref=e42] [cursor=pointer]:
+              - /url: "#kreator"
+              - generic [aria-hidden] [ref=e43]: Pomysł
+          - listitem [ref=e44]:
+            - link [ref=e45] [cursor=pointer]:
+              - /url: "#tester"
+              - generic [aria-hidden] [ref=e46]: Testuj
+          - listitem [ref=e47]:
+            - link ", 6 nowych powiadomień" [ref=e169] [cursor=pointer]:
+              - /url: "#komunikacja"
+              - generic [aria-hidden] [ref=e49]: Rozmowy
+              - generic [aria-hidden] [ref=e50]: "6"
+          - listitem [ref=e52]:
+            - link ", 9 nowych powiadomień" [ref=e2226] [cursor=pointer]:
+              - /url: "#admin"
+              - generic [aria-hidden] [ref=e54]: Panel
+              - generic [aria-hidden] [ref=e55]: "9"
+          - listitem [ref=e57]:
+            - link [ref=e58] [cursor=pointer]:
+              - /url: "#middleman"
+              - generic [aria-hidden] [ref=e59]: Middleman
+          - listitem [ref=e60]:
+            - link [ref=e61] [cursor=pointer]:
+              - /url: "#dostepnosc"
+              - generic [aria-hidden] [ref=e62]: WCAG
+  - main [ref=e63]:
+    - generic [ref=e64]:
+      - generic [ref=e66]:
+        - heading "Opisz problem. Pokażemy, co już zadziałało." [level=1] [ref=e67]
+        - region "Wyszukiwanie rozwiązań" [ref=e68]:
+          - list [ref=e69]:
+            - listitem [ref=e1763]:
+              - generic [ref=e1764]: HubMI
+              - paragraph [ref=e1765]: Opisz problem lub wyzwanie w swojej okolicy. Wystarczą 1–2 zdania zwykłym, codziennym językiem.
+            - listitem [ref=e1858]:
+              - generic [ref=e1859]: Ty
+              - paragraph [ref=e1860]: hodowla pstrąga w stawie i wędzenie ryb na sprzedaż
+            - listitem [ref=e1861]:
+              - generic [ref=e1862]: HubMI
+              - paragraph [ref=e1863]: Kogo ten problem dotyczy w pierwszej kolejności?
+            - listitem [ref=e1871]:
+              - generic [ref=e1872]: Ty
+              - paragraph [ref=e1873]: trudno powiedzieć
+            - listitem [ref=e1874]:
+              - generic [ref=e1875]: HubMI
+              - paragraph [ref=e1876]: Przeszukuję bazę innowacji pod kątem tego opisu.
+      - generic [ref=e189]:
+        - status [ref=e1877]:
+          - generic [ref=e1878]:
+            - heading "Nie mamy na to gotowego rozwiązania" [level=2] [ref=e1879]
+            - paragraph [ref=e1880]: Nie rozpoznaliśmy w tym opisie żadnego z obszarów, które pokrywa Biblioteka Innowacji Społecznych.
+          - button "Zacznij od nowa" [ref=e1882] [cursor=pointer]
+        - generic [ref=e1883]:
+          - paragraph [ref=e1884]: Luka w ofercie Hubu
+          - heading "Twoje zgłoszenie jest tu wartościowe właśnie dlatego, że nic nie pasuje" [level=3] [ref=e1885]
+          - paragraph [ref=e1886]: Problem, na który nikt jeszcze nie odpowiedział, jest dla ROPS informacją o tym, czego w regionie brakuje. Po zgłoszeniu trafi do panelu koordynatora w zestawieniu „niezaspokojone potrzeby i trendy" — i może stać się tematem kolejnego naboru grantowego.
+          - paragraph [ref=e1887]: "Słowa, których nie rozpoznaliśmy jako znanego obszaru: hodowla, pstrąga, stawie, wędzenie, sprzedaż, trudno, powiedzieć. Te właśnie zasilają zestawienie trendów."
+          - status [ref=e2227]:
+            - strong [ref=e2228]: Zgłoszone.
+            - text: Koordynator ROPS widzi już powiadomienie w panelu — zajrzyj do modułu VI, żeby zobaczyć je z drugiej strony.
+        - generic [ref=e1890]:
+          - heading "Gdzie podobny problem już rozwiązano" [level=2] [ref=e1891]
+          - figure "Im ciemniejszy powiat, tym więcej dopasowanych innowacji zostało tam wdrożonych. Kliknij powiat, aby zawęzić wyniki — a potem użyj przycisku „Skontaktuj się z realizatorem” na fiszce, żeby napisać do instytucji, która to samo już u siebie zrobiła." [ref=e1892]:
+            - generic [ref=e1894]:
+              - group "Mapa województwa małopolskiego — 22 powiaty i miasta" [ref=e1895]:
+                - 'button "m. Kraków: 0 wdrożeń" [ref=e1897] [cursor=pointer]'
+                - 'button "m. Nowy Sącz: 0 wdrożeń" [ref=e1899] [cursor=pointer]'
+                - 'button "m. Tarnów: 3 wdrożenia" [ref=e1901] [cursor=pointer]'
+                - 'button "pow. bocheński: 0 wdrożeń" [ref=e1903] [cursor=pointer]'
+                - 'button "pow. brzeski: 0 wdrożeń" [ref=e1905] [cursor=pointer]'
+                - 'button "pow. chrzanowski: 1 wdrożenie" [ref=e1907] [cursor=pointer]'
+                - 'button "pow. dąbrowski: 0 wdrożeń" [ref=e1909] [cursor=pointer]'
+                - 'button "pow. gorlicki: 0 wdrożeń" [ref=e1911] [cursor=pointer]'
+                - 'button "pow. krakowski: 0 wdrożeń" [ref=e1913] [cursor=pointer]'
+                - 'button "pow. limanowski: 0 wdrożeń" [ref=e1915] [cursor=pointer]'
+                - 'button "pow. miechowski: 1 wdrożenie" [ref=e1917] [cursor=pointer]'
+                - 'button "pow. myślenicki: 3 wdrożenia" [ref=e1919] [cursor=pointer]'
+                - 'button "pow. nowosądecki: 0 wdrożeń" [ref=e1921] [cursor=pointer]'
+                - 'button "pow. nowotarski: 1 wdrożenie" [ref=e1923] [cursor=pointer]'
+                - 'button "pow. olkuski: 0 wdrożeń" [ref=e1925] [cursor=pointer]'
+                - 'button "pow. oświęcimski: 2 wdrożenia" [ref=e1927] [cursor=pointer]'
+                - 'button "pow. proszowicki: 1 wdrożenie" [ref=e1929] [cursor=pointer]'
+                - 'button "pow. suski: 0 wdrożeń" [ref=e1931] [cursor=pointer]'
+                - 'button "pow. tarnowski: 0 wdrożeń" [ref=e1933] [cursor=pointer]'
+                - 'button "pow. tatrzański: 2 wdrożenia" [ref=e1935] [cursor=pointer]'
+                - 'button "pow. wadowicki: 0 wdrożeń" [ref=e1937] [cursor=pointer]'
+                - 'button "pow. wielicki: 0 wdrożeń" [ref=e1939] [cursor=pointer]'
+              - list [aria-hidden] [ref=e1940]:
+                - listitem [ref=e1941]: brak
+                - listitem [ref=e1943]: mniej
+                - listitem [ref=e1945]
+                - listitem [ref=e1947]
+                - listitem [ref=e1949]: więcej
+            - group [ref=e1951]:
+              - generic "Te same dane jako tabela" [ref=e1952] [cursor=pointer]
+            - paragraph [ref=e1953]:
+              - strong [ref=e1954]: Dane demo.
+              - text: Biblioteka Innowacji Społecznych ROPS nie publikuje lokalizacji wdrożeń, więc rozmieszczenie zostało wygenerowane na potrzeby prototypu (deterministycznie, z charakteru innowacji). Granice powiatów są prawdziwe. Po wdrożeniu to pole wypełniają realne zgłoszenia realizatorów.
+        - region "Dopasowane innowacje" [ref=e1955]:
+          - article [ref=e1956]:
+            - generic [ref=e1957]:
+              - generic [ref=e1958]:
+                - paragraph [ref=e1959]: Dla dzieci, młodzieży i rodziny
+                - heading "Przewodnik dla osób z ASD \"Moje potrzeby - gdzie i jak je realizować?\"" [level=3] [ref=e1960]
+              - generic [ref=e1961]:
+                - generic [ref=e1962]: "30"
+                - generic [aria-hidden] [ref=e1963]: /100
+                - generic [ref=e1964]: na 100 punktów, dopasowanie niskie
+                - generic [ref=e1965]: niskie
+            - paragraph [ref=e1966]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e1967]:
+              - generic [ref=e1968]: ✓ Przetestowane
+              - generic [ref=e1969]: Przewodnik zdecydowanie wpłynął pozytywnie na samodzielność osób z ASD. Niewielkie kroki i nauka podstawowych czynności i zachowań, okazały się być du…
+            - generic [ref=e1970]:
+              - generic [ref=e1971]:
+                - term [ref=e1972]: Na czym polega
+                - definition [ref=e1973]: "Innowację stanowi słowno-graficzny przewodnik dla młodzieży i dorosłych osób z zaburzeniami ze spektrum autyzmu (dalej jako ASD) dotyczący miejsc i sposobów realizacji codziennych i podstawowych potrzeb realizowanych poza domem. Jego główne części składowe to: plan aktywności (pokazujący co po kolei…"
+              - generic [ref=e1974]:
+                - term [ref=e1975]: Jakiego problemu dotyczy
+                - definition [ref=e1976]: Innowacja stanowi odpowiedź na niski poziom kompetencji społecznych i specyficznych trudności w uczeniu się zachowań wymagających odwoływania się do specjalnych procedur uczenia behawioralnego przez osoby z ASD (tj. nie wiedzą jak się zachować, mają trudności w odróżnieniu właściwych i niewłaściwych…
+              - generic [ref=e1977]:
+                - term [ref=e1978]: Dla kogo
+                - definition [ref=e1979]: Osoby posiadające diagnozę ASD (autyzm lub zespół Aspergera) w okresie dojrzewania (do 13 r.ż) lub dorosłości oraz posiadające umiejętność czytania i elementarną umiejętność komunikowania się.
+              - generic [ref=e1980]:
+                - term [ref=e1981]: Kto może wdrożyć
+                - definition [ref=e1982]: Szkoły specjalne, szkoły publiczne z klasami specjalnymi, szkoły niepubliczne, placówki wsparcia osób z ASD.
+            - generic [ref=e1983]:
+              - generic [ref=e1984]: Weryfikacja Jev Decisions · pewność 99%
+              - paragraph [ref=e1985]: Jev nie dopatrzył się związku (0.01) — „Przewodnik dla osób z ASD "Moje potrzeby - gdzie i jak je realizować?"” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e1986]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e1987]
+              - list [ref=e1988]:
+                - listitem [ref=e1989]: "Było testowane: Przewodnik zdecydowanie wpłynął pozytywnie na samodzielność osób z ASD. Niewielkie kroki i nauka podstawowych czynności i zachowań, okazały się być du…"
+            - paragraph [ref=e1990]: Wdrożono w oświęcimski (dane demo)
+            - generic [ref=e1991]:
+              - button "Skontaktuj się z realizatorem" [ref=e1992] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e1993] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e1994] [cursor=pointer]
+              - button "Pełna karta" [ref=e1995] [cursor=pointer]
+          - article [ref=e1996]:
+            - generic [ref=e1997]:
+              - generic [ref=e1998]:
+                - paragraph [ref=e1999]: Dla zdrowia i medycyny
+                - heading "Himalaje autyzmu" [level=3] [ref=e2000]
+              - generic [ref=e2001]:
+                - generic [ref=e2002]: "21"
+                - generic [aria-hidden] [ref=e2003]: /100
+                - generic [ref=e2004]: na 100 punktów, dopasowanie niskie
+                - generic [ref=e2005]: niskie
+            - paragraph [ref=e2006]: INNOWACJA WYBRANA DO UPOWSZECHNIANIA W RAMACH PROJEKTU "INKUBATOR DOSTĘPNOŚCI"
+            - note "Wynik testu innowacji" [ref=e2007]:
+              - generic [ref=e2008]: ✓ Przetestowane
+              - generic [ref=e2009]: Innowacja jest realną i skuteczną odpowiedzią na problemy z dostępem do usług medycznych. Pozwala na zaplanowanie wizyty w taki sposób żeby zminimaliz…
+            - generic [ref=e2010]:
+              - generic [ref=e2011]:
+                - term [ref=e2012]: Na czym polega
+                - definition [ref=e2013]: Himalaje Autyzmu zostały stworzone na potrzeby wizyt w placówkach medycznych takich jak przychodnie, poradnie, punkty pobrań czy szpitale. Jest to model pracy z osobami przede wszystkim ze spektrum autyzmu), które przejawiają zachowania nieakceptowane społecznie, w tym agresywne i autoagresywne. Czt…
+              - generic [ref=e2014]:
+                - term [ref=e2015]: Jakiego problemu dotyczy
+                - definition [ref=e2016]:
+                  - text: Trudności w dostępie do usług i świadczeń medycznych dla osób (w tym ze spektrum autyzmu) przejawiających zachowania
+                  - mark [ref=e2017]: trudne
+                  - text: (w tym agresywne i autoagresywne).
+              - generic [ref=e2018]:
+                - term [ref=e2019]: Dla kogo
+                - definition [ref=e2020]:
+                  - text: Osoby dorosłe neuroatypowe (przede wszytskim ze spektrum autyzmu) przejawiające
+                  - mark [ref=e2021]: trudne
+                  - text: zachowania nieakceptowane społeczne.
+              - generic [ref=e2022]:
+                - term [ref=e2023]: Kto może wdrożyć
+                - definition [ref=e2024]:
+                  - text: Placówki medyczne, szpitala, rodziny osób przejawiających
+                  - mark [ref=e2025]: trudne
+                  - text: zachowania, asystenci osób z niepełnosprawnością, organizacje pozarządowe i podmioty zatrudniające asystentów osób z niepełnosprawności…
+            - generic [ref=e2026]:
+              - generic [ref=e2027]: Weryfikacja Jev Decisions · pewność 99%
+              - paragraph [ref=e2028]: Jev nie dopatrzył się związku (0.01) — „Himalaje autyzmu” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2029]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2030]
+              - list [ref=e2031]:
+                - listitem [ref=e2032]: "Było testowane: Innowacja jest realną i skuteczną odpowiedzią na problemy z dostępem do usług medycznych."
+            - paragraph [ref=e2033]: Wdrożono w miechowski (dane demo)
+            - generic [ref=e2034]:
+              - button "Skontaktuj się z realizatorem" [ref=e2035] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2036] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2037] [cursor=pointer]
+              - button "Pełna karta" [ref=e2038] [cursor=pointer]
+          - article [ref=e2039]:
+            - generic [ref=e2040]:
+              - generic [ref=e2041]:
+                - paragraph [ref=e2042]: Dla dzieci, młodzieży i rodziny
+                - heading "Piosenki uczestniczące" [level=3] [ref=e2043]
+              - generic [ref=e2044]:
+                - generic [ref=e2045]: "14"
+                - generic [aria-hidden] [ref=e2046]: /100
+                - generic [ref=e2047]: na 100 punktów, dopasowanie niskie
+                - generic [ref=e2048]: niskie
+            - paragraph [ref=e2049]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e2050]:
+              - generic [ref=e2051]: ✓ Przetestowane
+              - generic [ref=e2052]: Testy pokazały, że wspólna zabawa grupowa przy wsparciu narzędzia oraz instrumentów muzycznych sprzyja zwiększeniu umiejętności koncentracji uwagi, wz…
+            - generic [ref=e2053]:
+              - generic [ref=e2054]:
+                - term [ref=e2055]: Na czym polega
+                - definition [ref=e2056]:
+                  - text: Autorskie kompozycje i piosenki dydaktyczne, które są dostosowane do percepcji dzieci – przede wszystkim tych niemówiących oraz z
+                  - mark [ref=e2057]: trudnościami
+                  - text: w komunikacji. Dzięki temu rozwiązaniu mogą one brać czynny udział w zabawach muzycznych, z których do tej pory były wykluczone.
+              - generic [ref=e2058]:
+                - term [ref=e2059]: Jakiego problemu dotyczy
+                - definition [ref=e2060]: Innowacja odpowiada na ograniczony dostęp do narzędzi aktywnej integracji społecznej i edukacyjnej kierowanej do dzieci, które nie są w stanie komunikować się w sposób werbalny lub komunikacja ta jest niepełna, nieczytelna.
+              - generic [ref=e2061]:
+                - term [ref=e2062]: Dla kogo
+                - definition [ref=e2063]:
+                  - text: Dzieci w wieku 1-3 lat, niemówiące oraz z
+                  - mark [ref=e2064]: trudnościami
+                  - text: w komunikacji, które nie są w stanie porozumiewać się w sposób werbalny, dzieci, których komunikacja jest niepełna, nieczytelna.
+              - generic [ref=e2065]:
+                - term [ref=e2066]: Kto może wdrożyć
+                - definition [ref=e2067]: Rodzice i opiekunowie, placówki opiekuńcze, poradnie specjalistyczne, przedszkola i żłobki.
+            - generic [ref=e2068]:
+              - generic [ref=e2069]: Weryfikacja Jev Decisions · pewność 99%
+              - paragraph [ref=e2070]: Jev nie dopatrzył się związku (0.01) — „Piosenki uczestniczące” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2071]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2072]
+              - list [ref=e2073]:
+                - listitem [ref=e2074]: "Było testowane: Testy pokazały, że wspólna zabawa grupowa przy wsparciu narzędzia oraz instrumentów muzycznych sprzyja zwiększeniu umiejętności koncentracji uwagi, wz…"
+            - paragraph [ref=e2075]: Wdrożono w myślenicki (dane demo)
+            - generic [ref=e2076]:
+              - button "Skontaktuj się z realizatorem" [ref=e2077] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2078] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2079] [cursor=pointer]
+              - button "Pełna karta" [ref=e2080] [cursor=pointer]
+          - article [ref=e2081]:
+            - generic [ref=e2082]:
+              - generic [ref=e2083]:
+                - paragraph [ref=e2084]: Dla dzieci, młodzieży i rodziny
+                - heading "koMIX życiowy" [level=3] [ref=e2085]
+              - generic [ref=e2086]:
+                - generic [ref=e2087]: "12"
+                - generic [aria-hidden] [ref=e2088]: /100
+                - generic [ref=e2089]: na 100 punktów, dopasowanie niskie
+                - generic [ref=e2090]: niskie
+            - paragraph [ref=e2091]: INNOWACJA WYBRANA DO UPOWSZECHNIANIA W RAMACH PROJEKTU "INKUBATOR WŁĄCZENIA SPOŁECZNEGO"
+            - note "Wynik testu innowacji" [ref=e2092]:
+              - generic [ref=e2093]: ✓ Przetestowane
+              - generic [ref=e2094]: Narzędzie wspiera rozwój emocjonalny młodzieży, pozwala nabywać nowe kompetencje oraz w bezpiecznych warunkach dzielić się swoimi trudnościami. Ponadt…
+            - generic [ref=e2095]:
+              - generic [ref=e2096]:
+                - term [ref=e2097]: Na czym polega
+                - definition [ref=e2098]: Terapeutyczna gra planszowa dedykowana nastoletnim wychowankom placówek opiekuńczowychowawczych. Porusza problemy charakterystyczne dla ich wychowanków oraz zagadnienia związane z okresem dojrzewania wspierając ich prawidłowy rozwój emocjonalny, ucząc identyfikacji emocji, ich oswajania i radzenia s…
+              - generic [ref=e2099]:
+                - term [ref=e2100]: Jakiego problemu dotyczy
+                - definition [ref=e2101]:
+                  - text: Innowacja odpowiada na trudności z rozumieniem i radzeniem sobie z
+                  - mark [ref=e2102]: trudnymi
+                  - text: emocjami przez wychowanków placówek opiekuńczo-wychowawczych oraz brak narzędzi wspierających opiekunów w edukacji emocjonalnej młodzieży z w/w placówek.
+              - generic [ref=e2103]:
+                - term [ref=e2104]: Dla kogo
+                - definition [ref=e2105]: Wychowankowie placówek opiekuńczo-wychowawczych w okresie dojrzewania
+              - generic [ref=e2106]:
+                - term [ref=e2107]: Kto może wdrożyć
+                - definition [ref=e2108]: Placówki opiekuńczo-wychowawcze typu rodzinnego i instytucjonalnego, szkoły publiczne i niepubliczne, psychologowie, pedagodzy.
+            - generic [ref=e2109]:
+              - generic [ref=e2110]: Weryfikacja Jev Decisions · pewność 99%
+              - paragraph [ref=e2111]: Jev nie dopatrzył się związku (0.01) — „koMIX życiowy” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2112]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2113]
+              - list [ref=e2114]:
+                - listitem [ref=e2115]: "Było testowane: Narzędzie wspiera rozwój emocjonalny młodzieży, pozwala nabywać nowe kompetencje oraz w bezpiecznych warunkach dzielić się swoimi trudnościami."
+            - paragraph [ref=e2116]: Wdrożono w myślenicki, nowotarski, Tarnów (dane demo)
+            - generic [ref=e2117]:
+              - button "Skontaktuj się z realizatorem" [ref=e2118] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2119] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2120] [cursor=pointer]
+              - button "Pełna karta" [ref=e2121] [cursor=pointer]
+          - article [ref=e2122]:
+            - generic [ref=e2123]:
+              - generic [ref=e2124]:
+                - paragraph [ref=e2125]: Dla dzieci, młodzieży i rodziny
+                - heading "Nasz wspólny, rodzinny świat - poznaję, uczę, reaguję" [level=3] [ref=e2126]
+              - generic [ref=e2127]:
+                - generic [ref=e2128]: "12"
+                - generic [aria-hidden] [ref=e2129]: /100
+                - generic [ref=e2130]: na 100 punktów, dopasowanie niskie
+                - generic [ref=e2131]: niskie
+            - paragraph [ref=e2132]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e2133]:
+              - generic [ref=e2134]: ✓ Przetestowane
+              - generic [ref=e2135]: W ramach wspólnej rozgrywki członkowie rodzin mieli szansę zbliżyć się do siebie, rozwiązując zadania i bawiąc się razem. Wykorzystano grę planszową j…
+            - generic [ref=e2136]:
+              - generic [ref=e2137]:
+                - term [ref=e2138]: Na czym polega
+                - definition [ref=e2139]: "W ramach innowacji utworzono kmpleksowy model wsparcia rodzin, składający się z dwóch elementów: zespołu szybkiego reagowania na zgłaszany problem – w możliwie najszybszy sposób ma kierować osoby w potrzebie do odpowiedniego organu, jednostki czy specjalisty; autorskiej gry rodzinnej „Nasz wspólny,…"
+              - generic [ref=e2140]:
+                - term [ref=e2141]: Jakiego problemu dotyczy
+                - definition [ref=e2142]: Innowacja odpowiada na trudności w funkcjonowaniu rodzin dzieci z niepełnosprawnością, problemy w uzyskaniu odpowiedniej diagnozy i zaburzenia w relacjach rodzinnych z tym związanych.
+              - generic [ref=e2143]:
+                - term [ref=e2144]: Dla kogo
+                - definition [ref=e2145]:
+                  - text: Rodziny borykające się z
+                  - mark [ref=e2146]: trudnościami
+                  - text: wychowawczymi związanymi z zaburzeniami lub niepełnosprawnością dzieci
+              - generic [ref=e2147]:
+                - term [ref=e2148]: Kto może wdrożyć
+                - definition [ref=e2149]:
+                  - text: Instytucje i organizacje zajmujące się organizacją opieki i wsparcia dla rodzin w kryzysie, rodziny borykające się z
+                  - mark [ref=e2150]: trudnościami
+                  - text: wychowawczymi związanymi z zaburzeniami lub niepełnosprawnością występ…
+            - generic [ref=e2151]:
+              - generic [ref=e2152]: Weryfikacja Jev Decisions · pewność 99%
+              - paragraph [ref=e2153]: Jev nie dopatrzył się związku (0.01) — „Nasz wspólny, rodzinny świat - poznaję, uczę, reaguję” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2154]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2155]
+              - list [ref=e2156]:
+                - listitem [ref=e2157]: "Było testowane: W ramach wspólnej rozgrywki członkowie rodzin mieli szansę zbliżyć się do siebie, rozwiązując zadania i bawiąc się razem."
+            - paragraph [ref=e2158]: Wdrożono w chrzanowski, myślenicki, Tarnów, tatrzański (dane demo)
+            - generic [ref=e2159]:
+              - button "Skontaktuj się z realizatorem" [ref=e2160] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2161] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2162] [cursor=pointer]
+              - button "Pełna karta" [ref=e2163] [cursor=pointer]
+          - article [ref=e2164]:
+            - generic [ref=e2165]:
+              - generic [ref=e2166]:
+                - paragraph [ref=e2167]: Dla dzieci, młodzieży i rodziny
+                - heading "To nie koniec świata - to początek świata" [level=3] [ref=e2168]
+              - generic [ref=e2169]:
+                - generic [ref=e2170]: "12"
+                - generic [aria-hidden] [ref=e2171]: /100
+                - generic [ref=e2172]: na 100 punktów, dopasowanie niskie
+                - generic [ref=e2173]: niskie
+            - paragraph [ref=e2174]: sprawdź zasady
+            - note "Wynik testu innowacji" [ref=e2175]:
+              - generic [ref=e2176]: ✓ Przetestowane
+              - generic [ref=e2177]: Opracowane narzędzia pomagają rodzicom i rodzeństwu lepiej zrozumieć i radzić sobie z wyzwaniami, jakie niesie ze sobą opieka nad osobą z niepełnospra…
+            - generic [ref=e2178]:
+              - generic [ref=e2179]:
+                - term [ref=e2180]: Na czym polega
+                - definition [ref=e2181]: "Narzędzie edukacyjne, przeznaczone dla rodzin, które stają przed wyzwaniem związanym z wychowaniem dziecka/dzieci z niepełnosprawnością. Narzędzia są ze sobą spójne, uzupełniają się i tworzą logiczną całość. Składają się na nie: karty pracy dla rodziców i rodzeństwa, informator dla rodziców, podcast…"
+              - generic [ref=e2182]:
+                - term [ref=e2183]: Jakiego problemu dotyczy
+                - definition [ref=e2184]: Innowacja jest odpowiedzią na trudności w funkcjonowaniu rodziny, w której jedno lub więcej dzieci cierpi z powodu niepełnosprawności
+              - generic [ref=e2185]:
+                - term [ref=e2186]: Dla kogo
+                - definition [ref=e2187]:
+                  - text: Rodziny borykające się z
+                  - mark [ref=e2188]: trudnościami
+                  - text: wychowawczymi związanymi z zaburzeniami lub niepełnosprawnością występującymi u dziecka.
+              - generic [ref=e2189]:
+                - term [ref=e2190]: Kto może wdrożyć
+                - definition [ref=e2191]:
+                  - text: Instytucje i organizacje zajmujące się organizacją opieki i wsparcia dla rodzin w kórych funkcjonuje dziecko z niepełnosprawnością, rodziny borykające się z
+                  - mark [ref=e2192]: trudnościami
+                  - text: związanymi z niepełnosprawnośc…
+            - generic [ref=e2193]:
+              - generic [ref=e2194]: Weryfikacja Jev Decisions · pewność 99%
+              - paragraph [ref=e2195]: Jev nie dopatrzył się związku (0.01) — „To nie koniec świata - to początek świata” nie sięga opisanego problemu, brakuje w karcie tego, o co pyta mieszkaniec.
+            - region "Dlaczego to pasuje" [ref=e2196]:
+              - heading "Dlaczego to pasuje" [level=4] [ref=e2197]
+              - list [ref=e2198]:
+                - listitem [ref=e2199]: "Było testowane: Opracowane narzędzia pomagają rodzicom i rodzeństwu lepiej zrozumieć i radzić sobie z wyzwaniami, jakie niesie ze sobą opieka nad osobą z niepełnospra…"
+            - paragraph [ref=e2200]: Wdrożono w oświęcimski, proszowicki, Tarnów, tatrzański (dane demo)
+            - generic [ref=e2201]:
+              - button "Skontaktuj się z realizatorem" [ref=e2202] [cursor=pointer]
+              - button "Dopasuj do mojej instytucji" [ref=e2203] [cursor=pointer]
+              - button "Chcę to przetestować" [ref=e2204] [cursor=pointer]
+              - button "Pełna karta" [ref=e2205] [cursor=pointer]
+  - contentinfo [ref=e165]:
+    - generic [ref=e166]:
+      - paragraph [ref=e167]: Prototyp na HackYeah 2026 · zadanie Województwa Małopolskiego, realizator ROPS Kraków
+      - paragraph [ref=e168]: Dane innowacji pochodzą z Biblioteki Innowacji Społecznych ROPS (115 kart, w większości CC BY 4.0). Lokalizacje wdrożeń, kontakty realizatorów i zgłoszenia w panelu są danymi demonstracyjnymi — prototyp nie używa prawdziwych danych osobowych.

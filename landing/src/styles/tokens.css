@@ -1,0 +1,212 @@
+/**
+ * Tokeny HubMI — ten sam zestaw co w aplikacji (`app/src/styles/tokens.css`).
+ *
+ * Landing i aplikacja to dwa osobne builda, ale jeden produkt, więc wartości
+ * są przepisane 1:1, nie dobrane na nowo. Zmiana koloru zaczyna się w
+ * `DESIGN.md`, potem leci do obu plików — nigdy w komponencie.
+ *
+ * Każda para tekst/tło jest policzona pod WCAG 2.1 AA (ratio w komentarzach).
+ */
+
+:root {
+  /* --- powierzchnie --- */
+  --bg: #0a0a0b;
+  --surface: #16161a;
+  --surface-2: #1f1f24;
+
+  /* --- szkło (iOS-owe materiały: rozmycie + nasycenie) --- */
+  --surface-glass: rgba(18, 18, 26, 0.44);
+  --surface-glass-thick: rgba(22, 22, 32, 0.58);
+  --surface-glass-card: rgba(18, 18, 26, 0.40);
+  --surface-glass-thin: rgba(255, 255, 255, 0.06);
+  --surface-glass-btn: rgba(255, 255, 255, 0.09);
+
+  --glass-blur: 40px;
+  --glass-blur-heavy: 52px;
+  --glass-saturate: 200%;
+  --glass-contrast: 106%;
+
+  --glass-border: 1px solid rgba(255, 255, 255, 0.14);
+  --glass-border-subtle: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-border-bright: 1px solid rgba(255, 255, 255, 0.28);
+  --glass-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --glass-shadow: 0 16px 38px -6px rgba(0, 0, 0, 0.45), 0 4px 14px -2px rgba(0, 0, 0, 0.35);
+
+  /* --- tekst --- */
+  --ink: #ffffff;
+  --ink-2: #d6d6dc;
+  --ink-3: #a3a3ad;
+
+  /* --- akcent --- */
+  --accent: #e3b341;      /* 10.17 na bg */
+  --accent-ink: #0a0a0b;  /* 10.17 na akcencie */
+  --accent-wash: #241d0c;
+
+  /* --- stany --- */
+  --ok: #4ade80;          /* 11.36 */
+  --ok-wash: #0d2316;
+  --warn: #fbbf24;        /* 11.92 */
+  --err: #f87171;         /*  7.15 */
+
+  /* --- linie --- */
+  --line: #26262c;        /* dekoracyjna */
+  --line-ui: #666670;     /*  3.49 na bg — wymagana przez AA dla kontrolek */
+
+  --shadow-lg: 0 24px 60px rgb(0 0 0 / 0.7), 0 4px 12px rgb(0 0 0 / 0.5);
+
+  /* Przyciemnienie nad materiałem w tle. Wartość policzona, nie estetyczna. */
+  --scrim: 0.68;
+
+  /* Druga barwa poświaty (w aplikacji: druga seria na wykresach). */
+  --chart-2: #7f88e6;
+
+  /* --- typografia: Apple San Francisco --- */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+
+  /* Baza 18px, nie 16px — grupa docelowa to m.in. seniorzy. */
+  --fs-scale: 1;
+  --fs-xs: calc(13px * var(--fs-scale));
+  --fs-sm: calc(15px * var(--fs-scale));
+  --fs-base: calc(18px * var(--fs-scale));
+  --fs-lg: calc(20px * var(--fs-scale));
+  --fs-xl: calc(24px * var(--fs-scale));
+  --fs-2xl: calc(32px * var(--fs-scale));
+  --fs-3xl: calc(44px * var(--fs-scale));
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+  --sp-9: 7rem;
+  --measure: 66ch;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-lg: 28px;
+  --radius-pill: 9999px;
+
+  --focus-ring: var(--accent);
+  color-scheme: dark;
+}
+
+/**
+ * Tryb jasny — wybierany ręcznie, nie odwrócenie ciemnego.
+ * Złoto musi pociemnieć do #8A6100 (5.31), żeby czytało się na bieli.
+ */
+:root[data-theme="light"] {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+
+  --surface-glass: rgba(255, 255, 255, 0.52);
+  --surface-glass-thick: rgba(255, 255, 255, 0.70);
+  --surface-glass-card: rgba(255, 255, 255, 0.56);
+  --surface-glass-thin: rgba(255, 255, 255, 0.36);
+  --surface-glass-btn: rgba(255, 255, 255, 0.70);
+
+  --glass-border: 1px solid rgba(0, 0, 0, 0.10);
+  --glass-border-subtle: 1px solid rgba(0, 0, 0, 0.06);
+  --glass-border-bright: 1px solid rgba(0, 0, 0, 0.18);
+  --glass-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+  --glass-shadow: 0 14px 36px -4px rgba(0, 0, 0, 0.08), 0 3px 10px -2px rgba(0, 0, 0, 0.05);
+
+  --ink: #111114;
+  --ink-2: #404046;
+  --ink-3: #62626b;
+  --accent: #8a6100;      /*  5.31 */
+  --accent-ink: #ffffff;
+  --accent-wash: #fdf6e3;
+  --ok: #15803d;          /*  4.81 */
+  --ok-wash: #f0fdf4;
+  --warn: #b45309;
+  --err: #b91c1c;
+  --line: #e4e4e7;
+  --line-ui: #8e8e95;
+  --shadow-lg: 0 20px 50px rgb(24 24 27 / 0.12), 0 4px 10px rgb(24 24 27 / 0.06);
+  --chart-2: #4f46e5;
+  --scrim: 0.72;
+  color-scheme: light;
+}
+
+/**
+ * Wysoki kontrast — osobny od motywu. Ramki wracają wszędzie,
+ * tło dekoracyjne znika, gradienty ustępują jednolitej barwie.
+ */
+:root[data-contrast="high"] {
+  --bg: #000000;
+  --surface: #000000;
+  --surface-2: #141414;
+
+  --surface-glass: var(--surface);
+  --surface-glass-thick: var(--surface);
+  --surface-glass-card: var(--surface);
+  --surface-glass-thin: var(--surface-2);
+  --surface-glass-btn: var(--surface);
+
+  --glass-blur: 0px;
+  --glass-blur-heavy: 0px;
+  --glass-saturate: 100%;
+  --glass-contrast: 100%;
+
+  --glass-border: 2px solid var(--line-ui);
+  --glass-border-subtle: 2px solid var(--line-ui);
+  --glass-border-bright: 2px solid var(--line-ui);
+  --glass-highlight: none;
+  --glass-shadow: none;
+
+  --ink: #ffffff;         /* 21.00 */
+  --ink-2: #ededed;
+  --ink-3: #ededed;
+  --accent: #ffd454;
+  --accent-ink: #000000;
+  --accent-wash: #1a1405;
+  --ok: #7cff9e;
+  --ok-wash: #04210d;
+  --warn: #ffd454;
+  --err: #ff9b8f;
+  --line: #ffffff;
+  --line-ui: #ffffff;
+  --shadow-lg: none;
+  --chart-2: #a8c0ff;
+  --scrim: 1;
+  color-scheme: dark;
+}
+
+:root[data-contrast="high"][data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f0f0f0;
+
+  --surface-glass: var(--surface);
+  --surface-glass-thick: var(--surface);
+  --surface-glass-card: var(--surface);
+  --surface-glass-thin: var(--surface-2);
+  --surface-glass-btn: var(--surface);
+
+  --ink: #000000;
+  --ink-2: #1a1a1a;
+  --ink-3: #1a1a1a;
+  --accent: #5c3f00;
+  --accent-ink: #ffffff;
+  --accent-wash: #fff8e5;
+  --ok: #1d3c00;
+  --ok-wash: #e8f2e0;
+  --warn: #6b3000;
+  --err: #8c1200;
+  --line: #000000;
+  --line-ui: #000000;
+  --chart-2: #00007a;
+  color-scheme: light;
+}
+
+/* W wysokim kontraście granica wraca wszędzie i jest grubsza. */
+:root[data-contrast="high"] .card,
+:root[data-contrast="high"] .chip,
+:root[data-contrast="high"] .btn,
+:root[data-contrast="high"] select {
+  border: 2px solid var(--line-ui) !important;
+}
