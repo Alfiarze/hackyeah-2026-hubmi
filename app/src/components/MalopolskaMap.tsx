@@ -1,16 +1,16 @@
 /**
- * Mapa Małopolski — gdzie podobny problem już rozwiązano.
+ * Mapa Małopolski - gdzie podobny problem już rozwiązano.
  *
  * Geometria jest prawdziwa: 22 jednostki (19 powiatów + 3 miasta na prawach
  * powiatu), wycięte z polska-geojson i uproszczone do 10% punktów
- * (scripts/build_geo.py). Nie jest to schemat ani kafelki — jury widzi
+ * (scripts/build_geo.py). Nie jest to schemat ani kafelki - jury widzi
  * rzeczywisty kształt województwa.
  *
  * Lokalizacje wdrożeń to natomiast DANE DEMO i jest to w interfejsie napisane
  * wprost: Biblioteka ROPS nie publikuje, gdzie która innowacja była wdrażana.
  * Udawanie, że mamy te dane, byłoby wprowadzaniem jury w błąd.
  *
- * Dostępność: mapa nie jest jedynym dostępem do tej informacji — pod nią stoi
+ * Dostępność: mapa nie jest jedynym dostępem do tej informacji - pod nią stoi
  * ta sama lista jako tabela. Same ścieżki są przyciskami osiągalnymi
  * tabulatorem, z nazwą i liczbą w etykiecie (WCAG 1.1.1, 2.1.1).
  */
@@ -22,14 +22,14 @@ interface Props {
   counts: Map<string, number>;
   selected?: string | null;
   onSelect: (powiat: string | null) => void;
-  /** opis dla czytników — co ta mapa pokazuje w tym kontekście */
+  /** opis dla czytników - co ta mapa pokazuje w tym kontekście */
   caption: string;
 }
 
 export function MalopolskaMap({ counts, selected, onSelect, caption }: Props) {
   const max = Math.max(1, ...counts.values());
 
-  /** 5 progów — intensywność nigdy nie jest jedynym nośnikiem, liczba jest w etykiecie */
+  /** 5 progów - intensywność nigdy nie jest jedynym nośnikiem, liczba jest w etykiecie */
   const bucket = (n: number): number => {
     if (!n) return 0;
     return Math.min(4, Math.ceil((n / max) * 4));
@@ -44,7 +44,7 @@ export function MalopolskaMap({ counts, selected, onSelect, caption }: Props) {
           viewBox={MAP.viewBox}
           className="map__svg"
           role="group"
-          aria-label="Mapa województwa małopolskiego — 22 powiaty i miasta"
+          aria-label="Mapa województwa małopolskiego - 22 powiaty i miasta"
         >
           {MAP.units.map((u) => {
             const n = counts.get(u.id) ?? 0;
@@ -106,7 +106,7 @@ export function MalopolskaMap({ counts, selected, onSelect, caption }: Props) {
         </p>
       )}
 
-      {/* Ta sama informacja bez mapy — dla czytników ekranu i nawigacji klawiaturą. */}
+      {/* Ta sama informacja bez mapy - dla czytników ekranu i nawigacji klawiaturą. */}
       <details className="map__table">
         <summary>Te same dane jako tabela</summary>
         <div className="scroll-x">

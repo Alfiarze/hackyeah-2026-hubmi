@@ -4,7 +4,7 @@
 .fiszka {
   /* Celowo BEZ content-visibility: auto.
      Było tu, żeby odciążyć render 115 fiszek naraz, ale treść poza ekranem
-     nie jest wtedy malowana — karty wychodziły puste na zrzutach ekranu
+     nie jest wtedy malowana - karty wychodziły puste na zrzutach ekranu
      i na wydruku, a wyszukiwanie w stronie potrafi ich nie znaleźć.
      Przy 115 kartach zysk nie równoważy tych strat; gdyby lista urosła
      do tysięcy pozycji, właściwą odpowiedzią jest wirtualizacja, nie to. */
@@ -96,7 +96,7 @@
   overflow-wrap: anywhere;
 }
 
-/* Przy szerokiej fiszce pola idą w dwie kolumny — na wąskiej zostaje jedna. */
+/* Przy szerokiej fiszce pola idą w dwie kolumny - na wąskiej zostaje jedna. */
 @container (min-width: 44rem) {
   .fiszka__fields { grid-template-columns: 1fr 1fr; column-gap: var(--sp-6); }
 }

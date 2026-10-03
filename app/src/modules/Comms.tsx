@@ -1,9 +1,9 @@
 /**
- * Moduł V — Platforma aktywnej komunikacji.
+ * Moduł V - Platforma aktywnej komunikacji.
  *
  * Strona użytkownika tej samej skrzynki, którą koordynator widzi w module VI.
  * Jury pyta wprost: „jak system powiadamia administratora o nowym pomyśle
- * i jak wygląda ścieżka odpowiedzi do autora" — to jest ta druga połowa
+ * i jak wygląda ścieżka odpowiedzi do autora" - to jest ta druga połowa
  * odpowiedzi. Kropka „nowa odpowiedź" gaśnie dopiero po otwarciu wątku.
  */
 import { useEffect, useState } from "react";
@@ -26,7 +26,7 @@ const KIND_LABEL: Record<Thread["kind"], string> = {
   test: "Testowanie",
 };
 
-/** Role do przełączania przy odpowiedzi — spójne z lib/store.ts. */
+/** Role do przełączania przy odpowiedzi - spójne z lib/store.ts. */
 const DEMO_ROLES: { v: Role; label: string; aria: string }[] = [
   { v: "mieszkaniec", label: "Mieszkaniec", aria: "Odpowiedz jako mieszkaniec lub NGO" },
   { v: "ROPS", label: "ROPS", aria: "Odpowiedz jako pracownik ROPS" },
@@ -73,7 +73,7 @@ export function Comms({ state }: { state: AppState }) {
         <p className="page__mod">Moduł V · Platforma aktywnej komunikacji</p>
         <h1>Rozmowy z Hubem</h1>
         <p>
-          Każde zgłoszenie — pomysł, pytanie, zgłoszona luka — zostaje wątkiem.
+          Każde zgłoszenie - pomysł, pytanie, zgłoszona luka - zostaje wątkiem.
           Nic nie ginie w mailu i każdy widzi, na czym stoi sprawa.
         </p>
       </div>
@@ -165,7 +165,7 @@ export function Comms({ state }: { state: AppState }) {
                   </div>
                   <div>
                     <dt>Obszar</dt>
-                    <dd>{current.fiszka.obszar || "—"}</dd>
+                    <dd>{current.fiszka.obszar || "-"}</dd>
                   </div>
                 </dl>
               )}

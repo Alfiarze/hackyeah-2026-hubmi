@@ -49,7 +49,7 @@
 :root[data-theme="dark"] .hero__accent {
   box-shadow: inset 0 -0.28em #8a6d00;
 }
-/* W wysokim kontraście podkreślenie znika — litera jednolita. */
+/* W wysokim kontraście podkreślenie znika - litera jednolita. */
 :root[data-contrast="high"] .hero__accent {
   color: var(--ink);
   box-shadow: none;

@@ -1,10 +1,10 @@
 /**
- * „Dlaczego to pasuje" — rozliczenie dopasowania.
+ * „Dlaczego to pasuje" - rozliczenie dopasowania.
  *
  * Założenie: jury nie ma wierzyć w trafność, ma ją zobaczyć. Dlatego obok
  * wyniku stoi rozbicie na wątki (co pokryte, co nie), pola karty, w których
  * się zgadza, i konkretne słowa, które to uruchomiły. Wynik, którego nie da
- * się wytłumaczyć, jest w tym module bezwartościowy — także dla urzędnika,
+ * się wytłumaczyć, jest w tym module bezwartościowy - także dla urzędnika,
  * który musi uzasadnić wybór rozwiązania przed radą gminy.
  */
 import type { MatchResult } from "../lib/match";
@@ -60,7 +60,7 @@ export function WhyMatch({ result }: { result: MatchResult }) {
           ))}
           {missed.map((m) => (
             <span key={m.id} className="chip chip--miss">
-              <span aria-hidden="true">—</span>
+              <span aria-hidden="true">-</span>
               <span>
                 {m.label} <span className="muted">nie pokryte</span>
               </span>

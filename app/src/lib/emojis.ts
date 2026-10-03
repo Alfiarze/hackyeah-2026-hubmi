@@ -1,15 +1,15 @@
 /**
- * Dobór emotek do zapytania — „AI" decyduje, które pasują.
+ * Dobór emotek do zapytania - „AI" decyduje, które pasują.
  *
  * To nie jest ozdoba i nie jest losowanie: emotki wybiera ten sam silnik,
  * który dopasowuje innowacje (`analyzeQuery` z lib/match.ts). Zapytanie jest
  * rozbijane na rdzenie, rdzenie trafiają do znanych wątków (lib/concepts.ts),
  * a każdy wątek ma przypisaną paczkę emotek. Dzięki temu „Mama mieszka sama
- * na wsi" dostaje 👵🌾🫂, a „nie wejdę do urzędu, wszędzie schody" — ♿🏛️🛗.
+ * na wsi" dostaje 👵🌾🫂, a „nie wejdę do urzędu, wszędzie schody" - ♿🏛️🛗.
  *
  * Dlaczego bez API: cała aplikacja działa offline (zob. komentarz w match.ts),
  * a demo na hackathonie nie może zależeć od wifi na sali. Decyzja jest
- * w pełni explainable — dla każdego wyboru widać, który wątek go spowodował,
+ * w pełni explainable - dla każdego wyboru widać, który wątek go spowodował,
  * więc da się pokazać jury, „skąd" wzięła się dana emotka.
  *
  * Kolejność emotek w paczce ma znaczenie: pierwsza jest nośnikiem wątku
@@ -45,13 +45,13 @@ const CONCEPT_EMOJI: Record<string, string[]> = {
 
 /**
  * Emotki dla zapytania, którego nie rozpoznaliśmy jako żadnego znanego wątku.
- * Nie zostawiamy pola pustego — użytkownik ma wtedy sygnał, że tekst dotarł
+ * Nie zostawiamy pola pustego - użytkownik ma wtedy sygnał, że tekst dotarł
  * i jest przetwarzany, a nie że wpisanie nic nie dało.
  */
 const FALLBACK = ["🔎", "💭", "✨"];
 
 /**
- * Cała pula — do „sterty" emotek na dole hero (dekoracja, `aria-hidden`).
+ * Cała pula - do „sterty" emotek na dole hero (dekoracja, `aria-hidden`).
  * Sterta jest źródłem, z którego widoczny dobór „wylatuje" w górę pod pole
  * wyszukiwania, więc musi zawierać dokładnie te same emotki, co wybór.
  */
@@ -59,7 +59,7 @@ export const ALL_EMOJI: string[] = [
   ...new Set([...Object.values(CONCEPT_EMOJI).flat(), ...FALLBACK]),
 ];
 
-/** Ile emotek maksymalnie pokazujemy — więcej przestaje być czytelne. */
+/** Ile emotek maksymalnie pokazujemy - więcej przestaje być czytelne. */
 const MAX = 6;
 
 export interface PickedEmoji {
@@ -126,7 +126,7 @@ export const LOOSE_EMOJIS: LooseEmoji[] = [
 /**
  * Rozpoznane wątki → pasujące emotki (zawsze wybierane z dolnej sterty LOOSE_EMOJIS).
  *
- * Emotki nigdy nie biorą się „znikąd" — każda emotka widoczna pod polem
+ * Emotki nigdy nie biorą się „znikąd" - każda emotka widoczna pod polem
  * jest fizycznie reprezentowana w stercie na dole ekranu i odlatuje z niej
  * do pigułki wyszukiwania. Nawet przy braku podpiętego backendu lub
  * nietypowych frazach testowych, wybierane są elementy z tej samej sterty.

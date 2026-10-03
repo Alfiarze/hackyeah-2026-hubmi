@@ -15,7 +15,7 @@
 }
 
 /* --- rozmowa ---
-   Hero jest wyśrodkowany, ale formularz nie może być — czytanie etykiet,
+   Hero jest wyśrodkowany, ale formularz nie może być - czytanie etykiet,
    podpowiedzi i wypowiedzi od środka jest męczące i wygląda na przypadek. */
 .mm__conv {
   text-align: left;

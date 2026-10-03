@@ -1,9 +1,9 @@
-/* Baza i komponenty. Bez frameworka CSS — wszystko z tokenów w tokens.css.
-   Specyfikacja z „HubMI — system wizualny" v1:
-   — karty bez cieni, granica 1 px #D5E3E0;
-   — przyciski 48–52 px, jedna główna akcja na ekran;
-   — fokus = gruba ramka 3 px w kolorze atramentu, widoczna na każdym tle;
-   — ruch: tylko transform, opacity i stroke-dashoffset, tokeny --hm-*. */
+/* Baza i komponenty. Bez frameworka CSS - wszystko z tokenów w tokens.css.
+   Specyfikacja z „HubMI - system wizualny" v1:
+   - karty bez cieni, granica 1 px #D5E3E0;
+   - przyciski 48–52 px, jedna główna akcja na ekran;
+   - fokus = gruba ramka 3 px w kolorze atramentu, widoczna na każdym tle;
+   - ruch: tylko transform, opacity i stroke-dashoffset, tokeny --hm-*. */
 
 *,
 *::before,
@@ -41,7 +41,7 @@ h4 {
   text-wrap: balance;
 }
 
-/* Skala systemu: H1 64/1.05 · H2 40/1.1 · H3 24/1.2 — na małych ekranach
+/* Skala systemu: H1 64/1.05 · H2 40/1.1 · H3 24/1.2 - na małych ekranach
    clamp ścina górę, nigdy poniżej czytelności. */
 h1 {
   font-size: clamp(2.4rem, 5.4vw, var(--fs-4xl));
@@ -85,7 +85,7 @@ strong { font-weight: 700; }
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
-/* Nie zdejmujemy obrysu bez zamiennika — tylko chowamy go dla myszy. */
+/* Nie zdejmujemy obrysu bez zamiennika - tylko chowamy go dla myszy. */
 :focus:not(:focus-visible) { outline: none; }
 
 .skip-link {
@@ -312,7 +312,7 @@ textarea[aria-invalid="true"] {
   color: var(--ink-3);
 }
 
-/* Podświetlenie wspólnych słów. Nie polega na samym kolorze — dochodzi
+/* Podświetlenie wspólnych słów. Nie polega na samym kolorze - dochodzi
    podkreślenie (WCAG 1.4.1). Żółty Kraków nigdy jako kolor tekstu,
    więc pracuje jako gruba kreska pod atramentem. */
 mark {
@@ -389,7 +389,7 @@ details > summary:hover { color: var(--ink); }
 }
 
 /* Wyłącznik „Ruch w tle" z paska dostępności pauzuje animacje ambientowe
-   (WCAG 2.2.2) — prefers-reduced-motion robi to samo systemowo. */
+   (WCAG 2.2.2) - prefers-reduced-motion robi to samo systemowo. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

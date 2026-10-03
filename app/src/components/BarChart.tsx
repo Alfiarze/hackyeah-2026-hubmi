@@ -2,7 +2,7 @@
  * Poziome słupki w inline SVG. Bez bibliotek wykresowych.
  *
  * Poziome, nie pionowe, bo etykiety są długimi polskimi nazwami obszarów
- * („niepełnosprawność intelektualna") — w pionie trzeba by je obracać, a
+ * („niepełnosprawność intelektualna") - w pionie trzeba by je obracać, a
  * obrócony tekst jest barierą dla osób słabowidzących i przy powiększeniu.
  *
  * Tożsamość serii nie zależy od koloru: druga seria dostaje teksturę
@@ -80,7 +80,7 @@ export function BarChart({
 
   /**
    * Podziałki osi. Przy małych maksimach (np. 1 wystąpienie) ułamki zaokrąglone
-   * do liczb całkowitych dawały oś „0 0 1 1 1" — bezużyteczną i wyglądającą
+   * do liczb całkowitych dawały oś „0 0 1 1 1" - bezużyteczną i wyglądającą
    * na błąd. Gdy maksimum jest całkowite i niskie, dzielimy je na krokach
    * całkowitych zamiast na stałych czwartych.
    */
@@ -116,7 +116,7 @@ export function BarChart({
           aria-label={`${title}. Oś: ${unit}. ${rows.length} pozycji. Dane dostępne też jako tabela pod wykresem.`}
         >
           <defs>
-            {/* Tekstura dla drugiej serii — identyfikacja bez polegania na barwie. */}
+            {/* Tekstura dla drugiej serii - identyfikacja bez polegania na barwie. */}
             <pattern
               id={`hatch-${uid}`}
               width="6"
@@ -129,7 +129,7 @@ export function BarChart({
             </pattern>
           </defs>
 
-          {/* siatka — recesywna, za markami */}
+          {/* siatka - recesywna, za markami */}
           {ticks.map((t, i) => (
             <g key={i}>
               <line
@@ -187,7 +187,7 @@ export function BarChart({
                         stroke={isHot ? "var(--ink)" : "none"}
                         strokeWidth={isHot ? 2 : 0}
                       />
-                      {/* etykieta tylko przy najdłuższym słupku serii — nie na każdym */}
+                      {/* etykieta tylko przy najdłuższym słupku serii - nie na każdym */}
                       {(isHot || v === Math.max(...rows.map((r) => r.values[si] ?? 0))) && v > 0 && (
                         <text
                           x={LABEL_W + w + 8}
@@ -220,7 +220,7 @@ export function BarChart({
         <div className="scroll-x">
           <table>
             <caption className="sr-only">
-              {title} — {unit}
+              {title} - {unit}
             </caption>
             <thead>
               <tr>
@@ -254,7 +254,7 @@ export function BarChart({
   );
 }
 
-/** Kafel ze wskaźnikiem — tam, gdzie wykres nic nie dodaje. */
+/** Kafel ze wskaźnikiem - tam, gdzie wykres nic nie dodaje. */
 export function StatTile({
   value,
   label,

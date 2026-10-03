@@ -3,7 +3,7 @@
  *
  * To druga połowa odpowiedzi na „dlaczego to pasuje": użytkownik nie musi
  * wierzyć wynikowi liczbowemu, bo widzi w zdaniu, które słowa się zgadzają.
- * Podświetlenie ma kolor i podkreślenie — nie polega na samym kolorze (1.4.1),
+ * Podświetlenie ma kolor i podkreślenie - nie polega na samym kolorze (1.4.1),
  * a <mark> daje czytnikom ekranu semantykę wyróżnienia.
  */
 import type { Highlight } from "../lib/match";
@@ -11,7 +11,7 @@ import type { Highlight } from "../lib/match";
 interface Props {
   text: string;
   spans?: Highlight[];
-  /** przycięcie długich pól — podświetlenia poza zakresem są pomijane */
+  /** przycięcie długich pól - podświetlenia poza zakresem są pomijane */
   max?: number;
 }
 

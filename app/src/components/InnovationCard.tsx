@@ -1,5 +1,5 @@
 /**
- * Fiszka innowacji — podstawowa jednostka kartoteki.
+ * Fiszka innowacji - podstawowa jednostka kartoteki.
  *
  * Kolejność jest celowa i inna niż w portalu ROPS: najpierw dowód
  * („przetestowane"), potem co to jest, potem dlaczego pasuje. Urzędnik szukający
@@ -105,7 +105,7 @@ export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest 
       )}
 
       <footer className="fiszka__actions">
-        {/* Kontakt do realizatora opiera się na wdrożeniach w powiatach —
+        {/* Kontakt do realizatora opiera się na wdrożeniach w powiatach -
             karty z innych baz ich nie mają, więc zamiast pustego formularza
             prowadzimy do źródła. */}
         {inn.ext ? (
@@ -133,7 +133,7 @@ export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest 
         </button>
       </footer>
 
-      <Modal open={contact} onClose={() => setContact(false)} title={`Kontakt — ${inn.name}`}>
+      <Modal open={contact} onClose={() => setContact(false)} title={`Kontakt - ${inn.name}`}>
         <ContactRealizer innovation={inn} onDone={() => setContact(false)} />
       </Modal>
 
@@ -146,7 +146,7 @@ export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest 
 
 /**
  * Jedno zdanie prawdy o pochodzeniu karty. Pokazywane tylko dla kart spoza
- * Małopolski — przy 115 kartach ROPS taki znacznik byłby szumem.
+ * Małopolski - przy 115 kartach ROPS taki znacznik byłby szumem.
  */
 function OriginTag({ innovation: inn }: { innovation: Innovation }) {
   const region = inn.origin?.region;
@@ -155,7 +155,7 @@ function OriginTag({ innovation: inn }: { innovation: Innovation }) {
       <span className="fiszka__origin-mark" aria-hidden="true" />
       <span>
         <strong>Spoza Małopolski{region ? ` · ${region}` : ""}</strong>
-        {inn.origin?.source && <span className="muted"> — {inn.origin.source}</span>}
+        {inn.origin?.source && <span className="muted"> - {inn.origin.source}</span>}
       </span>
     </p>
   );
@@ -235,8 +235,8 @@ function FullCard({ innovation: inn }: { innovation: Innovation }) {
             {inn.license.includes("creativecommons") ? "CC BY 4.0" : "warunki źródła"}
           </a>
           {inn.license.includes("creativecommons")
-            ? " — można wdrażać i modyfikować, wymagane podanie autorstwa."
-            : " — sprawdź warunki ponownego użycia u właściciela bazy."}
+            ? " - można wdrażać i modyfikować, wymagane podanie autorstwa."
+            : " - sprawdź warunki ponownego użycia u właściciela bazy."}
         </p>
       )}
     </div>

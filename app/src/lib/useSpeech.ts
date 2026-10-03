@@ -3,7 +3,7 @@
  *
  * Dla seniora i osoby z niepełnosprawnością ruchową mówienie jest szybsze
  * i mniej barierowe niż pisanie. Z drugiej strony API jest dostępne tylko
- * w części przeglądarek, więc mikrofon nie może być jedyną drogą — jest
+ * w części przeglądarek, więc mikrofon nie może być jedyną drogą - jest
  * dodatkiem do pola tekstowego, nigdy jego zamiennikiem (WCAG 2.1.1).
  */
 import { useCallback, useEffect, useRef, useState } from "react";

@@ -1,11 +1,11 @@
 /**
- * Moduł III — Kreator pomysłów.
+ * Moduł III - Kreator pomysłów.
  *
  * Trzy warstwy, w kolejności rosnącego zobowiązania:
- *  1. fiszka — cztery pola, dostępna cały czas, niski próg wejścia;
- *  2. asystent kreatora — sprawdza pomysł przez Bibliotekę i podpowiada,
+ *  1. fiszka - cztery pola, dostępna cały czas, niski próg wejścia;
+ *  2. asystent kreatora - sprawdza pomysł przez Bibliotekę i podpowiada,
  *     czy to nie jest już zrobione (to samo, czego wymaga ocena nowości);
- *  3. generator wniosku — rozpisuje fiszkę na strukturę realnego formularza
+ *  3. generator wniosku - rozpisuje fiszkę na strukturę realnego formularza
  *     ROPS z naboru IWS 2.0, z podpowiedziami z kart oceny.
  *
  * Asystent nie udaje, że wymyśli innowację za użytkownika. Robi to, co
@@ -47,7 +47,7 @@ export function Creator() {
   const [errors, setErrors] = useState<string[]>([]);
   const errorBox = useRef<HTMLDivElement>(null);
 
-  // Po nieudanej wysyłce focus ląduje na podsumowaniu błędów — inaczej osoba
+  // Po nieudanej wysyłce focus ląduje na podsumowaniu błędów - inaczej osoba
   // korzystająca z czytnika nie dowie się, że cokolwiek się stało.
   useEffect(() => {
     if (errors.length) errorBox.current?.focus();
@@ -65,7 +65,7 @@ export function Creator() {
   const validate = (): string[] => {
     const e: string[] = [];
     if (!title.trim()) e.push("Podaj nazwę pomysłu.");
-    if (f.istota.trim().length < 20) e.push("Opisz istotę rozwiązania — przynajmniej dwa zdania.");
+    if (f.istota.trim().length < 20) e.push("Opisz istotę rozwiązania - przynajmniej dwa zdania.");
     if (!f.adresat.trim()) e.push("Wskaż, do kogo rozwiązanie jest skierowane.");
     return e;
   };
@@ -165,7 +165,7 @@ export function Creator() {
           <h1>Fiszka trafiła do Hubu</h1>
           <p>
             Koordynator ROPS widzi już powiadomienie w panelu administratora.
-            Odpowiedź pojawi się w module <strong>Komunikacja</strong> — i tam też
+            Odpowiedź pojawi się w module <strong>Komunikacja</strong> - i tam też
             zobaczysz kropkę „nowa odpowiedź", kiedy przyjdzie.
           </p>
           <p className="hint">
@@ -263,7 +263,7 @@ export function Creator() {
               >
                 {ETAPY.map((e, i) => (
                   <option key={e} value={e}>
-                    {String(i + 1).padStart(2, "0")} — {e}
+                    {String(i + 1).padStart(2, "0")} - {e}
                   </option>
                 ))}
               </select>
@@ -376,7 +376,7 @@ export function Creator() {
               <h3>Brak analogicznych innowacji w bazie</h3>
               <p>
                 Wśród 115 przetestowanych innowacji ROPS nie ma odpowiednika. To kluczowy
-                argument potwierdzający nowość rozwiązania — powołaj go w sekcji 5 wniosku.
+                argument potwierdzający nowość rozwiązania - powołaj go w sekcji 5 wniosku.
               </p>
             </div>
           ) : (
@@ -396,7 +396,7 @@ export function Creator() {
                     ? "Kryterium naboru wymaga wykazania unikalności. Przy wysokim podobieństwie " +
                       "wskaż precyzyjnie różnice metodyczne lub rozważ adaptację gotowego modelu."
                     : "Rozwiązania o zbliżonej tematyce. Eksperci oceniający wniosek zwrócą " +
-                      "na nie uwagę — warto wskazać różnice i unikalną wartość Twojego pomysłu."}
+                      "na nie uwagę - warto wskazać różnice i unikalną wartość Twojego pomysłu."}
                 </p>
               </div>
 
@@ -427,7 +427,7 @@ export function Creator() {
                 <span className="sr-only"> (pobiera plik)</span>
               </a>
               <p className="hint">
-                Plansza SOCIAL CANVAS z zasobów ROPS — pomaga rozpisać pomysł przed
+                Plansza SOCIAL CANVAS z zasobów ROPS - pomaga rozpisać pomysł przed
                 wypełnieniem wniosku.
               </p>
             </div>
@@ -469,7 +469,7 @@ function GrantView({ draft }: { draft: GrantDraft }) {
       <p className="hint" style={{ marginTop: 0 }}>
         Struktura odwzorowuje formularz aplikacyjny ROPS z naboru „Inkubator Włączenia
         Społecznego 2.0". Miejsca oznaczone <strong>[UZUPEŁNIJ]</strong> wymagają Twojej
-        wiedzy — generator nie zna liczb z Twojej gminy i nie będzie ich wymyślał.
+        wiedzy - generator nie zna liczb z Twojej gminy i nie będzie ich wymyślał.
       </p>
 
       {draft.warnings.length > 0 && (

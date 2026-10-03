@@ -93,7 +93,7 @@
   gap: var(--sp-2);
 }
 .cm__msg p { margin: 0; font-size: var(--fs-sm); line-height: 1.6; white-space: pre-wrap; }
-/* Autor wypowiedzi jest zawsze podpisany — strona rozmowy nie zależy od koloru. */
+/* Autor wypowiedzi jest zawsze podpisany - strona rozmowy nie zależy od koloru. */
 .cm__msg--author {
   background: var(--surface-glass-thin);
   backdrop-filter: blur(16px);

@@ -1,5 +1,5 @@
 /**
- * Klient API HubMI — połączenie frontendu React z backendem Django REST Framework.
+ * Klient API HubMI - połączenie frontendu React z backendem Django REST Framework.
  *
  * Wspiera:
  *  - automatyczny fallback offline/demo gdy serwer nie odpowiada,
@@ -74,7 +74,7 @@ export interface BackendThread {
   updated_at?: string;
 }
 
-/** Jedna karta z `/api/match/search/` — pełna fiszka + rozliczenie dopasowania. */
+/** Jedna karta z `/api/match/search/` - pełna fiszka + rozliczenie dopasowania. */
 export interface BackendMatchResult {
   id: string;
   name: string;
@@ -92,7 +92,7 @@ export interface BackendMatchResult {
   zip: string | null;
   license: string | null;
   url: string;
-  /** karta z bazy spoza Małopolski — zob. `origin` */
+  /** karta z bazy spoza Małopolski - zob. `origin` */
   ext?: boolean;
   origin?: {
     source: string | null;
@@ -135,7 +135,7 @@ export interface BackendMatchResult {
 
 /** Pełna odpowiedź `/api/match/search/`. Kształt 1:1 z `matchmaking/views.py`. */
 export interface MatchSearchResult {
-  /** id zapisanego SearchQuery — wymagane przy zgłoszeniu luki */
+  /** id zapisanego SearchQuery - wymagane przy zgłoszeniu luki */
   query_id: number;
   query: string;
   analysis: {
@@ -162,7 +162,7 @@ export interface MatchSearchResult {
   role: string;
 }
 
-/** Odpowiedź `POST /api/match/gaps/` — luka zarejestrowana jako wątek dla ROPS. */
+/** Odpowiedź `POST /api/match/gaps/` - luka zarejestrowana jako wątek dla ROPS. */
 export interface GapReport {
   id: number;
   query: number;
@@ -444,7 +444,7 @@ class ApiClient {
   public match = {
     /**
      * Jedyne źródło wyników modułu I. Backend liczy ranking (BM25 + wątki),
-     * dokłada werdykty Jev i zapisuje zapytanie jako sygnał potrzeby — dlatego
+     * dokłada werdykty Jev i zapisuje zapytanie jako sygnał potrzeby - dlatego
      * front nie liczy niczego równolegle.
      *
      * Timeout 20 s, bo w ścieżce stoi wywołanie Jev Decisions; typowo ~1,5 s,

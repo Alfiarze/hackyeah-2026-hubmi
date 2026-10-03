@@ -101,7 +101,7 @@
 .hdr__nav {
   margin-left: auto;
   /* Element flex ma domyślnie min-width:auto, więc rozpycha się do szerokości
-     swojej zawartości — a wtedy overflow-x na liście nic nie daje i cała
+     swojej zawartości - a wtedy overflow-x na liście nic nie daje i cała
      strona przewija się w poziomie (łamie WCAG 1.4.10). */
   min-width: 0;
 }
@@ -150,14 +150,14 @@
   --icon-stroke: var(--ink);
   --icon-node: var(--ink);
 }
-/* Aktywna pozycja: atramentowa pigułka — wypełnienie + waga, nie sam kolor. */
+/* Aktywna pozycja: atramentowa pigułka - wypełnienie + waga, nie sam kolor. */
 .hdr__nav a[aria-current="page"] {
   background: var(--mist);
   border-color: var(--accent-deep);
   color: var(--ink);
 }
 
-/* Znacznik „nowe": krakowska żółć z atramentowym tekstem — nigdy żółty
+/* Znacznik „nowe": krakowska żółć z atramentowym tekstem - nigdy żółty
    jako kolor tekstu (system wizualny, paleta). */
 .hdr__badge {
   display: inline-flex;
@@ -184,7 +184,7 @@
   .hdr__full { display: none; }
   .hdr__short { display: inline; }
 }
-/* Na telefonie sześć modułów w jednej linii z marką byłoby nieczytelne —
+/* Na telefonie sześć modułów w jednej linii z marką byłoby nieczytelne -
    pasek wraca do dwóch wierszy, a lista przewija się poziomo. */
 @media (max-width: 48rem) {
   .hdr__inner { flex-wrap: wrap; }
@@ -249,7 +249,7 @@ main { min-height: 60vh; }
 
 /* --- wspólne nagłówki sekcji modułów --- */
 .page { padding-block: var(--sp-7); }
-/* Widok z hero sam zarządza swoim górnym odstępem — hero sięga krawędzi. */
+/* Widok z hero sam zarządza swoim górnym odstępem - hero sięga krawędzi. */
 .page--hero { padding-bottom: var(--sp-7); }
 .page__head { margin-bottom: var(--sp-6); max-width: 62ch; }
 .page__head h1 { margin-bottom: var(--sp-3); }

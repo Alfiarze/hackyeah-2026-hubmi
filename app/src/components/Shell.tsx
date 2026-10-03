@@ -2,7 +2,7 @@
  * Rama aplikacji: skip-link, nagłówek, nawigacja, pasek dostępności.
  *
  * Rola demonstracyjnej (mieszkaniec / ROPS / ekspert) nie przełącza się
- * już globalnie z paska — siedzi tam, gdzie jest potrzebna: przy formularzu
+ * już globalnie z paska - siedzi tam, gdzie jest potrzebna: przy formularzu
  * odpowiedzi w module Komunikacja. W wersji produkcyjnej zastępuje ją
  * logowanie.
  */
@@ -32,7 +32,7 @@ export type Route =
   | "middleman"
   | "dostepnosc";
 
-/** Ikona modułu — jedna rodzina znaków, jedno znaczenie (system wizualny 02). */
+/** Ikona modułu - jedna rodzina znaków, jedno znaczenie (system wizualny 02). */
 const NAV: { id: Route; label: string; short: string; icon: (p: IconProps) => JSX.Element }[] = [
   { id: "matchmaking", label: "Znajdź rozwiązanie", short: "Szukaj", icon: IconMatchmaking },
   { id: "biblioteka", label: "Zasobnik wiedzy", short: "Wiedza", icon: IconKnowledge },
@@ -127,7 +127,7 @@ export function Shell({
             </button>
 
             {/* WCAG 2.2.2: ruch w tle trwa bez przerwy, więc musi mieć
-                widoczną pauzę — nie tylko wyciszenie w systemie. */}
+                widoczną pauzę - nie tylko wyciszenie w systemie. */}
             <button
               type="button"
               className="btn btn--ghost"
@@ -235,10 +235,10 @@ export function Shell({
           <p className="hint" style={{ maxWidth: "60ch" }}>
             Dane innowacji pochodzą z Biblioteki Innowacji Społecznych ROPS (115 kart,
             w większości CC BY 4.0). Dodatkowo, na wyraźne włączenie, Hub pokazuje karty
-            z baz spoza regionu — ogólnopolskiej bazy PO WER, ROPS Poznań i Social
+            z baz spoza regionu - ogólnopolskiej bazy PO WER, ROPS Poznań i Social
             Innovation Match ESF+. Każda z nich jest oznaczona źródłem i nie udaje
             innowacji przetestowanej w Małopolsce. Lokalizacje wdrożeń, kontakty
-            realizatorów i zgłoszenia w panelu są danymi demonstracyjnymi — prototyp
+            realizatorów i zgłoszenia w panelu są danymi demonstracyjnymi - prototyp
             nie używa prawdziwych danych osobowych.
           </p>
         </div>

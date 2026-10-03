@@ -1,9 +1,9 @@
 /**
- * Moduł I — dopasowanie liczone wyłącznie po stronie backendu.
+ * Moduł I - dopasowanie liczone wyłącznie po stronie backendu.
  *
  * Front nie ma tu własnego rankingu. `POST /api/match/search/` zwraca komplet:
  * analizę zapytania, wyniki z uzasadnieniami i podświetleniami, werdykt Jev
- * „czy powiązane" oraz flagę luki — i przy okazji zapisuje zapytanie jako
+ * „czy powiązane" oraz flagę luki - i przy okazji zapisuje zapytanie jako
  * sygnał potrzeby, z którego powstają trendy w panelu ROPS. Liczenie tego
  * samego drugi raz w przeglądarce rozjechałoby wyniki z tym, co widzi
  * koordynator, więc ten moduł tylko tłumaczy JSON na typy komponentów.
@@ -22,7 +22,7 @@ export interface AiVerdict {
 }
 
 export interface MatchResponse {
-  /** id SearchQuery w bazie — bez niego nie da się zgłosić luki */
+  /** id SearchQuery w bazie - bez niego nie da się zgłosić luki */
   queryId: number;
   analysis: QueryAnalysis;
   results: MatchResult[];
@@ -30,7 +30,7 @@ export interface MatchResponse {
   verdicts: Record<string, AiVerdict>;
 }
 
-/** Nazwy pól karty są wspólne dla backendu i frontu — patrz `engine.FIELDS`. */
+/** Nazwy pól karty są wspólne dla backendu i frontu - patrz `engine.FIELDS`. */
 const FIELD_KEYS: FieldKey[] = [
   "problem",
   "target",
@@ -98,7 +98,7 @@ export class MatchApiError extends Error {}
 /**
  * Odpytuje backend i zwraca gotowe wyniki.
  *
- * Rzuca `MatchApiError`, gdy serwer nie odpowiada — moduł I świadomie nie ma
+ * Rzuca `MatchApiError`, gdy serwer nie odpowiada - moduł I świadomie nie ma
  * trybu offline: wynik bez zapisu w bazie nie zasiliłby trendów i nie dałby
  * się zgłosić jako luka, więc pokazanie go byłoby kłamstwem wobec użytkownika.
  */

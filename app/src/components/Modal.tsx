@@ -32,7 +32,7 @@ export function Modal({ open, onClose, title, children, wide }: Props) {
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    // focus na pierwszy element, nie na całe okno — czytnik od razu czyta treść
+    // focus na pierwszy element, nie na całe okno - czytnik od razu czyta treść
     const first = panel.current?.querySelector<HTMLElement>(FOCUSABLE);
     (first ?? panel.current)?.focus();
 

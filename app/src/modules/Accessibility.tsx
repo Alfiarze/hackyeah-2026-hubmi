@@ -1,5 +1,5 @@
 /**
- * Strona dostępności — co zrobiliśmy i czym to sprawdziliśmy.
+ * Strona dostępności - co zrobiliśmy i czym to sprawdziliśmy.
  *
  * Istnieje, bo „zgodne z WCAG" w zgłoszeniu nic nie znaczy. Tutaj stoi lista
  * konkretów z numerami kryteriów oraz wynik automatycznego audytu axe-core,
@@ -64,7 +64,7 @@ const CRITERIA: { sc: string; name: string; what: string }[] = [
   {
     sc: "1.4.11",
     name: "Kontrast elementów nietekstowych",
-    what: "Granice kontrolek w osobnym tokenie (--line-ui, 3.05:1) — to jedyne miejsce, gdzie obramowanie zostaje, bo niesie informację. Linie dekoracyjne nigdy nie służą jako granica znacząca.",
+    what: "Granice kontrolek w osobnym tokenie (--line-ui, 3.05:1) - to jedyne miejsce, gdzie obramowanie zostaje, bo niesie informację. Linie dekoracyjne nigdy nie służą jako granica znacząca.",
   },
   {
     sc: "2.1.1",
@@ -94,12 +94,12 @@ const CRITERIA: { sc: string; name: string; what: string }[] = [
   {
     sc: "2.4.7",
     name: "Focus widoczny",
-    what: "3px obrys w kolorze atramentu z 3px odstępem — widoczny na każdym tle systemu. Nigdzie nie ma outline:none bez zamiennika.",
+    what: "3px obrys w kolorze atramentu z 3px odstępem - widoczny na każdym tle systemu. Nigdzie nie ma outline:none bez zamiennika.",
   },
   {
     sc: "2.5.5",
     name: "Rozmiar celu",
-    what: "Każdy przycisk, pole i zakładka ma min. 44×44px — nie 32px.",
+    what: "Każdy przycisk, pole i zakładka ma min. 44×44px - nie 32px.",
   },
   {
     sc: "3.1.1",
@@ -132,7 +132,7 @@ export function Accessibility() {
     <div className="page wrap">
       <div className="page__head" data-reveal>
         <p className="page__mod">Dostępność</p>
-        <h1>WCAG 2.1 AA — co zrobiliśmy i czym to sprawdziliśmy</h1>
+        <h1>WCAG 2.1 AA - co zrobiliśmy i czym to sprawdziliśmy</h1>
         <p>
           Dostępność to 20% oceny tego zadania, więc nie poprzestajemy na zdaniu
           „zgodne z WCAG". Poniżej lista konkretów z numerami kryteriów i wynik
@@ -144,7 +144,7 @@ export function Accessibility() {
         <h2>Sprawdź teraz, na tej stronie</h2>
         <p>
           Przełączniki działają w całej aplikacji i zapisują się na kolejne wejście
-          — senior nie musi ich włączać za każdym razem.
+          - senior nie musi ich włączać za każdym razem.
         </p>
         <div className="row">
           <button
@@ -153,7 +153,7 @@ export function Accessibility() {
             aria-pressed={a11y.simpleLanguage}
             onClick={() => a11y.set("simpleLanguage", !a11y.simpleLanguage)}
           >
-            Prosty język {a11y.simpleLanguage ? "— włączony" : ""}
+            Prosty język {a11y.simpleLanguage ? "- włączony" : ""}
           </button>
           <button
             type="button"
@@ -161,7 +161,7 @@ export function Accessibility() {
             aria-pressed={a11y.fontScale !== 1}
             onClick={() => a11y.set("fontScale", a11y.fontScale === 1 ? 1.5 : 1)}
           >
-            Bardzo duża czcionka {a11y.fontScale !== 1 ? "— włączona" : ""}
+            Bardzo duża czcionka {a11y.fontScale !== 1 ? "- włączona" : ""}
           </button>
           <button
             type="button"
@@ -169,7 +169,7 @@ export function Accessibility() {
             aria-pressed={a11y.highContrast}
             onClick={() => a11y.set("highContrast", !a11y.highContrast)}
           >
-            Wysoki kontrast {a11y.highContrast ? "— włączony" : ""}
+            Wysoki kontrast {a11y.highContrast ? "- włączony" : ""}
           </button>
         </div>
         <p className="hint">
@@ -250,7 +250,7 @@ export function Accessibility() {
 
         <p className="ap__caveat">
           <strong>Uczciwie:</strong> axe-core wyłapuje około jednej trzeciej
-          problemów z dostępnością. Zero naruszeń nie znaczy „dostępne" — znaczy
+          problemów z dostępnością. Zero naruszeń nie znaczy „dostępne" - znaczy
           „bez błędów, które da się wykryć automatycznie". Pozostałego nie
           sprawdzi żaden skrypt: czy senior zrozumie treść, czy kolejność focusu
           ma sens, czy opisy alternatywne mówią to, co trzeba. To wymaga testu
@@ -259,7 +259,7 @@ export function Accessibility() {
       </section>
 
       <section className="ap__criteria" data-reveal>
-        <h2>Kryteria WCAG 2.1 AA — realizacja</h2>
+        <h2>Kryteria WCAG 2.1 AA - realizacja</h2>
         <p className="muted">
           {CRITERIA.length} kryteriów, przy których podjęliśmy konkretne decyzje
           projektowe.

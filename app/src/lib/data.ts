@@ -16,13 +16,13 @@ export interface Deployment {
   year: number;
   email: string;
   phone: string;
-  /** zawsze true — geografia wdrożeń to dane demo, ROPS ich nie publikuje */
+  /** zawsze true - geografia wdrożeń to dane demo, ROPS ich nie publikuje */
   demo: boolean;
 }
 
 /**
  * Skąd pochodzi karta. Dla kart ROPS `malopolska: true`; wszystko inne jest
- * zaciągnięte z innych baz innowacji i MUSI być w interfejsie oznaczone —
+ * zaciągnięte z innych baz innowacji i MUSI być w interfejsie oznaczone -
  * zadanie UMWM dotyczy innowacji przetestowanych w Małopolsce, więc milczące
  * wrzucenie obcej karty na tę samą listę byłoby wprowadzeniem w błąd.
  */
@@ -55,7 +55,7 @@ export interface Innovation {
   /** true = karta z bazy spoza Małopolski (zob. `origin`) */
   ext?: boolean;
   origin?: Origin;
-  /** język karty — część baz zewnętrznych jest angielska */
+  /** język karty - część baz zewnętrznych jest angielska */
   lang?: string;
   /** załączniki z bazy źródłowej (karty zewnętrzne) */
   files?: { title: string | null; url: string }[];

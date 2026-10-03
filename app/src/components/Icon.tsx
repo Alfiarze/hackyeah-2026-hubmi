@@ -1,16 +1,16 @@
 /**
- * Ikony systemu HubMI — dwanaście znaków, jedna rodzina.
+ * Ikony systemu HubMI - dwanaście znaków, jedna rodzina.
  *
  * Siatka 32×32, linia 2 px, zaokrąglone końce i narożniki. Struktura
  * w turkusie głębokim (--icon-stroke), a łuk lub węzeł HubMI w turkusie
- * marki (--icon-node) — to on mówi „tu coś się łączy".
+ * marki (--icon-node) - to on mówi „tu coś się łączy".
  *
  * Zasady (strona 02 systemu wizualnego):
- *  — ikona zawsze idzie w parze z podpisem; dekoracyjna dostaje aria-hidden;
- *  — jedna ikona = jedno znaczenie w całym serwisie;
- *  — min. 24 px; w kartach 40 px na kafelku 72 px z tłem mgiełki;
- *  — węzeł HubMI tylko raz na ikonę.
- *  — warianty tła: na kolorowym kafelku ikona staje się jednokolorowa.
+ *  - ikona zawsze idzie w parze z podpisem; dekoracyjna dostaje aria-hidden;
+ *  - jedna ikona = jedno znaczenie w całym serwisie;
+ *  - min. 24 px; w kartach 40 px na kafelku 72 px z tłem mgiełki;
+ *  - węzeł HubMI tylko raz na ikonę.
+ *  - warianty tła: na kolorowym kafelku ikona staje się jednokolorowa.
  */
 import type { SVGProps } from "react";
 
@@ -39,7 +39,7 @@ function Svg({ size = 24, ...rest }: IconProps) {
 const node = { stroke: "var(--icon-node, #2bb3a5)" } as const;
 const nodeDot = { fill: "var(--icon-node, #2bb3a5)", stroke: "none" } as const;
 
-/** Moduł I — matchmaking społeczny. */
+/** Moduł I - matchmaking społeczny. */
 export const IconMatchmaking = (p: IconProps) => (
   <Svg {...p}>
     <circle cx="8.5" cy="21" r="4.5" />
@@ -49,7 +49,7 @@ export const IconMatchmaking = (p: IconProps) => (
   </Svg>
 );
 
-/** Zgłoś potrzebę — dymek z plusem, główna akcja platformy. */
+/** Zgłoś potrzebę - dymek z plusem, główna akcja platformy. */
 export const IconNeed = (p: IconProps) => (
   <Svg {...p}>
     <path d="M7 6.5h18a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H14l-5 4.5v-4.5H7a3 3 0 0 1-3-3v-10a3 3 0 0 1 3-3Z" />
@@ -57,7 +57,7 @@ export const IconNeed = (p: IconProps) => (
   </Svg>
 );
 
-/** Społeczność — trzy osoby z turkusowymi niciami relacji. */
+/** Społeczność - trzy osoby z turkusowymi niciami relacji. */
 export const IconCommunity = (p: IconProps) => (
   <Svg {...p}>
     <circle cx="16" cy="9" r="3.5" />
@@ -70,7 +70,7 @@ export const IconCommunity = (p: IconProps) => (
   </Svg>
 );
 
-/** Organizacja / NGO — wspólny dach nad połączonymi węzłami. */
+/** Organizacja / NGO - wspólny dach nad połączonymi węzłami. */
 export const IconNgo = (p: IconProps) => (
   <Svg {...p}>
     <path d="M4 14 16 5l12 9" />
@@ -82,7 +82,7 @@ export const IconNgo = (p: IconProps) => (
   </Svg>
 );
 
-/** Moduł II — zasobnik wiedzy: otwarta książka z turkusowym grzbietem. */
+/** Moduł II - zasobnik wiedzy: otwarta książka z turkusowym grzbietem. */
 export const IconKnowledge = (p: IconProps) => (
   <Svg {...p}>
     <path d="M16 9.5C13 7.5 8.5 7 4 7.5v16c4.5-.5 9 0 12 2 3-2 7.5-2.5 12-2v-16c-4.5-.5-9 0-12 2Z" />
@@ -91,7 +91,7 @@ export const IconKnowledge = (p: IconProps) => (
   </Svg>
 );
 
-/** Moduł III — kreator pomysłów: ołówek rysujący drogę do węzła. */
+/** Moduł III - kreator pomysłów: ołówek rysujący drogę do węzła. */
 export const IconIdea = (p: IconProps) => (
   <Svg {...p}>
     <path d="M19 4.5l6.5 6.5L13.5 23H7v-6.5Z" />
@@ -101,7 +101,7 @@ export const IconIdea = (p: IconProps) => (
   </Svg>
 );
 
-/** Moduł IV — tester innowacji: rozwiązanie z potwierdzeniem i testem. */
+/** Moduł IV - tester innowacji: rozwiązanie z potwierdzeniem i testem. */
 export const IconTest = (p: IconProps) => (
   <Svg {...p}>
     <rect x="5" y="7" width="20" height="20" rx="5" />
@@ -110,7 +110,7 @@ export const IconTest = (p: IconProps) => (
   </Svg>
 );
 
-/** Moduł V — komunikacja: osoba i dymek rozmowy. */
+/** Moduł V - komunikacja: osoba i dymek rozmowy. */
 export const IconExpert = (p: IconProps) => (
   <Svg {...p}>
     <circle cx="10" cy="13.5" r="4" />
@@ -120,7 +120,7 @@ export const IconExpert = (p: IconProps) => (
   </Svg>
 );
 
-/** Panel ROPS / partnerstwo — dwa kręgi z węzłami spotkania. */
+/** Panel ROPS / partnerstwo - dwa kręgi z węzłami spotkania. */
 export const IconPartnership = (p: IconProps) => (
   <Svg {...p}>
     <circle cx="12" cy="16" r="7.5" />
@@ -130,7 +130,7 @@ export const IconPartnership = (p: IconProps) => (
   </Svg>
 );
 
-/** Wdrożenie — kropkowana ścieżka od startu do flagi celu. */
+/** Wdrożenie - kropkowana ścieżka od startu do flagi celu. */
 export const IconImplement = (p: IconProps) => (
   <Svg {...p}>
     <path d="M21 27V5" />
@@ -140,7 +140,7 @@ export const IconImplement = (p: IconProps) => (
   </Svg>
 );
 
-/** Dostępność — uniwersalna postać, głowa to węzeł HubMI. */
+/** Dostępność - uniwersalna postać, głowa to węzeł HubMI. */
 export const IconAccess = (p: IconProps) => (
   <Svg {...p}>
     <circle cx="16" cy="16" r="12.5" />
@@ -149,7 +149,7 @@ export const IconAccess = (p: IconProps) => (
   </Svg>
 );
 
-/** Gmina / lokalnie — pinezka z domem. */
+/** Gmina / lokalnie - pinezka z domem. */
 export const IconLocal = (p: IconProps) => (
   <Svg {...p}>
     <path d="M16 28.5s-9-8.2-9-15a9 9 0 0 1 18 0c0 6.8-9 15-9 15Z" />
@@ -157,7 +157,7 @@ export const IconLocal = (p: IconProps) => (
   </Svg>
 );
 
-/** Znak HubMI — węzeł: koło + łuk + pełna kropka. Używany w logo i markerach. */
+/** Znak HubMI - węzeł: koło + łuk + pełna kropka. Używany w logo i markerach. */
 export function HubmiMark({ size = 26, ...rest }: IconProps) {
   return (
     <svg

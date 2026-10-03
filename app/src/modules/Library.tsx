@@ -1,5 +1,5 @@
 /**
- * Moduł II — Zasobnik wiedzy.
+ * Moduł II - Zasobnik wiedzy.
  *
  * Trzy rzeczy w jednym miejscu, bo z punktu widzenia użytkownika to jedna
  * potrzeba („czego mam szukać i czym to poprzeć"): Biblioteka 115 innowacji
@@ -113,13 +113,13 @@ export function Library({ onAdapt, onTest }: Props) {
         <h1>Co już wiemy o Małopolsce</h1>
         <p>
           {localCount} przetestowanych innowacji z Małopolski, {videoCount} z filmem,
-          oraz {localDocs} dokumentów ROPS — raporty, diagnozy, Mapa Wyzwań
+          oraz {localDocs} dokumentów ROPS - raporty, diagnozy, Mapa Wyzwań
           Społecznych i wzory wniosków grantowych.
         </p>
         <p className="hint">
           Obok tego {extCount} innowacji i {extDocs} dokumentów z baz spoza regionu
           (PO WER, ROPS Poznań, ESF+). Są wyłączone z widoku, dopóki nie włączysz ich
-          przyciskiem „Dołącz bazy spoza Małopolski” — i każda taka pozycja jest
+          przyciskiem „Dołącz bazy spoza Małopolski” - i każda taka pozycja jest
           oznaczona źródłem.
         </p>
       </div>
@@ -344,7 +344,7 @@ export function Library({ onAdapt, onTest }: Props) {
                   <p className="eyebrow">{d.section}</p>
                   {d.ext && d.origin?.source && (
                     <p className="lib__doc-origin">
-                      Spoza Małopolski — {d.origin.source}
+                      Spoza Małopolski - {d.origin.source}
                     </p>
                   )}
                   {d.desc && <p className="lib__doc-desc">{d.desc}</p>}
@@ -366,7 +366,7 @@ function Empty({ onReset }: { onReset: () => void }) {
       <p>
         Spróbuj krótszego słowa albo zdejmij jeden filtr. Jeśli szukasz rozwiązania
         konkretnego problemu, lepiej zadziała opisanie go zwykłym językiem w module
-        Matchmaking — tam szukamy po znaczeniu, nie po dosłownym słowie.
+        Matchmaking - tam szukamy po znaczeniu, nie po dosłownym słowie.
       </p>
       <button type="button" className="btn btn--primary" onClick={onReset}>
         Wyczyść filtry

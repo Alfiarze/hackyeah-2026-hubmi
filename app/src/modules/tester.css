@@ -89,7 +89,7 @@
   cursor: pointer;
   transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-/* Radio jest ukryte wizualnie, ale nadal fokusowalne — stan czyta czytnik. */
+/* Radio jest ukryte wizualnie, ale nadal fokusowalne - stan czyta czytnik. */
 .ts__star input {
   position: absolute;
   inset: 0;

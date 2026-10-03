@@ -1,9 +1,9 @@
 /**
- * Hero — jasny, ciepły, z ilustracją „potrzeba → rozwiązanie".
+ * Hero - jasny, ciepły, z ilustracją „potrzeba → rozwiązanie".
  *
  * System wizualny HubMI: Bricolage Grotesque 800, turkus prowadzi, jedno
  * słowo tezy dostaje żółte podkreślenie Krakowa (nigdy żółty tekst).
- * Pattern tła kładzie globalny `Backdrop` — hero nie powiela warstw.
+ * Pattern tła kładzie globalny `Backdrop` - hero nie powiela warstw.
  *
  * Sygnatura zostaje: po wejściu wyników hero kurczy się i oddaje
  * pierwszeństwo narzędziu; ilustracja znika, bo narzędzie właśnie
@@ -26,7 +26,7 @@ export function Hero({ receded, children }: Props) {
 
         {/* Ilustracja systemu (strona 06): potrzeba połączona łukiem
             z rozwiązaniem, wokół sieć ludzi i zasobów. Łuk rysuje się
-            raz (hm-draw), węzeł „zaskakuje" (hm-pulse) — tokeny ruchu
+            raz (hm-draw), węzeł „zaskakuje" (hm-pulse) - tokeny ruchu
             z global.css, wyłączane przez prefers-reduced-motion. */}
         <div className="hero__art" aria-hidden="true">
           <svg viewBox="0 0 520 420" fill="none" className="hero__art-svg">

@@ -3,7 +3,7 @@
  *
  * Dlaczego BM25 + koncepty, a nie embeddingi: wynik musi być *wytłumaczalny*.
  * Jury pyta wprost „czy narzędzie skutecznie sugeruje innowacje na podstawie
- * słów kluczowych z opisu potrzeb" — a przy embeddingach jedyną odpowiedzią
+ * słów kluczowych z opisu potrzeb" - a przy embeddingach jedyną odpowiedzią
  * jest „bo model tak policzył". Tu dla każdego trafienia widać, który wątek
  * został rozpoznany, w którym polu karty się zgadza i jakimi słowami.
  * Dodatkowo: zero wywołań API, więc demo działa bez internetu i bez kosztów.
@@ -26,7 +26,7 @@ const FIELDS = [
 type FieldKey = (typeof FIELDS)[number]["key"];
 
 /**
- * Ile warte jest trafienie wątku w danym polu — osobno od wag BM25.
+ * Ile warte jest trafienie wątku w danym polu - osobno od wag BM25.
  *
  * Kluczowe jest tu `benef` = 0.15. Pole „kto może skorzystać" w prawie każdej
  * karcie zawiera tę samą szablonową listę („urzędy miasta i gmin, ośrodki
@@ -48,7 +48,7 @@ const K1 = 1.2;
 const B = 0.75;
 /** Dopasowanie przez koncept liczy się słabiej niż trafienie dosłowne. */
 const CONCEPT_WEIGHT = 0.55;
-/** Mnożnik dla kart bez opisanych wyników testu — zob. komentarz przy użyciu. */
+/** Mnożnik dla kart bez opisanych wyników testu - zob. komentarz przy użyciu. */
 const UNTESTED_PENALTY = 0.88;
 /**
  * Mnożnik dla kart z baz spoza Małopolski. Taka innowacja bywa świetna, ale nie
@@ -77,7 +77,7 @@ interface DocIndex {
 
 /**
  * Siła obecności wątku w karcie, 0–1. Wzmianka rzucona raz w jednym słabym
- * polu daje ~0.1; wątek, na który karta wprost odpowiada — blisko 1.
+ * polu daje ~0.1; wątek, na który karta wprost odpowiada - blisko 1.
  */
 function conceptStrength(hit: ConceptHit): number {
   let best = 0;
@@ -217,7 +217,7 @@ function buildReasons(
   }
   if (inTarget.length) {
     out.push(
-      `Grupa docelowa się zgadza — karta wymienia ${inTarget
+      `Grupa docelowa się zgadza - karta wymienia ${inTarget
         .map((m) => m.label)
         .join(", ")}: ${snippet(inn.target, 120)}`,
     );
@@ -227,9 +227,9 @@ function buildReasons(
   }
   if (inn.ext) {
     out.push(
-      `Ta innowacja nie pochodzi z Małopolski — źródło: ${inn.origin?.source ?? "inna baza"}` +
+      `Ta innowacja nie pochodzi z Małopolski - źródło: ${inn.origin?.source ?? "inna baza"}` +
         `${inn.origin?.region ? ` (${inn.origin.region})` : ""}. Wynik dopasowania jest ` +
-        "lekko obniżony, bo ROPS nie testował jej w regionie — traktuj ją jak inspirację " +
+        "lekko obniżony, bo ROPS nie testował jej w regionie - traktuj ją jak inspirację " +
         "do adaptacji.",
     );
   }
@@ -238,12 +238,12 @@ function buildReasons(
   } else {
     out.push(
       "Ta karta nie ma opisanych wyników testu, więc wynik dopasowania został " +
-        "obniżony — tematycznie pasuje, ale nikt nie udokumentował, czy działa.",
+        "obniżony - tematycznie pasuje, ale nikt nie udokumentował, czy działa.",
     );
   }
   if (missed.length) {
     out.push(
-      `Nie pokrywa: ${missed.map((m) => m.label).join(", ")} — sprawdź, czy to dla Ciebie istotne.`,
+      `Nie pokrywa: ${missed.map((m) => m.label).join(", ")} - sprawdź, czy to dla Ciebie istotne.`,
     );
   }
   return out.slice(0, 4);
@@ -286,7 +286,7 @@ export function search(
   const limit = opts.limit ?? 8;
 
   // Rdzenie wpisane dosłownie mają wagę 1, rdzenie dociągnięte z konceptów
-  // CONCEPT_WEIGHT — żeby rozszerzenie pomagało, ale nie dominowało.
+  // CONCEPT_WEIGHT - żeby rozszerzenie pomagało, ale nie dominowało.
   const weights = new Map<string, number>();
   for (const s of analysis.stems) weights.set(s, 1);
   for (const c of analysis.concepts) {
@@ -317,7 +317,7 @@ export function search(
     if (lex <= 0) continue;
 
     // Ważone pokrycie: każdy wątek zapytania wnosi tyle, ile naprawdę waży
-    // w karcie — nie 1 za samo pojawienie się słowa.
+    // w karcie - nie 1 za samo pojawienie się słowa.
     let covSum = 0;
     for (const cid of queryConceptIds) {
       const hit = doc.concepts.get(cid);
@@ -338,7 +338,7 @@ export function search(
       // Pokrycie wątków waży więcej niż siła leksykalna: zgodność tematu jest
       // ważniejsza niż liczba powtórzeń słowa w karcie.
       let score = Math.round(100 * (0.65 * r.coverage + 0.35 * (r.lex / maxLex)));
-      // Nie rozpoznaliśmy żadnego wątku — zostaje samo trafienie w słowa.
+      // Nie rozpoznaliśmy żadnego wątku - zostaje samo trafienie w słowa.
       // Taki wynik nie ma prawa wyglądać na pewny, więc ścinamy go do 30.
       if (!queryConceptIds.size) score = Math.min(score, 30);
       // Obietnica tego modułu brzmi „pokażemy, co już zadziałało", więc karta
@@ -397,7 +397,7 @@ export function search(
  * Czy zgłoszenie jest luką w ofercie Hubu.
  *
  * Gdy nic sensownego nie pasuje, zgłoszenie ma trafić do adminowego widoku
- * „niezaspokojone potrzeby" — problem bez rozwiązania staje się zadaniem dla
+ * „niezaspokojone potrzeby" - problem bez rozwiązania staje się zadaniem dla
  * Hubu, a nie pustą listą dla użytkownika.
  */
 export const GAP_SCORE_THRESHOLD = 35;
@@ -410,7 +410,7 @@ export function gapReason(
   analysis: QueryAnalysis,
   results: MatchResult[],
 ): GapReason {
-  // Nie rozpoznaliśmy ani jednego wątku — Biblioteka nie pokrywa tego tematu.
+  // Nie rozpoznaliśmy ani jednego wątku - Biblioteka nie pokrywa tego tematu.
   // To najważniejszy przypadek: pytanie spoza domeny polityki społecznej
   // („hodowla pstrąga") nie może dostać wyniku wyglądającego na trafienie.
   if (analysis.concepts.length === 0) return "brak-watkow";
@@ -433,7 +433,7 @@ export const GAP_REASON_TEXT: Record<Exclude<GapReason, null>, string> = {
     "Nie rozpoznaliśmy w tym opisie żadnego z obszarów, które pokrywa Biblioteka Innowacji Społecznych.",
   "brak-trafien": "Żadna z 115 innowacji nie odpowiada na ten problem.",
   "slabe-pokrycie":
-    "Znaleźliśmy tylko luźno powiązane rozwiązania — żadne nie odpowiada na to wprost.",
+    "Znaleźliśmy tylko luźno powiązane rozwiązania - żadne nie odpowiada na to wprost.",
 };
 
 export { FIELDS, stem };

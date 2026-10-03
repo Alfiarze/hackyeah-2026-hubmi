@@ -1,10 +1,10 @@
 /**
- * „Skontaktuj się z realizatorem" — budowanie partnerstw międzysektorowych.
+ * „Skontaktuj się z realizatorem" - budowanie partnerstw międzysektorowych.
  *
  * To nie jest formularz kontaktowy do ROPS. Sens tego przycisku polega na tym,
  * że łączy gminę, która ma problem, z instytucją, która to samo rozwiązanie
  * już u siebie uruchomiła. Wiedza o wdrożeniu siedzi u realizatora, nie
- * w karcie — i właśnie tego nie da się wyczytać z PDF-a.
+ * w karcie - i właśnie tego nie da się wyczytać z PDF-a.
  *
  * Kontakty są fikcyjne (domena example.org, instytucje opisowe, zero nazwisk):
  * zadanie zabrania używania prawdziwych danych osobowych z materiałów ROPS.
@@ -30,7 +30,7 @@ export function ContactRealizer({ innovation, onDone }: Props) {
       <div className="stack">
         <p role="status">
           <strong>Zapytanie wysłane.</strong> Trafiło do skrzynki Hubu jako wątek
-          „pytanie" — zobaczysz je w module Komunikacja, a koordynator ROPS
+          „pytanie" - zobaczysz je w module Komunikacja, a koordynator ROPS
           w panelu administratora.
         </p>
         <button type="button" className="btn btn--primary" onClick={onDone}>
@@ -43,7 +43,7 @@ export function ContactRealizer({ innovation, onDone }: Props) {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (msg.trim().length < 10) {
-      setErr("Napisz przynajmniej jedno zdanie — realizator musi wiedzieć, o co pytasz.");
+      setErr("Napisz przynajmniej jedno zdanie - realizator musi wiedzieć, o co pytasz.");
       return;
     }
     setErr(null);
@@ -74,7 +74,7 @@ export function ContactRealizer({ innovation, onDone }: Props) {
           >
             {innovation.deployments.map((x, i) => (
               <option key={i} value={i}>
-                {x.org} — {x.powiat} ({x.year})
+                {x.org} - {x.powiat} ({x.year})
               </option>
             ))}
           </select>

@@ -3,13 +3,13 @@
  *
  * Struktura odwzorowuje realny formularz aplikacyjny ROPS z naboru
  * „Inkubator Włączenia Społecznego 2.0" oraz karty oceny formalnej
- * i merytorycznej — pliki pobrane do data/raw/pdf, metadane w
+ * i merytorycznej - pliki pobrane do data/raw/pdf, metadane w
  * data/resources.json → nabor_grantowy_iws20. Parametry naboru: grant do
  * 120 000 zł, bez wkładu własnego, mogą aplikować też grupy nieformalne.
  *
  * Nieoczywisty, ale najważniejszy element: sekcja o innowacyjności korzysta
  * z wyniku matchmakingu. ROPS wymaga, by rozwiązanie było NOWE w skali Polski,
- * więc lista najbliższych istniejących innowacji nie jest tu ciekawostką —
+ * więc lista najbliższych istniejących innowacji nie jest tu ciekawostką -
  * to materiał dowodowy, że wnioskodawca nie powtarza cudzej pracy. Ten sam
  * silnik, który szuka gotowych rozwiązań, pilnuje tu nowości.
  */
@@ -22,7 +22,7 @@ export interface GrantInput {
   fiszka: Fiszka;
   problem: string;
   powiat?: string | null;
-  /** najbliższe istniejące innowacje — do sekcji o nowości */
+  /** najbliższe istniejące innowacje - do sekcji o nowości */
   nearest: MatchResult[];
   /** wnioskowana kwota w zł */
   amount: number;
@@ -81,17 +81,17 @@ export function generateGrant(input: GrantInput): GrantDraft {
       closest
         .map(
           (r) =>
-            `  • ${r.innovation.name} (${r.innovation.catName}, dopasowanie ${r.score}/100) — ` +
+            `  • ${r.innovation.name} (${r.innovation.catName}, dopasowanie ${r.score}/100) - ` +
             `${snippet(r.innovation.desc, 140)}`,
         )
         .join("\n") +
-      `\n\nRóżnica wobec nich: [UZUPEŁNIJ — to pole komisja czyta najuważniej. ` +
+      `\n\nRóżnica wobec nich: [UZUPEŁNIJ - to pole komisja czyta najuważniej. ` +
       `Napisz konkretnie, co Twoje rozwiązanie robi inaczej: inna grupa odbiorców, ` +
       `inny mechanizm, niższy koszt, mniejszy próg wejścia. Samo „nasze będzie lepsze" ` +
       `nie przechodzi oceny merytorycznej.]`
     : `Przegląd Biblioteki Innowacji Społecznych ROPS (115 przetestowanych ` +
       `rozwiązań) nie wykazał innowacji odpowiadającej na ten problem. ` +
-      `To mocny argument za nowością rozwiązania w skali regionu — warto go ` +
+      `To mocny argument za nowością rozwiązania w skali regionu - warto go ` +
       `w tej sekcji wprost powołać.`;
 
   const sections: GrantSection[] = [
@@ -107,9 +107,9 @@ export function generateGrant(input: GrantInput): GrantDraft {
       body:
         `${problem.trim() || fiszka.istota}\n\n` +
         `Obszar oddziaływania: ${place}.\n\n` +
-        `[UZUPEŁNIJ danymi liczbowymi — ilu osób dotyczy problem na tym terenie. ` +
+        `[UZUPEŁNIJ danymi liczbowymi - ilu osób dotyczy problem na tym terenie. ` +
         `Źródła dostępne w Zasobniku wiedzy HubMI: „Usługi społeczne w Małopolsce ` +
-        `— deficyty, potrzeby, potencjał rozwojowy" (ROPS 2025) oraz Ocena Zasobów ` +
+        `- deficyty, potrzeby, potencjał rozwojowy" (ROPS 2025) oraz Ocena Zasobów ` +
         `Pomocy Społecznej WM. Komisja ocenia, czy skala jest udokumentowana, ` +
         `nie czy brzmi poważnie.]`,
     },
@@ -128,15 +128,15 @@ export function generateGrant(input: GrantInput): GrantDraft {
       body:
         `${fiszka.adresat}\n\n` +
         `Nabór kieruje wsparcie do osób wykluczonych społecznie lub zagrożonych ` +
-        `wykluczeniem — m.in. osób z niepełnosprawnością, wychowanków placówek ` +
+        `wykluczeniem - m.in. osób z niepełnosprawnością, wychowanków placówek ` +
         `opiekuńczo-wychowawczych, osób starszych, w kryzysie bezdomności, ubogich. ` +
-        `[SPRAWDŹ, czy Twój adresat mieści się w tym katalogu — to kryterium ` +
+        `[SPRAWDŹ, czy Twój adresat mieści się w tym katalogu - to kryterium ` +
         `formalne, odrzucenie następuje bez oceny merytorycznej.]`,
     },
     {
       no: 5,
       heading: "Na czym polega nowość (w skali Polski)",
-      criterion: "Ocena merytoryczna: innowacyjność — kryterium rozstrzygające",
+      criterion: "Ocena merytoryczna: innowacyjność - kryterium rozstrzygające",
       body: novelty,
     },
     {
@@ -147,7 +147,7 @@ export function generateGrant(input: GrantInput): GrantDraft {
         `Grupa testowa: [UZUPEŁNIJ liczbę i sposób rekrutacji uczestników].\n` +
         `Czas testu: ${MONTHS.length > 0 ? "9–12 miesięcy" : ""}.\n` +
         `Miejsce: ${place}.\n` +
-        `Partnerzy lokalni: [UZUPEŁNIJ — CUS/OPS, szkoła, biblioteka, NGO. ` +
+        `Partnerzy lokalni: [UZUPEŁNIJ - CUS/OPS, szkoła, biblioteka, NGO. ` +
         `Potwierdzony partner realnie podnosi ocenę wykonalności.]\n\n` +
         `Przed złożeniem wniosku ROPS udostępnia: konsultacje indywidualne, ` +
         `konsultacje specjalistyczne i spacery poznawcze z grupą docelową.`,
@@ -157,11 +157,11 @@ export function generateGrant(input: GrantInput): GrantDraft {
       heading: "Jak zmierzymy, czy to działa",
       criterion: "Ocena merytoryczna: mierzalność efektu",
       body:
-        `Wskaźnik główny: [UZUPEŁNIJ — jedna liczba, którą zmierzysz przed i po].\n` +
+        `Wskaźnik główny: [UZUPEŁNIJ - jedna liczba, którą zmierzysz przed i po].\n` +
         `Sposób pomiaru: [ankieta / obserwacja / test standaryzowany / dane instytucji].\n\n` +
         `Wskazówka: każda ze 115 kart w Bibliotece ma pole „Czy to działa?" ` +
         `z opisem efektu testu. Zajrzyj do kart z Twojego obszaru i użyj ` +
-        `wskaźnika porównywalnego z nimi — wtedy wynik da się zestawić z innymi ` +
+        `wskaźnika porównywalnego z nimi - wtedy wynik da się zestawić z innymi ` +
         `innowacjami, a to jest warunek upowszechnienia.`,
     },
     {
@@ -170,7 +170,7 @@ export function generateGrant(input: GrantInput): GrantDraft {
       criterion: "Ocena formalna: kwalifikowalność i limit 120 000 zł",
       body:
         `Wnioskowana kwota: ${amount.toLocaleString("pl-PL")} zł. ` +
-        `Wkład własny nie jest wymagany — grant pokrywa 100% kosztów ` +
+        `Wkład własny nie jest wymagany - grant pokrywa 100% kosztów ` +
         `opracowania, przygotowania i testowania innowacji.\n\n` +
         `Rozbicie poniżej jest propozycją startową opartą na typowych ` +
         `proporcjach testu innowacji (największa pozycja to praca ludzi, ` +
@@ -192,7 +192,7 @@ export function generateGrant(input: GrantInput): GrantDraft {
       heading: "Trwałość i skalowanie",
       criterion: "Ocena merytoryczna: potencjał upowszechnienia",
       body:
-        `Po zakończeniu grantu: [UZUPEŁNIJ — kto przejmie prowadzenie i z jakich ` +
+        `Po zakończeniu grantu: [UZUPEŁNIJ - kto przejmie prowadzenie i z jakich ` +
         `środków]. Najmocniejsza odpowiedź to wskazana instytucja, która wpisze ` +
         `działanie w budżet bieżący.\n\n` +
         `Gotowość do upowszechnienia: materiały opisowe na licencji CC BY 4.0, ` +
@@ -205,7 +205,7 @@ export function generateGrant(input: GrantInput): GrantDraft {
   if (amount > MAX_GRANT) {
     warnings.push(
       `Kwota ${amount.toLocaleString("pl-PL")} zł przekracza maksimum naboru ` +
-        `(${MAX_GRANT.toLocaleString("pl-PL")} zł) — wniosek zostanie odrzucony formalnie.`,
+        `(${MAX_GRANT.toLocaleString("pl-PL")} zł) - wniosek zostanie odrzucony formalnie.`,
     );
   }
   if (!input.title.trim()) warnings.push("Brak nazwy innowacji.");
@@ -215,7 +215,7 @@ export function generateGrant(input: GrantInput): GrantDraft {
   if (closest.some((r) => r.score >= 70)) {
     warnings.push(
       `Uwaga: „${closest[0].innovation.name}" dopasowuje się do Twojego opisu na ` +
-        `${closest[0].score}/100. Komisja oceni nowość w skali Polski — sekcja 5 ` +
+        `${closest[0].score}/100. Komisja oceni nowość w skali Polski - sekcja 5 ` +
         `musi jasno pokazać różnicę, albo rozważ zgłoszenie się jako tester ` +
         `istniejącej innowacji zamiast nowego grantu.`,
     );
