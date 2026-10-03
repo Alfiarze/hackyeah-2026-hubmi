@@ -1,0 +1,107 @@
+.map { margin: 0; }
+
+.map__caption {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-bottom: var(--sp-3);
+  max-width: var(--measure);
+}
+
+.map__shell {
+  position: relative;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: var(--sp-4);
+}
+
+.map__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Skala wypełnień: od papieru do kobaltu. Intensywność jest tylko dodatkiem —
+   liczba wdrożeń siedzi w aria-label i w tabeli pod mapą (WCAG 1.4.1). */
+.map__unit {
+  stroke: var(--surface);
+  stroke-width: 0.8;
+  cursor: pointer;
+  transition: fill 120ms ease;
+}
+.map__unit--b0 { fill: var(--surface-2); }
+.map__unit--b1 { fill: color-mix(in srgb, var(--chart-1) 12%, var(--surface)); }
+.map__unit--b2 { fill: color-mix(in srgb, var(--chart-1) 30%, var(--surface)); }
+.map__unit--b3 { fill: color-mix(in srgb, var(--chart-1) 52%, var(--surface)); }
+.map__unit--b4 { fill: color-mix(in srgb, var(--chart-1) 76%, var(--surface)); }
+
+.map__unit:hover { fill: var(--accent-wash); }
+.map__unit:focus-visible {
+  outline: none;
+  stroke: var(--focus-ring);
+  stroke-width: 3;
+}
+/* Wybór oznaczony grubym obrysem, nie tylko zmianą wypełnienia. */
+.map__unit--sel {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.map__city {
+  fill: var(--ink);
+  stroke: var(--surface);
+  stroke-width: 1.2;
+  pointer-events: none;
+}
+
+.map__legend {
+  position: absolute;
+  right: var(--sp-4);
+  bottom: var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin: 0;
+  padding: var(--sp-2);
+  list-style: none;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+.map__legend li { display: flex; align-items: center; gap: 4px; }
+.map__swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--line);
+}
+
+.map__sel {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
+}
+
+.map__table {
+  margin-top: var(--sp-4);
+  font-size: var(--fs-sm);
+}
+.map__table summary {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.map__note {
+  margin-top: var(--sp-4);
+  padding: var(--sp-3);
+  border-left: 2px solid var(--line-ui);
+  background: var(--surface-2);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  max-width: var(--measure);
+}
+
+@media (max-width: 48rem) {
+  .map__legend { position: static; margin-top: var(--sp-2); justify-content: flex-start; }
+}

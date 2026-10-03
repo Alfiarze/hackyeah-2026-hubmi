@@ -1,0 +1,2371 @@
+{
+  "downloaded_bytes": 52251524,
+  "zip_total_bytes_not_downloaded": 82281562984,
+  "items": [
+    {
+      "slug": "bawita",
+      "name": "BaWita",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ROPS_Folder_IN_BaWita_v15_www.pdf",
+          "local_path": "data/raw/assets/pdf/bawita.pdf",
+          "bytes": 547209
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/bawita.png",
+          "local_path": "data/raw/assets/covers/bawita.png",
+          "bytes": 166449
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/bawita.zip",
+          "local_path": null,
+          "bytes": 21430305,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=o7UhDlebLJo",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "senior-cuder",
+      "name": "Senior CUDER",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/05_CUDER.pdf",
+          "local_path": "data/raw/assets/pdf/senior-cuder.pdf",
+          "bytes": 1160447
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/seniorcuder.png",
+          "local_path": "data/raw/assets/covers/senior-cuder.png",
+          "bytes": 167372
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/seniorcuder.zip",
+          "local_path": null,
+          "bytes": 17573862,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=o5TP10ZStNA",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "merkury",
+      "name": "Merkury",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ROPS_Folder_IN_Merkury_v4_www.pdf",
+          "local_path": "data/raw/assets/pdf/merkury.pdf",
+          "bytes": 555390
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/merkury.png",
+          "local_path": "data/raw/assets/covers/merkury.png",
+          "bytes": 166536
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/merkury.zip",
+          "local_path": null,
+          "bytes": 638058825,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "http://www.youtube.com/watch?v=BK6a8fjELR0&t=48s",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "organizator-kompleksowej-opieki-w-miejscu-zamieszkania",
+      "name": "Organizator kompleksowej opieki w miejscu zamieszkania",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/01_model_COD.pdf",
+          "local_path": "data/raw/assets/pdf/organizator-kompleksowej-opieki-w-miejscu-zamieszkania.pdf",
+          "bytes": 760158
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/organizatorkompleksowejopieki.png",
+          "local_path": "data/raw/assets/covers/organizator-kompleksowej-opieki-w-miejscu-zamieszkania.png",
+          "bytes": 194730
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/organizatorkompleksowejopieki.zip",
+          "local_path": null,
+          "bytes": 6897337,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "przenosne-modularne-lazienki",
+      "name": "Przenośne, modularne łazienki",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ROPS_Folder_ModularneLazienki_v4_www.pdf",
+          "local_path": "data/raw/assets/pdf/przenosne-modularne-lazienki.pdf",
+          "bytes": 535437
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/przenosnelazienki.png",
+          "local_path": "data/raw/assets/covers/przenosne-modularne-lazienki.png",
+          "bytes": 176928
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/przenosnelazienki.zip",
+          "local_path": null,
+          "bytes": 133729067,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=Pl5bkpxEqgs",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "terapeuta-przestrzeni",
+      "name": "Terapeuta przestrzeni",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Zasady_wykorzystania_innowacji_MIIS.pdf",
+          "local_path": "data/raw/assets/pdf/terapeuta-przestrzeni.pdf",
+          "bytes": 105198
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/terapeutaprzestrzeni.png",
+          "local_path": "data/raw/assets/covers/terapeuta-przestrzeni.png",
+          "bytes": 176369
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/terapeutaprzestrzeni.zip",
+          "local_path": null,
+          "bytes": 2546575,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "talerze-zdrowia",
+      "name": "Talerze zdrowia",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/talerzezdrowia.png",
+          "local_path": "data/raw/assets/covers/talerze-zdrowia.png",
+          "bytes": 167622
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/talerzezdrowia.zip",
+          "local_path": null,
+          "bytes": 16230019,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "therapy-set",
+      "name": "Therapy Set",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Zasady_wykorzystania_innowacji_MIIS.pdf",
+          "local_path": "data/raw/assets/pdf/therapy-set.pdf",
+          "bytes": 105198
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/therapyset.png",
+          "local_path": "data/raw/assets/covers/therapy-set.png",
+          "bytes": 165611
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/therapyset.zip",
+          "local_path": null,
+          "bytes": 32801597,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "sciezka-treningu-umyslu",
+      "name": "Ścieżka treningu umysłu",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/sciezkatreninguumyslu.png",
+          "local_path": "data/raw/assets/covers/sciezka-treningu-umyslu.png",
+          "bytes": 175569
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/sciezkatreninguumyslu.zip",
+          "local_path": null,
+          "bytes": 26988135,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "edu-gra-hahaha",
+      "name": "Edu gra HaHaHa",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/edugra.png",
+          "local_path": "data/raw/assets/covers/edu-gra-hahaha.png",
+          "bytes": 165354
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/edugra.zip",
+          "local_path": null,
+          "bytes": 39330004,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "obu-obuwie-po-domu",
+      "name": "Obu – obuwie po domu",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Zasady_wykorzystania_innowacji_MIIS.pdf",
+          "local_path": "data/raw/assets/pdf/obu-obuwie-po-domu.pdf",
+          "bytes": 105198
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/obuobuwie.png",
+          "local_path": "data/raw/assets/covers/obu-obuwie-po-domu.png",
+          "bytes": 174568
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/obuobuwie.zip",
+          "local_path": null,
+          "bytes": 110285729,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "centrum-antydepresyjne",
+      "name": "Centrum antydepresyjne",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Zasady_wykorzystania_innowacji_MIIS.pdf",
+          "local_path": "data/raw/assets/pdf/centrum-antydepresyjne.pdf",
+          "bytes": 105198
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/centrumantydepresyjne.png",
+          "local_path": "data/raw/assets/covers/centrum-antydepresyjne.png",
+          "bytes": 176151
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/centrumantydepresyjne.zip",
+          "local_path": null,
+          "bytes": 2479364,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "zeglowanie-w-wyobrazni-czyli-sposob-na-strachy-na-wodzie",
+      "name": "Żeglowanie w wyobraźni - czyli sposób na strachy na wodzie",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/zeglowaniewwyobrazni.png",
+          "local_path": "data/raw/assets/covers/zeglowanie-w-wyobrazni-czyli-sposob-na-strachy-na-wodzie.png",
+          "bytes": 193201
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/zeglowaniewwyobrazni.zip",
+          "local_path": null,
+          "bytes": 18029645,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "stworzenie-narzedzia-ulatwiajacego-seniorom-prawidlowe-regulowanie-spraw-spadkowych",
+      "name": "Stworzenie narzędzia ułatwiającego seniorom prawidłowe regulowanie spraw spadkowych",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/narzedziespadkowe.png",
+          "local_path": "data/raw/assets/covers/stworzenie-narzedzia-ulatwiajacego-seniorom-prawidlowe-regulowanie-spraw-spadkowych.png",
+          "bytes": 182003
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/narzedziespadkowe.zip",
+          "local_path": null,
+          "bytes": 3377885,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "mobilne-centrum-pomocy-dla-osob-starszych",
+      "name": "Mobilne centrum pomocy dla osób starszych",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Zasady_wykorzystania_innowacji_MIIS.pdf",
+          "local_path": "data/raw/assets/pdf/mobilne-centrum-pomocy-dla-osob-starszych.pdf",
+          "bytes": 105198
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/mobilnecentrumpomocy.png",
+          "local_path": "data/raw/assets/covers/mobilne-centrum-pomocy-dla-osob-starszych.png",
+          "bytes": 192090
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/mobilnecentrumpomocy.zip",
+          "local_path": null,
+          "bytes": 2838113,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "kody-qr-na-pomoc-seniorom",
+      "name": "Kody QR na pomoc seniorom",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/kodyqr.png",
+          "local_path": "data/raw/assets/covers/kody-qr-na-pomoc-seniorom.png",
+          "bytes": 174244
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/kodyqr.zip",
+          "local_path": null,
+          "bytes": 25128158,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "e-rzecznik-konsumenta-seniora",
+      "name": "E-rzecznik konsumenta seniora",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/erzecznik.png",
+          "local_path": "data/raw/assets/covers/e-rzecznik-konsumenta-seniora.png",
+          "bytes": 176937
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/erzecznik.zip",
+          "local_path": null,
+          "bytes": 58652235,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "sciezka-motosensoryczna",
+      "name": "Ścieżka motosensoryczna",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/Moj_folder/MIIS/07_model_MOTO-SENSORYCZNY.pdf",
+          "local_path": "data/raw/assets/pdf/sciezka-motosensoryczna.pdf",
+          "bytes": 6280801
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/sciezkamotosensoryczna.png",
+          "local_path": "data/raw/assets/covers/sciezka-motosensoryczna.png",
+          "bytes": 176428
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/sciezkamotosensoryczna.zip",
+          "local_path": null,
+          "bytes": 11462675137,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=4DKP0XK440U",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "korytarz-wspomnien",
+      "name": "Korytarz wspomnień",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/korytarzwspomnien.png",
+          "local_path": "data/raw/assets/covers/korytarz-wspomnien.png",
+          "bytes": 174561
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/korytarzwspomnien.zip",
+          "local_path": null,
+          "bytes": 1265896098,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "wirtualne-izby-pamieci",
+      "name": "Wirtualne izby pamięci",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/wirtualneizby.png",
+          "local_path": "data/raw/assets/covers/wirtualne-izby-pamieci.png",
+          "bytes": 176996
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/wirtualneizby.zip",
+          "local_path": null,
+          "bytes": 10104989,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "komix-zyciowy",
+      "name": "koMIX życiowy",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ROPS_Folder_IN_KoMIX_v6_www.pdf",
+          "local_path": "data/raw/assets/pdf/komix-zyciowy.pdf",
+          "bytes": 560442
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/komixzyciowy.png",
+          "local_path": "data/raw/assets/covers/komix-zyciowy.png",
+          "bytes": 178533
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/komix.zip",
+          "local_path": null,
+          "bytes": 11216340693,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=hohm7FnsukY",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "patryk-i-kropka",
+      "name": "Patryk i Kropka",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ROPS_Folder_IN_PatrykIKropka_v5_www.pdf",
+          "local_path": "data/raw/assets/pdf/patryk-i-kropka.pdf",
+          "bytes": 619105
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/patrykikropka.png",
+          "local_path": "data/raw/assets/covers/patryk-i-kropka.png",
+          "bytes": 176530
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/patrykikropka.zip",
+          "local_path": null,
+          "bytes": 127350525,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://youtu.be/JfmyToWVuOs",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "edki-kredki-terapeutyczne",
+      "name": "Edki - kredki terapeutyczne",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ROPS_Folder_IN_Edki_v6_www.pdf",
+          "local_path": "data/raw/assets/pdf/edki-kredki-terapeutyczne.pdf",
+          "bytes": 401158
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/edki.png",
+          "local_path": "data/raw/assets/covers/edki-kredki-terapeutyczne.png",
+          "bytes": 194801
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/terapeutycznekredki.zip",
+          "local_path": null,
+          "bytes": 444252029,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=ev173g-d_vA&t=5s",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "rodzina-adopcyjna-dorasta",
+      "name": "Rodzina adopcyjna dorasta",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ROPS_Folder_RodzinaAdopcyjna_v5_www.pdf",
+          "local_path": "data/raw/assets/pdf/rodzina-adopcyjna-dorasta.pdf",
+          "bytes": 551118
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/rodzinadopcyjnadorasta.png",
+          "local_path": "data/raw/assets/covers/rodzina-adopcyjna-dorasta.png",
+          "bytes": 195637
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/rodzinaadopcyjna.zip",
+          "local_path": null,
+          "bytes": 6167876,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=HZzYekiW_nY",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "puzzle-3d",
+      "name": "Puzzle 3D",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Wykorzystanie_druku_3D_w_tworzeniu_zabawek_dla_dzieci_niewidomych.pdf",
+          "local_path": "data/raw/assets/pdf/puzzle-3d.pdf",
+          "bytes": 1018527
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/puzzle3d.png",
+          "local_path": "data/raw/assets/covers/puzzle-3d.png",
+          "bytes": 176751
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/wykorzystaniedruku3d.zip",
+          "local_path": null,
+          "bytes": 25003236,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=T_OM-4WqGzE",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "hop-hop-mobilny-plac-zabaw",
+      "name": "Hop hop - mobilny plac zabaw",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/HOP_HOP_MOBILNY_PLAC_ZABAW.pdf",
+          "local_path": "data/raw/assets/pdf/hop-hop-mobilny-plac-zabaw.pdf",
+          "bytes": 895353
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/hophop.png",
+          "local_path": "data/raw/assets/covers/hop-hop-mobilny-plac-zabaw.png",
+          "bytes": 193741
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/hophop.zip",
+          "local_path": null,
+          "bytes": 15013491,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=kE9lpr4OJPQ",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "mobilny-pomocnik-dydaktyczno-sensoryczny-dla-uczniowstudentow-ze-spektrum-autyzmu",
+      "name": "Mobilny pomocnik dydaktyczno-sensoryczny dla uczniów/studentów ze spektrum autyzmu",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/mobilnypomocnik.png",
+          "local_path": "data/raw/assets/covers/mobilny-pomocnik-dydaktyczno-sensoryczny-dla-uczniowstudentow-ze-spektrum-autyzmu.png",
+          "bytes": 163916
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/mobilnypomocnik.zip",
+          "local_path": null,
+          "bytes": 836471822,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "przewodnik-dla-osob-z-asd-moje-potrzeby-gdzie-i-jak-je-realizowac",
+      "name": "Przewodnik dla osób z ASD \"Moje potrzeby - gdzie i jak je realizować?\"",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/przewodnikasd.png",
+          "local_path": "data/raw/assets/covers/przewodnik-dla-osob-z-asd-moje-potrzeby-gdzie-i-jak-je-realizowac.png",
+          "bytes": 181022
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/przewodnikasd.zip",
+          "local_path": null,
+          "bytes": 5119179070,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "bez-presji-z-depresji",
+      "name": "Bez presji z depresji",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/bezpresji.png",
+          "local_path": "data/raw/assets/covers/bez-presji-z-depresji.png",
+          "bytes": 194995
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/bezpresji.zip",
+          "local_path": null,
+          "bytes": 150723785,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "bez-stresu-do-sukcesu-terapia-neurologiczna-przyjazna-dziecku",
+      "name": "Bez stresu do sukcesu - terapia neurologiczna przyjazna dziecku",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/bezstresudosukcesu.png",
+          "local_path": "data/raw/assets/covers/bez-stresu-do-sukcesu-terapia-neurologiczna-przyjazna-dziecku.png",
+          "bytes": 181458
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/bezstresudosukcesu.zip",
+          "local_path": null,
+          "bytes": 6289549,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "uwaznione-rodzienstwo",
+      "name": "Uważnione rodzieństwo",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/uwaznionerodzenstwo.png",
+          "local_path": "data/raw/assets/covers/uwaznione-rodzienstwo.png",
+          "bytes": 194132
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/uwaznionerodzenstwo.zip",
+          "local_path": null,
+          "bytes": 5234270,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "brzuszkole-brzuszek-zostaje-w-przedszkolu",
+      "name": "Brzuszkole - brzuszek zostaje w przedszkolu",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/brzuszkole.png",
+          "local_path": "data/raw/assets/covers/brzuszkole-brzuszek-zostaje-w-przedszkolu.png",
+          "bytes": 194917
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/brzuszkole.zip",
+          "local_path": null,
+          "bytes": 206616373,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "to-nie-koniec-swiata-to-poczatek-swiata",
+      "name": "To nie koniec świata - to początek świata",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/toniekoniecswiata.png",
+          "local_path": "data/raw/assets/covers/to-nie-koniec-swiata-to-poczatek-swiata.png",
+          "bytes": 193441
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/toniekoniecswiata.zip",
+          "local_path": null,
+          "bytes": 90268397,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "jezykolamacz",
+      "name": "Językołamacz",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/jezykolamacz.png",
+          "local_path": "data/raw/assets/covers/jezykolamacz.png",
+          "bytes": 176327
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/jezykolamacz.zip",
+          "local_path": null,
+          "bytes": 662262714,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "piosenki-uczestniczace",
+      "name": "Piosenki uczestniczące",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/piosenkiuczestniczace.png",
+          "local_path": "data/raw/assets/covers/piosenki-uczestniczace.png",
+          "bytes": 194718
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/piosenkiuczestniczace.zip",
+          "local_path": null,
+          "bytes": 66505629,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "moj-pomocny-virtual-world",
+      "name": "Mój pomocny Virtual World",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/mojpomocnyvirtualworld.png",
+          "local_path": "data/raw/assets/covers/moj-pomocny-virtual-world.png",
+          "bytes": 195166
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/virtualworld.zip",
+          "local_path": null,
+          "bytes": 2186607835,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "mobilna-pomoc-terapeutyczna",
+      "name": "Mobilna pomoc terapeutyczna",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/mobilnapomocterapeutyczna.png",
+          "local_path": "data/raw/assets/covers/mobilna-pomoc-terapeutyczna.png",
+          "bytes": 195396
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/mobilnapomoc.zip",
+          "local_path": null,
+          "bytes": 5434406,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "marimbaza",
+      "name": "MarimBaza!",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/marimbaza.png",
+          "local_path": "data/raw/assets/covers/marimbaza.png",
+          "bytes": 175183
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/marimbaza.zip",
+          "local_path": null,
+          "bytes": 4252621,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "nasz-wspolny-rodzinny-swiat-poznaje-ucze-reaguje",
+      "name": "Nasz wspólny, rodzinny świat - poznaję, uczę, reaguję",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/naszwspolnyrodzinnyswiat.png",
+          "local_path": "data/raw/assets/covers/nasz-wspolny-rodzinny-swiat-poznaje-ucze-reaguje.png",
+          "bytes": 180642
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/naszwspolnyrodzinnyswiat.zip",
+          "local_path": null,
+          "bytes": 12116968,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "mpatyk",
+      "name": "mPatyk",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/mpatyk.png",
+          "local_path": "data/raw/assets/covers/mpatyk.png",
+          "bytes": 176513
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/mpatyk.zip",
+          "local_path": null,
+          "bytes": 69922301,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "czas-na-aktywnosc",
+      "name": "Czas na aktywność!",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/03_CzasNaAktywnosc.pdf",
+          "local_path": "data/raw/assets/pdf/czas-na-aktywnosc.pdf",
+          "bytes": 1339070
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/czasnaaktywnosc.png",
+          "local_path": "data/raw/assets/covers/czas-na-aktywnosc.png",
+          "bytes": 194913
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/czasnaaktywnosc.zip",
+          "local_path": null,
+          "bytes": 24916809,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=QgkpdYndqNU",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "uniodziez",
+      "name": "Uniodzież",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/09_Model_unidziez.pdf",
+          "local_path": "data/raw/assets/pdf/uniodziez.pdf",
+          "bytes": 4233634
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/uniodziez.png",
+          "local_path": "data/raw/assets/covers/uniodziez.png",
+          "bytes": 177192
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/uniodziez.zip",
+          "local_path": null,
+          "bytes": 200110963,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=hBY1SnqLXV0&t=23s",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "zakupy-na-jednym-wozku-z-dzieckiem-z-niepelnosprawnoscia-ruchowa",
+      "name": "Zakupy na jednym wózku z dzieckiem z niepełnosprawnością ruchową",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/LEKABEL.pdf",
+          "local_path": "data/raw/assets/pdf/zakupy-na-jednym-wozku-z-dzieckiem-z-niepelnosprawnoscia-ruchowa.pdf",
+          "bytes": 1144695
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/zakupynajednymwozku.png",
+          "local_path": "data/raw/assets/covers/zakupy-na-jednym-wozku-z-dzieckiem-z-niepelnosprawnoscia-ruchowa.png",
+          "bytes": 180737
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/zakupynajednymwozku.zip",
+          "local_path": null,
+          "bytes": 15765619,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=2tUImD7I-CE",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "kompleksowa-pomoc-dla-osob-po-amputacji-konczyny-dolnej",
+      "name": "Kompleksowa pomoc dla osób po amputacji kończyny dolnej",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/kompleksowapomocpoamputacji.png",
+          "local_path": "data/raw/assets/covers/kompleksowa-pomoc-dla-osob-po-amputacji-konczyny-dolnej.png",
+          "bytes": 178747
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/kompleksowapomocpoamputacji.zip",
+          "local_path": null,
+          "bytes": 716146,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "puzzles-ramp",
+      "name": "Puzzle's Ramp",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/puzzlesramp.png",
+          "local_path": "data/raw/assets/covers/puzzles-ramp.png",
+          "bytes": 194666
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/puzzlesramp.zip",
+          "local_path": null,
+          "bytes": 8047480,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "chlap-pro",
+      "name": "Chlap Pro",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/chlappro.png",
+          "local_path": "data/raw/assets/covers/chlap-pro.png",
+          "bytes": 177122
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/chlappro.zip",
+          "local_path": null,
+          "bytes": 18970839,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "marina-pai",
+      "name": "Marina Pai",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/marinapai.png",
+          "local_path": "data/raw/assets/covers/marina-pai.png",
+          "bytes": 175659
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/marinapai.zip",
+          "local_path": null,
+          "bytes": 71536559,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "zakupy-bez-barier",
+      "name": "Zakupy bez barier",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/02_Zakupy-bez-barier.pdf",
+          "local_path": "data/raw/assets/pdf/zakupy-bez-barier.pdf",
+          "bytes": 699470
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/zakupybezbarier.png",
+          "local_path": "data/raw/assets/covers/zakupy-bez-barier.png",
+          "bytes": 195726
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/zakupybezbarier.zip",
+          "local_path": null,
+          "bytes": 20956193,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=v2cD6yEJQos",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "nakreceni-na-aktywnosc",
+      "name": "Nakręceni na aktywność",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/nakreceninaaktywnosc.png",
+          "local_path": "data/raw/assets/covers/nakreceni-na-aktywnosc.png",
+          "bytes": 194300
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/nakreceninaaktywnosc.zip",
+          "local_path": null,
+          "bytes": 8461856,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "moduly-niezaleznosci",
+      "name": "Moduły niezależności",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/modulyniezaleznosci.png",
+          "local_path": "data/raw/assets/covers/moduly-niezaleznosci.png",
+          "bytes": 195198
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/modulyniezaleznosci.zip",
+          "local_path": null,
+          "bytes": 34996290,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "biustspinka",
+      "name": "BiustSPINKA",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/biustspinka.png",
+          "local_path": "data/raw/assets/covers/biustspinka.png",
+          "bytes": 178230
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/biustspinka.zip",
+          "local_path": null,
+          "bytes": 250996426,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "szablony-piekna",
+      "name": "Szablony piękna",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/szablonypiekna.png",
+          "local_path": "data/raw/assets/covers/szablony-piekna.png",
+          "bytes": 193908
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/szablonypiekna.zip",
+          "local_path": null,
+          "bytes": 13456382,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "ev-modul-do-wozkow-inwalidzkich",
+      "name": "EV moduł do wózków inwalidzkich",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/evmodul.png",
+          "local_path": "data/raw/assets/covers/ev-modul-do-wozkow-inwalidzkich.png",
+          "bytes": 195772
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/evmodul.zip",
+          "local_path": null,
+          "bytes": 18294006,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "dostepny-stol-targowy",
+      "name": "Dostępny stół targowy",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/dostepnystoltargowy.png",
+          "local_path": "data/raw/assets/covers/dostepny-stol-targowy.png",
+          "bytes": 194767
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/dostepnystol.zip",
+          "local_path": null,
+          "bytes": 2438375,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "cloudleg",
+      "name": "Cloudleg",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/cloudleg.png",
+          "local_path": "data/raw/assets/covers/cloudleg.png",
+          "bytes": 176070
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/cloudleg.zip",
+          "local_path": null,
+          "bytes": 50037986,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "lekki-wozek-aktywny",
+      "name": "Lekki wózek aktywny",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/lekkiwozekaktywny.png",
+          "local_path": "data/raw/assets/covers/lekki-wozek-aktywny.png",
+          "bytes": 194689
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/lekkiwozekaktywny.zip",
+          "local_path": null,
+          "bytes": 15390457,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "wozek-szermierczy",
+      "name": "Wózek szermierczy",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/wozekszermierczy.png",
+          "local_path": "data/raw/assets/covers/wozek-szermierczy.png",
+          "bytes": 194108
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/wozekszermierczy.zip",
+          "local_path": null,
+          "bytes": 28996355,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "dostepna-szermierka",
+      "name": "Dostępna szermierka",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/dostepnaszermierka.png",
+          "local_path": "data/raw/assets/covers/dostepna-szermierka.png",
+          "bytes": 194788
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/dostepnaszermierka.zip",
+          "local_path": null,
+          "bytes": 10839821,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "innotextil",
+      "name": "Innotextil",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/06_Model_Innotextil-1.pdf",
+          "local_path": "data/raw/assets/pdf/innotextil.pdf",
+          "bytes": 2640061
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/innotextil.png",
+          "local_path": "data/raw/assets/covers/innotextil.png",
+          "bytes": 174034
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/innotextil.zip",
+          "local_path": null,
+          "bytes": 185474382,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=ScqdHaNxYa8",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "straznik",
+      "name": "Strażnik",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Straznik.pdf",
+          "local_path": "data/raw/assets/pdf/straznik.pdf",
+          "bytes": 684942
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/straznik.png",
+          "local_path": "data/raw/assets/covers/straznik.png",
+          "bytes": 193988
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/straznik.zip",
+          "local_path": null,
+          "bytes": 4980181,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=zYVr0zMAqWE",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "wsparcie-imprez-masowych-dla-osob-z-niepelnosprawnoscia-wzroku",
+      "name": "Wsparcie imprez masowych dla osób z niepełnosprawnością wzroku",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/WSPARCIE_IMPREZ_MASOWYCH_DLA_OSOB_Z_NIEPENOSPRAWNOSCIA_WZROKU.pdf",
+          "local_path": "data/raw/assets/pdf/wsparcie-imprez-masowych-dla-osob-z-niepelnosprawnoscia-wzroku.pdf",
+          "bytes": 853987
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/wsparcieimprez.png",
+          "local_path": "data/raw/assets/covers/wsparcie-imprez-masowych-dla-osob-z-niepelnosprawnoscia-wzroku.png",
+          "bytes": 164532
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/wsparcieimprez.zip",
+          "local_path": null,
+          "bytes": 29584456,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=3s2kYAWWVkM",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "teleasystent",
+      "name": "Teleasystent",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/08_model_Teleasystent.pdf",
+          "local_path": "data/raw/assets/pdf/teleasystent.pdf",
+          "bytes": 246009
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/teleasystent.png",
+          "local_path": "data/raw/assets/covers/teleasystent.png",
+          "bytes": 194205
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/teleasystent.zip",
+          "local_path": null,
+          "bytes": 76331232,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=8xUBVF_5CWU",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "hear-it",
+      "name": "Hear IT",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ROPS_Folder_IN_HearIT_v6_www.pdf",
+          "local_path": "data/raw/assets/pdf/hear-it.pdf",
+          "bytes": 553120
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/hearit.png",
+          "local_path": "data/raw/assets/covers/hear-it.png",
+          "bytes": 196587
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/hearit.zip",
+          "local_path": null,
+          "bytes": 3633074,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=uDLOSoCb3E8",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "gluchy-czytelnik-w-bibliotece",
+      "name": "Głuchy czytelnik w bibliotece",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ROPS_Folder_IN_GuchyCzytelnik_v4_www.pdf",
+          "local_path": "data/raw/assets/pdf/gluchy-czytelnik-w-bibliotece.pdf",
+          "bytes": 455989
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/gluchyczytelnik.png",
+          "local_path": "data/raw/assets/covers/gluchy-czytelnik-w-bibliotece.png",
+          "bytes": 194252
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/gluchyczytelnik.zip",
+          "local_path": null,
+          "bytes": 16503797,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=BoAC-J1Owr4",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "blue-sea-eye",
+      "name": "Blue Sea Eye",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/blueseaeye.png",
+          "local_path": "data/raw/assets/covers/blue-sea-eye.png",
+          "bytes": 193004
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/blueseaeye.zip",
+          "local_path": null,
+          "bytes": 10135118,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "osoby-niewidome-i-niedowidzace-jako-nauczyciele-jezyka-polskiego",
+      "name": "Osoby niewidome i niedowidzące jako nauczyciele języka polskiego",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/nauczycielepolskiego.png",
+          "local_path": "data/raw/assets/covers/osoby-niewidome-i-niedowidzace-jako-nauczyciele-jezyka-polskiego.png",
+          "bytes": 163806
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/osobyniewidomejakonauczyciele.zip",
+          "local_path": null,
+          "bytes": 496191949,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "ngoz-nawigacja-glosowa-osob-zaleznych",
+      "name": "NGOZ - nawigacja głosowa osób zależnych",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/04_model-NGOZ.pdf",
+          "local_path": "data/raw/assets/pdf/ngoz-nawigacja-glosowa-osob-zaleznych.pdf",
+          "bytes": 722500
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/ngoz.png",
+          "local_path": "data/raw/assets/covers/ngoz-nawigacja-glosowa-osob-zaleznych.png",
+          "bytes": 181420
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/ngoz.zip",
+          "local_path": null,
+          "bytes": 27175560,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=ZiGxSX-VRfg",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "wibraap",
+      "name": "Wibraap",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Wibraap.pdf",
+          "local_path": "data/raw/assets/pdf/wibraap.pdf",
+          "bytes": 771651
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/wibraap.png",
+          "local_path": "data/raw/assets/covers/wibraap.png",
+          "bytes": 196097
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/wibraap.zip",
+          "local_path": null,
+          "bytes": 22024862,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=nmsEAH6BbR0",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "my-way-to-culture",
+      "name": "My way to culture",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/mywaytoculture.png",
+          "local_path": "data/raw/assets/covers/my-way-to-culture.png",
+          "bytes": 197648
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/mywaytoculture.zip",
+          "local_path": null,
+          "bytes": 1275280453,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "glucha-ankieta",
+      "name": "Głucha ankieta",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/gluchaankieta.png",
+          "local_path": "data/raw/assets/covers/glucha-ankieta.png",
+          "bytes": 194223
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/gluchaankieta.zip",
+          "local_path": null,
+          "bytes": 16678044,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "dostepny-wniosek-dla-ggluchych",
+      "name": "Dostępny wniosek dla g/Głuchych",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/dostepnywniosek.png",
+          "local_path": "data/raw/assets/covers/dostepny-wniosek-dla-ggluchych.png",
+          "bytes": 195038
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/dostepnywniosek.zip",
+          "local_path": null,
+          "bytes": 3381903,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "czytamoda",
+      "name": "Czytamoda",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/czytamoda.png",
+          "local_path": "data/raw/assets/covers/czytamoda.png",
+          "bytes": 194609
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/czytamoda.zip",
+          "local_path": null,
+          "bytes": 53280188,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "dostepny-transport-publiczny",
+      "name": "Dostępny transport publiczny",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/dostepnytransport.png",
+          "local_path": "data/raw/assets/covers/dostepny-transport-publiczny.png",
+          "bytes": 193798
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/dostepnytransport.zip",
+          "local_path": null,
+          "bytes": 26955662,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "turystyka-gorskawspinaczka-dostepna-dla-wszystkich",
+      "name": "Turystyka górska/wspinaczka dostępna dla wszystkich",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/turystykagorska.png",
+          "local_path": "data/raw/assets/covers/turystyka-gorskawspinaczka-dostepna-dla-wszystkich.png",
+          "bytes": 183255
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/turystykagorska.zip",
+          "local_path": null,
+          "bytes": 347461,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "zdobadz-swoje-szczyty",
+      "name": "Zdobądź swoje szczyty",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/zdobadzswojeszczyty.png",
+          "local_path": "data/raw/assets/covers/zdobadz-swoje-szczyty.png",
+          "bytes": 194694
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/zdobadzswojeszczyty.zip",
+          "local_path": null,
+          "bytes": 693475887,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "spotkania-kulturlove",
+      "name": "Spotkania KulturLove",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/spotkaniakulturlove.png",
+          "local_path": "data/raw/assets/covers/spotkania-kulturlove.png",
+          "bytes": 196203
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/spotkaniakulturlove.zip",
+          "local_path": null,
+          "bytes": 4212608,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "zmysly-w-ruchu-model-choreografii-dla-osob-niewidomych",
+      "name": "Zmysły w ruchu. Model choreografii dla osób niewidomych.",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/zmyslywruchu.png",
+          "local_path": "data/raw/assets/covers/zmysly-w-ruchu-model-choreografii-dla-osob-niewidomych.png",
+          "bytes": 181692
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/zmyslywruchu.zip",
+          "local_path": null,
+          "bytes": 1022795929,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "kaski-binauralne",
+      "name": "Kaski binauralne",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/kaskibinauralne.png",
+          "local_path": "data/raw/assets/covers/kaski-binauralne.png",
+          "bytes": 194218
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/kaskibinauralne.zip",
+          "local_path": null,
+          "bytes": 5557362110,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "wielodziedzinowy-slownik-terminow-specjalistycznych-pl-pjm",
+      "name": "Wielodziedzinowy słownik terminów specjalistycznych PL-PJM",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/wielodziedzinowyslownik.png",
+          "local_path": "data/raw/assets/covers/wielodziedzinowy-slownik-terminow-specjalistycznych-pl-pjm.png",
+          "bytes": 181859
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/wielodziedzinowyslownik.zip",
+          "local_path": null,
+          "bytes": 2258621326,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "paszport-pacjenta-z-choroba-rzadka",
+      "name": "Paszport pacjenta z chorobą rzadką",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Paszport_pacjenta_z_choroba_rzadka.pdf",
+          "local_path": "data/raw/assets/pdf/paszport-pacjenta-z-choroba-rzadka.pdf",
+          "bytes": 727290
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/paszportpacjenta.png",
+          "local_path": "data/raw/assets/covers/paszport-pacjenta-z-choroba-rzadka.png",
+          "bytes": 195792
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/paszportpacjenta.zip",
+          "local_path": null,
+          "bytes": 5820373,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=7QedTbxzsPk",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "himalaje-autyzmu",
+      "name": "Himalaje autyzmu",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Himalaje_Autyzmu.pdf",
+          "local_path": "data/raw/assets/pdf/himalaje-autyzmu.pdf",
+          "bytes": 867151
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/himalajeautyzmu.png",
+          "local_path": "data/raw/assets/covers/himalaje-autyzmu.png",
+          "bytes": 175889
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/himalajeautyzmu.zip",
+          "local_path": null,
+          "bytes": 3031727,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=q31uQ435YAo",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "gra-o-zdrowie",
+      "name": "Gra o zdrowie",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Gra_o_zdrowie.pdf",
+          "local_path": "data/raw/assets/pdf/gra-o-zdrowie.pdf",
+          "bytes": 1046783
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/graozdrowie.png",
+          "local_path": "data/raw/assets/covers/gra-o-zdrowie.png",
+          "bytes": 177652
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/graozdrowie.zip",
+          "local_path": null,
+          "bytes": 57436720,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        },
+        "video": {
+          "url": "https://www.youtube.com/watch?v=YRzg98fveHc",
+          "local_path": null,
+          "note": "YouTube - tylko link, bez pobierania"
+        }
+      }
+    },
+    {
+      "slug": "telerehabilitacja-oddechowa",
+      "name": "Telerehabilitacja oddechowa",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/telerehabilitacjaoddechowa.png",
+          "local_path": "data/raw/assets/covers/telerehabilitacja-oddechowa.png",
+          "bytes": 175098
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/telerehabilitacja.zip",
+          "local_path": null,
+          "bytes": 648454354,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "inteligentny-organizer-do-lekow",
+      "name": "Inteligentny organizer do leków",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/inteligentnyorganizer.png",
+          "local_path": "data/raw/assets/covers/inteligentny-organizer-do-lekow.png",
+          "bytes": 194679
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/inteligentnyorganizer.zip",
+          "local_path": null,
+          "bytes": 0,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "drogowskazy-ajkum",
+      "name": "Drogowskazy AJKUM",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/drogowskazyajkum.png",
+          "local_path": "data/raw/assets/covers/drogowskazy-ajkum.png",
+          "bytes": 176548
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/drogowskazyajkum.zip",
+          "local_path": null,
+          "bytes": 356360011,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "cold-box",
+      "name": "Cold Box",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/coldbox.png",
+          "local_path": "data/raw/assets/covers/cold-box.png",
+          "bytes": 177459
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/coldbox.zip",
+          "local_path": null,
+          "bytes": 114,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "pacjent-pro",
+      "name": "Pacjent Pro",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/pacjentpro.png",
+          "local_path": "data/raw/assets/covers/pacjent-pro.png",
+          "bytes": 177639
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/pacjentpro.zip",
+          "local_path": null,
+          "bytes": 49615126,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "oncotriada",
+      "name": "Oncotriada",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/oncotriada.png",
+          "local_path": "data/raw/assets/covers/oncotriada.png",
+          "bytes": 177205
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/oncotriada.zip",
+          "local_path": null,
+          "bytes": 43957901,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "agencja-pracy-incydentalnej",
+      "name": "Agencja pracy incydentalnej",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/agencjapracy.png",
+          "local_path": "data/raw/assets/covers/agencja-pracy-incydentalnej.png",
+          "bytes": 177014
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/agencjapracy.zip",
+          "local_path": null,
+          "bytes": 8936071,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "niewypaleni",
+      "name": "NIEwypaleni",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/niewypaleni.png",
+          "local_path": "data/raw/assets/covers/niewypaleni.png",
+          "bytes": 169763
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/niewypaleni.zip",
+          "local_path": null,
+          "bytes": 32171003,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "konsultant-etr",
+      "name": "Konsultant ETR",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/konsultantetr.png",
+          "local_path": "data/raw/assets/covers/konsultant-etr.png",
+          "bytes": 166407
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/konsultantetr.zip",
+          "local_path": null,
+          "bytes": 674892,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "mobilna-gielda-pracy",
+      "name": "Mobilna giełda pracy",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/mobilnagieldapracy.png",
+          "local_path": "data/raw/assets/covers/mobilna-gielda-pracy.png",
+          "bytes": 177605
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/mobilnagielda.zip",
+          "local_path": null,
+          "bytes": 2197792,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "oddawacze",
+      "name": "Oddawacze",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/oddawacze.png",
+          "local_path": "data/raw/assets/covers/oddawacze.png",
+          "bytes": 167036
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/oddawacze.zip",
+          "local_path": null,
+          "bytes": 69054164,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "bajkala",
+      "name": "Bajkala",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/bajkala.png",
+          "local_path": "data/raw/assets/covers/bajkala.png",
+          "bytes": 166455
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/bajkala.zip",
+          "local_path": null,
+          "bytes": 33737975,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "dialog-ponad-kulturami",
+      "name": "Dialog ponad kulturami",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/dialogponadkulturami.png",
+          "local_path": "data/raw/assets/covers/dialog-ponad-kulturami.png",
+          "bytes": 175511
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/dialogponadkulturami.zip",
+          "local_path": null,
+          "bytes": 27894004022,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "wortal-informacyjny",
+      "name": "Wortal informacyjny",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/wortalinformacyjny.png",
+          "local_path": "data/raw/assets/covers/wortal-informacyjny.png",
+          "bytes": 176565
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/wortalinformacyjny.zip",
+          "local_path": null,
+          "bytes": 58616830,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "dialog-ponad-kulturami-1",
+      "name": "Dialog ponad kulturami",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/dialog.png",
+          "local_path": "data/raw/assets/covers/dialog-ponad-kulturami-1.png",
+          "bytes": 166204
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/dialog.zip",
+          "local_path": null,
+          "bytes": 4558485,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "health-guide-pl",
+      "name": "Health Guide PL",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/healthguide.png",
+          "local_path": "data/raw/assets/covers/health-guide-pl.png",
+          "bytes": 176958
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/healthguide.zip",
+          "local_path": null,
+          "bytes": 152183073,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "zrozum-moja-kulture-zrozum-mnie",
+      "name": "Zrozum moją kulturę, zrozum mnie",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/zrozummojakulture.png",
+          "local_path": "data/raw/assets/covers/zrozum-moja-kulture-zrozum-mnie.png",
+          "bytes": 193802
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/zrozummojakulture.zip",
+          "local_path": null,
+          "bytes": 10604268,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "szlakiem-ludzi-bezdomnych",
+      "name": "Szlakiem ludzi bezdomnych",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/szlakiemludzibezdomnych.png",
+          "local_path": "data/raw/assets/covers/szlakiem-ludzi-bezdomnych.png",
+          "bytes": 194949
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/szlakiemludzibezdomnych.zip",
+          "local_path": null,
+          "bytes": 5134453,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "wiejski-program-pomocy-osobom-w-kryzysie-bezdomnosci-sciezka-feniksa",
+      "name": "Wiejski program pomocy osobom w kryzysie bezdomności - Ścieżka Feniksa",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/sciezkafeniksa.png",
+          "local_path": "data/raw/assets/covers/wiejski-program-pomocy-osobom-w-kryzysie-bezdomnosci-sciezka-feniksa.png",
+          "bytes": 180672
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/sciezkafeniksa.zip",
+          "local_path": null,
+          "bytes": 0,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "urzedowy-ambaras",
+      "name": "Urzędowy ambaras",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/urzedowyambaras.png",
+          "local_path": "data/raw/assets/covers/urzedowy-ambaras.png",
+          "bytes": 7603
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/pelnawokanda.zip",
+          "local_path": null,
+          "bytes": 29943163,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "stop-otylosci-innowacyjna-metoda-pracy-z-osobami-niepelnosprawnymi-intelektualnie",
+      "name": "Stop otyłości  - innowacyjna metoda pracy z osobami niepełnosprawnymi intelektualnie",
+      "assets": {
+        "pdf": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/Zasady_wykorzystania_innowacji_MIIS.pdf",
+          "local_path": "data/raw/assets/pdf/stop-otylosci-innowacyjna-metoda-pracy-z-osobami-niepelnosprawnymi-intelektualnie.pdf",
+          "bytes": 105198
+        },
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/stopotylosci.png",
+          "local_path": "data/raw/assets/covers/stop-otylosci-innowacyjna-metoda-pracy-z-osobami-niepelnosprawnymi-intelektualnie.png",
+          "bytes": 3379
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/stopotylosci.zip",
+          "local_path": null,
+          "bytes": 1418371,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "pelna-wokanda",
+      "name": "Pełna wokanda",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/pelnawokanda.png",
+          "local_path": "data/raw/assets/covers/pelna-wokanda.png",
+          "bytes": 194748
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/pelnawokanda.zip",
+          "local_path": null,
+          "bytes": 29943163,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "pelnia-zdrowia",
+      "name": "Pełnia zdrowia",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/pelniazdrowia.png",
+          "local_path": "data/raw/assets/covers/pelnia-zdrowia.png",
+          "bytes": 194110
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/pelniazdrowia.zip",
+          "local_path": null,
+          "bytes": 31141918,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "niepelnosprawnosc-szansa-na-pelnosprawnosc-w-pracy-i-zyciu",
+      "name": "Niepełnosprawność szansą na pełnosprawność w pracy i życiu",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/niepelnosprawnoscszansa.png",
+          "local_path": "data/raw/assets/covers/niepelnosprawnosc-szansa-na-pelnosprawnosc-w-pracy-i-zyciu.png",
+          "bytes": 179800
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/niepelnosprawnoscszansa.zip",
+          "local_path": null,
+          "bytes": 633410,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "dostepna-polska",
+      "name": "Dostępna Polska",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/dostepnapolska.png",
+          "local_path": "data/raw/assets/covers/dostepna-polska.png",
+          "bytes": 194495
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/dostepnapolska.zip",
+          "local_path": null,
+          "bytes": 92499072,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "zalatw-to-sam",
+      "name": "Załatw to sam",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/zalatwtosam.png",
+          "local_path": "data/raw/assets/covers/zalatw-to-sam.png",
+          "bytes": 194694
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/zalatwtosam.zip",
+          "local_path": null,
+          "bytes": 45583831,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "go-ahead-mow-smialo",
+      "name": "Go ahead - mów śmiało!",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/goahead.png",
+          "local_path": "data/raw/assets/covers/go-ahead-mow-smialo.png",
+          "bytes": 193467
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/goahead.zip",
+          "local_path": null,
+          "bytes": 232042066,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "autyzm-i-ja",
+      "name": "AuTyzm i ja",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/autyzmija.png",
+          "local_path": "data/raw/assets/covers/autyzm-i-ja.png",
+          "bytes": 195133
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/autyzmija.zip",
+          "local_path": null,
+          "bytes": 152467990,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "podroz-poza-domem-w-wirtualnej-rzeczywistosci",
+      "name": "Podróż poza domem w wirtualnej rzeczywistości",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/podrozpozadomem.png",
+          "local_path": "data/raw/assets/covers/podroz-poza-domem-w-wirtualnej-rzeczywistosci.png",
+          "bytes": 179898
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/podrozpozadomem.zip",
+          "local_path": null,
+          "bytes": 2721801332,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "ta-sciezka-terapeutyczna-sciezka-kulturowa-dla-dzieci-i-doroslych-z-autyzmem",
+      "name": "TA ścieżka. Terapeutyczna ścieżka kulturowa dla dzieci i dorosłych z autyzmem.",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/tasciezka.png",
+          "local_path": "data/raw/assets/covers/ta-sciezka-terapeutyczna-sciezka-kulturowa-dla-dzieci-i-doroslych-z-autyzmem.png",
+          "bytes": 164196
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/tasciezka.zip",
+          "local_path": null,
+          "bytes": 2861310,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "osa-i-eco-puzzle",
+      "name": "OSA i eco puzzle",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/osaiecopuzzle.png",
+          "local_path": "data/raw/assets/covers/osa-i-eco-puzzle.png",
+          "bytes": 193451
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/osaiecopuzzle.zip",
+          "local_path": null,
+          "bytes": 2848816,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "rodzinny-system-wzajemnej-pomocy",
+      "name": "Rodzinny system wzajemnej pomocy",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/rodzinnysystemwzajemnejpomocy.png",
+          "local_path": "data/raw/assets/covers/rodzinny-system-wzajemnej-pomocy.png",
+          "bytes": 176944
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/graozdrowie.zip",
+          "local_path": null,
+          "bytes": 57436720,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    },
+    {
+      "slug": "mix-ar-i-vr-dla-koordynacji-ruchowej",
+      "name": "Mix AR i VR dla koordynacji ruchowej",
+      "assets": {
+        "cover": {
+          "url": "https://rops.krakow.pl/mpliki/IS/BIBLIOTEKA_INNOWACJI_SPOECZNYCH/mixarvr.png",
+          "local_path": "data/raw/assets/covers/mix-ar-i-vr-dla-koordynacji-ruchowej.png",
+          "bytes": 180727
+        },
+        "materials_zip": {
+          "url": "https://rops.krakow.pl/pliki/IS/bibloteka/mixarvr.zip",
+          "local_path": null,
+          "bytes": 1713971055,
+          "downloaded": false,
+          "note": "paczka materialow ROPS (moze zawierac filmy/assety VR)"
+        }
+      }
+    }
+  ]
+}

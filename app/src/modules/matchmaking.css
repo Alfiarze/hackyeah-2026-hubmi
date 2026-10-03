@@ -1,0 +1,216 @@
+.mm__hero { margin-bottom: var(--sp-7); }
+.mm__hero h1 { font-size: var(--fs-4xl); max-width: 16ch; }
+.mm__lede {
+  font-size: var(--fs-lg);
+  color: var(--ink-2);
+  max-width: 48ch;
+  margin-top: var(--sp-4);
+}
+
+@media (max-width: 64rem) {
+  .mm__hero h1 { font-size: var(--fs-3xl); max-width: 20ch; }
+}
+@media (max-width: 48rem) {
+  .mm__hero h1 { font-size: var(--fs-2xl); max-width: none; }
+}
+
+/* --- rozmowa --- */
+/* Hero jest wyśrodkowany, ale formularz nie może być — czytanie etykiet,
+   podpowiedzi i wypowiedzi od środka jest męczące i wygląda na przypadek. */
+.mm__conv {
+  text-align: left;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: var(--sp-6);
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+.mm__turns {
+  list-style: none;
+  margin: 0 0 var(--sp-5);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.mm__turn p { margin: 0; font-size: var(--fs-base); line-height: 1.55; }
+.mm__who {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  margin-bottom: var(--sp-1);
+}
+/* Rola mówiącego jest podpisana słownie; wcięcie tylko to wzmacnia. */
+.mm__turn--bot { padding-left: var(--sp-4); border-left: 2px solid var(--accent); }
+.mm__turn--user {
+  padding-left: var(--sp-4);
+  border-left: 2px solid var(--line);
+  color: var(--ink-2);
+}
+
+.mm__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+}
+
+/* --- wyszukiwarka w pigułce (styl referencji) --- */
+/* Jedno duże, zaokrąglone pole zawieszone na tle — bez ramki formularza.
+   Kontrast tekstu na pigułce policzony jak każdy inny: biel na `--surface`
+   daje 15.9:1, więc AA bez wyjątków. */
+.mm__search { max-width: 42rem; margin-inline: auto; }
+
+.mm__pill {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: var(--sp-1);
+  border: 1px solid var(--line-ui);
+  border-radius: 100px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+.mm__pill:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg), 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.mm__pill input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding-inline: var(--sp-5);
+  border: 0;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-base);
+}
+/* Ramka i tło kontrolki przenoszą się na pigułkę — wewnątrz nie ma już
+   drugiej ramki (byłaby podwójna i szumna). */
+.mm__pill input:focus-visible { outline: none; }
+.mm__pill input::placeholder { color: var(--ink-3); opacity: 1; }
+
+/* Przyciski wewnątrz pigułki: okrągłe, 44×44 (WCAG 2.5.5). */
+.mm__pillbtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-2);
+  font-family: var(--font);
+  font-size: 1.05rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+.mm__pillbtn:hover { background: var(--surface-2); color: var(--ink); }
+.mm__pillbtn[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.mm__pillgo {
+  flex: none;
+  min-height: 46px;
+  padding-inline: var(--sp-5);
+  border: 0;
+  border-radius: 100px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: filter 140ms ease;
+}
+.mm__pillgo:hover { filter: brightness(0.9); }
+.mm__pillgo:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* --- emotki dobrane przez analizę, wjeżdżające spod pigułki --- */
+/* Stała wysokość — bez tego pole i podpowiedzi skakałyby przy każdym
+   naciśnięciu klawisza (irytujące i mylące przy pisaniu). */
+.mm__picks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  min-height: 3.25rem;
+  padding-top: var(--sp-3);
+}
+.mm__pick {
+  display: inline-block;
+  font-size: 1.75rem;
+  line-height: 1;
+  /* Start: 40px niżej i przezroczysty — czyli „leci z dołu", dokładnie
+     jak emotki w referencji. Kolejne dostają opóźnienie inline. */
+  animation: pick-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes pick-rise {
+  from { opacity: 0; transform: translateY(40px) scale(0.7); }
+  to   { opacity: 1; transform: none; }
+}
+
+.mm__hint { text-align: center; }
+
+.mm__listening {
+  margin-top: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.mm__examples {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+}
+.mm__examples .eyebrow { display: block; margin-bottom: var(--sp-3); }
+.mm__example {
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  color: var(--ink-2);
+  border-color: var(--line);
+  text-align: left;
+}
+.mm__example:hover { color: var(--ink); }
+
+/* --- podsumowanie wyników --- */
+.mm__summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  margin: var(--sp-8) 0 var(--sp-5);
+}
+.mm__summary h2 { margin-bottom: var(--sp-2); }
+.mm__summary p { font-size: var(--fs-sm); color: var(--ink-2); max-width: var(--measure); }
+
+/* --- luka --- */
+.mm__gap { margin-bottom: var(--sp-6); }
+.mm__gap h3 { margin-bottom: var(--sp-3); max-width: 44ch; }
+.mm__gap p { color: var(--ink-2); }
+.mm__sent {
+  margin-top: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--ok-wash);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+}
+
+.mm__map { margin-bottom: var(--sp-7); }
+.mm__map h2 { margin-bottom: var(--sp-4); }

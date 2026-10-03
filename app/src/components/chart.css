@@ -1,0 +1,103 @@
+.chart {
+  margin: 0;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--sp-6);
+}
+.chart figcaption { margin-bottom: var(--sp-4); }
+.chart figcaption h3 { font-size: var(--fs-lg); }
+.chart__cap {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: var(--sp-2);
+  max-width: var(--measure);
+  line-height: 1.6;
+}
+
+.chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  list-style: none;
+  margin: 0 0 var(--sp-4);
+  padding: 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.chart__legend li { display: flex; align-items: center; gap: var(--sp-2); }
+.chart__key { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+.chart__key--1 { background: var(--chart-1); }
+/* Klucz drugiej serii powtarza teksturę ze słupków — identyfikacja nie zależy
+   od samego koloru (WCAG 1.4.1). */
+.chart__key--2 {
+  background: repeating-linear-gradient(
+    45deg, var(--chart-2) 0 2px, var(--chart-surface) 2px 4px);
+  outline: 1px solid var(--chart-2);
+  outline-offset: -1px;
+}
+
+/* Szeroki wykres przewija się sam, body nigdy w poziomie. */
+.chart__scroll { overflow-x: auto; }
+.chart__svg { display: block; width: 100%; min-width: 32rem; height: auto; }
+
+/* Tekst wykresu nosi tokeny tekstu, nigdy barwę serii. */
+.chart__label {
+  font-family: var(--font);
+  font-size: 13px;
+  fill: var(--ink-2);
+  dominant-baseline: middle;
+}
+.chart__val {
+  font-family: var(--font);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink);
+  dominant-baseline: middle;
+}
+.chart__tick {
+  font-family: var(--font);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink-3);
+}
+
+.chart__tip {
+  margin: var(--sp-3) 0 0;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+}
+
+.chart__table { margin-top: var(--sp-4); font-size: var(--fs-sm); }
+.chart--empty { color: var(--ink-3); }
+
+/* --- kafle wskaźników --- */
+.tiles {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  margin-bottom: var(--sp-6);
+}
+.tile {
+  display: grid;
+  gap: var(--sp-1);
+  padding: var(--sp-5);
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.tile__v {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.tile__l { font-size: var(--fs-sm); font-weight: 500; color: var(--ink-2); }
+.tile__n { font-size: var(--fs-xs); color: var(--ink-3); }
+/* Ton kafla niesie kolor liczby i podpis, nie tło — tło zostaje neutralne,
+   żeby rząd kafli nie wyglądał jak zestaw alarmów. */
+.tile--alert .tile__v { color: var(--warn); }
+.tile--good .tile__v { color: var(--ok); }

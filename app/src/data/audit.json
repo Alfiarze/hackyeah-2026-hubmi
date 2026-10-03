@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-10-03T15:44:32.761Z",
+  "tool": "axe-core 4.13.0",
+  "standard": "WCAG 2.1 AA",
+  "pages": [
+    {
+      "route": "matchmaking",
+      "label": "I — Matchmaking",
+      "violations": 0,
+      "passes": 29
+    },
+    {
+      "route": "biblioteka",
+      "label": "II — Zasobnik wiedzy",
+      "violations": 0,
+      "passes": 31
+    },
+    {
+      "route": "kreator",
+      "label": "III — Kreator pomysłów",
+      "violations": 0,
+      "passes": 26
+    },
+    {
+      "route": "tester",
+      "label": "IV — Tester innowacji",
+      "violations": 0,
+      "passes": 28
+    },
+    {
+      "route": "komunikacja",
+      "label": "V — Komunikacja",
+      "violations": 0,
+      "passes": 25
+    },
+    {
+      "route": "admin",
+      "label": "VI — Panel administratora",
+      "violations": 2,
+      "passes": 30
+    },
+    {
+      "route": "middleman",
+      "label": "VII — Middleman",
+      "violations": 0,
+      "passes": 26
+    },
+    {
+      "route": "dostepnosc",
+      "label": "Dostępność",
+      "violations": 0,
+      "passes": 27
+    }
+  ],
+  "violations": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "nodes": 2,
+      "route": "admin",
+      "where": "#atab-skrzynka"
+    }
+  ]
+}

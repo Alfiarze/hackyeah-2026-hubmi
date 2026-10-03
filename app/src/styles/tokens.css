@@ -1,0 +1,193 @@
+/**
+ * Tokeny HubMI — ciemny, kinowy, minimalny.
+ *
+ * Każda para tekst/tło jest policzona pod WCAG 2.1 AA (liczby w komentarzach),
+ * nie dobrana na oko. Kolory zmieniaj tutaj, nigdy w komponentach.
+ *
+ * Hierarchię budują odstęp, powierzchnia i waga kroju — nie ramki. Widoczne
+ * obramowanie zostaje wyłącznie tam, gdzie jest jedynym nośnikiem informacji
+ * o kontrolce (pola, przyciski) i wtedy musi mieć 3:1 (WCAG 1.4.11).
+ */
+
+:root {
+  /* --- powierzchnie --- */
+  --bg: #0a0a0b;
+  --surface: #16161a;
+  --surface-2: #1f1f24;
+
+  /* --- tekst --- */
+  --ink: #fafaf9;         /* 18.95 na bg */
+  --ink-2: #a1a1aa;       /*  7.72 */
+  --ink-3: #8a8a93;       /*  5.78 — najlżejszy dopuszczalny */
+
+  /* --- akcent --- */
+  --accent: #e3b341;      /* 10.17 na bg */
+  --accent-ink: #0a0a0b;  /* 10.17 na akcencie */
+  --accent-wash: #241d0c;
+
+  /* --- stany --- */
+  --ok: #4ade80;          /* 11.36 */
+  --ok-wash: #0d2316;
+  --warn: #fbbf24;        /* 11.92 */
+  --warn-wash: #251c08;
+  --err: #f87171;         /*  7.15 */
+  --err-wash: #2a1012;
+
+  /* --- linie --- */
+  --line: #26262c;        /* dekoracyjna */
+  --line-ui: #666670;     /*  3.49 na bg, 3.18 na surface — wymagana przez AA */
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow: 0 2px 8px rgb(0 0 0 / 0.5), 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 24px 60px rgb(0 0 0 / 0.7), 0 4px 12px rgb(0 0 0 / 0.5);
+
+  /**
+   * Przyciemnienie nad wideo. Wartość nie jest estetyczna, tylko policzona:
+   * przy 0.65 biały tekst ma 6.04:1 nawet gdyby kadr był całkowicie biały,
+   * czyli AA jest spełnione niezależnie od tego, co akurat leci w tle.
+   * 0.68 daje zapas. Złoty tekst wymagałby 0.75, dlatego na wideo kładziemy
+   * wyłącznie biel — złoto zostaje na powierzchniach.
+   */
+  --scrim: 0.68;
+
+  /* --- wykresy --- */
+  --chart-1: #e3b341;
+  --chart-2: #7f88e6;
+  --chart-grid: var(--line);
+  --chart-surface: var(--surface);
+
+  /* --- typografia --- */
+  /* Sora na nagłówki (geometryczna, techniczna, ma subset latin-ext, czyli
+     polskie diakrytyki), Manrope na treść — miękka humanistyka, która nie
+     męczy w długim czytaniu w interfejsie. */
+  --font-display: "Sora Variable", "Sora", system-ui, sans-serif;
+  --font: "Manrope Variable", "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Baza 18px, nie 16px — grupa docelowa to m.in. seniorzy. */
+  --fs-scale: 1;
+  --fs-xs: calc(13px * var(--fs-scale));
+  --fs-sm: calc(15px * var(--fs-scale));
+  --fs-base: calc(18px * var(--fs-scale));
+  --fs-lg: calc(20px * var(--fs-scale));
+  --fs-xl: calc(24px * var(--fs-scale));
+  --fs-2xl: calc(32px * var(--fs-scale));
+  --fs-3xl: calc(44px * var(--fs-scale));
+  --fs-4xl: calc(72px * var(--fs-scale));
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+  --sp-9: 7rem;
+  --measure: 66ch;
+  --radius: 16px;
+  --radius-sm: 10px;
+
+  --focus-ring: var(--accent);
+  color-scheme: dark;
+}
+
+/**
+ * Tryb jasny — wybierany ręcznie.
+ * Nie jest „odwróceniem" ciemnego: to osobno dobrane kroki, każdy policzony.
+ */
+:root[data-theme="light"] {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --ink: #18181b;         /* 16.97 */
+  --ink-2: #52525b;       /*  7.41 */
+  --ink-3: #6b6b76;       /*  5.04 */
+  --accent: #8a6100;      /*  5.31 — złoto musi pociemnieć, żeby czytać się na bieli */
+  --accent-ink: #ffffff;
+  --accent-wash: #fdf6e3;
+  --ok: #15803d;          /*  4.81 */
+  --ok-wash: #f0fdf4;
+  --warn: #b45309;        /*  4.81 */
+  --warn-wash: #fffbeb;
+  --err: #b91c1c;         /*  6.20 */
+  --err-wash: #fef2f2;
+  --line: #e4e4e7;
+  --line-ui: #8e8e95;     /*  3.12 */
+  --shadow-sm: 0 1px 2px rgb(24 24 27 / 0.05);
+  --shadow: 0 1px 3px rgb(24 24 27 / 0.08), 0 1px 2px rgb(24 24 27 / 0.04);
+  --shadow-lg: 0 20px 50px rgb(24 24 27 / 0.12), 0 4px 10px rgb(24 24 27 / 0.06);
+  --chart-1: #8a6100;
+  --chart-2: #4f46e5;
+  /* Na jasnym tle kadr wideo musi być przyciemniony jeszcze mocniej, bo tekst
+     nad nim i tak zostaje biały. */
+  --scrim: 0.72;
+  color-scheme: light;
+}
+
+/**
+ * Wysoki kontrast — osobny od motywu.
+ * Tutaj ramki wracają na wszystkim, a wideo w ogóle się nie odtwarza:
+ * dla tej grupy użytkowników ruch w tle jest przeszkodą, nie ozdobą.
+ */
+:root[data-contrast="high"] {
+  --bg: #000000;
+  --surface: #000000;
+  --surface-2: #141414;
+  --ink: #ffffff;         /* 21.00 */
+  --ink-2: #ededed;
+  --ink-3: #ededed;
+  --accent: #ffd454;
+  --accent-ink: #000000;
+  --accent-wash: #1a1405;
+  --ok: #7cff9e;
+  --ok-wash: #04210d;
+  --warn: #ffd454;
+  --warn-wash: #211a04;
+  --err: #ff9b8f;
+  --err-wash: #210a07;
+  --line: #ffffff;
+  --line-ui: #ffffff;
+  --shadow-sm: none;
+  --shadow: none;
+  --shadow-lg: none;
+  --chart-1: #ffd454;
+  --chart-2: #a8c0ff;
+  --chart-grid: #ffffff;
+  --scrim: 1;
+  color-scheme: dark;
+}
+
+:root[data-contrast="high"][data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f0f0f0;
+  --ink: #000000;
+  --ink-2: #1a1a1a;
+  --ink-3: #1a1a1a;
+  --accent: #5c3f00;
+  --accent-ink: #ffffff;
+  --accent-wash: #fff8e5;
+  --ok: #1d3c00;
+  --ok-wash: #e8f2e0;
+  --warn: #6b3000;
+  --warn-wash: #fff4e5;
+  --err: #8c1200;
+  --err-wash: #ffe8e2;
+  --line: #000000;
+  --line-ui: #000000;
+  --chart-1: #5c3f00;
+  --chart-2: #00007a;
+  --chart-grid: #000000;
+  color-scheme: light;
+}
+
+/* W wysokim kontraście granica wraca wszędzie i jest grubsza. */
+:root[data-contrast="high"] .card,
+:root[data-contrast="high"] .fiszka,
+:root[data-contrast="high"] .chip,
+:root[data-contrast="high"] .btn,
+:root[data-contrast="high"] input,
+:root[data-contrast="high"] textarea,
+:root[data-contrast="high"] select {
+  border: 2px solid var(--line-ui) !important;
+}

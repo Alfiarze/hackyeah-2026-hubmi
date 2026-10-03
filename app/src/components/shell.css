@@ -1,0 +1,205 @@
+/* Rama aplikacji: pasek dostępności, nagłówek, stopka. */
+
+/* --- pasek dostępności --- */
+/* Siedzi nad logo, więc musi być maksymalnie cichy: bez tła, jedna linia
+   oddzielająca, przyciski w wariancie ghost. */
+.a11ybar {
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-xs);
+}
+.a11ybar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  padding-block: var(--sp-2);
+}
+.a11ybar__label {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  margin: 0;
+}
+.a11ybar .btn {
+  min-height: 36px;
+  padding-inline: var(--sp-3);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink-2);
+}
+.a11ybar .btn:hover { background: var(--surface-2); color: var(--ink); }
+.a11ybar .btn[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.a11ybar__group {
+  gap: 2px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+}
+.a11ybar__role {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.a11ybar__role select {
+  width: auto;
+  min-width: 15rem;
+  min-height: 36px;
+  padding-block: var(--sp-1);
+  font-size: var(--fs-xs);
+  border-color: var(--line);
+  background: var(--surface-2);
+}
+
+/* --- nagłówek --- */
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+.hdr__inner {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  padding-block: var(--sp-3);
+}
+
+.hdr__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--ink);
+  text-decoration: none;
+  min-height: 44px;
+}
+.hdr__mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--chart-2));
+  flex: none;
+}
+.hdr__brand strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.hdr__sub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+.hdr__nav {
+  margin-left: auto;
+  /* Element flex ma domyślnie min-width:auto, więc rozpycha się do szerokości
+     swojej zawartości — a wtedy overflow-x na liście nic nie daje i cała
+     strona przewija się w poziomie (łamie WCAG 1.4.10). */
+  min-width: 0;
+}
+.hdr__nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hdr__nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 40px;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-sm);
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+.hdr__nav a:hover { background: var(--surface-2); color: var(--ink); }
+/* Aktywna pozycja: wypełnienie + waga, nie tylko inny kolor tekstu
+   (WCAG 1.4.1 — kolor nie może być jedynym nośnikiem). */
+.hdr__nav a[aria-current="page"] {
+  background: var(--surface-2);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.hdr__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 100px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.hdr__short { display: none; }
+
+@media (max-width: 70rem) {
+  .hdr__full { display: none; }
+  .hdr__short { display: inline; }
+  .hdr__sub { display: none; }
+}
+@media (max-width: 48rem) {
+  .hdr__nav { margin-left: 0; width: 100%; max-width: 100%; }
+  .hdr__nav ul {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--sp-1);
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .hdr__nav ul::-webkit-scrollbar { display: none; }
+  .hdr__nav li { flex: none; }
+  .hdr__nav a { white-space: nowrap; }
+  .a11ybar__role { margin-left: 0; width: 100%; }
+  .a11ybar__role select { min-width: 0; flex: 1; }
+}
+
+main { min-height: 60vh; }
+
+/* --- stopka --- */
+.ftr {
+  margin-top: var(--sp-8);
+  padding-block: var(--sp-6);
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: var(--fs-sm);
+}
+
+/* --- wspólne nagłówki sekcji modułów --- */
+.page { padding-block: var(--sp-7); }
+/* Widok z hero sam zarządza swoim górnym odstępem — hero sięga krawędzi. */
+.page--hero { padding-bottom: var(--sp-7); }
+.page__head { margin-bottom: var(--sp-6); max-width: 62ch; }
+.page__head h1 { margin-bottom: var(--sp-3); }
+.page__head p { font-size: var(--fs-lg); color: var(--ink-2); }
+/* Podpis modułu: cicha nadlinia, nie czerwone wersaliki. */
+.page__mod {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-3);
+  margin-bottom: var(--sp-2);
+}

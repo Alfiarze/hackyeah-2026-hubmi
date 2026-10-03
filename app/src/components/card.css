@@ -1,0 +1,89 @@
+/* Fiszka innowacji. Powierzchnia i cień zamiast obramowania. */
+
+.fiszka {
+  /* Celowo BEZ content-visibility: auto.
+     Było tu, żeby odciążyć render 115 fiszek naraz, ale treść poza ekranem
+     nie jest wtedy malowana — karty wychodziły puste na zrzutach ekranu
+     i na wydruku, a wyszukiwanie w stronie potrafi ich nie znaleźć.
+     Przy 115 kartach zysk nie równoważy tych strat; gdyby lista urosła
+     do tysięcy pozycji, właściwą odpowiedzią jest wirtualizacja, nie to. */
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  container-type: inline-size;
+  /* Element grida ma domyślnie min-width:auto, więc jedno długie nieprzełamywalne
+     słowo w opisie innowacji rozpycha kolumnę i całą stronę (WCAG 1.4.10). */
+  min-width: 0;
+}
+
+.fiszka__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+.fiszka__id { min-width: 0; }
+.fiszka__id h3 { margin-top: var(--sp-1); text-wrap: pretty; }
+
+.fiszka__badge {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  margin: 0;
+  max-width: none;
+}
+
+.fiszka__fields {
+  display: grid;
+  gap: var(--sp-4);
+  margin: 0;
+}
+.fiszka__fields > div { min-width: 0; }
+.fiszka__fields dt {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--ink-3);
+  margin-bottom: var(--sp-1);
+}
+.fiszka__fields dd {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: var(--measure);
+  /* Nazwy własne i adresy w opisach ROPS bywają długie i bez spacji. */
+  overflow-wrap: anywhere;
+}
+
+/* Przy szerokiej fiszce pola idą w dwie kolumny — na wąskiej zostaje jedna. */
+@container (min-width: 44rem) {
+  .fiszka__fields { grid-template-columns: 1fr 1fr; column-gap: var(--sp-6); }
+}
+
+.fiszka__where {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin: 0;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+}
+
+.fiszka__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+/* Siatka wyników */
+.results {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+@media (min-width: 64rem) {
+  .results--two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}

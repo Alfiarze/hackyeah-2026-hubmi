@@ -1,0 +1,45 @@
+/* Znacznik „przetestowane".
+   Wcześniej była to pieczątka z rozjechanym dwukolorowym nadrukiem — jedyny
+   efekt w projekcie. W kierunku minimalnym był najgłośniejszym elementem na
+   ekranie, więc został sprowadzony do cichego paska z jednym znakiem.
+   Informacja zostaje ta sama, hałas znika. */
+
+.stamp {
+  display: block;
+  padding: var(--sp-3) var(--sp-4);
+  margin: 0;
+  background: var(--ok-wash);
+  border-radius: var(--radius-sm);
+  max-width: none;
+}
+
+.stamp__label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ok);
+  margin-bottom: var(--sp-1);
+}
+/* Znak jest dekoracją wzmacniającą słowo „Przetestowane", nie jego zamiennikiem
+   — treść pozostaje czytelna dla czytnika ekranu bez niego. */
+.stamp__label::before {
+  content: "✓";
+  font-size: 1.05em;
+  line-height: 1;
+}
+
+.stamp__text {
+  display: block;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* Brak dowodu to osobny, jeszcze cichszy stan. Nie alarm — po prostu brak. */
+.stamp--none {
+  background: var(--surface-2);
+}
+.stamp--none .stamp__label { color: var(--ink-3); }
+.stamp--none .stamp__label::before { content: "—"; }

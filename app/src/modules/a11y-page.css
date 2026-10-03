@@ -1,0 +1,34 @@
+.ap__try, .ap__audit, .ap__criteria { margin-bottom: var(--sp-7); }
+.ap__try h2, .ap__audit h2, .ap__criteria h2 {
+  margin-bottom: var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: 2px solid var(--ink);
+}
+.ap__try .row { margin-block: var(--sp-4); }
+.ap__audit h3 { font-size: var(--fs-lg); margin-bottom: var(--sp-3); }
+
+.ap__ok { color: var(--ok); font-weight: 700; }
+.ap__bad { color: var(--warn); font-weight: 700; }
+.ap__sc { color: var(--accent); white-space: nowrap; }
+
+.ap__viol {
+  margin-top: var(--sp-5);
+  padding: var(--sp-4);
+  border-left: 3px solid var(--warn);
+  background: var(--warn-wash);
+}
+.ap__viol ul { margin: 0; padding-left: var(--sp-5); display: grid; gap: var(--sp-3); }
+.ap__viol li { font-size: var(--fs-sm); line-height: 1.6; }
+
+.ap__caveat {
+  margin-top: var(--sp-5);
+  padding: var(--sp-4);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-wash);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  max-width: var(--measure);
+}
+
+.ap__criteria td, .ap__criteria th { font-size: var(--fs-sm); }
+.ap__criteria td:last-child { max-width: 44ch; }

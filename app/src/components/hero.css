@@ -1,0 +1,201 @@
+/* Hero. Płaskie ciemne tło, ogromna typografia, jedno słowo z poświatą.
+   Referencja: motionsites.ai — tam hero NIE ma wideo w tle, tło jest płaskie,
+   a ruch siedzi dopiero w kartach niżej. Dzięki temu tekst stoi na stałym
+   kolorze i kontrast nie zależy od tego, co akurat leci w materiale. */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  text-align: center;
+  padding-block: var(--sp-9) var(--sp-7);
+  /* Dół z zapasem na stertę emotek, żeby nie leżała na podpowiedziach. */
+  padding-bottom: calc(var(--sp-7) + 5.5rem);
+  overflow: hidden;
+  transition: padding 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Sygnatura: po wejściu wyników hero kurczy się i oddaje pierwszeństwo
+   narzędziu. Jedyny zaaranżowany moment w aplikacji. */
+.hero--receded {
+  padding-block: var(--sp-6) var(--sp-5);
+  padding-bottom: calc(var(--sp-5) + 5.5rem);
+}
+
+/* Poświata za nagłówkiem. Czysto dekoracyjna, pod tekstem, bardzo szeroka —
+   to ona daje wrażenie głębi bez żadnego materiału wideo. */
+.hero__glow {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  width: min(1100px, 120%);
+  aspect-ratio: 2 / 1;
+  translate: -50% 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 42% at 50% 46%,
+      color-mix(in srgb, var(--accent) 55%, transparent) 0%,
+      transparent 68%),
+    radial-gradient(55% 50% at 28% 62%,
+      color-mix(in srgb, var(--chart-2) 34%, transparent) 0%,
+      transparent 70%);
+  filter: blur(90px);
+  opacity: 1;
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero--receded .hero__glow { opacity: 0.35; }
+
+/* Opcjonalne wideo: nie za tekstem, tylko jako cichy dalszy plan.
+   Domyślnie nieużywane — zob. lib/media.ts. */
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.3;
+}
+.hero__video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    color-mix(in srgb, var(--bg) calc(var(--scrim) * 100%), transparent) 0%,
+    var(--bg) 100%);
+}
+
+.hero__content { position: relative; }
+
+/* --- sterta emotek na dole hero --- */
+/* Źródło, z którego pod pigułką wjeżdżają dobrane emotki. Czysto
+   dekoracyjna (aria-hidden), więc jedyna jej rola jest wizualna: ma być
+   cicho i lekko „żyć", nie konkurować z nagłówkiem. */
+.hero__pile {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(0.5rem, 1.6vw, 1.25rem);
+  padding: 0 var(--sp-5) var(--sp-3);
+  /* Gaśnie ku dołowi i ku górze — emotki wyglądają, jakby leżały na dnie
+     ekranu, a nie jak kolejny rzędzik elementów. */
+  -webkit-mask-image: linear-gradient(to top, #000 40%, transparent);
+  mask-image: linear-gradient(to top, #000 40%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+.hero__pile-emoji {
+  display: inline-block;
+  line-height: 1;
+  opacity: 0.4;
+  /* Wolne, subtelne kołysanie — jedna wspólna animacja, opóźnienie z inline,
+     więc fala idzie przez stertę. Przy reduced-motion globalnie wyłączona. */
+  animation: pile-bob 5.5s ease-in-out infinite alternate;
+}
+@keyframes pile-bob {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-7px); }
+}
+/* Wysoki kontrast: dekoracja znika, zostaje płaskie tło. */
+:root[data-contrast="high"] .hero__pile { display: none; }
+
+/* --- pigułka nad nagłówkiem --- */
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 0 auto var(--sp-5);
+  padding: var(--sp-1) var(--sp-4);
+  border: 1px solid var(--line-ui);
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--ink-2);
+  max-width: none;
+}
+
+/* --- nagłówek: to on robi całą robotę --- */
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7.5vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-wrap: balance;
+  max-width: 18ch;
+  margin-inline: auto;
+  margin-bottom: var(--sp-5);
+}
+.hero--receded h1 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  max-width: 28ch;
+  margin-bottom: var(--sp-3);
+}
+
+/* Jedno słowo z gradientem — nośnik tezy, nie ozdoba.
+   Tekst pod spodem zostaje w DOM, więc czytnik ekranu czyta go normalnie,
+   a przy braku obsługi background-clip zadziała zwykły kolor. */
+.hero__accent {
+  color: var(--accent);
+  background: linear-gradient(100deg,
+    var(--accent) 0%,
+    color-mix(in srgb, var(--accent) 55%, var(--ink)) 55%,
+    var(--ink) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* W wysokim kontraście gradient znika — litera musi być jednolita. */
+:root[data-contrast="high"] .hero__accent {
+  background: none;
+  -webkit-text-fill-color: var(--accent);
+  color: var(--accent);
+}
+
+.hero__lede {
+  font-size: var(--fs-lg);
+  color: var(--ink-2);
+  max-width: 52ch;
+  margin-inline: auto;
+  margin-bottom: var(--sp-6);
+}
+.hero--receded .hero__lede { display: none; }
+
+/* --- przycisk pauzy, gdy materiał jednak gra (WCAG 2.2.2) --- */
+.hero__pause {
+  position: absolute;
+  right: var(--sp-5);
+  bottom: var(--sp-5);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: var(--sp-2) var(--sp-4);
+  border: 1px solid var(--line-ui);
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(8px);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.hero__pause:hover { background: var(--surface); border-color: var(--ink-3); }
+
+@media (max-width: 40rem) {
+  .hero { padding-block: var(--sp-7) var(--sp-6); }
+  .hero__pause-label { display: none; }
+  .hero__lede { font-size: var(--fs-base); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero, .hero__glow { transition: none; }
+}

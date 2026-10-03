@@ -1,0 +1,351 @@
+/* Baza i komponenty. Bez frameworka CSS — wszystko z tokenów w tokens.css. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis-weight: none;
+}
+
+/* --- typografia: jeden krój, hierarchia z wagi i rozmiaru --- */
+h1,
+h2,
+h3,
+h4 {
+  /* Nagłówek wskazany z kotwicy nie może chować się pod przyklejonym paskiem. */
+  scroll-margin-top: 6rem;
+  font-family: var(--font-display);
+  margin: 0;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+h2 {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+h3 {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.3;
+}
+h4 {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  letter-spacing: -0.008em;
+  line-height: 1.35;
+}
+
+p { margin: 0 0 var(--sp-4); max-width: var(--measure); }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+strong { font-weight: 600; }
+
+/* --- focus: zawsze widoczny (WCAG 2.4.7) --- */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+/* Nie zdejmujemy obrysu bez zamiennika — tylko chowamy go dla myszy. */
+:focus:not(:focus-visible) { outline: none; }
+
+.skip-link {
+  position: absolute;
+  left: var(--sp-4);
+  top: calc(-1 * var(--sp-8));
+  z-index: 100;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 140ms ease;
+}
+.skip-link:focus { top: var(--sp-4); }
+
+/* --- utility --- */
+
+/* Nadlinia: mały, stonowany podpis sekcji. Bez wersalików i bez rozstrzelenia —
+   to był główny powód, dla którego poprzednia wersja czytała się jak zin. */
+.eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--ink-3);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Dawniej osobny krój monospace. Teraz ten sam krój z cyframi o równej
+   szerokości — liczby w kolumnach nie skaczą, a strona nie ma drugiego
+   alfabetu do czytania. */
+.mono {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.005em;
+}
+
+.muted { color: var(--ink-2); }
+
+.sr-only {
+  position: absolute;
+  /* Przypięcie do rogu bloku zawierającego jest konieczne, nie kosmetyczne:
+     bez left/top element siedzi w pozycji statycznej i wewnątrz poziomo
+     przewijanego paska potrafi rozciągnąć całą stronę (łamie WCAG 1.4.10). */
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.stack > * + * { margin-top: var(--sp-4); }
+.row {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: var(--sp-5);
+}
+
+/* --- kontrolki: min. 44×44px (WCAG 2.5.5) --- */
+.btn {
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: var(--sp-2) var(--sp-4);
+  /* Obramowanie zostaje tylko na kontrolkach, bo jest jedynym nośnikiem
+     informacji, że to przycisk — i dlatego musi mieć 3:1 (WCAG 1.4.11). */
+  border: 1px solid var(--line-ui);
+  /* Pigułka — podstawowy kształt kontrolki w tej referencji. */
+  border-radius: 100px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 140ms ease, border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+.btn:hover {
+  background: var(--surface-2);
+  border-color: var(--ink-3);
+}
+.btn[aria-pressed="true"],
+.btn[aria-selected="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+/* Główna akcja jest jasną pigułką na ciemnym tle — najmocniejszy możliwy
+   kontrast w tej palecie i dokładnie ten ruch, co w referencji. */
+.btn--primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+  font-weight: 600;
+  padding-inline: var(--sp-5);
+}
+.btn--primary:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  filter: brightness(0.92);
+}
+/* Wariant cichy: bez obramowania, bo sąsiaduje z elementami, które je mają,
+   więc jego rola jest czytelna z kontekstu i z hoveru. */
+.btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ink-2);
+}
+.btn--ghost:hover { background: var(--surface-2); color: var(--ink); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn--icon { min-width: 44px; padding-inline: var(--sp-3); }
+
+input,
+textarea,
+select {
+  touch-action: manipulation;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--line-ui);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  transition: border-color 140ms ease;
+}
+input:hover,
+textarea:hover,
+select:hover { border-color: var(--ink-3); }
+input:focus,
+textarea:focus { border-color: var(--accent); }
+textarea { resize: vertical; }
+input::placeholder,
+textarea::placeholder { color: var(--ink-3); opacity: 1; }
+
+label {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: var(--sp-2);
+}
+.field + .field { margin-top: var(--sp-4); }
+.hint {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  margin-top: var(--sp-2);
+  line-height: 1.5;
+}
+.error {
+  font-size: var(--fs-sm);
+  color: var(--err);
+  font-weight: 500;
+  margin-top: var(--sp-2);
+}
+
+/* --- powierzchnie: cień i tło zamiast ramki --- */
+.card {
+  background: var(--surface);
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--sp-6);
+}
+.card--flat { box-shadow: none; background: var(--surface-2); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 3px var(--sp-3);
+  border: 0;
+  border-radius: 100px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.chip--match { background: var(--ok-wash); color: var(--ok); }
+.chip--miss { background: var(--surface-2); color: var(--ink-3); }
+
+/* Podświetlenie wspólnych słów. Nie polega na samym kolorze — dochodzi
+   podkreślenie (WCAG 1.4.1). */
+mark {
+  background: var(--accent-wash);
+  color: var(--ink);
+  padding: 0 2px;
+  border-radius: 3px;
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+/* --- tabela --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+th,
+td {
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+  padding: var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--ink-3);
+  text-transform: none;
+  letter-spacing: 0;
+}
+tbody th { font-size: var(--fs-sm); color: var(--ink); font-weight: 500; }
+
+/* Szerokie treści przewijają się same, body nigdy w poziomie. */
+.scroll-x {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+details > summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-2);
+}
+details > summary:hover { color: var(--ink); }
+
+/* --- ruch: wyłączany na życzenie (WCAG 2.3.3) --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+img { max-width: 100%; height: auto; }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card, .fiszka { box-shadow: none; border: 1px solid #ccc; }
+}

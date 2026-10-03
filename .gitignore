@@ -1,0 +1,87 @@
+# Dependencies
+node_modules/
+*/node_modules/
+.pnp
+.pnp.js
+
+# Production & build outputs
+dist/
+*/dist/
+build/
+*/build/
+out/
+.next/
+*.tsbuildinfo
+.eslintcache
+.vite/
+.parcel-cache/
+
+# Python
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Django & Database
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+/media/
+/backend/media/
+!app/public/media/
+
+# Environment files & secrets (keep .env.example)
+.env
+.env.*
+.env.local
+!.env.example
+
+# OS & system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# IDE & editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Agents & local tool directories
+.agents/
+.claude/
+.opencode/
+graphify-out/
+
+# Project-specific raw data
+data/raw/

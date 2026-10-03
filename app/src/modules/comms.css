@@ -1,0 +1,95 @@
+.cm__top { margin-bottom: var(--sp-5); }
+.cm__ask { max-width: 46rem; margin-bottom: var(--sp-5); }
+
+.cm__grid {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 64rem) {
+  .cm__grid { grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr); }
+}
+
+/* --- lista wątków --- */
+.cm__list ul { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: var(--sp-2); }
+
+.cm__item {
+  display: grid;
+  gap: var(--sp-1);
+  width: 100%;
+  text-align: left;
+  padding: var(--sp-3);
+  min-height: 44px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+}
+.cm__item:hover { background: var(--surface-2); }
+/* Wybrany wątek: obrys + lewa belka, nie tylko inne tło. */
+.cm__item--sel {
+  background: var(--accent-wash);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.cm__item-top { display: flex; align-items: center; gap: var(--sp-2); }
+.cm__item-title { font-weight: 600; font-size: var(--fs-sm); line-height: 1.4; }
+.cm__item-meta { font-size: var(--fs-xs); color: var(--ink-2); }
+
+/* Kropka „nowa odpowiedź" ma obok siebie tekst dla czytnika ekranu. */
+.cm__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background: var(--warn);
+  box-shadow: 0 0 0 3px var(--warn-wash);
+}
+
+/* --- wątek --- */
+.cm__thread {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--sp-5);
+}
+.cm__thread-head { margin-bottom: var(--sp-5); }
+.cm__thread-head h2 { font-size: var(--fs-xl); margin-block: var(--sp-2); }
+
+.cm__fiszka {
+  padding: var(--sp-4);
+  background: var(--bg);
+  border-radius: var(--radius);
+  margin-bottom: var(--sp-5);
+}
+@media (min-width: 44rem) {
+  .cm__fiszka { grid-template-columns: 1fr 1fr; }
+}
+
+.cm__msgs { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); }
+.cm__msg {
+  padding: var(--sp-4);
+  border-radius: var(--radius);
+  display: grid;
+  gap: var(--sp-2);
+}
+.cm__msg p { margin: 0; font-size: var(--fs-sm); line-height: 1.6; white-space: pre-wrap; }
+/* Autor wypowiedzi jest zawsze podpisany — strona rozmowy nie zależy od koloru. */
+.cm__msg--author { background: var(--bg); border-left: 3px solid var(--line-ui); }
+.cm__msg--staff { background: var(--accent-wash); border-left: 3px solid var(--accent); }
+.cm__from {
+  font-family: var(--font);
+  font-size: var(--fs-xs);
+}
+
+.cm__reply {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+}
+.cm__reply .btn { margin-top: var(--sp-3); }
+
+.cm__empty { max-width: 42rem; }
+.cm__empty h3 { margin-bottom: var(--sp-3); }

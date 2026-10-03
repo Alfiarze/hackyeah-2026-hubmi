@@ -1,0 +1,112 @@
+.ts__grid {
+  display: grid;
+  gap: var(--sp-6);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 68rem) {
+  .ts__grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+}
+
+.ts__form {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--sp-5);
+}
+.ts__form > * + * { margin-top: var(--sp-4); }
+
+.ts__mode { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+
+.ts__picked {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: var(--accent-wash);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+}
+.ts__picked h3 { font-size: var(--fs-lg); margin-top: var(--sp-1); }
+
+.ts__options {
+  list-style: none;
+  margin: var(--sp-3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-2);
+  max-height: 22rem;
+  overflow-y: auto;
+}
+.ts__option {
+  width: 100%;
+  justify-content: space-between;
+  text-align: left;
+  font-weight: 400;
+  gap: var(--sp-4);
+}
+.ts__option > span:first-child { font-weight: 600; }
+
+/* --- ocena --- */
+.ts__rating { border: 0; background: var(--surface-2); border-radius: var(--radius); padding: var(--sp-4); }
+.ts__rating legend {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  padding-inline: var(--sp-2);
+}
+.ts__stars { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+.ts__star {
+  position: relative;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--line-ui);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  cursor: pointer;
+}
+/* Radio jest ukryte wizualnie, ale nadal fokusowalne — stan czyta czytnik. */
+.ts__star input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.ts__star:has(input:checked) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.ts__star:has(input:focus-visible) {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.ts__side {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: var(--sp-5);
+}
+
+.ts__recent { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
+.ts__recent > li {
+  display: grid;
+  gap: var(--sp-1);
+  border-top: 1px solid var(--line);
+  padding-top: var(--sp-3);
+  font-size: var(--fs-sm);
+}
+
+.ts__done { max-width: 46rem; }
+.ts__done h1 { margin-bottom: var(--sp-4); }
+.ts__done p { margin-bottom: var(--sp-4); }

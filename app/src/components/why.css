@@ -1,0 +1,77 @@
+/* Panel „dlaczego to pasuje" + wskaźnik wyniku. */
+
+.why {
+  border-top: 1px solid var(--line);
+  padding-top: var(--sp-4);
+}
+
+.why__h {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--ink-3);
+  margin-bottom: var(--sp-3);
+}
+
+.why__cov { font-size: var(--fs-sm); margin-bottom: var(--sp-3); }
+
+.why__reasons {
+  margin: 0 0 var(--sp-4);
+  padding-left: var(--sp-5);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+.why__reasons li + li { margin-top: var(--sp-2); }
+.why__reasons li::marker { color: var(--ink-3); }
+
+.why__chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+
+.why__terms { margin-top: var(--sp-3); font-size: var(--fs-sm); }
+.why__terms dl { margin: var(--sp-2) 0 0; }
+.why__term-row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 14rem) 1fr;
+  gap: var(--sp-3);
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--line);
+}
+.why__term-row dt { font-weight: 500; }
+.why__term-row dd { margin: 0; color: var(--ink-3); }
+
+@media (max-width: 40rem) {
+  .why__term-row { grid-template-columns: 1fr; gap: var(--sp-1); }
+}
+
+/* --- wskaźnik wyniku: liczba, nie tarcza --- */
+.dial {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  flex: none;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  line-height: 1.1;
+}
+.dial__num {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.dial__den { font-size: var(--fs-xs); color: var(--ink-3); }
+/* Poziom dopasowania jest podpisany słownie, więc kolor tylko go wzmacnia
+   (WCAG 1.4.1). */
+.dial__tier {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  margin-left: var(--sp-2);
+  align-self: center;
+}
+.dial--wysokie { background: var(--ok-wash); }
+.dial--wysokie .dial__num, .dial--wysokie .dial__tier { color: var(--ok); }
+.dial--srednie { background: var(--accent-wash); }
+.dial--srednie .dial__num, .dial--srednie .dial__tier { color: var(--accent); }
+.dial--niskie .dial__num { color: var(--ink-2); }
+.dial--niskie .dial__tier { color: var(--ink-3); }
