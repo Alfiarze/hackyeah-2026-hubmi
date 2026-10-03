@@ -49,6 +49,9 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
   const [conv, setConv] = useState<ConvState>(initConversation);
   const [draft, setDraft] = useState("");
   const [powiatFilter, setPowiatFilter] = useState<string | null>(null);
+  // Domyślnie wyłączone: zadanie dotyczy innowacji przetestowanych w Małopolsce,
+  // a karty z innych baz to inspiracja, o którą użytkownik prosi świadomie.
+  const [external, setExternal] = useState(false);
   const [phase, setPhase] = useState<Phase>("idle");
   const [data, setData] = useState<MatchResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -91,7 +94,11 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
 
     const timer = setTimeout(async () => {
       try {
-        const res = await fetchMatches(conv.problem, { limit: 6, powiat: powiatFilter });
+        const res = await fetchMatches(conv.problem, {
+          limit: 6,
+          powiat: powiatFilter,
+          external,
+        });
         if (!active) return;
         setData(res);
         setPhase("ready");
@@ -109,11 +116,16 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
       active = false;
       clearTimeout(timer);
     };
-  }, [conv.done, conv.problem, powiatFilter, retryKey]);
+  }, [conv.done, conv.problem, powiatFilter, external, retryKey]);
 
   const results = data?.results ?? [];
   const analysis = data?.analysis;
   const gap = data?.gap.isGap ? data.gap : null;
+
+  const extCount = useMemo(
+    () => results.filter((r) => r.innovation.ext).length,
+    [results],
+  );
 
   /** Ile wdrożeń ma każdy powiat — ale tylko wśród dopasowanych innowacji. */
   const counts = useMemo(() => {
@@ -369,8 +381,14 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                           "rozwiązanie",
                           "rozwiązania",
                           "rozwiązań",
-                        )} z Biblioteki`}
+                        )}${extCount > 0 ? "" : " z Biblioteki"}`}
                   </h2>
+                  {extCount > 0 && (
+                    <p className="muted">
+                      {extCount} z nich pochodzi z baz poza Małopolską — każda taka karta
+                      jest tak opisana i ma niżej ważony wynik.
+                    </p>
+                  )}
                   <p className="muted">
                     {gap
                       ? gap.text
@@ -388,6 +406,16 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
               {phase === "error" && (
                 <button type="button" className="btn btn--primary" onClick={retry}>
                   Spróbuj ponownie
+                </button>
+              )}
+              {(phase === "ready" || phase === "idle") && (
+                <button
+                  type="button"
+                  className="btn"
+                  aria-pressed={external}
+                  onClick={() => setExternal((v) => !v)}
+                >
+                  {external ? "Szukaj tylko w Małopolsce" : "Dodaj bazy spoza Małopolski"}
                 </button>
               )}
               <button type="button" className="btn" onClick={restart}>

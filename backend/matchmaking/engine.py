@@ -51,6 +51,9 @@ K1 = 1.2
 B = 0.75
 CONCEPT_WEIGHT = 0.55  # dopasowanie przez wątek liczy się słabiej niż dosłowne
 UNTESTED_PENALTY = 0.88  # karta bez opisanych wyników testu dostaje korektę w dół
+# Karta z bazy spoza Małopolski: temat może pasować idealnie, ale ROPS jej tu nie
+# testował, więc przy równym wyniku pierwszeństwo ma innowacja małopolska.
+EXTERNAL_PENALTY = 0.9
 
 GAP_SCORE_THRESHOLD = 35
 GAP_COVERAGE_THRESHOLD = 0.25
@@ -125,6 +128,8 @@ def _load_docs() -> list[dict]:
                 "evidence": inn.evidence,
                 "cat": inn.cat_slug,
                 "powiaty": [d.powiat for d in inn.deployments.all()],
+                "ext": inn.ext,
+                "origin": inn.origin or {},
             }
         )
     return out
@@ -232,6 +237,16 @@ def _build_reasons(doc: dict, matched: list[dict], missed: list[dict]) -> list[s
         )
     if not in_problem and not in_target and matched:
         out.append("Wspólne wątki: " + ", ".join(m["label"] for m in matched) + ".")
+    if doc.get("ext"):
+        origin = doc.get("origin") or {}
+        region = origin.get("region")
+        out.append(
+            "Ta innowacja nie pochodzi z Małopolski — źródło: "
+            f"{origin.get('source') or 'inna baza'}"
+            + (f" ({region})" if region else "")
+            + ". Wynik dopasowania jest lekko obniżony, bo ROPS nie testował jej "
+            "w regionie — traktuj ją jak inspirację do adaptacji."
+        )
     if doc["evidence"]:
         out.append(f"Było testowane: {snippet(doc['evidence'], 150)}")
     else:
@@ -262,7 +277,14 @@ def _highlights(doc: dict, wanted: set[str]) -> dict:
     return hl
 
 
-def search(query: str, *, limit: int = 8, cat: str | None = None, powiat: str | None = None) -> dict:
+def search(
+    query: str,
+    *,
+    limit: int = 8,
+    cat: str | None = None,
+    powiat: str | None = None,
+    external: bool = False,
+) -> dict:
     """
     Pełna odpowiedź dopasowania: analiza zapytania, wyniki z uzasadnieniami
     i flaga luki (gdy nic sensownego nie pasuje).
@@ -287,6 +309,8 @@ def search(query: str, *, limit: int = 8, cat: str | None = None, powiat: str | 
         if cat and doc["cat"] != cat:
             continue
         if powiat and powiat not in doc["powiaty"]:
+            continue
+        if doc.get("ext") and not external:
             continue
 
         lex = 0.0
@@ -327,6 +351,8 @@ def search(query: str, *, limit: int = 8, cat: str | None = None, powiat: str | 
             score = min(score, 30)
         if not doc["evidence"]:
             score = round(score * UNTESTED_PENALTY)
+        if doc.get("ext"):
+            score = round(score * EXTERNAL_PENALTY)
 
         matched = []
         for c in analysis["concepts"]:

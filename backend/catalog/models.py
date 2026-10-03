@@ -60,6 +60,12 @@ class Innovation(models.Model):
     zip = models.URLField(max_length=500, blank=True, null=True)
     license = models.CharField(max_length=80, blank=True, null=True)
     url = models.URLField(max_length=500, blank=True)
+    # --- pochodzenie karty --------------------------------------------------
+    # Zadanie UMWM dotyczy innowacji przetestowanych w Małopolsce, a katalog
+    # trzyma też karty z innych baz (PO WER, ROPS Poznań, ESF+, Zenodo). Bez
+    # tego znacznika nie da się ich odfiltrować ani uczciwie opisać w UI.
+    ext = models.BooleanField(default=False, verbose_name="spoza Małopolski")
+    origin = models.JSONField(default=dict, blank=True)
     # kiedy ostatnio edytował administrator (moduł VI: „szybka aktualizacja”)
     updated_by = models.CharField(max_length=120, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -129,6 +135,9 @@ class LibraryItem(models.Model):
     bytes = models.BigIntegerField(null=True, blank=True)
     # wyróżnienie na górze Biblioteki (Mapa Wyzwań Społecznych — wymóg modułu II)
     featured = models.BooleanField(default=False)
+    # dokument z bazy spoza Małopolski (zob. Innovation.ext)
+    ext = models.BooleanField(default=False, verbose_name="spoza Małopolski")
+    origin = models.JSONField(default=dict, blank=True)
     search_vector = SearchVectorField(null=True, blank=True)
 
     class Meta:

@@ -53,6 +53,8 @@ export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest 
         <p className="fiszka__badge">{inn.badges[0]}</p>
       )}
 
+      {inn.ext && <OriginTag innovation={inn} />}
+
       <Stamp evidence={inn.evidence} compact />
 
       <dl className="fiszka__fields">
@@ -103,9 +105,19 @@ export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest 
       )}
 
       <footer className="fiszka__actions">
-        <button type="button" className="btn btn--primary" onClick={() => setContact(true)}>
-          Skontaktuj się z realizatorem
-        </button>
+        {/* Kontakt do realizatora opiera się na wdrożeniach w powiatach —
+            karty z innych baz ich nie mają, więc zamiast pustego formularza
+            prowadzimy do źródła. */}
+        {inn.ext ? (
+          <a className="btn btn--primary" href={inn.url} target="_blank" rel="noreferrer">
+            Otwórz w bazie źródłowej
+            <span className="sr-only"> (otwiera {inn.origin?.source ?? "serwis źródłowy"} w nowej karcie)</span>
+          </a>
+        ) : (
+          <button type="button" className="btn btn--primary" onClick={() => setContact(true)}>
+            Skontaktuj się z realizatorem
+          </button>
+        )}
         {onAdapt && (
           <button type="button" className="btn" onClick={() => onAdapt(inn)}>
             Dopasuj do mojej instytucji
@@ -132,10 +144,28 @@ export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest 
   );
 }
 
+/**
+ * Jedno zdanie prawdy o pochodzeniu karty. Pokazywane tylko dla kart spoza
+ * Małopolski — przy 115 kartach ROPS taki znacznik byłby szumem.
+ */
+function OriginTag({ innovation: inn }: { innovation: Innovation }) {
+  const region = inn.origin?.region;
+  return (
+    <p className="fiszka__origin">
+      <span className="fiszka__origin-mark" aria-hidden="true" />
+      <span>
+        <strong>Spoza Małopolski{region ? ` · ${region}` : ""}</strong>
+        {inn.origin?.source && <span className="muted"> — {inn.origin.source}</span>}
+      </span>
+    </p>
+  );
+}
+
 function FullCard({ innovation: inn }: { innovation: Innovation }) {
   return (
     <div className="stack">
       <p className="eyebrow">{inn.catName}</p>
+      {inn.ext && <OriginTag innovation={inn} />}
       <Stamp evidence={inn.evidence} />
 
       <dl className="fiszka__fields">
@@ -182,9 +212,19 @@ function FullCard({ innovation: inn }: { innovation: Innovation }) {
             <span className="sr-only"> (pobiera archiwum ZIP)</span>
           </a>
         )}
+        {(inn.files ?? []).map((f) => (
+          <a className="btn" key={f.url} href={f.url} target="_blank" rel="noreferrer">
+            {f.title || "Materiał do pobrania"}
+            <span className="sr-only"> (otwiera plik w nowej karcie)</span>
+          </a>
+        ))}
         <a className="btn btn--ghost" href={inn.url} target="_blank" rel="noreferrer">
-          Karta w serwisie ROPS
-          <span className="sr-only"> (otwiera rops.krakow.pl w nowej karcie)</span>
+          {inn.ext ? "Karta w bazie źródłowej" : "Karta w serwisie ROPS"}
+          <span className="sr-only">
+            {" "}
+            (otwiera {inn.ext ? (inn.origin?.source ?? "serwis źródłowy") : "rops.krakow.pl"} w
+            nowej karcie)
+          </span>
         </a>
       </div>
 
@@ -192,9 +232,11 @@ function FullCard({ innovation: inn }: { innovation: Innovation }) {
         <p className="hint">
           Licencja:{" "}
           <a href={inn.license} target="_blank" rel="noreferrer">
-            CC BY 4.0
-          </a>{" "}
-          — można wdrażać i modyfikować, wymagane podanie autorstwa.
+            {inn.license.includes("creativecommons") ? "CC BY 4.0" : "warunki źródła"}
+          </a>
+          {inn.license.includes("creativecommons")
+            ? " — można wdrażać i modyfikować, wymagane podanie autorstwa."
+            : " — sprawdź warunki ponownego użycia u właściciela bazy."}
         </p>
       )}
     </div>

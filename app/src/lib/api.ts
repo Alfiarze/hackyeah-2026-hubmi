@@ -92,6 +92,15 @@ export interface BackendMatchResult {
   zip: string | null;
   license: string | null;
   url: string;
+  /** karta z bazy spoza Małopolski — zob. `origin` */
+  ext?: boolean;
+  origin?: {
+    source: string | null;
+    sourceUrl: string | null;
+    scope?: string | null;
+    region?: string | null;
+    malopolska: boolean;
+  };
   deployments: {
     powiat: string;
     org: string;
@@ -441,12 +450,18 @@ class ApiClient {
      * Timeout 20 s, bo w ścieżce stoi wywołanie Jev Decisions; typowo ~1,5 s,
      * ale pierwsze zapytanie po starcie kontenera potrafi być wolniejsze.
      */
-    search: async (q: string, limit = 5, cat?: string, powiat?: string) => {
+    search: async (
+      q: string,
+      limit = 5,
+      cat?: string,
+      powiat?: string,
+      external = false,
+    ) => {
       return this.request<MatchSearchResult>(
         "/match/search/",
         {
           method: "POST",
-          body: JSON.stringify({ q, limit, cat, powiat }),
+          body: JSON.stringify({ q, limit, cat, powiat, external }),
         },
         20000,
       );

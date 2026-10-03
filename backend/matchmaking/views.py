@@ -104,7 +104,7 @@ def _sources_for(question: str, limit: int = 5) -> list[dict]:
 @permission_classes([AllowAny])
 def match_search(request):
     """
-    GET/POST /api/match/search/?q=... (&limit, &cat, &powiat)
+    GET/POST /api/match/search/?q=... (&limit, &cat, &powiat, &external)
 
     Zwraca: analizę zapytania, wyniki z uzasadnieniami i podświetleniami,
     werdykt AI „czy powiązane” oraz flagę luki. Zapytanie zapisuje się jako
@@ -123,8 +123,11 @@ def match_search(request):
         limit = 5
     cat = data.get("cat") or None
     powiat = (data.get("powiat") or "").strip() or None
+    # Bazy spoza Małopolski tylko na wyraźne życzenie — domyślna odpowiedź
+    # modułu obowiązkowego zostaje przy innowacjach przetestowanych w regionie.
+    external = str(data.get("external", "")).lower() in ("1", "true", "tak", "yes", "on")
 
-    found = engine.search(query, limit=limit, cat=cat, powiat=powiat)
+    found = engine.search(query, limit=limit, cat=cat, powiat=powiat, external=external)
     candidates = _gather_candidates(found["results"])
     verdicts = ai_service.judge_related(query, candidates) if candidates else {
         "source": "brak-kandydatow",

@@ -50,6 +50,12 @@ const B = 0.75;
 const CONCEPT_WEIGHT = 0.55;
 /** Mnożnik dla kart bez opisanych wyników testu — zob. komentarz przy użyciu. */
 const UNTESTED_PENALTY = 0.88;
+/**
+ * Mnożnik dla kart z baz spoza Małopolski. Taka innowacja bywa świetna, ale nie
+ * została przetestowana w regionie, więc przy równym dopasowaniu pierwszeństwo
+ * ma karta małopolska. Powód trafia do uzasadnienia, nie znika po cichu.
+ */
+const EXTERNAL_PENALTY = 0.9;
 
 interface FieldIndex {
   tf: Map<string, number>;
@@ -219,6 +225,14 @@ function buildReasons(
   if (!inProblem.length && !inTarget.length && matched.length) {
     out.push(`Wspólne wątki: ${matched.map((m) => m.label).join(", ")}.`);
   }
+  if (inn.ext) {
+    out.push(
+      `Ta innowacja nie pochodzi z Małopolski — źródło: ${inn.origin?.source ?? "inna baza"}` +
+        `${inn.origin?.region ? ` (${inn.origin.region})` : ""}. Wynik dopasowania jest ` +
+        "lekko obniżony, bo ROPS nie testował jej w regionie — traktuj ją jak inspirację " +
+        "do adaptacji.",
+    );
+  }
   if (inn.evidence) {
     out.push(`Było testowane: ${snippet(inn.evidence, 150)}`);
   } else {
@@ -256,6 +270,12 @@ export interface SearchOptions {
   /** tylko innowacje wdrożone w tym powiecie */
   powiat?: string;
   cat?: string;
+  /**
+   * Czy dopuścić karty z baz spoza Małopolski (`Innovation.ext`).
+   * Domyślnie nie: zadanie dotyczy innowacji przetestowanych w Małopolsce,
+   * a reszta baz jest inspiracją, o którą użytkownik prosi świadomie.
+   */
+  external?: boolean;
 }
 
 export function search(
@@ -282,6 +302,7 @@ export function search(
   for (const doc of INDEX) {
     const inn = DOCS.get(doc.id)!;
     if (opts.cat && inn.cat !== opts.cat) continue;
+    if (inn.ext && !opts.external) continue;
     if (opts.powiat && !inn.deployments.some((d) => d.powiat === opts.powiat)) continue;
 
     let lex = 0;
@@ -325,6 +346,7 @@ export function search(
       // Celowo lekką: nie ukrywamy najlepszego tematycznie dopasowania, tylko
       // nie pozwalamy mu wygrywać po cichu. Powód jest wypisany w uzasadnieniu.
       if (!inn.evidence) score = Math.round(score * UNTESTED_PENALTY);
+      if (inn.ext) score = Math.round(score * EXTERNAL_PENALTY);
 
       const matched: MatchedConcept[] = [];
       for (const c of analysis.concepts) {

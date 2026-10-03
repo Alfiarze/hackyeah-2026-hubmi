@@ -39,6 +39,10 @@ def import_innovations() -> dict:
 
     raw = _load(settings.ROPS_DATA_DIR / "innovations.json") or {}
     raw_by_slug = {i.get("slug"): i for i in raw.get("innovations", [])}
+    # Karty z baz spoza Małopolski mają swój plik źródłowy — bez niego straciłyby
+    # `raw_text`, czyli materiał, na którym liczy się dopasowanie.
+    ext_raw = _load(settings.ROPS_DATA_DIR / "external_innovations.json") or {}
+    raw_by_slug.update({i.get("slug"): i for i in ext_raw.get("innovations", [])})
 
     categories = {
         c["slug"]: c for c in bundle.get("categories", [])
@@ -71,6 +75,8 @@ def import_innovations() -> dict:
             "zip": _optional_url(item.get("zip")),
             "license": item.get("license") or None,
             "url": item.get("url", ""),
+            "ext": bool(item.get("ext")),
+            "origin": item.get("origin") or {},
         }
         _, was_created = Innovation.objects.update_or_create(id=slug, defaults=defaults)
         created += int(was_created)
@@ -144,6 +150,8 @@ def import_library() -> dict:
                 "desc": item.get("desc", ""),
                 "bytes": item.get("bytes"),
                 "featured": is_featured,
+                "ext": bool(item.get("ext")),
+                "origin": item.get("origin") or {},
             },
         )
         count += 1

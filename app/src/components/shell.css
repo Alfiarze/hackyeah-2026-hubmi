@@ -71,24 +71,29 @@
   display: flex;
   min-width: 0;
   align-items: center;
-  gap: var(--sp-5);
-  flex-wrap: wrap;
+  gap: var(--sp-4);
+  /* Marka i nawigacja dzielą jedną linię; przy ciasnocie zwęża się lista
+     modułów (overflow-x niżej), a nie łamie się cały pasek. */
+  flex-wrap: nowrap;
   padding-block: var(--sp-3);
 }
 
 .hdr__brand {
   display: flex;
+  flex: none;
   align-items: center;
   gap: var(--sp-2);
   color: var(--ink);
   text-decoration: none;
   min-height: 44px;
+  white-space: nowrap;
 }
 .hdr__mark {
   display: inline-flex;
   flex: none;
   border-radius: 8px;
 }
+.hdr__brand > span:last-child { position: relative; }
 .hdr__brand strong {
   display: block;
   font-family: var(--font-display);
@@ -96,10 +101,17 @@
   font-weight: 800;
   line-height: 1.05;
 }
+/* Pełna nazwa rozpychała markę na drugi wiersz, więc w pasku zostaje sam
+   wordmark; dla czytników ekranu nazwa nadal brzmi w całości. */
 .hdr__sub {
-  display: block;
-  font-size: var(--fs-xs);
-  color: var(--ink-2);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .hdr__nav {
@@ -111,12 +123,17 @@
 }
 .hdr__nav ul {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 2px;
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
 }
+.hdr__nav ul::-webkit-scrollbar { display: none; }
+.hdr__nav li { flex: none; }
 .hdr__nav a {
   display: flex;
   align-items: center;
@@ -124,6 +141,7 @@
   min-height: 44px;
   padding: var(--sp-2) var(--sp-3);
   border: 1px solid transparent;
+  white-space: nowrap;
   border-radius: var(--radius-pill);
   color: var(--ink-2);
   text-decoration: none;
@@ -181,20 +199,13 @@
 @media (max-width: 70rem) {
   .hdr__full { display: none; }
   .hdr__short { display: inline; }
-  .hdr__sub { display: none; }
 }
+/* Na telefonie osiem modułów w jednej linii z marką byłoby nieczytelne —
+   pasek wraca do dwóch wierszy, a lista przewija się poziomo. */
 @media (max-width: 48rem) {
+  .hdr__inner { flex-wrap: wrap; }
   .hdr__nav { margin-left: 0; width: 100%; max-width: 100%; }
-  .hdr__nav ul {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    padding-bottom: var(--sp-1);
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-  }
-  .hdr__nav ul::-webkit-scrollbar { display: none; }
-  .hdr__nav li { flex: none; }
-  .hdr__nav a { white-space: nowrap; }
+  .hdr__nav ul { padding-bottom: var(--sp-1); }
   .a11ybar__role { margin-left: 0; width: 100%; }
   .a11ybar__role select { min-width: 0; flex: 1; }
 }

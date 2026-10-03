@@ -48,6 +48,32 @@
   max-width: none;
 }
 
+/* --- pochodzenie karty spoza Malopolski ---
+   Pasek, nie pigulka: to nie odznaczenie, a zastrzezenie, i ma byc czytane
+   razem ze stemplem "przetestowane" tuz pod nim. */
+.fiszka__origin {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  margin: 0;
+  padding: var(--sp-2) var(--sp-3);
+  border-left: 3px solid var(--chart-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: color-mix(in oklab, var(--chart-2) 10%, transparent);
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  max-width: none;
+}
+.fiszka__origin strong { font-weight: 600; }
+.fiszka__origin-mark {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--chart-2);
+  flex: none;
+  transform: translateY(-1px);
+}
+
 .fiszka__fields {
   display: grid;
   gap: var(--sp-4);
