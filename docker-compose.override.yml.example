@@ -1,0 +1,8 @@
+# Local dev only — compose auto-loads this file. Not used on Coolify.
+services:
+  db:
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+  landing:
+    ports:
+      - "8080:8080"
