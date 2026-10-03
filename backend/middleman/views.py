@@ -58,23 +58,108 @@ def _profile_payload(data: dict) -> dict:
 def _ai_notes(plan: dict, profile: dict, innovation) -> list[str]:
     if not plan:
         return []
-    prompt = AI_PROMPT.format(
-        profile=f"{profile['org_type']}, {profile['size_band']}, "
-                f"budżet {profile['budget']} zł, {profile['staff']} os., {profile['powiat']}",
-        innovation=f"{innovation.name}: {innovation.description[:400]}",
-        low=f"{plan['cost_low']:,}",
-        high=f"{plan['cost_high']:,}",
-        scale=plan["scale"],
-        staffing=plan["staffing"],
-        risks=" | ".join(plan["risks"][:3]),
+
+    state = {
+        "instytucja": {
+            "typ": profile.get("org_type", ""),
+            "wielkosc": profile.get("size_band", ""),
+            "budzet_pln": profile.get("budget", 0),
+            "kadra_osob": profile.get("staff", 1),
+            "powiat": profile.get("powiat", ""),
+        },
+        "innowacja": {
+            "nazwa": innovation.name,
+            "opis": innovation.description[:400],
+            "problem": innovation.problem[:300],
+        },
+        "parametry_wdrozenia": {
+            "koszt": f"{plan.get('cost_low', 0)}–{plan.get('cost_high', 0)} zł",
+            "zasieg": plan.get("scale", ""),
+            "kadra": plan.get("staffing", ""),
+        },
+    }
+
+    questions = {
+        "poziom_ryzyka": {
+            "type": "score",
+            "instructions": "Oceń realny poziom trudności wdrożenia tej innowacji w tej instytucji",
+            "criteria": ["Niskie", "Umiarkowane", "Podwyższone", "Wysokie"],
+        },
+        "glowna_bariera": {
+            "type": "choice",
+            "instructions": "Który czynnik stanowi największe wyzwanie wdrożeniowe dla tej jednostki?",
+            "criteria": {
+                "kadra": "Zasoby kadrowe i obciążenie bieżącymi obowiązkami",
+                "finanse": "Dopięcie budżetu i koszty utrzymania po pilotażu",
+                "procedury": "Procedury formalne, regulaminy i zgody organu prowadzącego",
+                "angazowanie_odbiorcow": "Rekrutacja grupy docelowej i frekwencja uczestników",
+            },
+        },
+        "rekomendacja_trybu": {
+            "type": "choice",
+            "instructions": "Jaki tryb wdrożenia jest optymalny dla profilu tej jednostki?",
+            "criteria": {
+                "pilotaz": "Rozpocząć od ograniczonego pilotażu w małej grupie",
+                "partnerstwo_ngo": "Realizować w partnerstwie z doświadczonym NGO",
+                "bezposrednie": "Wdrożyć bezpośrednio w strukturach jednostki",
+            },
+        },
+        "wymaga_szkolenia": {
+            "type": "noul",
+            "instructions": "Czy kadra instytucji wymaga dedykowanego szkolenia metodycznego przed uruchomieniem?",
+            "criteria": {
+                "true": "Konieczne wcześniejsze przeszkolenie zespołu z metodyki innowacji.",
+                "false": "Kompetencje zespołu są wystarczające do natychmiastowego startu.",
+            },
+        },
+    }
+
+    result = ai_transport.evaluate(state, questions)
+    if not result:
+        out = []
+        if plan.get("risks"):
+            out.append(f"Zidentyfikowane ryzyko: {plan['risks'][0]}.")
+        out.append(f"Rekomendacja zasobowa: zapotrzebowanie kadry to {plan.get('staffing', 'wg wytycznych')}.")
+        out.append("Zalecane przetestowanie procedury w formule pilotażowej przed pełnym wdrożeniem.")
+        return out[:3]
+
+    ryzyko_data = ai_transport.score_answer(result, "poziom_ryzyka")
+    ryzyko_score = ryzyko_data.get("score", 1.0) if ryzyko_data else 1.0
+    ryzyko_poziomy = ["niskie", "umiarkowane", "podwyższone", "wysokie"]
+    ryzyko_label = ryzyko_poziomy[min(3, max(0, int(round(ryzyko_score))))]
+
+    bariera_data = ai_transport.choice_answer(result, "glowna_bariera")
+    bariera_key = bariera_data.get("choice") if bariera_data else "kadra"
+    bariera_labels = {
+        "kadra": "dostępność i obciążenie zespołu",
+        "finanse": "finansowanie po zakończeniu dofinansowania",
+        "procedury": "procedury formalne i dostosowanie regulaminów",
+        "angazowanie_odbiorcow": "rekrutacja i zaangażowanie odbiorców",
+    }
+    bariera_text = bariera_labels.get(bariera_key, "dostosowanie organizacyjne")
+
+    rekom_data = ai_transport.choice_answer(result, "rekomendacja_trybu")
+    rekom_key = rekom_data.get("choice") if rekom_data else "pilotaz"
+    rekom_labels = {
+        "pilotaz": "rekomendowany start od mini-pilotażu na małej próbie odbiorców",
+        "partnerstwo_ngo": "rekomendowane partnerstwo z lokalnym NGO dla odciążenia kadry",
+        "bezposrednie": "możliwe bezpośrednie wdrożenie w bieżącej strukturze jednostki",
+    }
+    rekom_text = rekom_labels.get(rekom_key, "rekomendowany etap pilotażowy")
+
+    szkolenie_noul = ai_transport.noul_answer(result, "wymaga_szkolenia") or 0.5
+    szkolenie_text = (
+        "Wymagane wstępne szkolenie metodyczne dla kadry przed startem usługi."
+        if szkolenie_noul >= 0.5
+        else "Wdrożenie wykonalne w oparciu o dotychczasowe przygotowanie zespołu."
     )
-    raw = ai_transport.generate_text(
-        prompt, system=AI_SYSTEM, json_mode=True, max_tokens=500
-    )
-    data = ai_transport.extract_json(raw) if raw else None
-    if isinstance(data, dict) and isinstance(data.get("uwagi"), list):
-        return [str(u)[:300] for u in data["uwagi"]][:3]
-    return []
+
+    notes = [
+        f"Ocena Jev: poziom trudności to {ryzyko_label} (indeks {ryzyko_score:.1f}/3) — {rekom_text}.",
+        f"Główny punkt uwagi: {bariera_text} (uwzględnij w harmonogramie wdrożenia).",
+        szkolenie_text,
+    ]
+    return notes
 
 
 class InstitutionViewSet(mixins.ListModelMixin, mixins.CreateModelMixin,
@@ -131,7 +216,7 @@ class InstitutionViewSet(mixins.ListModelMixin, mixins.CreateModelMixin,
             notes = _ai_notes(plan, profile, innovation)
             if notes:
                 plan["risks"] = plan["risks"] + [f"Uwaga AI: {n}" for n in notes]
-                source = "llm"
+                source = "jev"
 
         with transaction.atomic():
             inst = InstitutionProfile.objects.create(
