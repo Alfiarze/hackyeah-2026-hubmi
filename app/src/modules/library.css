@@ -95,3 +95,86 @@
 .lib__empty { max-width: 48rem; }
 .lib__empty h3 { margin-bottom: var(--sp-3); }
 .lib__empty p { margin-bottom: var(--sp-4); }
+
+/* --- Moduł II: Zapytaj bazę ze źródłami (AI) --- */
+.lib__qa {
+  display: grid;
+  gap: var(--sp-5);
+  max-width: 54rem;
+}
+.lib__qa-form {
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  padding: var(--sp-5);
+}
+.lib__qa-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+.lib__qa-chip {
+  background: var(--surface-glass-thin);
+  border: var(--glass-border-subtle);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+.lib__qa-chip:hover {
+  background: var(--surface-glass-btn);
+  color: var(--ink);
+  border-color: var(--accent);
+}
+.lib__qa-result {
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast));
+  border: var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  padding: var(--sp-5);
+}
+.lib__qa-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-3);
+}
+.lib__qa-answer {
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--ink);
+  margin-bottom: var(--sp-4);
+}
+.lib__qa-sources {
+  border-top: 1px solid var(--line);
+  padding-top: var(--sp-4);
+  list-style: none;
+  margin: 0;
+  display: grid;
+  gap: var(--sp-3);
+}
+.lib__qa-source-item {
+  padding: var(--sp-3);
+  background: var(--surface-glass-thin);
+  border: var(--glass-border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+}
+.lib__qa-source-item h4 {
+  font-size: var(--fs-sm);
+  margin: 0 0 var(--sp-1);
+}
+.lib__qa-source-item p {
+  color: var(--ink-2);
+  font-size: var(--fs-xs);
+  margin: 0;
+}
+

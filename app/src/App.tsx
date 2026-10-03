@@ -19,10 +19,11 @@ import { Accessibility } from "./modules/Accessibility";
 import {
   getState,
   subscribe,
+  syncWithBackend,
   unreadForAdmin,
   unseenRepliesForAuthor,
 } from "./lib/store";
-import type { Innovation } from "./lib/data";
+import { loadCatalogFromBackend, type Innovation } from "./lib/data";
 import { useReveal } from "./lib/useReveal";
 
 const ROUTES: Route[] = [
@@ -47,6 +48,11 @@ export default function App() {
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
+
+  useEffect(() => {
+    loadCatalogFromBackend();
+    syncWithBackend();
+  }, [route]);
 
   // Treść pojawia się przy przewijaniu; nowy widok = nowa pętla obserwatora.
   useReveal(route);

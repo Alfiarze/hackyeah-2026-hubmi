@@ -8,7 +8,8 @@
  *  - endpointy wszystkich 7 modułów zadania HubMI.
  */
 
-const API_BASE = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "") || "/api";
+const env = typeof import.meta !== "undefined" ? (import.meta as any).env : undefined;
+const API_BASE = (env?.VITE_API_URL as string | undefined)?.replace(/\/$/, "") || "/api";
 const TOKEN_KEY = "hubmi.auth.token";
 
 export interface ApiHealth {
@@ -402,14 +403,33 @@ class ApiClient {
       );
     },
 
-    generate: async (payload: { idea: string; grant_id?: string; fiszka?: BackendFiszka }) => {
-      return this.request<GrantGenerateResult>("/grants/generate/", {
+    generate: async (payload: {
+      title?: string;
+      problem?: string;
+      idea?: string;
+      grant_id?: string;
+      amount?: number;
+      powiat?: string | null;
+      fiszka?: BackendFiszka;
+    }) => {
+      return this.request<any>("/grants/generate/", {
         method: "POST",
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          title: payload.title || "",
+          problem: payload.problem || payload.idea || "",
+          amount: payload.amount,
+          powiat: payload.powiat,
+          grant_id: payload.grant_id || "iws20",
+          fiszka: payload.fiszka,
+        }),
       });
     },
 
-    developIdea: async (payload: { idea: string; fiszka?: BackendFiszka }) => {
+    developIdea: async (payload: {
+      problem?: string;
+      idea?: string;
+      fiszka?: BackendFiszka;
+    }) => {
       return this.request<{
         source: string;
         istota: string;
@@ -419,7 +439,10 @@ class ApiClient {
         jev_decisions?: any;
       }>("/ideas/develop/", {
         method: "POST",
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          problem: payload.problem || payload.idea || "",
+          fiszka: payload.fiszka,
+        }),
       });
     },
   };
@@ -492,7 +515,68 @@ class ApiClient {
     },
   };
 
-  // --- Konta i logowanie demo -----------------------------------------------
+  // --- Moduł II: Baza innowacji i dokumentów (Zasobnik wiedzy) --------------
+
+  public innovations = {
+    list: async (params?: { category?: string; q?: string; has_evidence?: boolean; powiat?: string }) => {
+      const query = new URLSearchParams();
+      if (params?.category) query.set("category", params.category);
+      if (params?.q) query.set("q", params.q);
+      if (params?.has_evidence) query.set("has_evidence", "1");
+      if (params?.powiat) query.set("powiat", params.powiat);
+      const qs = query.toString();
+      return this.request<any[]>(`/innovations/${qs ? `?${qs}` : ""}`);
+    },
+
+    get: async (id: string) => {
+      return this.request<any>(`/innovations/${id}/`);
+    },
+
+    create: async (payload: {
+      id?: string;
+      name: string;
+      category: string;
+      problem: string;
+      description: string;
+      target: string;
+      beneficiaries?: string;
+      evidence?: string;
+      authors?: string[];
+      url?: string;
+      pdf?: string;
+    }) => {
+      const id = payload.id || "inn-" + Math.random().toString(36).slice(2, 8);
+      return this.request<any>("/innovations/", {
+        method: "POST",
+        body: JSON.stringify({ ...payload, id }),
+      });
+    },
+
+    update: async (id: string, payload: Partial<any>) => {
+      return this.request<any>(`/innovations/${id}/`, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+      });
+    },
+
+    delete: async (id: string) => {
+      return this.request<any>(`/innovations/${id}/`, { method: "DELETE" });
+    },
+
+    similar: async (id: string) => {
+      return this.request<any[]>(`/innovations/${id}/similar/`);
+    },
+
+    categories: async () => {
+      return this.request<{ slug: string; title: string }[]>("/categories/");
+    },
+  };
+
+  public library = {
+    list: async () => {
+      return this.request<any[]>("/library/");
+    },
+  };
 
   public auth = {
     demoAccounts: async () => {

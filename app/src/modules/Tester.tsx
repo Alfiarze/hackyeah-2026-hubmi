@@ -11,6 +11,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { INNOVATIONS, type Innovation } from "../lib/data";
 import { addThread, getState, type Thread } from "../lib/store";
+import { api } from "../lib/api";
 import { foldDiacritics } from "../lib/text";
 import { Stamp } from "../components/Stamp";
 import "./tester.css";
@@ -81,6 +82,11 @@ export function Tester({ preselected, onClearPreselect, threads }: Props) {
       innovationId: current.id,
       rating: mode === "ocena" ? rating : undefined,
     });
+
+    if (mode === "ocena") {
+      api.ratings.create(current.id, rating, comment.trim(), role.trim() || undefined);
+    }
+
     setDone(true);
   };
 

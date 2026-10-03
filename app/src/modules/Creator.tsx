@@ -22,6 +22,8 @@ import { Modal } from "../components/Modal";
 import { ScoreDial } from "../components/WhyMatch";
 import "./creator.css";
 
+import { api } from "../lib/api";
+
 const ETAPY: Fiszka["etap"][] = ["pomysł", "prototyp", "testowanie", "gotowe do skalowania"];
 
 const EMPTY: Fiszka = { istota: "", adresat: "", etap: "pomysł", obszar: "" };
@@ -34,6 +36,14 @@ export function Creator() {
   const [amount, setAmount] = useState(60_000);
   const [sent, setSent] = useState<string | null>(null);
   const [grant, setGrant] = useState<GrantDraft | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isDeveloping, setIsDeveloping] = useState(false);
+  const [aiFeedback, setAiFeedback] = useState<{
+    source?: string;
+    sugestie?: string[];
+    obszar?: string;
+    rekomendacja?: string;
+  } | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const errorBox = useRef<HTMLDivElement>(null);
 
@@ -75,10 +85,66 @@ export function Creator() {
     setSent(th.id);
   };
 
-  const makeGrant = () => {
+  const handleDevelopIdea = async () => {
+    const text = `${title} ${problem} ${f.istota}`.trim();
+    if (text.length < 5) {
+      setErrors(["Wpisz chociaż nazwę lub zarys problemu, aby asystent AI mógł go przeanalizować."]);
+      return;
+    }
+    setErrors([]);
+    setIsDeveloping(true);
+    try {
+      const res = await api.grants.developIdea({
+        problem: text,
+        fiszka: f,
+      });
+      if (res.ok && res.data) {
+        const data = res.data;
+        setF((prev) => ({
+          ...prev,
+          istota: prev.istota || data.istota || "",
+          adresat: prev.adresat || data.adresat || "",
+          obszar: prev.obszar || data.obszar || "",
+        }));
+        setAiFeedback({
+          source: data.source,
+          sugestie: data.sugestie,
+          obszar: data.obszar,
+          rekomendacja: data.jev_decisions?.rekomendacja?.choice,
+        });
+      }
+    } catch {
+      // offline fallback
+    } finally {
+      setIsDeveloping(false);
+    }
+  };
+
+  const makeGrant = async () => {
     const errs = validate();
     setErrors(errs);
     if (errs.length) return;
+
+    setIsGenerating(true);
+    try {
+      const res = await api.grants.generate({
+        title,
+        problem: problem || f.istota,
+        amount,
+        powiat: powiat || null,
+        fiszka: f,
+      });
+      if (res.ok && res.data && res.data.sections) {
+        setGrant(res.data);
+        setIsGenerating(false);
+        return;
+      }
+    } catch {
+      // fallback to client-side generator below
+    } finally {
+      setIsGenerating(false);
+    }
+
     setGrant(
       generateGrant({
         title,
@@ -237,12 +303,41 @@ export function Creator() {
             </div>
           )}
 
+          {aiFeedback && (
+            <div className="cr__ai-feedback" role="status">
+              <div className="cr__ai-head">
+                <span className="eyebrow">Asystent Kreatora (Jev Decisions)</span>
+                {aiFeedback.obszar && <span className="mono">Obszar: {aiFeedback.obszar}</span>}
+              </div>
+              {aiFeedback.sugestie && aiFeedback.sugestie.length > 0 && (
+                <ul>
+                  {aiFeedback.sugestie.map((s, idx) => (
+                    <li key={idx}>{s}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
           <div className="row cr__actions">
             <button type="submit" className="btn btn--primary">
               Zgłoś fiszkę do ROPS
             </button>
-            <button type="button" className="btn" onClick={makeGrant}>
-              Wygeneruj szkic wniosku grantowego
+            <button
+              type="button"
+              className="btn btn--ghost"
+              onClick={handleDevelopIdea}
+              disabled={isDeveloping}
+            >
+              {isDeveloping ? "Analiza Jev AI..." : "✨ Rozwiń z Jev AI"}
+            </button>
+            <button
+              type="button"
+              className="btn"
+              onClick={makeGrant}
+              disabled={isGenerating}
+            >
+              {isGenerating ? "Generowanie..." : "Wygeneruj szkic wniosku"}
             </button>
           </div>
 

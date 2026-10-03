@@ -20,6 +20,8 @@ import {
   type OrgType,
   type SizeBand,
 } from "../lib/middleman";
+import { api } from "../lib/api";
+import { useEffect } from "react";
 import { Stamp } from "../components/Stamp";
 import "./middleman.css";
 
@@ -37,8 +39,31 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
     budget: 20_000,
     staff: 1,
   });
+  const [aiNotes, setAiNotes] = useState<string[]>([]);
 
   const current = preselected ?? picked;
+
+  useEffect(() => {
+    if (!current) {
+      setAiNotes([]);
+      return;
+    }
+    api.middleman.options({
+      innovation_id: current.id,
+      org_type: profile.type,
+      size_band: profile.size,
+      budget: profile.budget,
+      staff: profile.staff,
+      powiat: "krakowski",
+    }).then((res) => {
+      if (res.ok && res.data?.plan?.risks) {
+        const notes = res.data.plan.risks.filter(
+          (r: string) => r.startsWith("Uwaga AI:") || r.startsWith("Ocena Jev:"),
+        );
+        setAiNotes(notes);
+      }
+    });
+  }, [current, profile]);
 
   const needle = foldDiacritics(q.trim().toLowerCase());
   const options = useMemo(() => {
@@ -234,6 +259,17 @@ export function Middleman({ preselected, onClearPreselect }: Props) {
                   <ul className="mi__list mi__list--adapt">
                     {out.adaptations.map((a, i) => (
                       <li key={i}>{a}</li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {aiNotes.length > 0 && (
+                <section className="mi__block" data-reveal style={{ borderColor: "var(--brand)" }}>
+                  <h3 style={{ color: "var(--brand)" }}>Diagnoza wdrożeniowa Jev (Decisions API)</h3>
+                  <ul className="mi__list">
+                    {aiNotes.map((note, i) => (
+                      <li key={i}><strong>{note}</strong></li>
                     ))}
                   </ul>
                 </section>

@@ -18,13 +18,20 @@ import "./card.css";
 interface Props {
   result?: MatchResult;
   innovation?: Innovation;
+  /** werdykt modelu decyzyjnego Jev z backendu */
+  aiVerdict?: {
+    related?: boolean;
+    confidence?: number;
+    reason?: string;
+    source?: string;
+  };
   /** otwiera Middleman dla tej innowacji */
   onAdapt?: (inn: Innovation) => void;
   /** zgłoszenie chęci testowania (moduł IV) */
   onTest?: (inn: Innovation) => void;
 }
 
-export function InnovationCard({ result, innovation, onAdapt, onTest }: Props) {
+export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest }: Props) {
   const inn = result?.innovation ?? innovation!;
   const [contact, setContact] = useState(false);
   const [full, setFull] = useState(false);
@@ -74,6 +81,16 @@ export function InnovationCard({ result, innovation, onAdapt, onTest }: Props) {
           </dd>
         </div>
       </dl>
+
+      {aiVerdict && (
+        <div className="fiszka__ai-verdict">
+          <span className="eyebrow">
+            {aiVerdict.source === "jev" ? "Weryfikacja Jev Decisions" : "Diagnoza powiązania"}
+            {typeof aiVerdict.confidence === "number" && ` · pewność ${aiVerdict.confidence}%`}
+          </span>
+          <p>{aiVerdict.reason || (aiVerdict.related ? "Potwierdzono silne powiązanie merytoryczne z opisanym problemem." : "Rozwiązanie kontekstowo zbliżone.")}</p>
+        </div>
+      )}
 
       {result && <WhyMatch result={result} />}
 

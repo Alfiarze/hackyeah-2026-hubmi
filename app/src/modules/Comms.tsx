@@ -6,7 +6,7 @@
  * i jak wygląda ścieżka odpowiedzi do autora" — to jest ta druga połowa
  * odpowiedzi. Kropka „nowa odpowiedź" gaśnie dopiero po otwarciu wątku.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   markSeenByAuthor,
   reply,
@@ -14,6 +14,7 @@ import {
   type AppState,
   type Thread,
 } from "../lib/store";
+import { api } from "../lib/api";
 import "./comms.css";
 
 const KIND_LABEL: Record<Thread["kind"], string> = {
@@ -27,6 +28,25 @@ export function Comms({ state }: { state: AppState }) {
   const [open, setOpen] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
   const [askOpen, setAskOpen] = useState(false);
+  const [digest, setDigest] = useState<string | null>(null);
+  const [loadingDigest, setLoadingDigest] = useState(false);
+
+  useEffect(() => {
+    setDigest(null);
+  }, [open]);
+
+  const loadDigest = async () => {
+    if (!current) return;
+    setLoadingDigest(true);
+    try {
+      const res = await api.threads.digest(current.id);
+      if (res.ok && res.data?.summary) {
+        setDigest(res.data.summary);
+      }
+    } finally {
+      setLoadingDigest(false);
+    }
+  };
 
   const threads = state.threads;
   const current = threads.find((t) => t.id === open) ?? null;
@@ -139,6 +159,24 @@ export function Comms({ state }: { state: AppState }) {
                     <dd>{current.fiszka.obszar || "—"}</dd>
                   </div>
                 </dl>
+              )}
+
+              <div className="row" style={{ justifyContent: "space-between", alignItems: "center", margin: "var(--sp-3) 0" }}>
+                <button
+                  type="button"
+                  className="btn btn--sm btn--ghost"
+                  onClick={loadDigest}
+                  disabled={loadingDigest}
+                >
+                  {loadingDigest ? "Analizuję wątek (Jev)..." : "⚡ Diagnoza AI wątku (Jev)"}
+                </button>
+              </div>
+
+              {digest && (
+                <div className="card" style={{ borderColor: "var(--brand)", marginBottom: "var(--sp-4)", padding: "var(--sp-3)" }}>
+                  <p className="eyebrow" style={{ color: "var(--brand)", margin: 0 }}>Model Decyzyjny Jev (Live API):</p>
+                  <p style={{ margin: "var(--sp-1) 0", fontSize: "var(--fs-sm)" }}>{digest}</p>
+                </div>
               )}
 
               <ol className="cm__msgs">

@@ -20,6 +20,7 @@ import { buildIndex, search, gapReason, GAP_REASON_TEXT, type MatchResult } from
 import { LOOSE_EMOJIS, pickEmojis } from "../lib/emojis";
 import { INNOVATIONS, type Innovation } from "../lib/data";
 import { addThread } from "../lib/store";
+import { api } from "../lib/api";
 import { useSpeech } from "../lib/useSpeech";
 import { useA11y } from "../lib/a11y";
 import { InnovationCard } from "../components/InnovationCard";
@@ -43,6 +44,9 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
   const [powiatFilter, setPowiatFilter] = useState<string | null>(null);
   const [gapSent, setGapSent] = useState(false);
   const [gapOpen, setGapOpen] = useState(false);
+  const [serverVerdicts, setServerVerdicts] = useState<
+    Record<string, { related?: boolean; confidence?: number; reason?: string; source?: string }>
+  >({});
   const liveRef = useRef<HTMLDivElement>(null);
 
   const picks = useMemo(() => pickEmojis(draft), [draft]);
@@ -61,6 +65,40 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
         : { analysis: { concepts: [], stems: [], unknown: [] }, results: [] as MatchResult[] },
     [conv.done, conv.problem, powiatFilter],
   );
+
+  // Synchronizacja z backendem DRF: rejestruje SearchQuery w Postgres (zasilając Trendy)
+  // oraz pobiera werdykty modelu decyzyjnego Jev dla poszczególnych innowacji
+  useEffect(() => {
+    if (!conv.done || !conv.problem) return;
+    let active = true;
+    (async () => {
+      try {
+        const res = await api.match.search(conv.problem, 6, undefined, powiatFilter ?? undefined);
+        if (!active || !res.ok || !res.data) return;
+        const vMap: Record<string, { related?: boolean; confidence?: number; reason?: string; source?: string }> = {};
+        if (Array.isArray(res.data.results)) {
+          for (const item of res.data.results) {
+            const id = (item as any).id || (item as any).innovation_id;
+            const ai = (item as any).ai;
+            if (id && ai) {
+              vMap[id] = {
+                related: ai.related,
+                confidence: typeof ai.confidence === "number" ? ai.confidence : undefined,
+                reason: ai.reason,
+                source: ai.source,
+              };
+            }
+          }
+        }
+        setServerVerdicts(vMap);
+      } catch {
+        // graceful fallback do dopasowania lokalnego
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, [conv.done, conv.problem, powiatFilter]);
 
   const gap = conv.done ? gapReason(analysis, results) : null;
 
@@ -348,6 +386,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                   <InnovationCard
                     key={r.innovation.id}
                     result={r}
+                    aiVerdict={serverVerdicts[r.innovation.id]}
                     onAdapt={onAdapt}
                     onTest={onTest}
                   />

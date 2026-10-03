@@ -10,13 +10,14 @@
  * jedno pole filtrujące działające od pierwszej litery, bez przycisku
  * „szukaj" i bez przeładowania.
  */
-import { useMemo, useState } from "react";
-import { INNOVATIONS, LIBRARY, CATEGORIES, type Innovation } from "../lib/data";
+import { useEffect, useMemo, useState } from "react";
+import { INNOVATIONS, LIBRARY, CATEGORIES, subscribeCatalog, type Innovation } from "../lib/data";
 import { foldDiacritics } from "../lib/text";
 import { InnovationCard } from "../components/InnovationCard";
+import { api } from "../lib/api";
 import "./library.css";
 
-type Tab = "innowacje" | "dokumenty";
+type Tab = "innowacje" | "dokumenty" | "pytanie";
 
 interface Props {
   onAdapt: (inn: Innovation) => void;
@@ -29,11 +30,48 @@ export function Library({ onAdapt, onTest }: Props) {
   const [cat, setCat] = useState<string>("");
   const [onlyVideo, setOnlyVideo] = useState(false);
   const [section, setSection] = useState<string>("");
+  const [innovations, setInnovations] = useState(INNOVATIONS);
+  const [library, setLibrary] = useState(LIBRARY);
+  const [question, setQuestion] = useState("");
+  const [qaLoading, setQaLoading] = useState(false);
+  const [qaResult, setQaResult] = useState<{
+    answer: string;
+    source: string;
+    sources: { title: string; type: string; url: string; snippet?: string }[];
+    latency_ms?: number;
+  } | null>(null);
+
+  useEffect(() => {
+    return subscribeCatalog(() => {
+      setInnovations([...INNOVATIONS]);
+      setLibrary([...LIBRARY]);
+    });
+  }, []);
+
+  const handleAsk = async (userQ?: string) => {
+    const prompt = (userQ || question).trim();
+    if (!prompt) return;
+    setQaLoading(true);
+    try {
+      const res = await api.match.askAI(prompt);
+      if (res.ok && res.data) {
+        setQaResult(res.data);
+      }
+    } catch {
+      setQaResult({
+        source: "offline",
+        answer: "Połączenie z serwerem asystenta ROPS jest chwilowo niedostępne. Sprawdź wyszukiwarkę w zakładce „Innowacje” lub „Dokumenty”.",
+        sources: [],
+      });
+    } finally {
+      setQaLoading(false);
+    }
+  };
 
   const needle = foldDiacritics(q.trim().toLowerCase());
 
   const inns = useMemo(() => {
-    return INNOVATIONS.filter((i) => {
+    return innovations.filter((i) => {
       if (cat && i.cat !== cat) return false;
       if (onlyVideo && !i.video) return false;
       if (!needle) return true;
@@ -42,22 +80,22 @@ export function Library({ onAdapt, onTest }: Props) {
       );
       return hay.includes(needle);
     });
-  }, [needle, cat, onlyVideo]);
+  }, [innovations, needle, cat, onlyVideo]);
 
   const sections = useMemo(
-    () => [...new Set(LIBRARY.map((d) => d.section))],
-    [],
+    () => [...new Set(library.map((d) => d.section))],
+    [library],
   );
 
   const docs = useMemo(() => {
-    return LIBRARY.filter((d) => {
+    return library.filter((d) => {
       if (section && d.section !== section) return false;
       if (!needle) return true;
       return foldDiacritics(`${d.title} ${d.desc}`.toLowerCase()).includes(needle);
     });
-  }, [needle, section]);
+  }, [library, needle, section]);
 
-  const videoCount = INNOVATIONS.filter((i) => i.video).length;
+  const videoCount = innovations.filter((i) => i.video).length;
 
   return (
     <div className="page wrap">
@@ -65,95 +103,187 @@ export function Library({ onAdapt, onTest }: Props) {
         <p className="page__mod">Moduł II · Zasobnik wiedzy</p>
         <h1>Co już wiemy o Małopolsce</h1>
         <p>
-          {INNOVATIONS.length} przetestowanych innowacji, {videoCount} z filmem,
-          oraz {LIBRARY.length} dokumentów ROPS — raporty, diagnozy, Mapa Wyzwań
+          {innovations.length} przetestowanych innowacji, {videoCount} z filmem,
+          oraz {library.length} dokumentów ROPS — raporty, diagnozy, Mapa Wyzwań
           Społecznych i wzory wniosków grantowych.
         </p>
       </div>
 
       <div className="lib__tabs" role="tablist" aria-label="Rodzaj zasobu" data-reveal>
-        {(["innowacje", "dokumenty"] as Tab[]).map((x) => (
+        {[
+          { id: "innowacje", label: `Biblioteka innowacji (${innovations.length})` },
+          { id: "dokumenty", label: `Dokumenty i raporty (${library.length})` },
+          { id: "pytanie", label: "Zapytaj bazę ze źródłami (Jev AI)" },
+        ].map((x) => (
           <button
-            key={x}
+            key={x.id}
             type="button"
             role="tab"
-            id={`tab-${x}`}
-            aria-selected={tab === x}
-            aria-controls={`panel-${x}`}
+            id={`tab-${x.id}`}
+            aria-selected={tab === x.id}
+            aria-controls={`panel-${x.id}`}
             className="btn"
-            onClick={() => setTab(x)}
+            onClick={() => setTab(x.id as Tab)}
           >
-            {x === "innowacje"
-              ? `Biblioteka innowacji (${INNOVATIONS.length})`
-              : `Dokumenty i raporty (${LIBRARY.length})`}
+            {x.label}
           </button>
         ))}
       </div>
 
-      <div className="lib__filters" data-reveal>
-        <div className="field lib__search">
-          <label htmlFor="lib-q">Szukaj w treści</label>
-          <input
-            id="lib-q"
-            type="search"
-            autoComplete="off"
-            spellCheck={false}
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder={
-              tab === "innowacje" ? "np. demencja, wózek, PJM…" : "np. deinstytucjonalizacja…"
-            }
-            aria-describedby="lib-q-hint"
-          />
-          <p id="lib-q-hint" className="hint">
-            Filtruje od pierwszej litery. Działa bez polskich znaków.
-          </p>
-        </div>
-
-        {tab === "innowacje" ? (
-          <>
-            <div className="field">
-              <label htmlFor="lib-cat">Obszar</label>
-              <select id="lib-cat" value={cat} onChange={(e) => setCat(e.target.value)}>
-                <option value="">Wszystkie obszary</option>
-                {CATEGORIES.map((c) => (
-                  <option key={c.slug} value={c.slug}>
-                    {c.title}
-                  </option>
-                ))}
-              </select>
+      {tab !== "pytanie" && (
+        <>
+          <div className="lib__filters" data-reveal>
+            <div className="field lib__search">
+              <label htmlFor="lib-q">Szukaj w treści</label>
+              <input
+                id="lib-q"
+                type="search"
+                autoComplete="off"
+                spellCheck={false}
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder={
+                  tab === "innowacje" ? "np. demencja, wózek, PJM…" : "np. deinstytucjonalizacja…"
+                }
+                aria-describedby="lib-q-hint"
+              />
+              <p id="lib-q-hint" className="hint">
+                Filtruje od pierwszej litery. Działa bez polskich znaków.
+              </p>
             </div>
-            <button
-              type="button"
-              className="btn"
-              aria-pressed={onlyVideo}
-              onClick={() => setOnlyVideo((v) => !v)}
-            >
-              Tylko z filmem
-            </button>
-          </>
-        ) : (
-          <div className="field">
-            <label htmlFor="lib-sec">Rodzaj dokumentu</label>
-            <select id="lib-sec" value={section} onChange={(e) => setSection(e.target.value)}>
-              <option value="">Wszystkie rodzaje</option>
-              {sections.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
+
+            {tab === "innowacje" ? (
+              <>
+                <div className="field">
+                  <label htmlFor="lib-cat">Obszar</label>
+                  <select id="lib-cat" value={cat} onChange={(e) => setCat(e.target.value)}>
+                    <option value="">Wszystkie obszary</option>
+                    {CATEGORIES.map((c) => (
+                      <option key={c.slug} value={c.slug}>
+                        {c.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <button
+                  type="button"
+                  className="btn"
+                  aria-pressed={onlyVideo}
+                  onClick={() => setOnlyVideo((v) => !v)}
+                >
+                  Tylko z filmem
+                </button>
+              </>
+            ) : (
+              <div className="field">
+                <label htmlFor="lib-sec">Rodzaj dokumentu</label>
+                <select id="lib-sec" value={section} onChange={(e) => setSection(e.target.value)}>
+                  <option value="">Wszystkie rodzaje</option>
+                  {sections.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      <p className="lib__count" role="status">
-        {tab === "innowacje"
-          ? `${inns.length} z ${INNOVATIONS.length} innowacji`
-          : `${docs.length} z ${LIBRARY.length} dokumentów`}
-      </p>
+          <p className="lib__count" role="status">
+            {tab === "innowacje"
+              ? `${inns.length} z ${INNOVATIONS.length} innowacji`
+              : `${docs.length} z ${LIBRARY.length} dokumentów`}
+          </p>
+        </>
+      )}
 
-      {tab === "innowacje" ? (
+      {tab === "pytanie" && (
+        <div id="panel-pytanie" role="tabpanel" aria-labelledby="tab-pytanie" className="lib__qa" data-reveal>
+          <form
+            className="lib__qa-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleAsk();
+            }}
+          >
+            <div className="field">
+              <label htmlFor="lib-question">Zadaj pytanie do bazy 76 dokumentów i 115 innowacji ROPS</label>
+              <textarea
+                id="lib-question"
+                rows={3}
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                placeholder="Np. Gdzie szukać wsparcia dla opiekunów osób starszych? Jakie są procedury naboru IWS 2.0?"
+              />
+            </div>
+
+            <div className="lib__qa-chips">
+              {[
+                "Jakie innowacje wspierają seniorów z demencją w Małopolsce?",
+                "Jak przygotować wniosek o grant na innowację w naborze IWS 2.0?",
+                "Czym jest Canwa Innowacji Społecznych (Social Canvas)?",
+                "Gdzie szukać wsparcia dla opiekunów osób niesamodzielnych?",
+              ].map((sug) => (
+                <button
+                  key={sug}
+                  type="button"
+                  className="lib__qa-chip"
+                  onClick={() => {
+                    setQuestion(sug);
+                    handleAsk(sug);
+                  }}
+                >
+                  {sug}
+                </button>
+              ))}
+            </div>
+
+            <div className="row" style={{ marginTop: "var(--sp-4)" }}>
+              <button
+                type="submit"
+                className="btn btn--primary"
+                disabled={qaLoading || !question.trim()}
+              >
+                {qaLoading ? "Przeszukiwanie bazy ze źródłami..." : "Zapytaj asystenta ROPS (AI)"}
+              </button>
+            </div>
+          </form>
+
+          {qaResult && (
+            <div className="lib__qa-result" role="status">
+              <div className="lib__qa-head">
+                <span className="eyebrow">
+                  {qaResult.source === "jev"
+                    ? "Odpowiedź modelu decyzyjnego Jev"
+                    : "Odpowiedź ze źródeł ROPS"}
+                  {qaResult.latency_ms ? ` · ${qaResult.latency_ms} ms` : ""}
+                </span>
+                <span className="mono">Źródła: {qaResult.sources.length}</span>
+              </div>
+
+              <p className="lib__qa-answer">{qaResult.answer}</p>
+
+              {qaResult.sources.length > 0 && (
+                <ul className="lib__qa-sources">
+                  {qaResult.sources.map((s, idx) => (
+                    <li key={idx} className="lib__qa-source-item">
+                      <h4>
+                        <a href={s.url} target="_blank" rel="noreferrer">
+                          {s.title}
+                        </a>
+                      </h4>
+                      <p className="eyebrow">{s.type}</p>
+                      {s.snippet && <p>{s.snippet}</p>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {tab === "innowacje" && (
         <div id="panel-innowacje" role="tabpanel" aria-labelledby="tab-innowacje">
           {inns.length === 0 ? (
             <Empty onReset={() => { setQ(""); setCat(""); setOnlyVideo(false); }} />
@@ -165,7 +295,9 @@ export function Library({ onAdapt, onTest }: Props) {
             </div>
           )}
         </div>
-      ) : (
+      )}
+
+      {tab === "dokumenty" && (
         <div id="panel-dokumenty" role="tabpanel" aria-labelledby="tab-dokumenty">
           {docs.length === 0 ? (
             <Empty onReset={() => { setQ(""); setSection(""); }} />

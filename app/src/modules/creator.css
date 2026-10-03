@@ -134,5 +134,30 @@
   font-size: var(--fs-sm);
 }
 .grant__warn ul { margin: var(--sp-2) 0 0; padding-left: var(--sp-5); }
-.grant__warn li + li { margin-top: var(--sp-2); }
 .grant__copied { color: var(--ok); font-weight: 600; font-size: var(--fs-sm); }
+
+/* --- AI asystent kreatora --- */
+.cr__ai-feedback {
+  margin-top: var(--sp-4);
+  padding: var(--sp-4);
+  border-left: 3px solid var(--accent);
+  background: var(--surface-glass-thin);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+.cr__ai-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-2);
+}
+.cr__ai-feedback ul {
+  margin: var(--sp-2) 0 0;
+  padding-left: var(--sp-5);
+}
+.cr__ai-feedback li + li {
+  margin-top: var(--sp-2);
+}
+
