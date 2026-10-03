@@ -32,6 +32,28 @@
 5. **Przykładowy formularz na landing — zatwierdzony.** Do dorobienia
    w `landing/` (zgłoszenie problemu/pomysłu).
 
+## Dane — źródła do zapełnienia bazy (PRIORYTET)
+
+Matchmaking ma sens tylko wtedy, gdy baza pomysłów jest duża i realna.
+Musimy **zlokalizować przestrzeń, skąd zbieramy dane**, i zrobić to
+„turbo kreatywnie" — wyjść ponad to, co daje ROPS:
+
+1. **Dane ROPS** (już mamy dostęp): Mapa Wyzwań Społecznych, Biblioteka
+   Innowacji Społecznych, przykładowe dane — to baza startowa.
+2. **Posty z krakowskich grup miejskich na Facebooku** — wciągnąć kilka/kilkanaście
+   postów (ludzie dzielą się inicjatywami i pomysłami) jako wstępne dane.
+   Dużo większa baza, **nikt inny tego na hackathonie nie zrobi** — realna
+   przewaga nad zespołami, które użyją tylko danych od ROPS.
+3. **Projekty ze zeszłorocznych hackathonów** — spróbować pozyskać listę
+   zgłoszonych projektów (ze strony zgłoszeń, jeśli mamy podgląd).
+   Do actions: poszukać kontaktu („traczyk"), który da dostęp do zgłoszeń.
+4. **Open source z GitHuba** — projekty społeczne/obywatelskie jako
+   dodatkowe źródło pomysłów i rozwiązań.
+
+**Task:** wymyślić + wdrożyć pipeline pozyskania danych (scraping/zbieranie)
+— to warunek, żeby matchmaking „mrugał i działał" na demo. Bez danych
+mechanizm jest pusty.
+
 ## Moduły (liczą się punkty)
 
 - **Matchmaking społeczny — obowiązkowy** (10% oceny); **każdy kolejny moduł +5%**:
