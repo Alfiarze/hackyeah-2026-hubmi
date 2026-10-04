@@ -20,7 +20,11 @@ Dokładnie to samo dzieje się z wójtem. Sąsiednia gmina rozwiązała jego pro
 
 ---
 
-## ⏱ 0:40–2:20 · Demo na żywo — rdzeń wartości (100 s)
+## ⏱ 0:40–2:10 · Demo na żywo — rdzeń wartości (90 s)
+
+> Chronologia v2: ten beat ma **90 s** (było 100), bo weszła nowa sekwencja
+> powrotu potrzeby (⏱ 2:40). Tekstów nie zmieniamy — szybciej prowadzisz
+> końcówkę o Middlemanie („dokument, z którym wchodzisz na sesję Rady”).
 
 **[RÓB]** Moduł I, wpisz (albo wklej z buforu) zdanie:
 > „Mama ma początki demencji, mieszka sama na wsi i boimy się, że wyjdzie z domu.”
@@ -50,18 +54,61 @@ Jury nie musi mi wierzyć, że dopasowanie jest trafne. **Widzi, dlaczego.**”
 
 ---
 
-## ⏱ 2:20–2:50 · Pętla: brak wyniku to dane, nie błąd (30 s)
+## ⏱ 2:10–2:40 · Pętla: brak wyniku to dane, nie błąd (30 s)
 
 **[MÓW]**
 „Teraz rzecz, której nie ma nigdzie indziej. Kiedy **nic nie pasuje**, my nie pokazujemy pustej strony. Nie dopasowujemy też na siłę — wynik jest twardo ścinany.
 
 Zgłoszenie trafia do panelu ROPS, do zestawienia **niezaspokojonych potrzeb i trendów**. Słowa, których silnik nie rozpoznał, tworzą listę pojęć, których Bibliotece **brakuje**.
 
-Czyli: **im częściej system nie znajduje odpowiedzi, tym lepiej wie, czego region naprawdę potrzebuje** — i tym trafniejszy jest następny nabór grantowy. Moduł analityczny powstaje z samych zapytań. Nikt nie wypełnia dodatkowej ankiety.”
+Czyli: **im częściej system nie znajduje odpowiedzi, tym lepiej wie, czego
+region naprawdę potrzebuje** — i tym trafniejszy jest następny nabór grantowy.
+Moduł analityczny powstaje z samych zapytań. Nikt nie wypełnia dodatkowej
+ankiety.”
 
 ---
 
-## ⏱ 2:50–3:50 · Jev + GB10 — dlaczego to jest szybkie, tanie i suwerenne (60 s)
+## ⏱ 2:40–3:20 · NOWY BEAT: potrzeba wraca do mieszkańca (40 s)
+
+> To jest jedyna sekwencja demo, w której **zmieniasz rolę na żywo** — jury
+> zobaczy pętlę z obu stron jednego ekranu. Realizuje wprost wymóg zadania
+> („automatyczne powiadomienia o nowych pomysłach”) i domyka tezę pitchu.
+> Przed wejściem: wyczyść poprzednie powiadomienia w konsoli przeglądarki
+> (`localStorage.removeItem('hubmi.watches.v1')`), inaczej baner będzie śladem
+> próby generalnej.
+
+**[MÓW]**
+„Poprzednia sekcja pokazuje, że zgłoszenie nie przepada. Ale w dzisiejszych
+systemach nic **nie wraca** do człowieka, który zgłosił. To domykamy.”
+
+**[RÓB]** W wynikach (albo w karcie luki): klik **„Obserwuj tę potrzebę”**.
+
+**[MÓW]**
+„Jedno kliknięcie i czujka stoi. Widać też nowy sygnał: **podobną potrzebę
+szukało w tym tygodniu w regionie 9 osób** — zgłoszenie wzmacnia trend,
+nie mnoży duplikatów.”
+
+**[RÓB]** Przejdź do **Panel ROPS → Baza innowacji → „+ Dodaj nową innowację”**:
+nazwa *„Klub rozmów: senior na wsi”*, problem *„Starsze osoby na wsi same,
+bez kontaktu”*, opis jedno zdanie, reszta domyślna → zapis.
+
+**[MÓW]**
+„Strona ROPS udzieliła odpowiedzi — a mieszkanka, która miesiąc temu zgłosiła
+początek jako lukę, nie musi tego śledzić. **System wróci do niej sam.**”
+
+**[RÓB]** Wróć do **„Znajdź rozwiązanie”**: u samej góry baner
+**„Do zgłoszonych potrzeb pasują nowe innowacje”** → klik **„Pokaż fiszkę”**
+(pełna karta rozwija się na miejscu) → (opcjonalnie, jeśli czasy się cieśnią)
+Middleman.
+
+**[MÓW]**
+„I to jest cała pętla z zadania: **potrzeba → sygnał → innowacja →
+powiadomienie → wdrożenie.** A ponieważ powiadomienie żyje lokalnie, w
+urządzeniu — przetrwa nawet chwilę bez internetu, o której za chwilę.”
+
+---
+
+## ⏱ 3:20–4:20 · Jev + GB10 — dlaczego to jest szybkie, tanie i suwerenne (60 s)
 
 **[MÓW]**
 „Minuta o technologii, bo tu podjęliśmy dwie nieoczywiste decyzje.
@@ -84,7 +131,10 @@ I to jest argument instytucjonalny, nie tylko techniczny: **dane mieszkańców M
 
 ---
 
-## ⏱ 3:50–4:30 · Wartość — po jednym zdaniu na interesariusza (40 s)
+## ⏱ 4:20–4:45 · Wartość — po jednym zdaniu na interesariusza (25 s)
+
+> Ciasno bywa: mówisz **mieszkanca, wójta i ROPS** oraz zdanie o dostępności;
+> punkt o Innowatorze już spłynął w beatcie o pętli i jest w banku pytań.
 
 **[MÓW]**
 „Co z tego ma kto:
@@ -98,14 +148,17 @@ I rzecz, która w usługach publicznych bywa dopiskiem: **dostępność**. Baza 
 
 ---
 
-## ⏱ 4:30–5:00 · Domknięcie i prośba (30 s)
+## ⏱ 4:45–5:00 · Domknięcie i prośba (15 s)
 
 **[MÓW]**
-„Podsumowując: **wszystkie 7 modułów z zadania**, w tym obowiązkowy matchmaking, działający backend, 115 zweryfikowanych kart, 7 na 7 testów silnika, zero błędów dostępności. Utrzymanie wariantu produkcyjnego: **rzędu tysiąca złotych rocznie infrastruktury** — bo nie karmimy GPU.
+„Domknięcie pętli: **problem opisany w języku życia wraca jako przetestowana
+innowacja, a pomysł w drodze na grant jest sprawdzony z bazą po drodze.**
+Utrzymanie rzędu **tysiąca złotych rocznie** — bo nie karmimy GPU.
 
-Nasza prośba to nie budżet. To **trzy gminy i jedna skrzynka w ROPS na miesiąc pilotażu.** Miesiąc drugi — integracja z profilem zaufanym. Miesiąc trzeci — pierwszy nabór mikrograntów puszczony przez HubMI.
+Prośba jedna: **trzy gminy i jedna skrzynka w ROPS na miesiąc pilotażu.**
 
-**Opisz problem. Pokażemy, co już zadziałało.** Dziękuję — zapraszam do klikania na żywo.”
+**Opisz problem. Pokażemy, co już zadziałało.** Dziękuję — zapraszam
+do klikania na żywo."
 
 ---
 
@@ -125,6 +178,7 @@ Nasza prośba to nie budżet. To **trzy gminy i jedna skrzynka w ROPS na miesią
 | **21:1** | kontrast w trybie wysokiego kontrastu |
 | **4,75:1** | najsłabsza para tekstowa w palecie domyślnej |
 | **65 / 35** | udział pokrycia wątków vs. siły leksykalnej w wyniku |
+| **1 klik** | obserwacja potrzeby → powiadomienie po dodaniu karty w Panelu ROPS (mechanika działa i bez internetu) |
 
 ---
 
@@ -134,7 +188,10 @@ Nasza prośba to nie budżet. To **trzy gminy i jedna skrzynka w ROPS na miesią
 - **Backend padnie w trakcie** → nie walcz z demo na żywo, wejdź w `docs/screenshots/` (13 zrzutów, w tym wyniki z „dlaczego to pasuje") i dokończ narrację na nich.
 - **Jev nie odpowie w demo** → **nie milcz**, wykorzystaj to: *„proszę, właśnie widzimy fallback — werdykt AI jest puste, a ranking i uzasadnienia stoją nietknięte, bo liczy je nasz kod”*.
 - O GB10 mów **bez przechwałek benchmarkowych**: twierdzenie brzmi *„cały stos mieści się na takim sprzęcie i stawiamy go z Dockera”*, a nie *„zmierzyliśmy tam 300 ms”*. Jeśli ktoś dopyta o pomiary — ~300 ms to czas odpowiedzi Jev przez API, nie wynik lokalnego benchmarku.
-- **Zegar**: jeśli po demo masz mniej niż 2 minuty, wycinasz sekcję wartości dla interesariuszy (⏱ 3:50) i wchodzisz prosto w domknięcie. Nigdy nie wycinaj „Dlaczego to pasuje” ani bloku Jev/GB10.
+- **Zegar v2**: jeśli po demo masz mniej niż 2 minuty, wycinasz sekcję wartości dla interesariuszy (⏱ 4:20) i wchodzisz prosto w domknięcie. **Nigdy nie wycinaj** „Dlaczego to pasuje", bloku Jev/GB10 ani **beatu powrotu potrzeby (⏱ 2:40)** — to jedyna dowodowa sekwencja domkniętej pętli z dwoma stronami biurka.
+- **Hygiena pętli (⏱ 2:40), zanim wejdziesz przed jury:** w konsoli przeglądarki `localStorage.removeItem('hubmi.watches.v1')` — stare powiadomienie inaczej wisi nad hero i zdradza próbę generalną; sprawdź też, że na starcie **nie ma banera**.
+- **Frazy na lukę — potwierdzone na żywym backendzie (4.10):** *„kurier nie dociera do wioski odludnej"* → luka `brak-trafien`, 0 wyników (najczystsza na scenie); *„brak wywozu śmieci z osiedla wiejskiego"* → luka `brak-watkow` (z jednym słabym wynikiem — pokazuje, że nie dopasowujemy na siłę). Uwaga: *„pomoc w dowozie dzieci do przedszkola"* — to NIE luka (ma trafienie), nie używać na demo.
+- **Karta dla admina z notatki**: formularz „Dodaj innowację" ma 3 wymagane pola — przepisuj, nie improwizuj, żeby nazwa zgadzała się z tym, co pokaże powiadomienie.
 - Ostatnie zdanie wypowiedz **patrząc na jury, nie na ekran**.
 
 ---
@@ -333,7 +390,13 @@ Fiszka na cztery pola, sprawdzenie nowości w Bibliotece i generator wniosku pod
 Formularzem w panelu administratora. Nowa karta jest wyszukiwalna **od razu po zapisie** — indeks silnika unieważnia się sygnałem, a wektor liczy się tą samą macierzą.
 
 **„Jaka jest ścieżka od zgłoszenia do odpowiedzi?”**
-Zgłoś pomysł → przełącz rolę na pracownika ROPS → powiadomienie w panelu → odpowiedz → wróć jako autorka i zobacz odpowiedź. Cała pętla jest klikalna w demo.
+Dwie, w obie strony, obie klikalne w demo. Pomysł: zgłoś → powiadomienie w panelu ROPS → odpowiedź → autorka widzi „nowa odpowiedź". **Potrzeba**: opis → luka/trend → „Obserwuj tę potrzebę" → pracownik ROPS dodaje kartę → powiadomienie u obserwującego z pełną fiszką i wejściem w Middleman.
+
+**„Skąd wzięła się liczba osób przy wynikach?"**
+Uczciwie: w prototypie to dane demonstracyjne — deterministyczne i opisane razem z resztą danych demo w stopce aplikacji. W wdrożeniu ta sama pozycja liczy się z prawdziwych zgłoszeń: to ten sam mechanizm, który żywi panel trendów.
+
+**„Obserwacja potrzeby — to nie dane osobowe?"**
+W prototypie obserwacja jest preferencją zapisaną lokalnie w przeglądarce — nie leci do backendu i nie wymaga konta. W wdrożeniu obserwacja łączy się z profilem zaufanym, a rozstrzygnięcia o retencji i podstawie prawnej mieszczą się w tej samej decyzji ROPS z IOD, co reszta zgłoszeń — nie zmyślimy jej za nich.
 
 ## 9. Pytania zaczepne i uczciwość
 

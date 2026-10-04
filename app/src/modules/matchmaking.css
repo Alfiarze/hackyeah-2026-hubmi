@@ -376,3 +376,45 @@
 .mm__gap .mono {
   overflow-wrap: anywhere;
 }
+
+/* --- pętla powrotu potrzeby: obserwacje + „Nie jesteś sam" ---
+   Powiadomienia na górze widoku: ta sama karta (card), żeby na scenie
+   czytało się jako element systemu, a nie wyskakujący toast. */
+.mm__notice {
+  margin-top: var(--sp-4);
+  margin-bottom: var(--sp-6);
+  border-color: var(--accent-deep);
+}
+.mm__notice h2 {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--sp-4);
+  max-width: 32ch;
+}
+.mm__notice-list {
+  list-style: none;
+  margin: 0 0 var(--sp-4);
+  padding: 0;
+  display: grid;
+  gap: var(--sp-4);
+}
+.mm__notice-row {
+  padding-top: var(--sp-4);
+  border-top: 1px dashed var(--line);
+}
+.mm__notice-row:first-child { border-top: 0; padding-top: 0; }
+.mm__notice-row p { margin: 0 0 var(--sp-3); max-width: var(--measure); }
+/* Fiszka w rozwinięciu powiadomienia - pełna szerokość, bez siatki wyników. */
+.mm__notice-row .fiszka { margin-top: var(--sp-2); }
+
+/* Sygnał „nie jesteś sam": akcent kolorem ok (przetestowane), nie błędem. */
+.mm__alone {
+  margin-top: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+.mm__alone strong {
+  color: var(--ok);
+  font-weight: 800;
+}
+[data-contrast="high"] .mm__alone strong { color: var(--ink); }

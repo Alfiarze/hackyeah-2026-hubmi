@@ -13,7 +13,7 @@
  * trendy w panelu ROPS), więc wynik policzony lokalnie rozjechałby się z tym,
  * co widzi koordynator. Gdy backend milczy, moduł mówi to wprost.
  */
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   advance,
   applyChip,
@@ -26,7 +26,19 @@ import { fetchMatches, reportGap as postGap, type MatchResponse } from "../lib/m
 import { LOOSE_EMOJIS } from "../lib/emojis";
 import { ScanFallback } from "../components/ScanFallback";
 import { useEmojiPicks } from "../lib/useEmojiPicks";
-import { type Innovation } from "../lib/data";
+import { type Innovation, byId } from "../lib/data";
+import {
+  getWatchState,
+  isWatched,
+  markNoticesRead,
+  seekersBeforeYou,
+  similarSearches,
+  subscribeWatch,
+  unwatchNeed,
+  watchNeed,
+  watchKey,
+  type WatchNotice,
+} from "../lib/watch";
 import { plural } from "../lib/text";
 import { addLocalThread } from "../lib/store";
 import { useSpeech } from "../lib/useSpeech";
@@ -61,6 +73,13 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
   const [gapOpen, setGapOpen] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
   const liveRef = useRef<HTMLDivElement>(null);
+
+  // --- pętla powrotu potrzeby: obserwacje i powiadomienia (lib/watch.ts) ---
+  // Stan żyje poza komponentem, żeby przeżył przełączanie ról i odświeżenie
+  // strony - dla demo w jednym oknie przeglądarki to wystarcza.
+  const watchState = useSyncExternalStore(subscribeWatch, getWatchState, getWatchState);
+  const unreadNotices = watchState.notices.filter((n) => !n.read);
+  const [noticeOpen, setNoticeOpen] = useState<string | null>(null);
 
   // O doborze emotek decyduje wyłącznie Jev (`POST /api/match/emojis/`).
   // Hook sam pilnuje ciszy przed pytaniem, więc krążek nie wylatuje i nie
@@ -121,6 +140,21 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
   const results = data?.results ?? [];
   const analysis = data?.analysis;
   const gap = data?.gap.isGap ? data.gap : null;
+
+  // Obserwowana potrzeba = bieżący problem rozmowy. Klucz jest normalizowany
+  // (lib/watch.ts), więc ta sama potrzeba po powrocie nie mnoży wpisów.
+  const watchActive = isWatched(conv.done ? conv.problem : null);
+
+  const toggleWatch = () => {
+    if (watchActive) {
+      const entry = watchState.watches.find((w) => w.id === watchKey(conv.problem));
+      if (entry) unwatchNeed(entry.id);
+      return;
+    }
+    // Zapytanie bez rozpoznanych wątków też da się obserwować - wtedy liczy
+    // wspólne słowa (lib/watch.ts), więc luka nigdy nie jest „nieobserwowalna".
+    watchNeed(conv.problem, analysis?.concepts ?? []);
+  };
 
   const extCount = useMemo(
     () => results.filter((r) => r.innovation.ext).length,
@@ -206,6 +240,40 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
 
   return (
     <div className="page--hero">
+      {/* --- domknięcie pętli: powiadomienia z obserwowanych potrzeb ---
+           Pokaże się tu, bo mieszkańcy zaczynają i kończą podróż w tym widoku.
+           Rozwinięcie „Pokaż fiszkę" renderuje pełna kartę na miejscu, więc
+           użytkownik od razu może przejść do Middlemana lub zgłoszenia testu. */}
+      {unreadNotices.length > 0 && (
+        <section
+          className="mm__notice card"
+          role="region"
+          aria-label="Nowe innowacje pasujące do obserwowanych potrzeb"
+        >
+          <p className="page__mod">Twoje obserwacje</p>
+          <h2>Do zgłoszonych potrzeb pasują nowe innowacje</h2>
+          <ul className="mm__notice-list">
+            {unreadNotices.map((n) => (
+              <NoticeRow
+                key={n.id}
+                notice={n}
+                open={noticeOpen === n.id}
+                onToggle={() =>
+                  setNoticeOpen((v) => (v === n.id ? null : n.id))
+                }
+                onAdapt={onAdapt}
+                onTest={onTest}
+              />
+            ))}
+          </ul>
+          <div className="row">
+            <button type="button" className="btn" onClick={markNoticesRead}>
+              Zamknij powiadomienia
+            </button>
+          </div>
+        </section>
+      )}
+
       <Hero receded={conv.done}>
         <h1>
           {t("Opisz problem.", "Napisz, co się dzieje.")}{" "}
@@ -398,6 +466,13 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                             .join(", ")}.`
                         : "Dopasowanie oparte na słowach z Twojego opisu."}
                   </p>
+                  {!gap && analysis && analysis.concepts.length > 0 && (
+                    <p className="mm__alone">
+                      <strong>Nie jesteś sam.</strong> Podobną potrzebę szukało w
+                      tym tygodniu w regionie {similarSearches(analysis.concepts)}{" "}
+                      osób.
+                    </p>
+                  )}
                 </>
               )}
             </div>
@@ -418,10 +493,27 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                   {external ? "Szukaj tylko w Małopolsce" : "Dodaj bazy spoza Małopolski"}
                 </button>
               )}
+              {phase === "ready" && !gap && (
+                <button
+                  type="button"
+                  className="btn"
+                  aria-pressed={watchActive}
+                  onClick={toggleWatch}
+                >
+                  {watchActive ? "Obserwujesz" : "Obserwuj tę potrzebę"}
+                </button>
+              )}
               <button type="button" className="btn" onClick={restart}>
                 Zacznij od nowa
               </button>
             </div>
+            {phase === "ready" && (
+              <p className="hint">
+                {watchActive
+                  ? "Obserwujesz tę potrzebę - powiadomimy Cię, gdy w bazie pojawi się pasująca innowacja."
+                  : "Obserwacja to powiadomienie: damy znać, gdy w bazie pojawi się innowacja pasująca do tego problemu."}
+              </p>
+            )}
           </div>
 
           {phase === "error" && (
@@ -469,6 +561,14 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                   Te właśnie zasilają zestawienie trendów.
                 </p>
               )}
+              {analysis && analysis.concepts.length > 0 && (
+                <p className="mm__alone">
+                  <strong>Nie jesteś sam.</strong> Jesteś{" "}
+                  {seekersBeforeYou(analysis.concepts)}. osobą z podobnym problemem
+                  w tym tygodniu — Twoje zgłoszenie wzmacnia ten sygnał w trendach
+                  ROPS.
+                </p>
+              )}
               {gapSent ? (
                 <p className="mm__sent" role="status">
                   <strong>Zgłoszone.</strong> Koordynator ROPS widzi już powiadomienie
@@ -488,6 +588,14 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
                       onClick={() => setGapOpen(true)}
                     >
                       Zgłoś tę potrzebę do ROPS
+                    </button>
+                    <button
+                      type="button"
+                      className="btn"
+                      aria-pressed={watchActive}
+                      onClick={toggleWatch}
+                    >
+                      {watchActive ? "Obserwujesz" : "Obserwuj tę potrzebę"}
                     </button>
                   </div>
                 </>
@@ -589,5 +697,49 @@ function GapForm({
         </button>
       </div>
     </form>
+  );
+}
+
+/**
+ * Jeden wiersz powiadomienia z obserwacji: tekst + rozwinięcie do pełnej
+ * fiszki. Fiszka jest tu z celowego założenia ta sama komponenta co w
+ * wynikach - powiadomienie nie jest martwą karteczką, tylko wejściem
+ * do tego samego katalogu, z Middlemanem i zgłoszeniem testu w zasięgu ręki.
+ */
+function NoticeRow({
+  notice,
+  open,
+  onToggle,
+  onAdapt,
+  onTest,
+}: {
+  notice: WatchNotice;
+  open: boolean;
+  onToggle: () => void;
+  onAdapt: (inn: Innovation) => void;
+  onTest: (inn: Innovation) => void;
+}) {
+  const inn = byId(notice.innovationId);
+  return (
+    <li className="mm__notice-row">
+      <p>
+        Pasuje do obserwowanej potrzeby{" "}
+        <strong>„{notice.watchText}"</strong>: nowa innowacja{" "}
+        <strong>„{notice.innovationName}"</strong>.
+      </p>
+      {inn && (
+        <div className="row">
+          <button
+            type="button"
+            className="btn"
+            aria-expanded={open}
+            onClick={onToggle}
+          >
+            {open ? "Zwiń fiszkę" : "Pokaż fiszkę"}
+          </button>
+        </div>
+      )}
+      {open && inn && <InnovationCard innovation={inn} onAdapt={onAdapt} onTest={onTest} />}
+    </li>
   );
 }
