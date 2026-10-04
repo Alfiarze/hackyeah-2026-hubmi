@@ -44,8 +44,14 @@ def import_innovations() -> dict:
     ext_raw = _load(settings.ROPS_DATA_DIR / "external_innovations.json") or {}
     raw_by_slug.update({i.get("slug"): i for i in ext_raw.get("innovations", [])})
 
+    # Bundle frontu to wylacznie Malopolska (lekki start aplikacji). Karty z baz
+    # zewnetrznych maja wlasny plik - baza trzyma jedno i drugie, bo to ona
+    # serwuje katalog i liczy dopasowanie.
+    ext_bundle = _load(settings.APP_DATA_DIR / "innovations_external.json") or {}
+
     categories = {
-        c["slug"]: c for c in bundle.get("categories", [])
+        c["slug"]: c
+        for c in list(bundle.get("categories", [])) + list(ext_bundle.get("categories", []))
     }
     cat_objs = {}
     for slug, cat in categories.items():
@@ -55,7 +61,7 @@ def import_innovations() -> dict:
 
     created = updated = 0
     deployments = 0
-    for item in bundle.get("innovations", []):
+    for item in list(bundle.get("innovations", [])) + list(ext_bundle.get("innovations", [])):
         slug = item["id"]
         raw_item = raw_by_slug.get(slug, {})
         cat = cat_objs.get(item.get("cat")) or next(iter(cat_objs.values()))
@@ -98,7 +104,8 @@ def import_innovations() -> dict:
 
     return {
         "categories": len(cat_objs),
-        "innovations": len(bundle.get("innovations", [])),
+        "innovations": len(bundle.get("innovations", [])) + len(ext_bundle.get("innovations", [])),
+        "zewnetrzne": len(ext_bundle.get("innovations", [])),
         "created": created,
         "updated": updated,
         "deployments": deployments,

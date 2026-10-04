@@ -227,6 +227,61 @@ export interface AdminTrendsResult {
   };
 }
 
+/** Jeden temat zapytań z `/api/admin/demand/` - potrzeba, nie pojedyncze zdanie. */
+export interface DemandTopicRow {
+  id: number;
+  label: string;
+  kind: "wątki" | "nowe pojęcia" | "opis";
+  concepts: string[];
+  terms: string[];
+  /** ile razy w ogóle pytano o ten temat */
+  searches: number;
+  /** ile z tych zapytań skończyło się brakiem pokrycia w Bibliotece */
+  unmet_searches: number;
+  unmet_share: number;
+  /** ile różnych przeglądarek pytało (0 = zapytania sprzed wdrożenia licznika) */
+  askers: number;
+  best_score: number | null;
+  status: "brak pokrycia" | "słabe pokrycie" | "pokryte";
+  first_seen: string;
+  last_seen: string;
+  days_since_last: number;
+  window: { searches: number; unmet: number };
+  monthly: { month: string; count: number; unmet: number }[];
+  trend: {
+    recent_30d: number;
+    previous_30d: number;
+    change_pct: number | null;
+    direction: "rośnie" | "maleje" | "stabilne" | "nowe" | "cisza";
+  };
+  powiats: { powiat: string; count: number }[];
+  samples: string[];
+}
+
+export interface AdminDemandResult {
+  period_days: number;
+  scope: "unmet" | "all";
+  generated_at: string;
+  totals: {
+    /** wszystkie tematy okresu - podsumowanie nie zależy od wybranego zakresu */
+    topics: number;
+    /** ile tematów faktycznie trafiło do tabeli */
+    listed: number;
+    unmet_topics: number;
+    repeated_topics: number;
+    searches: number;
+    unmet_searches: number;
+    unmet_share: number;
+    askers: number;
+    window_searches: number;
+    window_unmet: number;
+    /** średnia liczba zapytań na temat - „to nie przypadek, to potrzeba” */
+    repeat_rate: number;
+  };
+  series_monthly: { month: string; count: number; unmet: number }[];
+  topics: DemandTopicRow[];
+}
+
 class ApiClient {
   private token: string | null = null;
   private backendAlive: boolean | null = null;
@@ -664,6 +719,18 @@ class ApiClient {
       return this.request<AdminTrendsResult>(`/admin/trends/?days=${days}`);
     },
 
+    /**
+     * Popyt policzony tematami: ile razy pytano o to samo, ilu różnych ludzi
+     * pytało, kiedy i czy rośnie. `scope=unmet` (domyślnie) zostawia tylko
+     * tematy, na które Biblioteka nie ma odpowiedzi - to jest ta część, którą
+     * da się pokazać inwestorowi jako niezagospodarowany rynek.
+     */
+    demand: async (days = 180, limit = 20, scope: "unmet" | "all" = "unmet") => {
+      return this.request<AdminDemandResult>(
+        `/admin/demand/?days=${days}&limit=${limit}&scope=${scope}`,
+      );
+    },
+
     summary: async () => {
       return this.request<{
         period: string;
@@ -706,12 +773,20 @@ class ApiClient {
   // --- Moduł II: Baza innowacji i dokumentów (Zasobnik wiedzy) --------------
 
   public innovations = {
-    list: async (params?: { category?: string; q?: string; has_evidence?: boolean; powiat?: string }) => {
+    list: async (params?: {
+      category?: string;
+      q?: string;
+      has_evidence?: boolean;
+      powiat?: string;
+      /** pominięte = tylko Małopolska · "1" = tylko bazy zewnętrzne · "all" = komplet */
+      ext?: "1" | "all";
+    }) => {
       const query = new URLSearchParams();
       if (params?.category) query.set("category", params.category);
       if (params?.q) query.set("q", params.q);
       if (params?.has_evidence) query.set("has_evidence", "1");
       if (params?.powiat) query.set("powiat", params.powiat);
+      if (params?.ext) query.set("ext", params.ext);
       const qs = query.toString();
       return this.request<any[]>(`/innovations/${qs ? `?${qs}` : ""}`);
     },
@@ -773,7 +848,8 @@ class ApiClient {
       >("/auth/demo/");
     },
 
-    login: async (username: string, password = "demo-password") => {
+    /** Hasła kont demo to `<login>123` (zob. `backend/accounts/services.py`). */
+    login: async (username: string, password = `${username}123`) => {
       const res = await this.request<{ token: string; user: any }>("/auth/login/", {
         method: "POST",
         body: JSON.stringify({ username, password }),

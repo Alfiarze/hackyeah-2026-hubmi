@@ -1,47 +1,47 @@
 {
-  "generatedAt": "2026-10-03T20:40:01.904Z",
+  "generatedAt": "2026-10-04T05:48:43.924Z",
   "tool": "axe-core 4.13.0",
   "standard": "WCAG 2.1 AA",
   "pages": [
     {
       "route": "matchmaking",
-      "label": "I — Matchmaking",
+      "label": "I - Matchmaking",
       "violations": 0,
-      "passes": 25
+      "passes": 23
     },
     {
       "route": "biblioteka",
-      "label": "II — Zasobnik wiedzy",
+      "label": "II - Zasobnik wiedzy",
       "violations": 0,
       "passes": 31
     },
     {
       "route": "kreator",
-      "label": "III — Kreator pomysłów",
+      "label": "III - Kreator pomysłów",
       "violations": 0,
       "passes": 26
     },
     {
       "route": "tester",
-      "label": "IV — Tester innowacji",
+      "label": "IV - Tester innowacji",
       "violations": 0,
-      "passes": 28
+      "passes": 27
     },
     {
       "route": "komunikacja",
-      "label": "V — Komunikacja",
+      "label": "V - Komunikacja",
       "violations": 0,
-      "passes": 25
+      "passes": 23
     },
     {
       "route": "admin",
-      "label": "VI — Panel administratora",
+      "label": "VI - Panel administratora",
       "violations": 0,
       "passes": 30
     },
     {
       "route": "middleman",
-      "label": "VII — Middleman",
+      "label": "VII - Middleman",
       "violations": 0,
       "passes": 26
     },
@@ -49,7 +49,7 @@
       "route": "dostepnosc",
       "label": "Dostępność",
       "violations": 0,
-      "passes": 27
+      "passes": 25
     }
   ],
   "violations": []

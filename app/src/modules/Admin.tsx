@@ -6,7 +6,7 @@
  * 2. Analityka luk i trendy zapytań (udział podaży vs popytu, nierozpoznane pojęcia).
  * 3. Sprawna i szybka aktualizacja bazy wiedzy (formularz dodawania innowacji, zapis do API Django i aktualizacja katalogu).
  */
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   markRead,
   reply,
@@ -19,7 +19,7 @@ import {
 import { INNOVATIONS, CATEGORIES, addCustomInnovation, subscribeCatalog, type Innovation } from "../lib/data";
 import { CONCEPTS } from "../lib/concepts";
 import { analyzeQuery } from "../lib/match";
-import { api } from "../lib/api";
+import { api, type AdminDemandResult, type DemandTopicRow } from "../lib/api";
 import { BarChart, StatTile, type BarRow } from "../components/BarChart";
 import { MalopolskaMap } from "../components/MalopolskaMap";
 import "./admin.css";
@@ -41,6 +41,14 @@ export function Admin({ state }: { state: AppState }) {
     INNOVATIONS.filter((i) => !i.ext),
   );
   const [serverSummary, setServerSummary] = useState<any>(null);
+
+  // --- popyt: ile razy pytano o to samo (moduł VI, dane z backendu) ---------
+  const [demand, setDemand] = useState<AdminDemandResult | null>(null);
+  const [demandScope, setDemandScope] = useState<"unmet" | "all">("unmet");
+  const [demandDays, setDemandDays] = useState(180);
+  /** Zestawienia są tylko dla ROPS/admina - stan mówi, czego brakuje do widoku. */
+  const [analytics, setAnalytics] = useState<"loading" | "ok" | "denied" | "offline">("loading");
+  const [loggingIn, setLoggingIn] = useState(false);
 
   // Formularz dodawania innowacji (Wymóg §2.II i §2.VI)
   const [showAddForm, setShowAddForm] = useState(false);
@@ -64,15 +72,37 @@ export function Admin({ state }: { state: AppState }) {
     });
   }, []);
 
-  useEffect(() => {
-    if (tab === "trendy") {
-      api.analytics.summary().then((res) => {
-        if (res.ok && res.data) {
-          setServerSummary(res.data);
-        }
-      });
+  /**
+   * Zestawienia serwerowe. Osobno od lokalnych wykresów, bo to jedyne miejsce
+   * w panelu, które wymaga roli - bez logowania backend odpowiada 403 i trzeba
+   * powiedzieć to wprost, zamiast pokazywać pustą sekcję.
+   */
+  const loadServerAnalytics = useCallback(async () => {
+    setAnalytics("loading");
+    const [sum, dem] = await Promise.all([
+      api.analytics.summary(),
+      api.analytics.demand(demandDays, 25, demandScope),
+    ]);
+    if (sum.ok && sum.data) setServerSummary(sum.data);
+    if (dem.ok && dem.data) {
+      setDemand(dem.data);
+      setAnalytics("ok");
+      return;
     }
-  }, [tab]);
+    setDemand(null);
+    setAnalytics(dem.status === 401 || dem.status === 403 ? "denied" : "offline");
+  }, [demandDays, demandScope]);
+
+  useEffect(() => {
+    if (tab === "trendy") void loadServerAnalytics();
+  }, [tab, loadServerAnalytics]);
+
+  const loginAsRops = async () => {
+    setLoggingIn(true);
+    const res = await api.auth.login("rops");
+    setLoggingIn(false);
+    if (res.ok) await loadServerAnalytics();
+  };
 
   const threads = state.threads;
   const current = threads.find((t) => t.id === open) ?? null;
@@ -503,6 +533,115 @@ export function Admin({ state }: { state: AppState }) {
             dla ROPS o brakujących innowacjach w regionie.
           </p>
 
+          <section className="ad__demand" data-reveal>
+            <div className="ad__demandhead">
+              <div>
+                <h3>Ile razy szukano rozwiązania, którego nie ma</h3>
+                <p className="hint">
+                  Zapytania sklejone w tematy, nie liczone zdaniami: „hodowla pstrąga”
+                  i „hodowla pstraga w stawie” to jedna potrzeba zgłoszona dwa razy.
+                  Stąd wiadomo, czy coś jest jednorazowym pytaniem, czy rynkiem -
+                  i od kiedy ten rynek się zgłasza.
+                </p>
+              </div>
+              <div className="row ad__demandctl">
+                <div className="row a11ybar__group" role="group" aria-label="Zakres tematów">
+                  {(["unmet", "all"] as const).map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      className="btn btn--ghost"
+                      aria-pressed={demandScope === s}
+                      onClick={() => setDemandScope(s)}
+                    >
+                      {s === "unmet" ? "Bez pokrycia" : "Wszystkie"}
+                    </button>
+                  ))}
+                </div>
+                <label className="ad__period">
+                  <span>Okres</span>
+                  <select
+                    value={demandDays}
+                    onChange={(e) => setDemandDays(Number(e.target.value))}
+                  >
+                    <option value={90}>90 dni</option>
+                    <option value={180}>180 dni</option>
+                    <option value={365}>rok</option>
+                    <option value={730}>2 lata</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            {analytics === "loading" && <p className="muted">Liczę popyt z logu zapytań…</p>}
+
+            {analytics === "denied" && (
+              <div className="card ad__demandgate">
+                <p>
+                  Zestawienie popytu widzi wyłącznie pracownik ROPS i administrator
+                  (§2.II zadania: trendy tylko dla administratora). Zaloguj się kontem
+                  demo, żeby zobaczyć dane z serwera.
+                </p>
+                <button type="button" className="btn btn--primary" onClick={loginAsRops} disabled={loggingIn}>
+                  {loggingIn ? "Loguję…" : "Zaloguj jako ROPS (konto demo)"}
+                </button>
+              </div>
+            )}
+
+            {analytics === "offline" && (
+              <p className="muted">
+                Brak połączenia z API. Popyt liczy backend - w przeglądarce nie ma
+                drugiego licznika, żeby panel i baza nie pokazywały dwóch różnych
+                liczb tego samego.
+              </p>
+            )}
+
+            {analytics === "ok" && demand && (
+              <>
+                <div className="tiles" data-reveal="stagger">
+                  <StatTile
+                    value={demand.totals.unmet_searches}
+                    label="Zapytań bez pokrycia"
+                    note={`${demand.totals.unmet_share}% wszystkich zapytań`}
+                    tone={demand.totals.unmet_searches ? "alert" : "good"}
+                  />
+                  <StatTile
+                    value={demand.totals.unmet_topics}
+                    label="Potrzeb bez rozwiązania"
+                    note="tematów, nie pojedynczych zdań"
+                  />
+                  <StatTile
+                    value={demand.totals.repeat_rate}
+                    label="Zapytań na temat"
+                    note={`${plural(
+                      demand.totals.repeated_topics,
+                      "temat wrócił",
+                      "tematy wróciły",
+                      "tematów wróciło",
+                    )} więcej niż raz`}
+                  />
+                  <StatTile
+                    value={demand.totals.askers || "—"}
+                    label="Różnych pytających"
+                    note={
+                      demand.totals.askers
+                        ? "liczone po przeglądarce, bez danych osobowych"
+                        : "licznik rusza od pierwszego nowego zapytania"
+                    }
+                  />
+                </div>
+
+                {demand.topics.length === 0 ? (
+                  <p className="muted">
+                    W tym okresie każde zapytanie znalazło pokrycie w Bibliotece.
+                  </p>
+                ) : (
+                  <DemandTable rows={demand.topics} days={demand.period_days} />
+                )}
+              </>
+            )}
+          </section>
+
           <section data-reveal>
             <h3>Podaż vs Popyt - gdzie brakuje innowacji w Małopolsce</h3>
             <p className="hint">
@@ -517,6 +656,9 @@ export function Admin({ state }: { state: AppState }) {
               ]}
               rows={supplyDemand}
               unit="%"
+              // Udziały to ułamki - bez formatu etykieta słupka pokazywała
+              // surowe „7.046979865771812".
+              format={(v) => `${v.toFixed(1)}%`}
             />
           </section>
 
@@ -796,6 +938,131 @@ export function Admin({ state }: { state: AppState }) {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+/**
+ * Polska odmiana po liczbie: 1 temat, 2-4 tematy, 5+ tematów.
+ * „1 tematów wróciło” w panelu dla ROPS wygląda jak nieskończony string z kodu.
+ */
+function plural(n: number, one: string, few: string, many: string): string {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (n === 1) return `${n} ${one}`;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} ${few}`;
+  return `${n} ${many}`;
+}
+
+/** Miesięczny rozkład zapytań. Dekoracja - treść niesie opis obok, nie słupki. */
+function Sparkline({ rows }: { rows: DemandTopicRow["monthly"] }) {
+  const max = Math.max(1, ...rows.map((r) => r.count));
+  return (
+    <span className="ad__spark" aria-hidden="true">
+      {rows.map((r) => (
+        <span
+          key={r.month}
+          className={`ad__sparkbar ${r.unmet ? "ad__sparkbar--unmet" : ""}`}
+          style={{ height: `${Math.max(12, Math.round((100 * r.count) / max))}%` }}
+          title={`${r.month}: ${r.count} zapytań, bez pokrycia ${r.unmet}`}
+        />
+      ))}
+    </span>
+  );
+}
+
+const MONTH_FMT = new Intl.DateTimeFormat("pl-PL", { month: "long", year: "numeric" });
+const DATE_FMT = new Intl.DateTimeFormat("pl-PL", { day: "numeric", month: "short", year: "numeric" });
+
+const TREND_LABEL: Record<DemandTopicRow["trend"]["direction"], string> = {
+  rośnie: "rośnie",
+  maleje: "maleje",
+  stabilne: "stabilnie",
+  nowe: "nowy temat",
+  cisza: "ucichło",
+};
+
+/**
+ * Tabela popytu. Celowo tabela, nie kafelki: inwestor i koordynator porównują
+ * tu kolumny między wierszami, a do tego porównania tabela jest narzędziem -
+ * ma też nagłówki wierszy i kolumn dla czytnika ekranu.
+ */
+function DemandTable({ rows, days }: { rows: DemandTopicRow[]; days: number }) {
+  return (
+    <div className="table-wrap ad__table ad__demandwrap" data-reveal>
+      <table className="ad__demandtable">
+        <caption className="sr-only">
+          Tematy zapytań z ostatnich {days} dni: liczba wyszukiwań, brak pokrycia,
+          okres zgłaszania i kierunek zmiany.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Temat</th>
+            <th scope="col">Szukane</th>
+            <th scope="col">Bez pokrycia</th>
+            <th scope="col">Pytających</th>
+            <th scope="col">Od kiedy do kiedy</th>
+            <th scope="col">Trend (30 dni)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((t) => {
+            const peak = t.monthly.reduce(
+              (best, m) => (m.count > (best?.count ?? 0) ? m : best),
+              t.monthly[0],
+            );
+            return (
+              <tr key={t.id}>
+                <th scope="row">
+                  <span className="ad__topic">{t.label}</span>
+                  <span className={`chip ad__kind ad__kind--${t.status.split(" ")[0]}`}>
+                    {t.status}
+                  </span>
+                  {t.samples[0] && <span className="ad__sample">„{t.samples[0]}”</span>}
+                </th>
+                <td className="mono">{t.searches}×</td>
+                <td className="mono">
+                  {t.unmet_searches}×
+                  {t.unmet_searches > 0 && (
+                    <span className="muted"> ({t.unmet_share}%)</span>
+                  )}
+                </td>
+                <td className="mono">{t.askers || "—"}</td>
+                <td>
+                  <span className="ad__span">
+                    {DATE_FMT.format(new Date(t.first_seen))} –{" "}
+                    {DATE_FMT.format(new Date(t.last_seen))}
+                  </span>
+                  {/* Jeden słupek nie jest rozkładem, tylko kreską - przy
+                      historii krótszej niż dwa miesiące zostaje sam opis. */}
+                  {t.monthly.length > 1 && <Sparkline rows={t.monthly} />}
+                  <span className="sr-only">
+                    {peak
+                      ? `Najwięcej zapytań w miesiącu ${MONTH_FMT.format(new Date(peak.month + "-01"))}: ${peak.count}.`
+                      : ""}{" "}
+                    Ostatnie zapytanie {t.days_since_last === 0 ? "dzisiaj" : `${t.days_since_last} dni temu`}.
+                  </span>
+                </td>
+                <td>
+                  <span className={`ad__trend ad__trend--${t.trend.direction}`}>
+                    {TREND_LABEL[t.trend.direction]}
+                    {t.trend.change_pct !== null && (
+                      <span className="mono">
+                        {" "}
+                        {t.trend.change_pct > 0 ? "+" : ""}
+                        {t.trend.change_pct}%
+                      </span>
+                    )}
+                  </span>
+                  <span className="muted ad__trendnote">
+                    {t.trend.recent_30d} teraz · {t.trend.previous_30d} wcześniej
+                  </span>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }

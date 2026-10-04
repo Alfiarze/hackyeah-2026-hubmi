@@ -84,3 +84,97 @@
 }
 .ad__gaphead h4 { font-size: var(--fs-lg); }
 .ad__gaplist p { font-size: var(--fs-sm); margin-bottom: var(--sp-2); }
+
+/* --- popyt: ile razy pytano o to samo (moduł VI) --------------------------
+   Sekcja czytana z dwóch stron: koordynator szuka w niej tematu na nabór,
+   inwestor - powtarzalności. Stąd liczby wiodą, a opis tematu jest nagłówkiem
+   wiersza, nie zwykłą komórką. */
+.ad__demand { margin-bottom: var(--sp-7); }
+.ad__demandhead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--sp-4);
+}
+.ad__demandhead h3 { font-size: var(--fs-xl); margin-bottom: var(--sp-1); }
+.ad__demandhead .hint { max-width: 62ch; }
+.ad__demandctl { gap: var(--sp-3); align-items: center; }
+/* Przełącznik zakresu: stan „wciśnięty" niesie wypełnienie, nie sam kolor. */
+.ad__demandctl .btn[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #ffffff;
+}
+.ad__period {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.ad__demandgate {
+  display: grid;
+  gap: var(--sp-3);
+  justify-items: start;
+  border-color: var(--accent-deep);
+}
+
+.ad__demandwrap { margin-top: var(--sp-4); }
+.ad__demandtable { width: 100%; border-collapse: collapse; }
+.ad__demandtable th, .ad__demandtable td {
+  font-size: var(--fs-sm);
+  text-align: left;
+  vertical-align: top;
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+.ad__demandtable thead th {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.ad__demandtable tbody tr:last-child th,
+.ad__demandtable tbody tr:last-child td { border-bottom: 0; }
+.ad__demandtable tbody th { max-width: 34ch; }
+
+.ad__topic { display: block; font-weight: 700; color: var(--ink); }
+.ad__sample {
+  display: block;
+  margin-top: var(--sp-1);
+  font-weight: 400;
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+.ad__kind { margin-top: var(--sp-2); font-size: var(--fs-xs); }
+.ad__kind--brak { color: var(--err); border-color: var(--err); }
+.ad__kind--słabe { color: var(--warn); border-color: var(--warn); }
+.ad__kind--pokryte { color: var(--ok); border-color: var(--ok); }
+
+.ad__span { display: block; white-space: nowrap; }
+/* Histogram miesięczny: 12 słupków, więc liczy się rytm, nie dokładny odczyt -
+   dokładne wartości stoją w tekście alternatywnym obok. */
+.ad__spark {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 30px;
+  margin-top: var(--sp-2);
+}
+.ad__sparkbar {
+  width: 8px;
+  min-height: 3px;
+  border-radius: 2px;
+  background: var(--chart-1);
+}
+.ad__sparkbar--unmet { background: var(--err-strong); }
+
+.ad__trend { font-weight: 700; white-space: nowrap; }
+.ad__trend--rośnie { color: var(--err); }
+.ad__trend--maleje { color: var(--ok); }
+.ad__trend--nowe { color: var(--accent-deep); }
+.ad__trendnote { display: block; font-size: var(--fs-xs); white-space: nowrap; }

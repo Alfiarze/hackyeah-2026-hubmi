@@ -39,8 +39,11 @@ const SETUP = {
   matchmaking: async (page) => {
     // Rozmowa musi dobiec do końca, inaczej audyt nie zobaczy ani wyników,
     // ani mapy, ani fiszek - czyli najważniejszej części tego widoku.
-    // Kamyk na tacy emocji wpisuje gotowy opis problemu do pigułki…
-    await page.getByRole("button", { name: "Osoby starsze" }).click();
+    // Opis wpisujemy wprost do pigułki, a nie kamykiem ze sterty: sterta jest
+    // ukryta przy `prefers-reduced-motion` (zob. matchmaking.css), a audyt
+    // chodzi właśnie w tym trybie — przez co scenariusz wyników cicho się nie
+    // wykonywał i audytowany był sam ekran startowy.
+    await page.fill("#mm-input", "Mama mieszka sama na wsi i nie ma z kim pogadać");
     // …a „Szukaj" wysyła pierwszą wypowiedź (asystent doprecyzowuje chipsami).
     await page.getByRole("button", { name: "Szukaj" }).click();
     for (let i = 0; i < 3; i++) {

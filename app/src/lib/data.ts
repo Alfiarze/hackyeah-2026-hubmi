@@ -113,6 +113,34 @@ export function subscribeCatalog(fn: () => void): () => void {
   };
 }
 
+let externalLoaded = false;
+
+/** Czy karty spoza Małopolski są już w katalogu. */
+export function hasExternalCatalog(): boolean {
+  return externalLoaded || INNOVATIONS.some((i) => i.ext);
+}
+
+/**
+ * Dociąga karty z baz spoza Małopolski (`?ext=1`) i scala je z katalogiem.
+ * Wywoływane dopiero, gdy użytkownik włączy te bazy — na starcie aplikacji
+ * nie ma sensu ciągnąć kilkuset kart, których nikt nie prosił.
+ */
+export async function loadExternalCatalog(): Promise<boolean> {
+  if (hasExternalCatalog()) return true;
+  try {
+    const res = await api.innovations.list({ ext: "1" });
+    if (!res.ok || !Array.isArray(res.data) || res.data.length === 0) return false;
+    const known = new Set(INNOVATIONS.map((i) => i.id));
+    INNOVATIONS = [...INNOVATIONS, ...res.data.map(fromApi).filter((i) => !known.has(i.id))];
+    externalLoaded = true;
+    buildIndex(INNOVATIONS);
+    notifyCatalogListeners();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function byId(id: string): Innovation | undefined {
   return INNOVATIONS.find((i) => i.id === id);
 }
@@ -143,9 +171,42 @@ export function addCustomInnovation(inn: Innovation) {
   notifyCatalogListeners();
 }
 
+/** Rekord z API -> `Innovation`. Jedno miejsce, bo korzystają z tego dwie ścieżki:
+ *  start aplikacji (Małopolska) i doładowanie baz zewnętrznych na życzenie. */
+function fromApi(item: any): Innovation {
+  return {
+    id: String(item.id),
+    name: item.name,
+    cat: item.cat || (item.category?.slug ?? "inne"),
+    catName: item.catName || (item.category?.title ?? "Innowacja społeczna"),
+    problem: item.problem || "",
+    desc: item.desc || item.description || "",
+    target: item.target || "",
+    benef: item.benef || item.beneficiaries || "",
+    evidence: item.evidence || "",
+    authors: item.authors || [],
+    badges: item.badges || [],
+    video: item.video || null,
+    pdf: item.pdf || null,
+    zip: item.zip || null,
+    license: item.license || null,
+    url: item.url || "",
+    deployments: item.deployments || [],
+    // Bez tego karta z bazy zewnętrznej traci oznaczenie po synchronizacji
+    // z backendem i wyglądałaby jak innowacja przetestowana w Małopolsce.
+    ext: Boolean(item.ext),
+    origin: item.origin ?? undefined,
+    lang: item.lang,
+  };
+}
+
 /**
  * Pobiera dane katalogu z prawdziwego backendu Django REST Framework,
  * jeśli serwer jest uruchomiony.
+ *
+ * Bez parametru `ext` backend oddaje tylko Małopolskę — karty z baz
+ * zewnętrznych (~900 sztuk, ~3 MB JSON-a) dociąga `loadExternalCatalog()`
+ * dopiero wtedy, gdy użytkownik o nie poprosi.
  */
 export async function loadCatalogFromBackend(): Promise<boolean> {
   try {
@@ -157,25 +218,7 @@ export async function loadCatalogFromBackend(): Promise<boolean> {
     let changed = false;
 
     if (innRes.ok && Array.isArray(innRes.data) && innRes.data.length > 0) {
-      const serverInnovations: Innovation[] = innRes.data.map((item: any) => ({
-        id: String(item.id),
-        name: item.name,
-        cat: item.cat || (item.category?.slug ?? "inne"),
-        catName: item.catName || (item.category?.title ?? "Innowacja społeczna"),
-        problem: item.problem || "",
-        desc: item.desc || item.description || "",
-        target: item.target || "",
-        benef: item.benef || item.beneficiaries || "",
-        evidence: item.evidence || "",
-        authors: item.authors || [],
-        badges: item.badges || [],
-        video: item.video || null,
-        pdf: item.pdf || null,
-        zip: item.zip || null,
-        license: item.license || null,
-        url: item.url || "",
-        deployments: item.deployments || [],
-      }));
+      const serverInnovations: Innovation[] = innRes.data.map(fromApi);
 
       // Zachowaj unikalne wpisy lokalne
       const serverIds = new Set(serverInnovations.map((i) => i.id));

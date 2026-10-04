@@ -11,7 +11,14 @@
  * „szukaj" i bez przeładowania.
  */
 import { useEffect, useMemo, useState } from "react";
-import { INNOVATIONS, LIBRARY, CATEGORIES, subscribeCatalog, type Innovation } from "../lib/data";
+import {
+  INNOVATIONS,
+  LIBRARY,
+  CATEGORIES,
+  subscribeCatalog,
+  loadExternalCatalog,
+  type Innovation,
+} from "../lib/data";
 import { foldDiacritics } from "../lib/text";
 import { InnovationCard } from "../components/InnovationCard";
 import { ScanFallback } from "../components/ScanFallback";
@@ -33,6 +40,7 @@ export function Library({ onAdapt, onTest }: Props) {
   // Zasobnik domyślnie pokazuje Małopolskę; karty i dokumenty z innych baz
   // wchodzą na życzenie, bo to inny poziom wiarygodności dla ROPS.
   const [onlyMalopolska, setOnlyMalopolska] = useState(true);
+  const [loadingExt, setLoadingExt] = useState(false);
   const [section, setSection] = useState<string>("");
   const [innovations, setInnovations] = useState(INNOVATIONS);
   const [library, setLibrary] = useState(LIBRARY);
@@ -118,8 +126,9 @@ export function Library({ onAdapt, onTest }: Props) {
           Społecznych i wzory wniosków grantowych.
         </p>
         <p className="hint">
-          Obok tego {extCount} innowacji i {extDocs} dokumentów z baz spoza regionu
-          (PO WER, ROPS Poznań, ESF+). Są wyłączone z widoku, dopóki nie włączysz ich
+          Obok tego Hub zna innowacje i dokumenty z baz spoza regionu
+          (PO WER, ROPS Poznań, ESF+){extCount > 0 ? `: ${extCount} kart i ${extDocs} dokumentów` : ""}.
+          Są wyłączone z widoku, dopóki nie włączysz ich
           przyciskiem „Dołącz bazy spoza Małopolski” - i każda taka pozycja jest
           oznaczona źródłem.
         </p>
@@ -193,9 +202,23 @@ export function Library({ onAdapt, onTest }: Props) {
                   type="button"
                   className="btn"
                   aria-pressed={!onlyMalopolska}
-                  onClick={() => setOnlyMalopolska((v) => !v)}
+                  disabled={loadingExt}
+                  onClick={async () => {
+                    // Karty spoza regionu nie sa w bundlu - pierwsze wlaczenie
+                    // dociaga je z backendu, kolejne sa juz w pamieci.
+                    if (onlyMalopolska) {
+                      setLoadingExt(true);
+                      await loadExternalCatalog();
+                      setLoadingExt(false);
+                    }
+                    setOnlyMalopolska((v) => !v);
+                  }}
                 >
-                  {onlyMalopolska ? "Dołącz bazy spoza Małopolski" : "Tylko Małopolska"}
+                  {loadingExt
+                    ? "Wczytuję bazy…"
+                    : onlyMalopolska
+                      ? "Dołącz bazy spoza Małopolski"
+                      : "Tylko Małopolska"}
                 </button>
               </>
             ) : (

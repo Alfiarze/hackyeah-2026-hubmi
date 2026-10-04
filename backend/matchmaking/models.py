@@ -12,6 +12,65 @@ from django.conf import settings
 from django.db import models
 
 
+class DemandTopic(models.Model):
+    """
+    Jedna potrzeba rynkowa = wiele zapytań o to samo.
+
+    Po co osobna tabela, skoro log zapytań i tak jest: żeby dało się
+    odpowiedzieć na pytanie inwestora „ile razy ktoś szukał rozwiązania,
+    którego nie ma, i czy to rośnie”. Z samego logu wychodzi lista zdań,
+    a nie wielkość popytu - ta sama potrzeba jest tam zapisana dziesięcioma
+    sformułowaniami. Klucz i zasady sklejania opisuje `demand.py`.
+
+    Czego tu świadomie NIE ma: danych osobowych. `clients` to skróty
+    identyfikatora przeglądarki, liczone tylko po to, żeby odróżnić
+    „sto wejść jednej osoby” od „sto osób”.
+    """
+
+    class Kind(models.TextChoices):
+        WATKI = "wątki", "Rozpoznane wątki"
+        NOWE = "nowe pojęcia", "Słowa spoza bazy ROPS"
+        OPIS = "opis", "Sam opis problemu"
+
+    key = models.CharField(max_length=240, unique=True)
+    label = models.CharField(max_length=240)
+    kind = models.CharField(max_length=20, choices=Kind.choices, default=Kind.OPIS)
+    concepts = models.JSONField(default=list, blank=True)
+    terms = models.JSONField(default=list, blank=True)
+    #: klucze wariantów wchłoniętych do tego tematu („hodowla pstraga” → „pstrąga”)
+    aliases = models.JSONField(default=list, blank=True)
+
+    searches = models.PositiveIntegerField(default=0)
+    #: zapytania zakończone brakiem pokrycia - to jest „rynek bez produktu”
+    unmet_searches = models.PositiveIntegerField(default=0)
+    #: najlepsze dopasowanie, jakie kiedykolwiek padło na ten temat (0-100)
+    best_score = models.PositiveSmallIntegerField(null=True, blank=True)
+
+    first_seen = models.DateTimeField(db_index=True)
+    last_seen = models.DateTimeField(db_index=True)
+
+    powiats = models.JSONField(default=dict, blank=True)
+    samples = models.JSONField(default=list, blank=True)
+    clients = models.JSONField(default=list, blank=True)
+
+    class Meta:
+        ordering = ["-unmet_searches", "-searches"]
+        verbose_name = "temat zapytań"
+        verbose_name_plural = "tematy zapytań"
+
+    def __str__(self) -> str:
+        return f"{self.label} ({self.searches}×, bez pokrycia {self.unmet_searches}×)"
+
+    @property
+    def askers(self) -> int:
+        """Ilu różnych pytających - przybliżenie po skrócie klienta."""
+        return len(self.clients or [])
+
+    @property
+    def covered(self) -> bool:
+        return self.unmet_searches == 0
+
+
 class SearchQuery(models.Model):
     text = models.TextField()
     powiat = models.CharField(max_length=60, blank=True)
@@ -36,6 +95,14 @@ class SearchQuery(models.Model):
     ai_source = models.CharField(max_length=20, blank=True)
     # wynik do odtworzenia w panelu admina: [{id, score, tier, related, reason}]
     results = models.JSONField(default=list, blank=True)
+    # temat, do którego zapytanie się zlicza - oś czasu popytu liczymy stąd
+    topic = models.ForeignKey(
+        DemandTopic,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="queries",
+    )
 
     class Meta:
         ordering = ["-created_at"]

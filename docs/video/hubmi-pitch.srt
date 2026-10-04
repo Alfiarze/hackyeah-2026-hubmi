@@ -1,0 +1,95 @@
+1
+00:00:00,000 --> 00:00:03,816
+HubMI — Małopolski Hub Innowacji Społecznych.
+
+2
+00:00:04,116 --> 00:00:09,108
+Opisz problem zwykłym językiem. Pokażemy, co już zadziałało.
+
+3
+00:00:09,608 --> 00:00:16,832
+Regionalny Ośrodek Polityki Społecznej przez dekadę przetestował sto piętnaście innowacji społecznych i opisał, co zadziałało.
+
+4
+00:00:17,132 --> 00:00:29,564
+Tylko że ta wiedza leży w PDF-ach. Córka wpisuje: boimy się, że mama wyjdzie z domu i nie wróci. Rejestr ma: izolacja społeczna na obszarach peryferyjnych. Zero trafień.
+
+5
+00:00:29,864 --> 00:00:36,320
+Nie brakuje innowacji. Brakuje warstwy, która łączy język człowieka z językiem instytucji.
+
+6
+00:00:36,820 --> 00:00:43,948
+Moduł pierwszy, obowiązkowy: matchmaking. Mieszkanka pisze własnymi słowami albo dyktuje głosem.
+
+7
+00:00:44,248 --> 00:00:48,520
+Asystent dopytuje najwyżej dwa razy — o gminę, nie o życiorys.
+
+8
+00:00:48,820 --> 00:00:58,492
+System rozpoznaje wątki: osoby starsze, demencja i pamięć — i zestawia zgłoszenie z bazą przetestowanych innowacji. Sześć trafień w trzy sekundy.
+
+9
+00:00:58,992 --> 00:01:03,288
+Każde trafienie jest rozliczone — zamiast liczby z czarnej skrzynki.
+
+10
+00:01:03,588 --> 00:01:09,132
+Jest cytat z pola „czy to działa” i podświetlone słowa karty, które uruchomiły dopasowanie.
+
+11
+00:01:09,432 --> 00:01:19,056
+Niżej: które wątki karta pokrywa, w którym polu się zgadza i werdykt modelu obok. Karta bez wyników testu dostaje niższy wynik i jest to napisane wprost.
+
+12
+00:01:19,556 --> 00:01:27,356
+Mapa pokazuje, gdzie już to wdrożono, i daje kontakt do realizatora. Dla czytników ekranu jest równoważna tabela.
+
+13
+00:01:27,856 --> 00:01:34,744
+Moduł siódmy, Middleman: bierze innowację i profil instytucji — typ, liczbę mieszkańców, budżet, obsadę.
+
+14
+00:01:35,044 --> 00:01:43,468
+Zwraca kroki wdrożenia z kosztem pilotażu, ryzyka i wymogi formalne. To dokument, z którym wójt wchodzi na sesję rady gminy.
+
+15
+00:01:43,968 --> 00:01:48,528
+Gdy nic nie pasuje, luka nie jest błędem — staje się diagnozą regionu.
+
+16
+00:01:48,828 --> 00:01:56,484
+Zgłoszenia bez pokrycia i słowa, których silnik nie rozpoznał, trafiają do panelu ROPS jako żywe zestawienie niezaspokojonych potrzeb.
+
+17
+00:01:56,784 --> 00:02:01,512
+Nikt nie wypełnia dodatkowej ankiety — analityka powstaje z samych zapytań.
+
+18
+00:02:02,012 --> 00:02:10,268
+Dostępność nie jest dopiskiem: baza osiemnaście pikseli, przełącznik do dwudziestu siedmiu, wysoki kontrast, pełna obsługa klawiaturą.
+
+19
+00:02:10,568 --> 00:02:14,480
+Zero naruszeń WCAG w audycie axe na ośmiu widokach.
+
+20
+00:02:14,980 --> 00:02:24,220
+Ranking liczy nasz kod: BM25 po siedmiu polach karty plus mostek pojęciowy. Wynik jest deterministyczny i wytłumaczalny.
+
+21
+00:02:24,520 --> 00:02:32,200
+Model decyzyjny odpowiada w trzysta milisekund i tylko dopisuje werdykt obok — nie generuje prozy, więc nie ma w czym halucynować.
+
+22
+00:02:32,700 --> 00:02:41,364
+Wdrożenie: osiemdziesiąt do stu dwudziestu tysięcy złotych, tyle co jeden grant. Utrzymanie: około sześćdziesięciu trzech tysięcy rocznie.
+
+23
+00:02:41,664 --> 00:02:48,528
+Siedem z siedmiu modułów zadania, sto piętnaście innowacji z udokumentowanym testem, zero naruszeń dostępności.
+
+24
+00:02:48,828 --> 00:02:53,532
+HubMI. Opisz problem — pokażemy, co już zadziałało.

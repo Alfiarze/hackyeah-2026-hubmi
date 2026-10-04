@@ -17,6 +17,8 @@ CRUD ocen Jev „czy powiązane” (moduł I, osobny zasób):
   DELETE /api/relevance/<id>/        usuń
   (zmiana i kasowanie: rola ROPS/admin — reszta API jest publiczna do odczytu)
 """
+import logging
+
 from django.db.models import Q
 from django.utils import timezone
 from rest_framework import status
@@ -32,9 +34,12 @@ from catalog.text_pl import snippet
 from catalog import search as hybrid
 
 from . import ai as ai_service
+from . import demand
 from . import engine
 from .models import Gap, RelevanceCheck, SearchQuery
 from .serializers import GapSerializer, RelevanceCheckSerializer, SearchQuerySerializer
+
+logger = logging.getLogger(__name__)
 
 
 def _gather_candidates(results: list[dict]) -> list[dict]:
@@ -188,6 +193,15 @@ def match_search(request):
             for r in results
         ],
     )
+
+    # Zliczenie popytu: to samo pytanie zadane dziesiątym sformułowaniem ma
+    # podbić jeden licznik, a nie zostać dziesiątym wierszem w logu. Osobny
+    # try, bo analityka nie ma prawa wywrócić modułu obowiązkowego - gorzej
+    # mieć nieodpowiadające wyszukiwanie niż niedoliczony temat.
+    try:
+        demand.record(sq, client_id=request.headers.get("X-Hubmi-Client", ""))
+    except Exception:  # noqa: BLE001 - log popytu nigdy nie blokuje odpowiedzi
+        logger.exception("Nie udało się doliczyć zapytania %s do tematu", sq.id)
 
     return Response(
         {

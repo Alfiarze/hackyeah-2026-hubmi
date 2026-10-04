@@ -51,14 +51,26 @@
   background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
+/* Pasek to chrome, nie kolumna treści — dostaje własną, szerszą miarę.
+   Przy `.wrap` 1120 px na listę modułów zostawało 941 px, a potrzebuje 1063 px,
+   więc ostatnia pozycja („Panel ROPS") była ucinana w połowie — i to na KAŻDEJ
+   szerokości ekranu, także na 1920 px, bo limit brał się z kontenera, nie
+   z okna. */
+.hdr .wrap {
+  max-width: 1320px;
+}
+
 .hdr__inner {
   display: flex;
   min-width: 0;
   align-items: center;
   gap: var(--sp-4);
-  /* Marka i nawigacja dzielą jedną linię; przy ciasnocie zwęża się lista
-     modułów (overflow-x niżej), a nie łamie się cały pasek. */
-  flex-wrap: nowrap;
+  /* Marka i nawigacja dzielą jedną linię tylko dopóki się mieszczą. Gdy
+     zabraknie miejsca - przy wąskim oknie albo po powiększeniu czcionki do
+     22/27 px - nawigacja schodzi do własnego wiersza i łamie się dalej.
+     Żadna pozycja nie może zniknąć: to jedyne wejście do siedmiu modułów. */
+  flex-wrap: wrap;
+  row-gap: var(--sp-2);
   padding-block: var(--sp-3);
 }
 
@@ -99,24 +111,29 @@
 }
 
 .hdr__nav {
-  margin-left: auto;
-  /* Element flex ma domyślnie min-width:auto, więc rozpycha się do szerokości
-     swojej zawartości - a wtedy overflow-x na liście nic nie daje i cała
-     strona przewija się w poziomie (łamie WCAG 1.4.10). */
+  /* Baza 30rem to próg zejścia do własnego wiersza: dopóki obok marki zostaje
+     tyle miejsca, pasek jest jednolinijkowy; poniżej - cała nawigacja spada
+     niżej i dostaje pełną szerokość, zamiast ściskać pozycje do nieczytelnych.
+     min-width:0, bo element flex domyślnie rozpycha się do szerokości treści
+     i wymusiłby poziome przewijanie strony (łamie WCAG 1.4.10). */
+  flex: 1 1 30rem;
   min-width: 0;
 }
+/* Lista łamie się na kolejne wiersze zamiast chować pozycje za krawędzią.
+   Wcześniej jechała w poziomie z maską wygaszającą prawy brzeg - przy
+   czcionce 27 px kończyło się to tym, że „Panel ROPS" był poza kadrem i
+   trzeba było wiedzieć, że da się tam doscrollować. Teraz wszystkie siedem
+   modułów jest widoczne naraz, bez ukrytego gestu. */
 .hdr__nav ul {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 2px;
+  row-gap: var(--sp-1);
   list-style: none;
   margin: 0;
   padding: 0;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
 }
-.hdr__nav ul::-webkit-scrollbar { display: none; }
 .hdr__nav li { flex: none; }
 .hdr__nav a {
   display: flex;
@@ -180,16 +197,27 @@
 
 .hdr__short { display: none; }
 
-@media (max-width: 70rem) {
-  .hdr__full { display: none; }
+@media (max-width: 81rem) {
+  /* Pełna etykieta znika z ekranu, ale NIE z drzewa dostępności. `display:none`
+     usuwało ją stamtąd, a krótka wersja jest `aria-hidden` — przez co link
+     „Znajdź rozwiązanie" zostawał bez dostępnej nazwy (axe: link-name, serious).
+     Dotyczyło to każdego telefonu; sr-only zamiast display:none to naprawia,
+     a dopisek o nowych powiadomieniach nadal się doczytuje. */
+  .hdr__full {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
   .hdr__short { display: inline; }
 }
-/* Na telefonie sześć modułów w jednej linii z marką byłoby nieczytelne -
-   pasek wraca do dwóch wierszy, a lista przewija się poziomo. */
+/* Na telefonie moduły i tak nie staną obok marki - od razu biorą cały wiersz
+   i czytają się od lewej, zgodnie z kierunkiem czytania. */
 @media (max-width: 48rem) {
-  .hdr__inner { flex-wrap: wrap; }
-  .hdr__nav { margin-left: 0; width: 100%; max-width: 100%; }
-  .hdr__nav ul { padding-bottom: var(--sp-1); }
+  .hdr__nav { flex-basis: 100%; }
+  .hdr__nav ul { justify-content: flex-start; }
 }
 
 main { min-height: 60vh; }

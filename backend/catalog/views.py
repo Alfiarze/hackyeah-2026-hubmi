@@ -42,7 +42,7 @@ def categories(request):
 
 class InnovationViewSet(viewsets.ModelViewSet):
     """
-    GET    /api/innovations/                 lista + filtry (category, q, has_evidence, powiat)
+    GET    /api/innovations/                 lista + filtry (category, q, has_evidence, powiat, ext)
     GET    /api/innovations/{id}/            karta innowacji
     POST   /api/innovations/                 ADMIN: nowa karta (auto-wektor)
     PATCH  /api/innovations/{id}/            ADMIN: edycja (przeliczenie wektora)
@@ -66,6 +66,14 @@ class InnovationViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         qs = Innovation.objects.select_related("category").prefetch_related("deployments")
         params = self.request.query_params
+        # Karty z baz spoza Malopolski to ~900 rekordow i ~3 MB JSON-a, a aplikacja
+        # wola te liste przy starcie. Domyslnie wiec oddajemy Malopolske;
+        # `ext=1` to same karty zewnetrzne, `ext=all` komplet.
+        ext = (params.get("ext") or "").lower()
+        if ext in ("1", "true", "tylko"):
+            qs = qs.filter(ext=True)
+        elif ext not in ("all", "wszystkie"):
+            qs = qs.filter(ext=False)
         if params.get("category"):
             qs = qs.filter(category__slug=params["category"])
         if params.get("has_evidence") in ("1", "true", "yes"):

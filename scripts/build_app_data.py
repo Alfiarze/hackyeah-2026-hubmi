@@ -243,21 +243,30 @@ def main():
         })
 
     ext = external_innovations(cats)
-    # Zewnetrzne karty ida na koniec listy, zeby domyslna kolejnosc (bez
-    # zapytania) zaczynala sie od innowacji malopolskich - to one sa przedmiotem
-    # zadania, reszta jest inspiracja.
-    inns += ext
-
+    # Karty zewnetrzne NIE wchodza do bundle'a frontu: jest ich kilkaset, a plik
+    # jest wczytywany statycznie przy starcie aplikacji (2,9 MB zamiast 0,5 MB
+    # to realny koszt dla gminy na slabym laczu). Front startuje na Malopolsce,
+    # a pelny katalog dociaga z backendu (`loadCatalogFromBackend`). Backend
+    # importuje te karty z osobnego pliku ponizej.
     (APP / "innovations.json").write_text(json.dumps(
-        {"categories": [{"slug": s, "title": t} for s, t in cats.items()],
+        {"categories": [{"slug": s, "title": t} for s, t in cats.items()
+                        if any(i["cat"] == s for i in inns)],
          "innovations": inns,
          "sources": {
-             "malopolska": len(inns) - len(ext),
-             "zewnetrzne": len(ext),
-             "note": "Karty z ext=true pochodzą z baz spoza Małopolski "
-                     "(origin.source) i nie mają wdrożeń w małopolskich powiatach.",
+             "malopolska": len(inns),
+             "zewnetrzne": 0,
+             "note": "Ten bundle to wylacznie Biblioteka ROPS Malopolska. Karty "
+                     "spoza regionu sa w innovations_external.json i dociagaja "
+                     "sie z backendu.",
          },
          "note": "Pola deployments[] to dane DEMO - ROPS nie publikuje lokalizacji wdrozen."},
+        ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+
+    (APP / "innovations_external.json").write_text(json.dumps(
+        {"categories": [{"slug": s, "title": t} for s, t in cats.items()],
+         "innovations": ext,
+         "note": "Karty spoza Malopolski (origin.malopolska=false). Zrodlo importu "
+                 "dla backendu; front dostaje je przez API, nie w bundle."},
         ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     # --- Zasobnik wiedzy ---
@@ -289,11 +298,11 @@ def main():
     (APP / "library.json").write_text(json.dumps(
         {"items": lib}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
-    for f in ("innovations.json", "library.json"):
+    for f in ("innovations.json", "innovations_external.json", "library.json"):
         print(f"  {f}: {(APP / f).stat().st_size / 1024:.0f} KB")
-    print(f"{len(inns)} innowacji ({len(inns) - len(ext)} Małopolska + {len(ext)} "
-          f"spoza regionu), {len(lib)} dokumentów ({len(ext_lib)} spoza regionu), "
-          f"{sum(len(i['deployments']) for i in inns)} wdrożeń demo")
+    print(f"{len(inns)} innowacji Małopolska w bundle frontu + {len(ext)} spoza "
+          f"regionu w pliku importu, {len(lib)} dokumentów ({len(ext_lib)} spoza "
+          f"regionu), {sum(len(i['deployments']) for i in inns)} wdrożeń demo")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,17 @@
 from django.contrib import admin
 
-from .models import Gap, RelevanceCheck, SearchQuery
+from .models import DemandTopic, Gap, RelevanceCheck, SearchQuery
+
+
+@admin.register(DemandTopic)
+class DemandTopicAdmin(admin.ModelAdmin):
+    list_display = (
+        "label", "kind", "searches", "unmet_searches",
+        "best_score", "first_seen", "last_seen",
+    )
+    list_filter = ("kind", "last_seen")
+    search_fields = ("label", "key")
+    readonly_fields = ("key", "first_seen", "last_seen", "clients")
 
 
 @admin.register(SearchQuery)
