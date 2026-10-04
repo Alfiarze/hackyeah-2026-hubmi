@@ -146,9 +146,13 @@ strong { font-weight: 700; }
   flex-wrap: wrap;
 }
 
+/* 1360 px: tyle trzeba, żeby sześć pełnych etykiet zmieściło się w pasku
+   bez przewijania (≈1005 px pigułek + marka + odstępy ≈ 1182 px + zapas
+   na badge i skalę czcionki A+). Zakres ustalony z teamu: 1200–1400 px.
+   Czytelność treści nie cierpi - akapity i tak trzymają --measure (66ch). */
 .wrap {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1360px;
   margin-inline: auto;
   padding-inline: var(--sp-5);
 }

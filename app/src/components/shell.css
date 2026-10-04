@@ -180,7 +180,11 @@
 
 .hdr__short { display: none; }
 
-@media (max-width: 70rem) {
+/* Pełne etykiety tylko od szerokości, na której faktycznie się mieszczą:
+   6 pigułek ≈ 1005 px + marka + odstępy ≈ 1182 px, więc próg to 76rem
+   (1216 px). Niżej - krótkie etykiety, bez ukrytego przewijania (scroll
+   bez paska to dla użytkownika ucięte pozycje). */
+@media (max-width: 76rem) {
   .hdr__full { display: none; }
   .hdr__short { display: inline; }
 }

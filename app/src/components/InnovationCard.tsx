@@ -5,7 +5,7 @@
  * („przetestowane"), potem co to jest, potem dlaczego pasuje. Urzędnik szukający
  * rozwiązania pyta najpierw „czy to działa", a nie „jak to wygląda".
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { MatchResult } from "../lib/match";
 import type { Innovation } from "../lib/data";
 import { Stamp } from "./Stamp";
@@ -25,17 +25,51 @@ interface Props {
     reason?: string;
     source?: string;
   };
+  /**
+   * Ile ms po wejściu karty odsłonić werdykt AI (0 = od razu).
+   * W modułu I kartki są podawane po kolei, żeby było widać, że najpierw
+   * silnik znajduje trafienia, a dopiero potem model je weryfikuje.
+   */
+  verdictDelay?: number;
   /** otwiera Middleman dla tej innowacji */
   onAdapt?: (inn: Innovation) => void;
   /** zgłoszenie chęci testowania (moduł IV) */
   onTest?: (inn: Innovation) => void;
 }
 
-export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest }: Props) {
+export function InnovationCard({
+  result,
+  innovation,
+  aiVerdict,
+  onAdapt,
+  onTest,
+  verdictDelay = 0,
+}: Props) {
   const inn = result?.innovation ?? innovation!;
   const [contact, setContact] = useState(false);
   const [full, setFull] = useState(false);
   const hl = result?.highlights;
+
+  // Etap „sprawdzam" dotyczy tylko prawdziwego werdyktu modelu (source=jev).
+  // Fallbacku nie udajemy: bez AI etykieta „Diagnoza powiązania" pokazuje się
+  // od razu, dokładnie tak jak mówi o tym kod na backendzie.
+  const isModelVerdict = aiVerdict?.source === "jev";
+  const [verdictShown, setVerdictShown] = useState(
+    () => !aiVerdict || !isModelVerdict || verdictDelay <= 0,
+  );
+
+  useEffect(() => {
+    if (verdictShown) return;
+    const reduce =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      document.documentElement.getAttribute("data-bg-motion") === "off";
+    if (reduce) {
+      setVerdictShown(true);
+      return;
+    }
+    const id = window.setTimeout(() => setVerdictShown(true), verdictDelay);
+    return () => window.clearTimeout(id);
+  }, [verdictShown, verdictDelay]);
 
   return (
     <article className="fiszka">
