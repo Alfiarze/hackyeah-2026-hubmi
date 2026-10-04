@@ -29,6 +29,13 @@ import { type PickedEmoji } from "../lib/emojis";
 interface Props {
   value: string;
   picks?: PickedEmoji[];
+  /**
+   * Wątki rozpoznane na żywo w trakcie pisania (ten sam silnik co backend,
+   * liczone lokalnie). Pokazują się jako chipsy pod pigułką natychmiast —
+   * to jest warstwa „instant", zanim przyjdą emotki od Jeva i zanim poleci
+   * żądanie o wyniki.
+   */
+  liveConcepts?: { id: string; label: string }[];
   /** tekst dopowiadany przez dyktowanie - pokazany obok wpisanego */
   interim?: string;
   onChange: (v: string) => void;
@@ -47,6 +54,7 @@ interface Props {
 export function SearchPill({
   value,
   picks: picksProp,
+  liveConcepts,
   interim,
   onChange,
   onSubmit,
@@ -89,6 +97,23 @@ export function SearchPill({
 
         {actions}
       </div>
+
+      {/* Pod pigułką NAJPIERW warstwa „instant": wątki rozpoznane lokalnie
+          w trakcie pisania. Kropka pulsuje tylko przy prefers-reduced-motion:
+          none (pulsowanie to ozdoba, nie informacja). */}
+      {liveConcepts && liveConcepts.length > 0 && (
+        <div className="mm__live" aria-live="polite">
+          <span className="mm__live-dot" aria-hidden="true" />
+          <span className="mm__live-label">Rozpoznaję:</span>
+          <ul className="mm__live-list">
+            {liveConcepts.map((c, i) => (
+              <li key={c.id} style={{ animationDelay: `${i * 70}ms` }}>
+                {c.label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Pod pigułką: emotki przylatujące z dołu po rozpoznaniu modelu.
           Bez znacznika „AI" — emotki mówią same za siebie, a plakietka tylko

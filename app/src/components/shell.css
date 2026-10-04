@@ -197,6 +197,10 @@
 
 .hdr__short { display: none; }
 
+/* Pełne etykiety tylko od szerokości, na której faktycznie się mieszczą:
+   6 pigułek + marka + odstępy przy powiększonej marce przekraczają 1216 px,
+   więc próg to 81rem (1296 px). Niżej - krótkie etykiety, bez ukrytego
+   przewijania (scroll bez paska to dla użytkownika ucięte pozycje). */
 @media (max-width: 81rem) {
   /* Pełna etykieta znika z ekranu, ale NIE z drzewa dostępności. `display:none`
      usuwało ją stamtąd, a krótka wersja jest `aria-hidden` — przez co link

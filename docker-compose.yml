@@ -1,9 +1,14 @@
-name: hubmi
+# HubMI — docker compose (prod/Coolify-ready)
+#
+# Local dev: cp docker-compose.override.yml.example docker-compose.override.yml
+#            + ustaw DJANGO_DEBUG=1 w .env (debug domyślnie WYŁĄCZONY)
+#
+# Coolify: bez container_name i bez top-level `name` (Coolify zarządza nazwami),
+#          publiczny wpis = serwis `web` (port 80), reszta wewnętrzna w sieci compose.
 
 services:
   db:
     image: pgvector/pgvector:pg17
-    container_name: hubmi-db
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-hubmi}
@@ -21,11 +26,10 @@ services:
 
   backend:
     build: ./backend
-    container_name: hubmi-backend
     restart: unless-stopped
     environment:
-      DJANGO_DEBUG: ${DJANGO_DEBUG:-1}
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-only-zmien-przy-deployu}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-0}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?ustaw DJANGO_SECRET_KEY w env}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-*}
       DB_HOST: db
       DB_PORT: "5432"
@@ -44,11 +48,29 @@ services:
       ROPS_DATA_DIR: /srv/data
       APP_DATA_DIR: /srv/app_data
     volumes:
-      - ./backend:/app
       - ./data:/srv/data:ro
       - ./app/src/data:/srv/app_data:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,os; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5)"]
+      interval: 15s
+      timeout: 8s
+      retries: 5
+      start_period: 30s
     depends_on:
       db:
+        condition: service_healthy
+
+  web:
+    build: ./app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/health"]
+      interval: 15s
+      timeout: 8s
+      retries: 5
+      start_period: 15s
+    depends_on:
+      backend:
         condition: service_healthy
 
 volumes:

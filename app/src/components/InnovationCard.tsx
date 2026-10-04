@@ -5,7 +5,7 @@
  * („przetestowane"), potem co to jest, potem dlaczego pasuje. Urzędnik szukający
  * rozwiązania pyta najpierw „czy to działa", a nie „jak to wygląda".
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { MatchResult } from "../lib/match";
 import type { Innovation } from "../lib/data";
 import { Stamp } from "./Stamp";
@@ -25,17 +25,51 @@ interface Props {
     reason?: string;
     source?: string;
   };
+  /**
+   * Ile ms po wejściu karty odsłonić werdykt AI (0 = od razu).
+   * W modułu I kartki są podawane po kolei, żeby było widać, że najpierw
+   * silnik znajduje trafienia, a dopiero potem model je weryfikuje.
+   */
+  verdictDelay?: number;
   /** otwiera Middleman dla tej innowacji */
   onAdapt?: (inn: Innovation) => void;
   /** zgłoszenie chęci testowania (moduł IV) */
   onTest?: (inn: Innovation) => void;
 }
 
-export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest }: Props) {
+export function InnovationCard({
+  result,
+  innovation,
+  aiVerdict,
+  onAdapt,
+  onTest,
+  verdictDelay = 0,
+}: Props) {
   const inn = result?.innovation ?? innovation!;
   const [contact, setContact] = useState(false);
   const [full, setFull] = useState(false);
   const hl = result?.highlights;
+
+  // Etap „sprawdzam" dotyczy tylko prawdziwego werdyktu modelu (source=jev).
+  // Fallbacku nie udajemy: bez AI etykieta „Diagnoza powiązania" pokazuje się
+  // od razu, dokładnie tak jak mówi o tym kod na backendzie.
+  const isModelVerdict = aiVerdict?.source === "jev";
+  const [verdictShown, setVerdictShown] = useState(
+    () => !aiVerdict || !isModelVerdict || verdictDelay <= 0,
+  );
+
+  useEffect(() => {
+    if (verdictShown) return;
+    const reduce =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      document.documentElement.getAttribute("data-bg-motion") === "off";
+    if (reduce) {
+      setVerdictShown(true);
+      return;
+    }
+    const id = window.setTimeout(() => setVerdictShown(true), verdictDelay);
+    return () => window.clearTimeout(id);
+  }, [verdictShown, verdictDelay]);
 
   return (
     <article className="fiszka">
@@ -84,10 +118,31 @@ export function InnovationCard({ result, innovation, aiVerdict, onAdapt, onTest 
         </div>
       </dl>
 
-      {aiVerdict && (
-        <div className="fiszka__ai-verdict">
+      {/* Werdykt AI wchodzi dwufazowo: najpierw karta pokazuje stan „weryfikuję"
+          (shimmer), potem werdykt wyskakuje z ikoną różniąca się kształtem, nie
+          kolorem (✓ powiązane / △ luźne / ○ diagnoza bez modelu). Fallbacku
+          (source != jev) nie animujemy — bez AI nie udajemy weryfikacji. */}
+      {aiVerdict && !verdictShown && (
+        <div className="fiszka__ai-verdict fiszka__ai-verdict--checking" aria-hidden="true">
+          <span className="eyebrow">Weryfikuję powiązanie…</span>
+          <span className="fiszka__shimmer" />
+        </div>
+      )}
+      {aiVerdict && verdictShown && (
+        <div
+          className={`fiszka__ai-verdict fiszka__ai-verdict--reveal${
+            aiVerdict.related === false ? " fiszka__ai-verdict--loose" : ""
+          }`}
+        >
           <span className="eyebrow">
-            {aiVerdict.source === "jev" ? "Weryfikacja AI" : "Diagnoza powiązania"}
+            <span className="fiszka__ai-ico" aria-hidden="true">
+              {!isModelVerdict || aiVerdict.related === undefined
+                ? "○"
+                : aiVerdict.related
+                  ? "✓"
+                  : "△"}
+            </span>
+            {isModelVerdict ? "Weryfikacja AI" : "Diagnoza powiązania"}
             {typeof aiVerdict.confidence === "number" && ` · pewność ${aiVerdict.confidence}%`}
           </span>
           <p>{aiVerdict.reason || (aiVerdict.related ? "Potwierdzono silne powiązanie merytoryczne z opisanym problemem." : "Rozwiązanie kontekstowo zbliżone.")}</p>

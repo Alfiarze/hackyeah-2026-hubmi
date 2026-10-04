@@ -17,6 +17,7 @@ import {
   type ThreadStatus,
 } from "../lib/store";
 import { INNOVATIONS, CATEGORIES, addCustomInnovation, subscribeCatalog, type Innovation } from "../lib/data";
+import { notifyCatalogAddition } from "../lib/watch";
 import { CONCEPTS } from "../lib/concepts";
 import { analyzeQuery } from "../lib/match";
 import { api, type AdminDemandResult, type DemandTopicRow } from "../lib/api";
@@ -225,6 +226,9 @@ export function Admin({ state }: { state: AppState }) {
 
     // 1. Zapis lokalny do katalogu frontendu (aktualizuje od razu Bibliotekę i indeks wyszukiwania)
     addCustomInnovation(newInn);
+
+    // 1a. Obserwujący tę potrzebę mieszkańcy dostają powiadomienie (lib/watch.ts).
+    notifyCatalogAddition(newInn);
 
     // 2. Wysłanie do bazy PostgreSQL przez Django REST Framework
     try {

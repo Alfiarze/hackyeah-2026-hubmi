@@ -129,6 +129,76 @@
   line-height: 1.5;
 }
 
+/* --- werdykt AI, dwufazowe odsłonięcie --------------------------------
+   Faza 1: karta pokazuje „Weryfikuję powiązanie…" z przejazdem shimmeru
+   (dekoracja, aria-hidden). Faza 2: werdykt wyskakuje z ikoną różniącą
+   się KSZTAŁTEM, nie tylko kolorem: ✓ powiązane, △ luźne, ○ bez modelu.
+   Wariant „loose" dostaje bursztynową belkę - to ocena, nie błąd. */
+.fiszka__ai-verdict--checking { border-left-color: var(--line); }
+.fiszka__shimmer {
+  display: block;
+  height: 10px;
+  width: min(100%, 18rem);
+  margin-top: var(--sp-2);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    90deg,
+    var(--surface) 25%,
+    color-mix(in srgb, var(--accent) 30%, var(--surface)) 50%,
+    var(--surface) 75%
+  );
+  background-size: 220% 100%;
+  animation: fiszka-shimmer 1.15s ease-in-out infinite;
+}
+@keyframes fiszka-shimmer {
+  from { background-position: 130% 0; }
+  to { background-position: -130% 0; }
+}
+
+@keyframes fiszka-verdict-pop {
+  0% { opacity: 0; transform: translateY(4px) scale(0.97); }
+  60% { opacity: 1; transform: translateY(0) scale(1.012); }
+  100% { opacity: 1; transform: none; }
+}
+.fiszka__ai-verdict--reveal { animation: fiszka-verdict-pop 340ms var(--hm-ease) both; }
+
+.fiszka__ai-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--ok-wash);
+  color: var(--ok);
+  border: 1px solid color-mix(in srgb, var(--ok) 40%, transparent);
+}
+.fiszka__ai-verdict--loose {
+  border-left-color: var(--warn);
+  background: var(--warn-wash);
+}
+.fiszka__ai-verdict--loose .fiszka__ai-ico {
+  background: var(--surface);
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fiszka__ai-verdict--reveal { animation: none; }
+  .fiszka__shimmer { animation: none; background: var(--surface-2); }
+}
+[data-bg-motion="off"] .fiszka__shimmer { animation: none; }
+[data-contrast="high"] .fiszka__shimmer { display: none; }
+[data-contrast="high"] .fiszka__ai-verdict--loose { background: var(--surface-2); }
+[data-contrast="high"] .fiszka__ai-ico {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
 /* Siatka wyników */
 .results {
   display: grid;

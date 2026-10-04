@@ -86,3 +86,65 @@
 @media (prefers-reduced-motion: reduce) {
   .hero { transition: none; }
 }
+
+/* --- wejście hero: teza wjeżdża, podkreślenie rysuje się jak marker ---
+   Kolejność opóźnień buduje rytm: h1 → lede → pasek liczb → żółta kreska.
+   Animujemy tylko opacity/transform (kompozytor, bez reflow) i tylko raz. */
+.hero__text h1 { animation: hero-rise 500ms var(--hm-ease) 60ms both; }
+.hero__lede { animation: hero-rise 500ms var(--hm-ease) 140ms both; }
+
+.hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-6);
+  margin-top: var(--sp-4);
+  animation: hero-rise 500ms var(--hm-ease) 220ms both;
+}
+.hero__stat {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero__stat strong {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  color: var(--accent-deep);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.hero__stat span {
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  max-width: 18ch;
+  line-height: 1.35;
+}
+/* Po wejściu wyników pasek znika razem z lede - narzędzie mówi samo. */
+.hero--receded .hero__stats { display: none; }
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Żółte podkreślenie tezy „dorzuca kreskę" po wejściu nagłówka: grubość
+   box-shadow animuje się od 0 do pełnej - wygląda jak zakreślacz.
+   Motyw ciemny i wysoki kontrast dostają stan końcowy od razu. */
+.hero__accent {
+  animation: hero-marker 650ms var(--hm-ease) 380ms both;
+}
+@keyframes hero-marker {
+  from { box-shadow: inset 0 -0em transparent; }
+  to { box-shadow: inset 0 -0.28em var(--krakow-yellow); }
+}
+:root[data-theme="dark"] .hero__accent,
+:root[data-contrast="high"] .hero__accent {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__text h1,
+  .hero__lede,
+  .hero__stats,
+  .hero__accent { animation: none; }
+}
