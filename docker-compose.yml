@@ -51,5 +51,12 @@ services:
       db:
         condition: service_healthy
 
+  web:
+    build: ./app
+    container_name: hubmi-web
+    restart: unless-stopped
+    depends_on:
+      - backend
+
 volumes:
   db_data:
