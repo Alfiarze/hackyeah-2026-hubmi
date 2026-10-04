@@ -98,6 +98,14 @@ const INIT = `
     #pv-root .pv-zero { font: 800 40px/1 "Bricolage Grotesque", system-ui, sans-serif;
       color: #b8001a; margin: 2px 0 0; }
     #pv-root .pv-box { background: #fff; border: 1px solid #d5e3e0; border-radius: 18px; padding: 24px 26px; }
+    #pv-root .pv-arch { display: flex; align-items: stretch; gap: 10px; margin-top: 22px;
+      border: 2px dashed #0f766e; border-radius: 18px; padding: 18px 20px; background: #f2f9f7; }
+    #pv-root .pv-arch-box { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px;
+      background: #fff; border: 1px solid #d5e3e0; border-radius: 14px; padding: 14px 16px;
+      font: 700 19px/1.25 "Atkinson Hyperlegible Next", system-ui, sans-serif; color: #10343a; text-align: center; }
+    #pv-root .pv-arch-box--ai { border: 2px solid #0f766e; }
+    #pv-root .pv-arch-box small { font: 400 15px/1.3 "Atkinson Hyperlegible Next", system-ui, sans-serif; color: #3f6b6b; }
+    #pv-root .pv-arch-arrow { align-self: center; color: #0f766e; font-size: 24px; font-weight: 700; }
     #pv-root .pv-box p { margin: 0; font: 400 22px/1.5 "Atkinson Hyperlegible Next", system-ui, sans-serif; color: #10343a; }
   \`;
 

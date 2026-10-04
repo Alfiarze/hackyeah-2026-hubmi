@@ -271,7 +271,7 @@ i realne wdrożenie, kosztem IP — uznaliśmy, że to dobra zamiana."
 
 ## D. Koszty i wdrożenie
 
-### D19. „63 000 zł rocznie plus 80–120 000 zł wdrożenia — kto za to zapłaci?"
+### D19. „63 000 zł rocznie plus 30 000 zł wdrożenia — kto za to zapłaci?"
 
 **Odpowiedź:** „To jest koszt jednego etatu na cztery furtki województwa, nie projektu
 IT. Rozbicie: infrastruktura ~6 100 zł rocznie (kontener, baza, pliki, monitoring,
@@ -508,7 +508,7 @@ backendu w jednym `docker compose`."
 | **7 / 7** | zapytań przechodzi w `npm run test:match` |
 | **~500 zł** | rocznie, wersja statyczna |
 | **~63 000 zł** | rocznie, wersja produkcyjna razem z ludźmi |
-| **80–120 tys. zł** | wdrożenie jednorazowo, w granicach jednego grantu ROPS |
+| **30 tys. zł** | wdrożenie jednorazowo, ćwierć jednego grantu ROPS |
 | **0 zł** | zmiennego kosztu za AI |
 | **~15 min** | kwartalne odświeżanie danych ze skryptów |
 

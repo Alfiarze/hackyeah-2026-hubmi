@@ -338,7 +338,7 @@ Nie zapewnimy technicznie — pole jest wolnym tekstem i to trzeba powiedzieć u
 Infrastruktura w wariancie produkcyjnym rzędu **950 zł**, bo nie karmimy GPU. Z ludźmi — ćwierć etatu koordynatora treści plus utrzymanie techniczne — rzędu **60 tysięcy złotych rocznie**, czyli mniej niż jeden grant z naboru.
 
 **„A wdrożenie jednorazowo?”**
-Rzędu **80–120 tysięcy złotych**: uwierzytelnianie, migracja danych, testy, integracje. W granicach jednego naboru IWS.
+Rzędu **30 tysięcy złotych**: uwierzytelnianie, migracja danych, testy, integracje. Ćwierć jednego naboru IWS.
 
 **„Zero kosztu zmiennego za AI — marketing czy kalkulacja?”**
 Kalkulacja. Ranking liczy się u nas za darmo, a Jev to **jedno wywołanie na zapytanie** przy $0,042 za milion tokenów. 50 tysięcy zapytań rocznie to dziesiątki złotych, nie dziesiątki tysięcy.

@@ -1,0 +1,358 @@
+================================================================================
+HACKYEAH 2026 - ADD PROJECT - GOTOWE ODPOWIEDZI DO FORMULARZA
+Projekt: HubMI - Malopolski Hub Innowacji Spolecznych
+Zadanie: PARTNER TASK [UMWM]: HubMi.pl (Wojewodztwo Malopolskie / ROPS Krakow)
+================================================================================
+
+Legenda:
+  [WKLEJ]  = skopiuj tresc ponizej do formularza
+  [!]      = musisz uzupelnic sam (nie wynika z repo)
+
+--------------------------------------------------------------------------------
+1. PROJECT NAME                                                         [WKLEJ]
+--------------------------------------------------------------------------------
+HubMI — Małopolski Hub Innowacji Społecznych
+
+(wariant krótki, jeśli pole ma limit znaków: HubMI)
+
+--------------------------------------------------------------------------------
+2. PUBLISHED                                                            [WKLEJ]
+--------------------------------------------------------------------------------
+ZAZNACZONE — checkbox zostaje zaznaczony, projekt ma być widoczny na liście.
+
+--------------------------------------------------------------------------------
+3. PROBLEM                                                              [WKLEJ]
+--------------------------------------------------------------------------------
+W Małopolsce (19 powiatów, 3 miasta na prawach powiatu, 182 gminy) ROPS Kraków
+udokumentował przez dekadę 115 przetestowanych innowacji społecznych i 76
+publikacji analitycznych: diagnozy, raporty, Mapę Wyzwań Społecznych, wzory
+wniosków. Ta wiedza w praktyce leży na półce.
+
+Cztery bariery, które ją blokują:
+
+1. BARIERA JĘZYKOWA. Mieszkaniec opisuje problem potocznie — „mama mieszka sama
+na wsi i nie ma z kim pogadać". Biblioteka ROPS nazywa to „osamotnieniem",
+„izolacją społeczną" i „obszarami wiejskimi". W zwykłej wyszukiwarce takie
+zapytanie zwraca 0 wyników. Sprawdziliśmy to na realnych danych.
+
+2. PUSTY WYNIK ZAMIAST DANYCH. Kiedy wyszukiwanie nic nie znajduje, intencja
+użytkownika jest wyrzucana. Samorząd traci sygnał diagnostyczny z dołu — nie wie,
+jakich potrzeb jeszcze nie zaspokaja.
+
+3. LUKA WDROŻENIOWA W GMINACH. Wójt, dyrektor OPS/CUS/DPS widzi opis innowacji,
+ale nie wie, ile to kosztuje przy JEGO skali, ilu ludzi potrzebuje, jakie są
+wymogi formalne i jakie ryzyka. Od „ciekawy pomysł" do „uchwała rady gminy" jest
+przepaść.
+
+4. WYKLUCZENIE CYFROWE. Publiczne narzędzia regularnie nie spełniają WCAG,
+a grupa docelowa to m.in. seniorzy, opiekunowie w kryzysie i osoby
+z niepełnosprawnościami — czyli dokładnie ci, których te narzędzia odrzucają.
+
+--------------------------------------------------------------------------------
+4. SOLUTION                                                             [WKLEJ]
+--------------------------------------------------------------------------------
+HubMI to dostępna platforma, która zamyka pętlę: mieszkaniec — samorząd —
+innowator — ROPS.
+
+Opisz problem zwykłym językiem albo podyktuj go głosem. HubMI dopasowuje
+przetestowane innowacje z Biblioteki ROPS, pokazuje DLACZEGO każda z nich pasuje,
+wskazuje na mapie, gdzie podobny problem już rozwiązano, i łączy z realizatorem.
+
+Co nas wyróżnia:
+
+1. „DLACZEGO TO PASUJE" ZAMIAST SAMEJ LICZBY. Każde trafienie pokazuje, ile
+wątków tematycznych pokrywa (i których NIE pokrywa), w którym polu karty się
+zgadza i jakie konkretnie słowa to uruchomiły — podświetlone w tekście. Jury nie
+musi wierzyć w trafność, widzi ją. Silnik: BM25 po 7 polach karty + mostek
+pojęciowy z 22 wątkami, który tłumaczy język potoczny na język ROPS. Bez wywołań
+API i bez embeddingów — świadomy wybór: wynik jest wytłumaczalny, demo działa
+offline w gminie ze słabym łączem, koszt zmienny to zero.
+
+2. BRAK DOPASOWANIA TO DANE, NIE BŁĄD. Gdy nic nie pasuje, zgłoszenie trafia do
+panelu „niezaspokojone potrzeby i trendy". Słowa, których silnik nie rozpoznał,
+tworzą listę pojęć, których Bibliotece brakuje. Moduł analityczny powstaje
+z samych zgłoszeń — nikt nie wypełnia dodatkowej ankiety.
+
+3. WSZYSTKIE 7 MODUŁÓW Z ZADANIA, w tym obowiązkowy matchmaking:
+   I.   Matchmaking społeczny — rozmowa zamiast formularza, dyktowanie głosem,
+        asystent dopytuje najwyżej 2 razy, dopasowanie do 115 innowacji.
+   II.  Zasobnik wiedzy — 115 innowacji (26 z filmem) + 76 dokumentów ROPS,
+        filtrowanie od pierwszej litery.
+   III. Kreator pomysłów — fiszka, sprawdzanie nowości w Bibliotece, generator
+        wniosku grantowego wg realnego formularza ROPS, Canwa Innowacji
+        Społecznych.
+   IV.  Tester innowacji — zgłoszenie do testów, ocena 1–5 z wymaganym
+        komentarzem.
+   V.   Platforma komunikacji — wątki ROPS <-> użytkownik, wskaźnik nowej
+        odpowiedzi.
+   VI.  Panel administratora — skrzynka z powiadomieniami, odpowiedzi,
+        zestawienie niezaspokojonych potrzeb i trendów, mapa 22 powiatów.
+   VII. Middleman Innowacji — przerabia innowację na usługę konkretnej
+        instytucji: koszt przy jej skali, obsada, kroki, ryzyka, wymogi formalne.
+
+4. MAPA NA PRAWDZIWEJ GEOMETRII. 22 jednostki wycięte z danych GUS, klikalne,
+dostępne z klawiatury, z tabelarycznym odpowiednikiem. Przycisk „skontaktuj się
+z realizatorem" buduje realne partnerstwa międzysektorowe.
+
+5. DOSTĘPNOŚĆ Z DOWODEM. 0 naruszeń axe-core (reguły wcag2a, wcag2aa, wcag21a,
+wcag21aa) na wszystkich 8 widokach, powtarzalne jedną komendą. Baza 18px (nie
+16px), skalowalna do 27px. Najsłabsza para kontrastu 4.75:1, tryb wysokiego
+kontrastu 21:1. Przełącznik prostego języka. Kolor nigdy nie jest jedynym
+nośnikiem informacji. Mikrofon jest dodatkiem, nie jedyną drogą. Uczciwie:
+axe-core łapie około jednej trzeciej problemów — zero naruszeń znaczy „bez
+błędów wykrywalnych automatycznie", nie „dostępne". Test z użytkownikami to
+pierwsza rzecz po hackathonie.
+
+6. KOSZT. Wariant statyczny: ~500 zł/rok. Wdrożenie produkcyjne dla całego
+województwa: ~6 100 zł/rok infrastruktury, ~63 000 zł/rok łącznie z obsadą
+ludzką, wdrożenie jednorazowo 80–120 tys. zł — w granicach jednego grantu
+z naboru ROPS. Zero kosztu zmiennego za AI, zero licencji (cały stos otwarty),
+statyczny front skaluje się przez CDN.
+
+--------------------------------------------------------------------------------
+5. CHALLENGES                                                           [WKLEJ]
+--------------------------------------------------------------------------------
+PARTNER TASK [UMWM]: HubMi.pl
+
+[!] UWAGA: w formularzu masz wstępnie zaznaczone „OPEN TASK: ARTIFICIAL
+    INTELLIGENCE". Projekt jest realizacją zadania Województwa Małopolskiego —
+    zaznacz zadanie UMWM / HubMi.pl. Jeśli formularz pozwala na wiele
+    zaznaczeń, zostaw też AI (silnik dopasowania + asystent dopytujący).
+
+--------------------------------------------------------------------------------
+6. COVER IMAGE                                                          [WKLEJ]
+--------------------------------------------------------------------------------
+Plik z repo: docs/screenshots/01-matchmaking-start.png
+Alternatywa:  docs/screenshots/02-matchmaking-wyniki.png
+              (lepsza, jeśli chcesz pokazać „dlaczego to pasuje" już na okładce)
+
+--------------------------------------------------------------------------------
+7. IDEA STAGE                                                           [WKLEJ]
+--------------------------------------------------------------------------------
+New Idea
+
+--------------------------------------------------------------------------------
+8. WHAT'S DONE SO FAR AND GOAL OF YOUR PROJECT                          [WKLEJ]
+--------------------------------------------------------------------------------
+PRZED WYDARZENIEM: nic. Zero linii kodu, zero projektu graficznego. Projekt
+powstał w całości na HackYeah 2026.
+
+ZROBIONE W TRAKCIE WYDARZENIA:
+- Wszystkie 7 modułów z zadania UMWM — zbudowane i przejezdne, w tym obowiązkowy
+  matchmaking społeczny.
+- Dane regionalne: 115 innowacji społecznych ROPS (111 z opisanymi wynikami
+  testu) i 76 publikacji ROPS — pobrane ze stron publicznych, sparsowane
+  i zindeksowane. Skrypty odświeżania danych są w repo.
+- Wytłumaczalny silnik dopasowania: BM25 po 7 polach karty + mostek pojęciowy
+  z 22 wątkami tematycznymi. Wynik = 65% ważone pokrycie wątków + 35% siła
+  leksykalna. Wagi wyszły z testów na realnych danych — np. pole „kto może
+  skorzystać" waży 0.15, bo w prawie każdej karcie zawiera tę samą szablonową
+  listę instytucji; bez tego zbicia ochrona protez przed zamoknięciem wychodziła
+  na 99/100 dla pytania o schody w urzędzie.
+- Testy regresyjne silnika: 7/7 scenariuszy potocznych zapytań przechodzi
+  (npm run test:match).
+- Interaktywna mapa 22 powiatów Małopolski na geometrii GUS, dostępna
+  z klawiatury, z tabelarycznym odpowiednikiem.
+- Dostępność: 0 naruszeń axe-core na 8 widokach, weryfikowane Playwright +
+  axe-core; wynik wyświetlany w samej aplikacji i generowany z pliku, żeby
+  liczby nie rozjechały się z rzeczywistością.
+- Zamknięta pętla na żywo: zgłoś pomysł -> przełącz rolę na pracownika ROPS ->
+  zobacz powiadomienie w panelu -> odpowiedz -> wróć i zobacz odpowiedź jako
+  autorka. Cała ścieżka działa w demo.
+- Backend produkcyjny i konteneryzacja: Django REST Framework + PostgreSQL 17
+  z pgvector, uruchamiane przez docker compose up --build.
+- 13 zrzutów ekranu, w tym wysoki kontrast, bardzo duża czcionka i widok
+  mobilny.
+- Dokumentacja: opis działania silnika, kierunek wizualny z policzonymi
+  kontrastami, kalkulacja kosztu utrzymania w dwóch wariantach.
+
+CZEGO PROTOTYP NIE UDAJE (zadanie zabrania używania prawdziwych danych
+osobowych i danych wrażliwych z materiałów ROPS):
+- Lokalizacje wdrożeń na mapie są danymi demo — ROPS nie publikuje, gdzie która
+  innowacja była wdrażana. Granice powiatów są prawdziwe, rozmieszczenie
+  wygenerowane deterministycznie. Jest to napisane wprost pod każdą mapą.
+- Kontakty realizatorów są fikcyjne (domena example.org, zero nazwisk).
+- Zgłoszenia w panelu administratora to dane demonstracyjne.
+
+CEL: wdrożyć HubMI jako regionalny hub innowacji społecznych Małopolski — żeby
+182 gminy mogły sięgać po rozwiązania, które już zadziałały, a ROPS dostawał
+żywą diagnozę niezaspokojonych potrzeb bez dodatkowych ankiet. Warstwa danych
+jest odizolowana (app/src/lib/store.ts), więc podmiana localStorage na wywołania
+API nie dotyka reszty aplikacji. Kolejne kroki: test dostępności z użytkownikami,
+uwierzytelnianie, integracja z bazą grantową ROPS.
+
+--------------------------------------------------------------------------------
+9. TEAM STATUS                                                             [!]
+--------------------------------------------------------------------------------
+[!] DO DECYZJI. Formularz ma wstępnie „Looking for team members" i rozmiar 1.
+    Jeśli startujecie kompletnym zespołem — przestaw na „Team completed"
+    i wpisz realny rozmiar; wtedy pola 11 i 12 możesz pominąć.
+    Jeśli faktycznie szukasz ludzi — użyj treści z punktów 11 i 12.
+
+--------------------------------------------------------------------------------
+10. CURRENT TEAM SIZE                                                      [!]
+--------------------------------------------------------------------------------
+[!] Wpisz realną liczbę osób w zespole.
+
+--------------------------------------------------------------------------------
+11. NEEDED SKILLS (co zaznaczyć)                                        [WKLEJ]
+--------------------------------------------------------------------------------
+[x] AI & Data Science
+[x] Backend Developer
+[x] Design & UX
+[x] Frontend Developer
+[x] Project/Product Management
+[x] Software Architecture
+
+Pozostałych pozycji nie zaznaczaj — pominięcie jest celowe.
+
+--------------------------------------------------------------------------------
+12. SKILLS COMMENT                                                      [WKLEJ]
+--------------------------------------------------------------------------------
+Szukamy osób, które pociągną HubMI z prototypu do produkcji w sektorze
+publicznym:
+
+- Frontend React + TypeScript — rozwój modułów i utrzymanie dostępności przy
+  rozbudowie (nie chcemy stracić 0 naruszeń axe-core).
+- Backend Python/Django + PostgreSQL — dopisanie realnej warstwy zgłoszeń,
+  wątków i panelu administratora zamiast localStorage.
+- Specjalista dostępności (WCAG 2.1 AA) z doświadczeniem w testach
+  z użytkownikami: seniorami i osobami z niepełnosprawnościami. To dla nas
+  najważniejsza kompetencja — audyt automatyczny mamy, testu z ludźmi nie.
+- AI & Data Science — rozwój mostka pojęciowego i ewaluacja trafności
+  dopasowania na większym zbiorze zapytań.
+- Osoba z doświadczeniem w sektorze publicznym lub politykach społecznych —
+  znajomość realiów OPS, CUS, DPS i naborów grantowych, wsparcie w rozmowie
+  z JST i w integracji z login.gov.pl.
+
+--------------------------------------------------------------------------------
+13. YOUR VIDEO PRESENTATION (Public lub Listed YouTube)                    [!]
+--------------------------------------------------------------------------------
+[!] BRAK LINKU. Film jest zmontowany lokalnie: docs/video/hubmi-pitch.mp4
+    (napisy: docs/video/hubmi-pitch.srt).
+
+    Do zrobienia:
+    1. Wrzuć hubmi-pitch.mp4 na YouTube.
+    2. Widoczność: „Niepubliczny / Listed" (unlisted) — tak dopuszcza formularz.
+    3. Dodaj napisy z pliku hubmi-pitch.srt — są gotowe, to punkt za dostępność.
+    4. Wklej link https://... w to pole.
+
+--------------------------------------------------------------------------------
+14. WEBSITE (https://...)                                                  [!]
+--------------------------------------------------------------------------------
+[!] BRAK DEPLOYU. Na dziś nie ma publicznego URL-a aplikacji.
+
+    Najszybsza droga (~5 min):
+        cd app
+        npm run build
+        -> wrzuć katalog app/dist na Cloudflare Pages albo Netlify (drag & drop)
+
+    Ścieżki są względne (base: "./"), dist to 872 KB statycznych plików,
+    więc zadziała bez konfiguracji przekierowań.
+
+    Dopóki nie ma deployu, wpisz adres repozytorium:
+    https://github.com/Alfiarze/hackyeah-2026-hubmi
+
+--------------------------------------------------------------------------------
+15. CODE REPOSITORY                                                     [WKLEJ]
+--------------------------------------------------------------------------------
+https://github.com/Alfiarze/hackyeah-2026-hubmi
+
+--------------------------------------------------------------------------------
+16. INSTRUCTIONS ON HOW TO OPEN PROJECT                                 [WKLEJ]
+--------------------------------------------------------------------------------
+WARIANT A — demo w przeglądarce (polecane dla jury, ~60 sekund)
+
+Aplikacja nie wymaga bazy ani internetu. Komplet danych (115 innowacji,
+76 dokumentów, silnik dopasowania, mapa, wszystkie 7 modułów) jest w buildzie.
+
+    git clone https://github.com/Alfiarze/hackyeah-2026-hubmi.git
+    cd hackyeah-2026-hubmi/app
+    npm install
+    npm run dev
+
+Otwórz http://localhost:5173
+
+Wersja produkcyjna:
+    npm run build && npm run preview      -> http://localhost:4173
+
+ŚCIEŻKA DEMO — co kliknąć, żeby zobaczyć sedno:
+1. Matchmaking -> wpisz albo podyktuj: „mama mieszka sama na wsi i nie ma z kim
+   pogadać" -> zobacz wyniki i rozwiń „dlaczego to pasuje".
+2. Kliknij powiat na mapie -> „skontaktuj się z realizatorem".
+3. Wpisz zapytanie spoza polityki społecznej -> zobacz, że brak dopasowania
+   staje się luką, a nie pustą listą.
+4. Panel administratora -> zestawienie niezaspokojonych potrzeb i trendów.
+5. Middleman Innowacji -> wybierz innowację i skalę instytucji -> koszt, obsada,
+   kroki, ryzyka.
+6. Dostępność -> przełącz prosty język / dużą czcionkę / wysoki kontrast.
+
+WERYFIKACJA (wszystko odtwarzalne jedną komendą):
+    npm run test:match    # silnik dopasowania, 7 potocznych zapytań -> 7/7
+    npm run audit         # axe-core na 8 widokach (wymaga działającego preview)
+    npm run typecheck
+
+WARIANT B — pełny stos produkcyjny (Docker: PostgreSQL 17 + pgvector + Django)
+
+    docker compose up --build
+
+    Frontend:  http://localhost:5173
+    REST API:  http://localhost:8000/api/
+    Swagger:   http://localhost:8000/api/docs/
+
+STOS: React 18, TypeScript, Vite 6, zero zależności runtime poza Reactem.
+Fonty self-hostowane z subsetem latin-ext — polskie diakrytyki to wymóg
+funkcjonalny, nie detal.
+
+--------------------------------------------------------------------------------
+17. TEAM NAME                                                              [!]
+--------------------------------------------------------------------------------
+Alfiarze
+
+[!] POTWIERDŹ. Nazwa wzięta z organizacji GitHuba
+    (Alfiarze/hackyeah-2026-hubmi). Jeśli zgłaszacie się pod inną — wpisz tę.
+
+--------------------------------------------------------------------------------
+18. PRESENTATION (PDF lub PPTX, max 10 MB)                              [WKLEJ]
+--------------------------------------------------------------------------------
+docs/prezentacja.pdf         — 126 KB, wersja pełna  (polecana)
+docs/prezentacja_5min.pdf    — 1,8 MB, wersja pod pitch 5-minutowy
+
+Oba mieszczą się w limicie 10 MB. Jeśli jury ocenia na podstawie pitcha
+5-minutowego, wrzuć prezentacja_5min.pdf.
+
+--------------------------------------------------------------------------------
+19. TABLE NUMBER                                                           [!]
+--------------------------------------------------------------------------------
+[!] Numer stolika dostajecie na miejscu od organizatora. Wpisz swój.
+
+--------------------------------------------------------------------------------
+20. ADDITIONAL FIELD FOR PRESENTATION / FILES                           [WKLEJ]
+--------------------------------------------------------------------------------
+Materiały dodatkowe w repozytorium:
+
+- docs/JAK_DZIALA_SZUKANIE.md — jak działa silnik dopasowania krok po kroku,
+  z wagami pól i uzasadnieniem decyzji wziętych z testów na realnych danych
+- README.md — kalkulacja kosztu utrzymania w dwóch wariantach
+  (~500 zł/rok statycznie, ~63 000 zł/rok produkcyjnie dla województwa)
+- DESIGN.md — kierunek wizualny z policzonymi kontrastami
+- docs/screenshots/ — 13 zrzutów ekranu, w tym wysoki kontrast, bardzo duża
+  czcionka i widok mobilny
+- data/README.md — źródła danych i licencje (dane ROPS ze stron publicznych)
+- docs/video/hubmi-pitch.srt — napisy do filmu
+
+================================================================================
+CHECKLISTA PRZED WYSŁANIEM
+================================================================================
+[ ] Film na YouTube jako unlisted + napisy z .srt      -> link w pkt 13
+[ ] app/dist zdeployowany (Cloudflare Pages/Netlify)   -> URL w pkt 14
+[ ] Challenge przestawiony na zadanie UMWM             -> pkt 5
+[ ] Nazwa zespołu potwierdzona                         -> pkt 17
+[ ] Rozmiar zespołu i status uzupełnione               -> pkt 9, 10
+[ ] Cover image wgrany                                 -> pkt 6
+[ ] Prezentacja PDF wgrana                             -> pkt 18
+[ ] Numer stolika wpisany                              -> pkt 19
+[ ] Checkbox „Published" zaznaczony                    -> pkt 2
+
+Wersja angielska tych odpowiedzi: docs/PROJECT_SUBMISSION_EN.md
+================================================================================

@@ -280,7 +280,7 @@ Dostępność nie jest dopiskiem: baza <strong>18 px</strong> (nie 16 — odbior
 ## Koszty: mniej niż jeden grant — i rachunek, który nie rośnie
 
 <div class="grid-3 gap-sm">
-  <div class="card"><div class="kpi">80–120 tys. zł</div><div class="kpi-label">wdrożenie jednorazowo</div><p>Tyle, ile <strong>jeden</strong> grant z naboru IWS 2.0</p></div>
+  <div class="card"><div class="kpi">30 tys. zł</div><div class="kpi-label">wdrożenie jednorazowo</div><p><strong>Ćwierć</strong> jednego grantu z naboru IWS 2.0</p></div>
   <div class="card"><div class="kpi">~63 tys. zł</div><div class="kpi-label">utrzymanie rocznie</div><p>Ćwierć etatu koordynatora + utrzymanie techniczne</p></div>
   <div class="card"><div class="kpi">~950 zł</div><div class="kpi-label">sama infrastruktura / rok</div><p>Prąd i backup — bez licencji i bez chmury</p></div>
 </div>

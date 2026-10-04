@@ -83,13 +83,17 @@ Ranking liczy nasz kod: BM25 po siedmiu polach karty plus mostek pojęciowy. Wyn
 Model decyzyjny odpowiada w trzysta milisekund i tylko dopisuje werdykt obok — nie generuje prozy, więc nie ma w czym halucynować.
 
 22
-00:02:32,700 --> 00:02:41,364
-Wdrożenie: osiemdziesiąt do stu dwudziestu tysięcy złotych, tyle co jeden grant. Utrzymanie: około sześćdziesięciu trzech tysięcy rocznie.
+00:02:32,500 --> 00:02:37,852
+Cały stos to trzy kontenery na jednym komputerze GB10 w serwerowni ROPS.
 
 23
-00:02:41,664 --> 00:02:48,528
-Siedem z siedmiu modułów zadania, sto piętnaście innowacji z udokumentowanym testem, zero naruszeń dostępności.
+00:02:38,352 --> 00:02:46,536
+Wdrożenie: trzydzieści tysięcy złotych, czwarta część jednego grantu. Utrzymanie: około sześćdziesięciu trzech tysięcy rocznie.
 
 24
-00:02:48,828 --> 00:02:53,532
+00:02:46,836 --> 00:02:53,700
+Siedem z siedmiu modułów zadania, sto piętnaście innowacji z udokumentowanym testem, zero naruszeń dostępności.
+
+25
+00:02:54,000 --> 00:02:58,704
 HubMI. Opisz problem — pokażemy, co już zadziałało.

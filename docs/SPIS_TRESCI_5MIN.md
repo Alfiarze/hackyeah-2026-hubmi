@@ -32,9 +32,9 @@ Tutaj jest, **w jakiej kolejności i co to punktuje** — żeby każda sekunda p
 
 Trzy zdania, w tej kolejności:
 
-**Koszt po stronie ROPS.** Utrzymanie produkcyjne to **~950 zł rocznie infrastruktury** i **~63 tys. zł rocznie razem z ludźmi** (ćwierć etatu koordynatora treści + utrzymanie techniczne + roczny audyt dostępności). Wdrożenie jednorazowo: **80–120 tys. zł**.
+**Koszt po stronie ROPS.** Utrzymanie produkcyjne to **~950 zł rocznie infrastruktury** i **~63 tys. zł rocznie razem z ludźmi** (ćwierć etatu koordynatora treści + utrzymanie techniczne + roczny audyt dostępności). Wdrożenie jednorazowo: **30 tys. zł**.
 
-**Punkt odniesienia.** Jeden grant w naborze IWS to **do 120 tys. zł**. Czyli całe wdrożenie mieści się w budżecie **jednego** grantu, a roczne utrzymanie w **połowie** jednego grantu.
+**Punkt odniesienia.** Jeden grant w naborze IWS to **do 120 tys. zł**. Czyli całe wdrożenie mieści się w **ćwierci** jednego grantu, a roczne utrzymanie w **połowie** jednego grantu.
 
 **Zwrot.** Wystarczy, że platforma w ciągu roku zapobiegnie **jednemu** dublującemu się wnioskowi albo pozwoli **jednej** gminie wdrożyć gotowe rozwiązanie zamiast projektować je od zera — i koszt się zwraca. Przy 182 gminach to nie jest optymistyczne założenie, to minimum.
 

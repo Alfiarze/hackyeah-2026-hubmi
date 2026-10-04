@@ -264,27 +264,27 @@ $\rightarrow$ Mostek nie rozpoznaje wątków społecznych, scoring ucięty do **
 <div class="grid-3">
   <div class="card">
     <h4>II. Zasobnik Wiedzy</h4>
-    <p><strong>115 innowacji + 76 publikacji</strong> ROPS (Canwy, raporty). Hybrydowe wyszukiwanie: <em>tsvector</em> + <em>pgvector</em> (LSA 48D) + Q&A Jev AI.</p>
+    <p><strong>Mapa Wyzwań Społecznych</strong> i raporty o kondycji Małopolski, <strong>Biblioteka Innowacji</strong> (115 kart z filmami), materiały edukacyjne. Wyszukiwanie <em>tsvector</em> + <em>pgvector</em>. Aktualizacja danych z panelu w minuty. <strong>Trendy potrzeb — tylko dla administratora.</strong></p>
   </div>
   <div class="card">
     <h4>III. Kreator Pomysłów</h4>
-    <p>Generator fiszek i wniosków grantowych pod <strong>nabór IWS 2.0 (do 120 000 zł)</strong>. Jev AI bada nowość i sugeruje ścieżkę inkubacji.</p>
+    <p><strong>Fiszka</strong> (istota, dla kogo, etap) — dostępna zawsze. <strong>Generator wniosków</strong> — włączany na czas naboru (IWS 2.0, do 120 000 zł). Canvy innowacji społecznych + <strong>Asystent kreatora</strong>: rozwija pomysł, podpowiada nietuzinkowe warianty i robi wizualizację rozwiązania.</p>
   </div>
   <div class="card">
     <h4>IV. Tester Innowacji</h4>
-    <p>Oceny 1–5, recenzje praktyków, deklaracje pilotażu przez placówki DPS, CUS i WTZ w Małopolsce.</p>
+    <p><strong>Zgłoszenie chęci udziału w testach</strong>, oceny 1–5 istniejących rozwiązań, recenzje praktyków z DPS, CUS i WTZ, informacja zwrotna i <strong>propozycje usprawnień</strong> wracające do autora.</p>
   </div>
   <div class="card">
     <h4>V. Komunikacja</h4>
-    <p>Wątki: <em>Mieszkaniec ↔ ROPS ↔ Ekspert</em>. Walidacja problemu („Mam ten problem”), diagnoza pilności przez Jev AI.</p>
+    <p>Bezpośredni dialog <em>Mieszkaniec ↔ ROPS ↔ Mentor</em>: szybkie pytania, wsparcie mentorów, <strong>partnerstwa międzysektorowe</strong> (NGO + samorząd + biznes). Walidacja problemu („Mam ten problem”) i diagnoza pilności przez Jev AI.</p>
   </div>
   <div class="card">
     <h4>VI. Panel Admina</h4>
-    <p>Geografia zgłoszeń (22 powiaty), wykresy potrzeb, detekcja nierozpoznanych pojęć i luki usług.</p>
+    <p>Modyfikacja, <strong>weryfikacja i publikacja wiedzy</strong> w jednym miejscu. Agregacja potrzeb po obszarach i <strong>trendy</strong>, geografia zgłoszeń (22 powiaty), detekcja nierozpoznanych pojęć i luk usług.</p>
   </div>
   <div class="card">
-    <h4>VII. Middleman</h4>
-    <p>Kalkulator wdrożenia dla wójtów/NGO, kosztorys obronny przed Radą Gminy + ocena ryzyka Jev AI.</p>
+    <h4>VII. Middleman Innowacji</h4>
+    <p><strong>Asystent AI</strong> przekuwa innowację w gotową usługę pod profil instytucji (typ, liczba mieszkańców, budżet, obsada): kroki wdrożenia, kosztorys obronny przed Radą Gminy, ryzyka i wymogi formalne.</p>
   </div>
 </div>
 
@@ -344,6 +344,10 @@ Dostępność w HubMI to fundament architektoniczny, a nie nakładka:
 </div>
 
 <div class="highlight-box">
+  <strong>Trzy kontenery na jednym komputerze GB10:</strong> Docker Compose uruchamia front (React + Vite), Django REST z silnikiem rankingu i PostgreSQL 17 + pgvector. Model decyzyjny Kev działa <strong>lokalnie</strong> — poza serwerownię ROPS nie wychodzi ani jedno zapytanie mieszkanki.
+</div>
+
+<div class="highlight-box">
   <strong>Bezpieczeństwo danych:</strong> Brak gromadzenia danych wrażliwych. Zapytania anonimizowane przed analizą trendów. Gotowość do integracji z węzłem krajowym (login.gov.pl).
 </div>
 
@@ -358,6 +362,10 @@ Dostępność w HubMI to fundament architektoniczny, a nie nakładka:
 | **Silnik AI (Jev)** | Reguły BM25 w przeglądarce: **0 zł** | Jev Decisions API: **~$0.042 / 1M tokenów** (~50 zł / rok) |
 | **Kwartalna aktualizacja** | Skrypty scrapujące ROPS: **~15 min pracy** | Panel admina lub auto-sync: **~400 zł / rok** |
 | **SUMA ROCZNA** | **0 zł / rok** | **~950 zł / rok** (nie dziesiątki tysięcy!) |
+
+<div class="highlight-box">
+  <strong>Wdrożenie jednorazowo: 30 000 zł</strong> — uwierzytelnianie, migracja danych, testy i integracje. To <strong>ćwierć</strong> jednego grantu z naboru IWS 2.0.
+</div>
 
 <div class="highlight-box">
   <em>Kluczowa przewaga ekonomiczna:</em> Wybór modelu decyzyjnego <strong>Jev AI</strong> zamiast generatywnego GPU sprawia, że koszty zmienne platformy są niemal zerowe, a system nie wymaga własnej infrastruktury serwerowej AI za setki tysięcy złotych.

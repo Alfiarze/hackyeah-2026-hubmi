@@ -142,6 +142,7 @@ export const SCENES = [
     lines: [
       "Ranking liczy nasz kod: BM25 po siedmiu polach karty plus mostek pojęciowy. Wynik jest deterministyczny i wytłumaczalny.",
       "Model decyzyjny odpowiada w trzysta milisekund i tylko dopisuje werdykt obok — nie generuje prozy, więc nie ma w czym halucynować.",
+      "Cały stos to trzy kontenery na jednym komputerze GB10 w serwerowni ROPS.",
     ],
     card: `
       <p class="pv-eyebrow pv-rv" data-at="0">Jak to dowozimy</p>
@@ -156,7 +157,16 @@ export const SCENES = [
           <p>~300 ms, bez generowania prozy. Gdy model milczy, ranking i uzasadnienia zostają te same.</p>
         </div>
       </div>
-      <p class="pv-note pv-rv" data-at="1">Docker · PostgreSQL + pgvector · Django REST · statyczny front — całość staje on-premise w serwerowni ROPS.</p>`,
+      <div class="pv-arch pv-rv" data-at="2">
+        <span class="pv-arch-box">Przeglądarka<small>React + Vite</small></span>
+        <span class="pv-arch-arrow">&rarr;</span>
+        <span class="pv-arch-box">Django REST<small>7 modułów pod /api/</small></span>
+        <span class="pv-arch-arrow">&rarr;</span>
+        <span class="pv-arch-box">Silnik rankingu<small>BM25 + 22 wątki</small></span>
+        <span class="pv-arch-arrow">&rarr;</span>
+        <span class="pv-arch-box pv-arch-box--ai">Kev — lokalnie<small>werdykt obok rankingu</small></span>
+      </div>
+      <p class="pv-note pv-rv" data-at="2">PostgreSQL 17 + pgvector · 3 kontenery Docker Compose · jeden komputer GB10 w serwerowni ROPS — poza tę ramkę nie wychodzi ani jedno zapytanie mieszkanki.</p>`,
   },
 
   // ----------------------------------------------------------------- outro --
@@ -164,14 +174,14 @@ export const SCENES = [
     id: "10-outro",
     kind: "card",
     lines: [
-      "Wdrożenie: osiemdziesiąt do stu dwudziestu tysięcy złotych, tyle co jeden grant. Utrzymanie: około sześćdziesięciu trzech tysięcy rocznie.",
+      "Wdrożenie: trzydzieści tysięcy złotych, czwarta część jednego grantu. Utrzymanie: około sześćdziesięciu trzech tysięcy rocznie.",
       "Siedem z siedmiu modułów zadania, sto piętnaście innowacji z udokumentowanym testem, zero naruszeń dostępności.",
       "HubMI. Opisz problem — pokażemy, co już zadziałało.",
     ],
     card: `
       <p class="pv-eyebrow pv-rv" data-at="0">Business case</p>
       <div class="pv-kpis pv-kpis--wide pv-rv" data-at="0">
-        ${kpi("80–120 tys. zł", "wdrożenie — tyle, co jeden grant")}
+        ${kpi("30 tys. zł", "wdrożenie — ćwierć jednego grantu")}
         ${kpi("~63 tys. zł", "utrzymanie rocznie, z ludźmi")}
         ${kpi("~950 zł", "sama infrastruktura / rok")}
       </div>

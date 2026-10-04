@@ -361,7 +361,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
             hint={
               speech.supported
                 ? "Wpisz i naciśnij Enter albo naciśnij mikrofon i powiedz."
-                : "Naciśnij Enter, żeby szukać. (Ta przeglądarka nie obsługuje dyktowania.)"
+                : `Naciśnij Enter, żeby szukać. ${speech.unsupportedReason ?? ""}`.trim()
             }
             actions={
               <>

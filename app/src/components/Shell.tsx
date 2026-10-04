@@ -39,12 +39,13 @@ const NAV: { id: Route; label: string; short: string; icon: (p: IconProps) => JS
   { id: "kreator", label: "Zgłoś pomysł", short: "Pomysł", icon: IconIdea },
   { id: "tester", label: "Testuj innowacje", short: "Testuj", icon: IconTest },
   { id: "komunikacja", label: "Komunikacja", short: "Rozmowy", icon: IconExpert },
+  { id: "middleman", label: "Middleman", short: "Wdróż", icon: IconPartnership },
   { id: "admin", label: "Panel ROPS", short: "Panel", icon: IconNgo },
 ];
 
-/** Moduły zapasowe: nie są ścieżką główną, więc żyją w stopce, nie w pasku. */
+/** Dostępność ma własny pasek przełączników w nagłówku, więc jej strona
+ *  z opisem zostaje w stopce - w pasku zajmowałaby miejsce modułom zadania. */
 const FOOTER_NAV: { id: Route; label: string; icon: (p: IconProps) => JSX.Element }[] = [
-  { id: "middleman", label: "Middleman Innowacji", icon: IconPartnership },
   { id: "dostepnosc", label: "Dostępność (WCAG)", icon: IconAccess },
 ];
 
