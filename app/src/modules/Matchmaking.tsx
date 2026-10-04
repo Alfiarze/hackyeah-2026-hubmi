@@ -26,7 +26,8 @@ import { fetchMatches, reportGap as postGap, type MatchResponse } from "../lib/m
 import { LOOSE_EMOJIS } from "../lib/emojis";
 import { ScanFallback } from "../components/ScanFallback";
 import { useEmojiPicks } from "../lib/useEmojiPicks";
-import { type Innovation, byId } from "../lib/data";
+import { INNOVATIONS, type Innovation, byId } from "../lib/data";
+import { analyzeQuery } from "../lib/match";
 import {
   getWatchState,
   isWatched,
@@ -48,6 +49,7 @@ import { MalopolskaMap } from "../components/MalopolskaMap";
 import { Modal } from "../components/Modal";
 import { Hero } from "../components/Hero";
 import { SearchPill } from "../components/SearchPill";
+import { SearchLoader } from "../components/SearchLoader";
 import "./matchmaking.css";
 
 interface Props {
@@ -86,6 +88,23 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
   // wraca przy każdej literze — a lot trwa teraz 1,5 s.
   const { picks } = useEmojiPicks(draft);
   const pickedEmojiSet = useMemo(() => new Set(picks.map((p) => p.emoji)), [picks]);
+
+  // „Instant": wątki rozpoznawane W TRAKCIE pisania, tym samym silnikiem,
+  // którym backend policzy dopasowanie (`analyzeQuery`). Zero API, zero
+  // opóźnień — użytkownik widzi, że system rozumie, zanim kliknie „Szukaj".
+  // Debounce 140 ms, żeby chipsy nie migotały przy każdym klawiszu.
+  const [liveDraft, setLiveDraft] = useState("");
+  useEffect(() => {
+    const id = window.setTimeout(() => setLiveDraft(draft), 140);
+    return () => window.clearTimeout(id);
+  }, [draft]);
+  const liveConcepts = useMemo(
+    () =>
+      liveDraft.trim().length >= 4
+        ? analyzeQuery(liveDraft).concepts.slice(0, 4)
+        : [],
+    [liveDraft],
+  );
 
   const speech = useSpeech((text) => {
     // dyktowanie od razu wysyła wypowiedź - senior nie musi szukać przycisku
@@ -283,6 +302,19 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
             {t("Pokażemy, co już zadziałało.", "Pokażemy pomoc, która działa.")}
           </span>
         </h1>
+        <p className="hero__lede">
+          {t(
+            "Piszesz po swojemu — my tłumaczymy to na język Biblioteki ROPS i pokazujemy rozwiązania, które mają udokumentowany test.",
+            "Piszesz, co się dzieje. My szukamy pomocy, która już komuś zadziałała.",
+          )}
+        </p>
+        {/* Uwaga honestowa: liczymy TYLKO karty małopolskie (bez baz
+            zewnętrznych) - „przetestowane" to obietnica dotycząca ROPS. */}
+        <div className="hero__stats">
+          <HeroStat value={INNOVATIONS.filter((i) => !i.ext).length} label="przetestowanych innowacji ROPS" suffix="" />
+          <HeroStat value={111} label="kart z dowodem testu" suffix="" />
+          <HeroStat value={22} label="wątków mostka pojęciowego" suffix="" />
+        </div>
 
       {/* --- rozmowa --- */}
       <section className="mm__conv" aria-label="Wyszukiwanie rozwiązań">
@@ -314,6 +346,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
           <SearchPill
             value={draft}
             picks={picks}
+            liveConcepts={liveConcepts}
             interim={speech.interim}
             onChange={setDraft}
             onSubmit={send}
@@ -406,6 +439,39 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
             </div>
           </div>
         )}
+
+        {/* --- „jak to działa": trzy kroki, żeby od wejścia było wiadomo,
+               czego szukamy i skąd biorą się wyniki --- */}
+        {!conv.done && (
+          <div className="mm__how" data-reveal>
+            <ol className="mm__how-steps">
+              <li>
+                <span className="mm__how-num" aria-hidden="true">1</span>
+                <span>
+                  {t("Opisujesz problem — słowami albo głosem.", "Piszesz albo mówisz, co jest nie tak.")}
+                </span>
+              </li>
+              <li>
+                <span className="mm__how-num" aria-hidden="true">2</span>
+                <span>
+                  {t(
+                    `Dopasowujemy go do ${INNOVATIONS.filter((i) => !i.ext).length} przetestowanych rozwiązań Biblioteki ROPS.`,
+                    `Szukamy w ${INNOVATIONS.filter((i) => !i.ext).length} rozwiązaniach, które już zadziałały.`,
+                  )}
+                </span>
+              </li>
+              <li>
+                <span className="mm__how-num" aria-hidden="true">3</span>
+                <span>
+                  {t(
+                    "AI weryfikuje każde trafienie i mówi, czy pasuje — i dlaczego.",
+                    "Sprawdzamy każdy wynik. Mówimy, dlaczego pasuje.",
+                  )}
+                </span>
+              </li>
+            </ol>
+          </div>
+        )}
       </section>
       </Hero>
 
@@ -422,15 +488,7 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
             aria-live="polite"
           >
             <div>
-              {phase === "loading" && (
-                <>
-                  <h2>Szukam w bazie innowacji…</h2>
-                  <p className="muted">
-                    Porównujemy zgłoszenie z kartami w bazie ROPS i weryfikujemy
-                    każde trafienie modelem decyzyjnym.
-                  </p>
-                </>
-              )}
+              {phase === "loading" && <SearchLoader />}
 
               {phase === "error" && (
                 <>
@@ -621,11 +679,12 @@ export function Matchmaking({ onAdapt, onTest }: Props) {
               </section>
 
               <section className="results" data-reveal="stagger" aria-label="Dopasowane innowacje">
-                {results.map((r) => (
+                {results.map((r, idx) => (
                   <InnovationCard
                     key={r.innovation.id}
                     result={r}
                     aiVerdict={data?.verdicts[r.innovation.id]}
+                    verdictDelay={500 + idx * 280}
                     onAdapt={onAdapt}
                     onTest={onTest}
                   />
@@ -697,6 +756,42 @@ function GapForm({
         </button>
       </div>
     </form>
+  );
+}
+
+/**
+ * Liczba w pasku zaufania hero: nadjeżdża od 0 do wartości (ease-out cubic).
+ * Przy prefers-reduced-motion pokazuje się od razu — ruch ma ozdabiać,
+ * nie opóźniać informację.
+ */
+function HeroStat({ value, label, suffix = "" }: { value: number; label: string; suffix?: string }) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    const reduce =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || typeof requestAnimationFrame !== "function") {
+      setN(value);
+      return;
+    }
+    let raf = 0;
+    const t0 = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - t0) / 900);
+      setN(Math.round(value * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value]);
+  return (
+    <p className="hero__stat">
+      <strong>
+        {n}
+        {suffix}
+      </strong>
+      <span>{label}</span>
+    </p>
   );
 }
 

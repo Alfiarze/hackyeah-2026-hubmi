@@ -418,3 +418,150 @@
   font-weight: 800;
 }
 [data-contrast="high"] .mm__alone strong { color: var(--ink); }
+
+/* --- warstwa „instant": watki rozpoznane w trakcie pisania -------------
+   Pojawiaja sie natychmiast pod pigulka, zanim emotki poleca od Jeva
+   i zanim poleci zadanie o wyniki. Kropka pulsuje (ozdoba, nie informacja),
+   chipsy wjezdzaja kaskadowo po 70 ms. */
+.mm__live {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-3);
+  margin-top: var(--sp-3);
+  min-height: 30px;
+}
+.mm__live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  animation: mm-live-pulse 1.6s ease-in-out infinite;
+}
+.mm__live-label {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.mm__live-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+.mm__live-list li {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--ok-wash);
+  border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
+  color: var(--ok);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  animation: mm-chip-pop 320ms var(--hm-ease) both;
+}
+@keyframes mm-live-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.55); opacity: 1; }
+}
+@keyframes mm-chip-pop {
+  from { opacity: 0; transform: translateY(6px) scale(0.9); }
+  to { opacity: 1; transform: none; }
+}
+[data-contrast="high"] .mm__live-list li {
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--ink);
+}
+[data-contrast="high"] .mm__live-dot { animation: none; }
+
+/* --- trzy kroki „jak to działa" ---------------------------------------
+   Odpowiadaja na pytanie nowego uzytkownika: czego tu sie szuka i skad
+   biora sie wyniki. Numery w turkusie - accent-ink trzyma kontrast AA. */
+.mm__how {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px dashed var(--line);
+}
+.mm__how-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-3);
+}
+@media (min-width: 40rem) {
+  .mm__how-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-4);
+  }
+}
+.mm__how-steps li {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+.mm__how-num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+}
+
+/* --- loader wyszukiwania: dwa kroki opowiadajace prawde o zadaniu -----
+   Krok 1 = deterministyczny silnik przegladа biblioteke, krok 2 = model
+   decyzyjny weryfikuje trafienia. Spinner pierścień, nie tekst-kropki. */
+.mm__loader { display: grid; gap: var(--sp-3); }
+.mm__loader-step { display: flex; gap: var(--sp-3); align-items: flex-start; }
+.mm__loader-ico {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  font-weight: 800;
+  color: var(--ok);
+  font-size: var(--fs-xs);
+}
+.mm__loader-step.is-active .mm__loader-ico { border-color: var(--accent-deep); }
+.mm__loader-step.is-done .mm__loader-ico {
+  background: var(--ok-wash);
+  border-color: color-mix(in srgb, var(--ok) 45%, transparent);
+}
+.mm__loader-spin {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent-deep);
+  animation: mm-spin 700ms linear infinite;
+}
+@keyframes mm-spin { to { transform: rotate(360deg); } }
+.mm__loader-label { margin: 0; font-weight: 700; font-size: var(--fs-sm); color: var(--ink); }
+.mm__loader-detail { margin: 2px 0 0; font-size: var(--fs-xs); color: var(--ink-2); }
+.mm__loader-step.is-done .mm__loader-label { color: var(--ink-2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mm__live-dot { animation: none; }
+  .mm__live-list li { animation: none; }
+  .mm__loader-spin { animation: none; border-top-color: var(--accent-deep); }
+}
+[data-contrast="high"] .mm__loader-ico { border-width: 2px; }

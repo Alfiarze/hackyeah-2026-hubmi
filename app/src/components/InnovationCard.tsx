@@ -118,10 +118,31 @@ export function InnovationCard({
         </div>
       </dl>
 
-      {aiVerdict && (
-        <div className="fiszka__ai-verdict">
+      {/* Werdykt AI wchodzi dwufazowo: najpierw karta pokazuje stan „weryfikuję"
+          (shimmer), potem werdykt wyskakuje z ikoną różniąca się kształtem, nie
+          kolorem (✓ powiązane / △ luźne / ○ diagnoza bez modelu). Fallbacku
+          (source != jev) nie animujemy — bez AI nie udajemy weryfikacji. */}
+      {aiVerdict && !verdictShown && (
+        <div className="fiszka__ai-verdict fiszka__ai-verdict--checking" aria-hidden="true">
+          <span className="eyebrow">Weryfikuję powiązanie…</span>
+          <span className="fiszka__shimmer" />
+        </div>
+      )}
+      {aiVerdict && verdictShown && (
+        <div
+          className={`fiszka__ai-verdict fiszka__ai-verdict--reveal${
+            aiVerdict.related === false ? " fiszka__ai-verdict--loose" : ""
+          }`}
+        >
           <span className="eyebrow">
-            {aiVerdict.source === "jev" ? "Weryfikacja AI" : "Diagnoza powiązania"}
+            <span className="fiszka__ai-ico" aria-hidden="true">
+              {!isModelVerdict || aiVerdict.related === undefined
+                ? "○"
+                : aiVerdict.related
+                  ? "✓"
+                  : "△"}
+            </span>
+            {isModelVerdict ? "Weryfikacja AI" : "Diagnoza powiązania"}
             {typeof aiVerdict.confidence === "number" && ` · pewność ${aiVerdict.confidence}%`}
           </span>
           <p>{aiVerdict.reason || (aiVerdict.related ? "Potwierdzono silne powiązanie merytoryczne z opisanym problemem." : "Rozwiązanie kontekstowo zbliżone.")}</p>
